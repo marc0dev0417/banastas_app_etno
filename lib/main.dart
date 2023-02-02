@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
+import 'package:etno_app/pages/PagePharmacies.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/widgets/home_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -59,12 +60,15 @@ class HomeState extends State<Home>{
             const Text('Farmacias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
             const Text('Encuentras las farmacias de tu localidad', style: TextStyle(color: Colors.grey)),
             const SizedBox(height: 20.0),
-            card('Farmacias de guardia y normal', context, 80.0),
+            cardPharmacies('Farmacias de guardia y normal', context, 80.0),
             const SizedBox(height: 20.0),
             const Text('Turismo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
             const Text('Turismo más relevante', style: TextStyle(color: Colors.grey)),
             const SizedBox(height: 20.0),
-            card('Turismo', context, 218.0),
+            cardTourism('Turismo', context, 218.0),
+            const SizedBox(height: 20.0),
+            const Text('Eventos', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+            const Text('Mira los eventos más destacados', style: TextStyle(color: Colors.grey)),
             const SizedBox(height: 20.0),
             swiperEvent(section),
           ],
@@ -74,20 +78,43 @@ class HomeState extends State<Home>{
   }
 }
 
-Widget card(String title, BuildContext context, double width){
-  return Card(
-    child:
+Widget cardPharmacies(String title, BuildContext context, double width){
+  return InkWell(
+    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => const PagePharmacies())); },
+    child: Card(
+        child:
         Container(
-          padding: const EdgeInsets.all(10.0),
-          child: Row(
-            children:  [
-              const Icon(Icons.access_time),
-              const SizedBox(width: 20.0),
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(width: width),
-              const Icon(Icons.chevron_right)
-            ],
-          )
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children:  [
+                const Icon(Icons.access_time),
+                const SizedBox(width: 20.0),
+                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(width: width),
+                const Icon(Icons.chevron_right)
+              ],
+            )
         )
+    ),
+  );
+}
+Widget cardTourism(String title, BuildContext context, double width){
+  return InkWell(
+    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => PagePharmacies())); },
+    child: Card(
+        child:
+        Container(
+            padding: const EdgeInsets.all(10.0),
+            child: Row(
+              children:  [
+                const Icon(Icons.access_time),
+                const SizedBox(width: 20.0),
+                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                SizedBox(width: width),
+                const Icon(Icons.chevron_right)
+              ],
+            )
+        )
+    ),
   );
 }

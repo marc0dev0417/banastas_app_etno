@@ -11,6 +11,8 @@ class New{
 
    New(this.idNew, this.username, this.category, this.title, this.publicationDate, this.description, this.imageUrl);
 
+   New.empty();
+
   New.fromJson(Map<String, dynamic> json) {
     idNew = json['idNew'];
     username = json['username'];

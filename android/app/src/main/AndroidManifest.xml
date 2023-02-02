@@ -1,9 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ecomputer.etno_app">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="etno_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyDZcqlsS-nn_OIV9-ZsoC_HCGYSdgWld0U">
+       </meta-data>
         <activity
             android:name=".MainActivity"
             android:exported="true"

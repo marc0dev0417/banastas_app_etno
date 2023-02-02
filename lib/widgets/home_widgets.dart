@@ -5,6 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 
+import '../models/New.dart';
+
 Widget swiperNews(Section section){
   return Observer(builder: (value){
     if(section.getList.isEmpty){
@@ -16,7 +18,20 @@ Widget swiperNews(Section section){
         child: Observer(builder: (value) => Swiper(
           itemBuilder: (BuildContext context, int index) {
             return InkWell(
-              onTap: () => { Navigator.push(context, MaterialPageRoute(builder: (context) => const PageNewDetail())) },
+              onTap: () => {
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>  PageNewDetail(new_: New(
+                    section.getList[index].idNew,
+                    section.getList[index].username,
+                    section.getList[index].category,
+                    section.getList[index].title,
+                    section.getList[index].publicationDate,
+                    section.getList[index].description,
+                    section.getList[index].imageUrl)
+                )
+                )
+                )
+              },
               child: Card(
                 child: Column(
                   children: [
@@ -24,7 +39,7 @@ Widget swiperNews(Section section){
                     const SizedBox(
                       height: 10.0,
                     ),
-                    Text(section.getListEvent[index].title!)
+                    Text(section.getList[index].title!)
                   ],
                 ),
               ),
@@ -49,7 +64,7 @@ return Observer(builder: (value){
       width: double.infinity,
       height: 250,
       child: Observer(builder: (value) => Swiper(
-        loop: true,
+        loop: false,
         itemBuilder: (BuildContext context, int index) {
           return InkWell(
             onTap: (){ print(index); },
@@ -67,7 +82,7 @@ return Observer(builder: (value){
           );
         },
         itemCount: section.getListEvent.length,
-        viewportFraction: 0.6,
+        viewportFraction: 0.9,
         scale: 0.9,
         control: const SwiperControl(),
       )
@@ -89,7 +104,7 @@ Widget renderImageEvent(Section section, int index){
   if (section.getListEvent[index].imageUrl == null){
     return Image.asset('assets/Loading_icon.gif', height: 200);
   }else{
-    return Image.network(section.getListEvent[index].imageUrl!, fit: BoxFit.fill, height: 200, width: 300);
+    return Image.network(section.getListEvent[index].imageUrl!, fit: BoxFit.fill, height: 200, width: 400);
   }
 }
 
