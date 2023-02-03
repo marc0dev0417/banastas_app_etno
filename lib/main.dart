@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:etno_app/pages/PagePharmacies.dart';
+import 'package:etno_app/pages/PageServices.dart';
+import 'package:etno_app/pages/PageTourism.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/widgets/home_widgets.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -31,6 +33,7 @@ class Home extends StatefulWidget {
   }
 }
 class HomeState extends State<Home>{
+  int bottomIndex = 0;
   final Section section = Section();
 
   @override
@@ -71,9 +74,46 @@ class HomeState extends State<Home>{
             const Text('Mira los eventos más destacados', style: TextStyle(color: Colors.grey)),
             const SizedBox(height: 20.0),
             swiperEvent(section),
+            const SizedBox(height: 20.0),
+            const Text('Servicios', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+            const Text('Servicios más relevante', style: TextStyle(color: Colors.grey)),
+            const SizedBox(height: 20.0),
+            cardServices('Los mejores servicios de tu localidad', context, 40.0)
           ],
         )
-      )
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: bottomIndex,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: const Color(0xFF6200EE),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white.withOpacity(.60),
+        selectedFontSize: 14,
+        unselectedFontSize: 14,
+        onTap: (value) {
+          setState(() {
+            bottomIndex = value;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            label: 'Inicio',
+            icon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            label: 'Eventos',
+            icon: Icon(Icons.celebration),
+          ),
+          BottomNavigationBarItem(
+            label: 'Noticias',
+            icon: Icon(Icons.newspaper),
+          ),
+          BottomNavigationBarItem(
+            label: 'Menú',
+            icon: Icon(Icons.library_books),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -86,7 +126,7 @@ Widget cardPharmacies(String title, BuildContext context, double width){
         Container(
             padding: const EdgeInsets.all(10.0),
             child: Row(
-              children:  [
+              children: [
                 const Icon(Icons.access_time),
                 const SizedBox(width: 20.0),
                 Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -98,15 +138,16 @@ Widget cardPharmacies(String title, BuildContext context, double width){
     ),
   );
 }
+
 Widget cardTourism(String title, BuildContext context, double width){
   return InkWell(
-    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => PagePharmacies())); },
+    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => const PageTourism())); },
     child: Card(
         child:
         Container(
             padding: const EdgeInsets.all(10.0),
             child: Row(
-              children:  [
+              children: [
                 const Icon(Icons.access_time),
                 const SizedBox(width: 20.0),
                 Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -115,6 +156,26 @@ Widget cardTourism(String title, BuildContext context, double width){
               ],
             )
         )
+    ),
+  );
+}
+
+Widget cardServices(String title, BuildContext context, double width){
+  return InkWell(
+    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => const PageServices())); },
+    child: Card(
+      child: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Row(
+          children:  [
+            const Icon(Icons.access_time),
+            const SizedBox(width: 20.0),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(width: width),
+            const Icon(Icons.chevron_right)
+          ],
+        ),
+      ),
     ),
   );
 }

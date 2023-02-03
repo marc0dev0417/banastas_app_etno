@@ -1,0 +1,53 @@
+import 'package:etno_app/pages/PageServicesList.dart';
+import 'package:flutter/material.dart';
+
+class PageServices extends StatefulWidget {
+  const PageServices({super.key});
+
+  @override
+  State<StatefulWidget> createState() {
+    return PageState();
+  }
+}
+class PageState extends State<PageServices> {
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      body: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.all(15.0),
+              child: ListView(
+                padding: const EdgeInsets.only(top: 80.0, left: 15, right: 15),
+                scrollDirection: Axis.vertical,
+                children: [
+                  cardService('Servicio', 'tool_image.jpg', (){ Navigator.push(context, MaterialPageRoute(builder: (context) => const PageServicesList(locality: 'Bolea', category: 'Servicio'))); }),
+                 const SizedBox(height: 10.0),
+                  cardService('Salud', 'salud_image.jpg', (){ Navigator.push(context, MaterialPageRoute(builder: (context) => const PageServicesList(locality: 'Bolea', category: 'Salud'))); }),
+                  const SizedBox(height: 10.0),
+                  cardService('Ocio', 'ocio_image.jpg', (){ Navigator.push(context, MaterialPageRoute(builder: (context) => const PageServicesList(locality: 'Bolea', category: 'Ocio'))); })
+                ],
+              ),
+            ),
+          )
+    );
+  }
+}
+
+Widget cardService(String type, String assetImage, VoidCallback function){
+  return InkWell(
+    onTap: function,
+    child: Container(
+      height: 200,
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage('assets/$assetImage'), fit: BoxFit.fill)
+      ),
+      child: Card(
+        elevation: 5.0,
+        color: Colors.transparent,
+        child: Center(
+          child: Text(type, style: const TextStyle(color: Colors.white, fontSize: 25.0)),
+        )
+      ),
+    ),
+  );
+}

@@ -27,7 +27,7 @@ class PageNewDetail extends StatelessWidget {
               Container(
                   width: MediaQuery.of(context).size.width,
                   padding: const EdgeInsets.all(20.0),
-                  child:  Text(new_.publicationDate!, style: const TextStyle(color: Colors.grey),)
+                  child:  Text(new_.publicationDate!, style: const TextStyle(color: Colors.grey))
               ),
               Container(
                   width: MediaQuery.of(context).size.width,
@@ -38,7 +38,7 @@ class PageNewDetail extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(right: 20.0, left: 20.0, bottom: 25.0),
                 child: Text(new_.description!,
-                    style: const TextStyle(color: Colors.grey, fontSize: 15.0)),
+                    style: const TextStyle(color: Colors.grey, fontSize: 15.0))
               )
             ],
           )
@@ -46,4 +46,3 @@ class PageNewDetail extends StatelessWidget {
     );
   }
 }
-

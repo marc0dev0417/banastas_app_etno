@@ -35,6 +35,20 @@ mixin _$Section on SectionBase, Store {
           Computed<List<Pharmacy>>(() => super.getListPharmacy,
               name: 'SectionBase.getListPharmacy'))
       .value;
+  Computed<List<Tourism>>? _$getListTourismComputed;
+
+  @override
+  List<Tourism> get getListTourism => (_$getListTourismComputed ??=
+          Computed<List<Tourism>>(() => super.getListTourism,
+              name: 'SectionBase.getListTourism'))
+      .value;
+  Computed<List<Service>>? _$getListServicesComputed;
+
+  @override
+  List<Service> get getListServices => (_$getListServicesComputed ??=
+          Computed<List<Service>>(() => super.getListServices,
+              name: 'SectionBase.getListServices'))
+      .value;
 
   late final _$newListAtom =
       Atom(name: 'SectionBase.newList', context: context);
@@ -99,6 +113,38 @@ mixin _$Section on SectionBase, Store {
     });
   }
 
+  late final _$tourismListAtom =
+      Atom(name: 'SectionBase.tourismList', context: context);
+
+  @override
+  List<Tourism> get tourismList {
+    _$tourismListAtom.reportRead();
+    return super.tourismList;
+  }
+
+  @override
+  set tourismList(List<Tourism> value) {
+    _$tourismListAtom.reportWrite(value, super.tourismList, () {
+      super.tourismList = value;
+    });
+  }
+
+  late final _$servicesListAtom =
+      Atom(name: 'SectionBase.servicesList', context: context);
+
+  @override
+  List<Service> get servicesList {
+    _$servicesListAtom.reportRead();
+    return super.servicesList;
+  }
+
+  @override
+  set servicesList(List<Service> value) {
+    _$servicesListAtom.reportWrite(value, super.servicesList, () {
+      super.servicesList = value;
+    });
+  }
+
   late final _$getAllNewByLocalityAsyncAction =
       AsyncAction('SectionBase.getAllNewByLocality', context: context);
 
@@ -126,6 +172,26 @@ mixin _$Section on SectionBase, Store {
         .run(() => super.getAllPharmaciesByLocality(locality));
   }
 
+  late final _$getAllTourismByLocalityAsyncAction =
+      AsyncAction('SectionBase.getAllTourismByLocality', context: context);
+
+  @override
+  Future<List<Tourism>> getAllTourismByLocality(String locality) {
+    return _$getAllTourismByLocalityAsyncAction
+        .run(() => super.getAllTourismByLocality(locality));
+  }
+
+  late final _$getAllServiceByLocalityAndCategoryAsyncAction = AsyncAction(
+      'SectionBase.getAllServiceByLocalityAndCategory',
+      context: context);
+
+  @override
+  Future<List<Service>> getAllServiceByLocalityAndCategory(
+      String locality, String category) {
+    return _$getAllServiceByLocalityAndCategoryAsyncAction.run(
+        () => super.getAllServiceByLocalityAndCategory(locality, category));
+  }
+
   @override
   String toString() {
     return '''
@@ -133,10 +199,14 @@ newList: ${newList},
 new_: ${new_},
 eventList: ${eventList},
 pharmaciesList: ${pharmaciesList},
+tourismList: ${tourismList},
+servicesList: ${servicesList},
 getList: ${getList},
 getListEvent: ${getListEvent},
 getNew: ${getNew},
-getListPharmacy: ${getListPharmacy}
+getListPharmacy: ${getListPharmacy},
+getListTourism: ${getListTourism},
+getListServices: ${getListServices}
     ''';
   }
 }
