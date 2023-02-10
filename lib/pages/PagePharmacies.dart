@@ -38,7 +38,7 @@ class PharmaciesState extends State<PagePharmacies>{
                 onTap: () {
                   showModalBottomSheet(context: context, builder: (context) {
                     return Wrap(
-                        children:  [
+                        children: [
                              Column(
                                 children: [
                                   renderImagePharmacy(element),

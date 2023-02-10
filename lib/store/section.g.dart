@@ -49,6 +49,19 @@ mixin _$Section on SectionBase, Store {
           Computed<List<Service>>(() => super.getListServices,
               name: 'SectionBase.getListServices'))
       .value;
+  Computed<List<Menu>>? _$getSectionsComputed;
+
+  @override
+  List<Menu> get getSections =>
+      (_$getSectionsComputed ??= Computed<List<Menu>>(() => super.getSections,
+              name: 'SectionBase.getSections'))
+          .value;
+  Computed<Event>? _$getEventComputed;
+
+  @override
+  Event get getEvent => (_$getEventComputed ??=
+          Computed<Event>(() => super.getEvent, name: 'SectionBase.getEvent'))
+      .value;
 
   late final _$newListAtom =
       Atom(name: 'SectionBase.newList', context: context);
@@ -94,6 +107,21 @@ mixin _$Section on SectionBase, Store {
   set eventList(List<Event> value) {
     _$eventListAtom.reportWrite(value, super.eventList, () {
       super.eventList = value;
+    });
+  }
+
+  late final _$eventAtom = Atom(name: 'SectionBase.event', context: context);
+
+  @override
+  Event get event {
+    _$eventAtom.reportRead();
+    return super.event;
+  }
+
+  @override
+  set event(Event value) {
+    _$eventAtom.reportWrite(value, super.event, () {
+      super.event = value;
     });
   }
 
@@ -145,6 +173,22 @@ mixin _$Section on SectionBase, Store {
     });
   }
 
+  late final _$sectionListAtom =
+      Atom(name: 'SectionBase.sectionList', context: context);
+
+  @override
+  List<Menu> get sectionList {
+    _$sectionListAtom.reportRead();
+    return super.sectionList;
+  }
+
+  @override
+  set sectionList(List<Menu> value) {
+    _$sectionListAtom.reportWrite(value, super.sectionList, () {
+      super.sectionList = value;
+    });
+  }
+
   late final _$getAllNewByLocalityAsyncAction =
       AsyncAction('SectionBase.getAllNewByLocality', context: context);
 
@@ -161,6 +205,15 @@ mixin _$Section on SectionBase, Store {
   Future<List<Event>> getAllEventsByLocality(String locality) {
     return _$getAllEventsByLocalityAsyncAction
         .run(() => super.getAllEventsByLocality(locality));
+  }
+
+  late final _$getEventByUsernameAndTitleAsyncAction =
+      AsyncAction('SectionBase.getEventByUsernameAndTitle', context: context);
+
+  @override
+  Future<Event> getEventByUsernameAndTitle(String username, String title) {
+    return _$getEventByUsernameAndTitleAsyncAction
+        .run(() => super.getEventByUsernameAndTitle(username, title));
   }
 
   late final _$getAllPharmaciesByLocalityAsyncAction =
@@ -198,15 +251,19 @@ mixin _$Section on SectionBase, Store {
 newList: ${newList},
 new_: ${new_},
 eventList: ${eventList},
+event: ${event},
 pharmaciesList: ${pharmaciesList},
 tourismList: ${tourismList},
 servicesList: ${servicesList},
+sectionList: ${sectionList},
 getList: ${getList},
 getListEvent: ${getListEvent},
 getNew: ${getNew},
 getListPharmacy: ${getListPharmacy},
 getListTourism: ${getListTourism},
-getListServices: ${getListServices}
+getListServices: ${getListServices},
+getSections: ${getSections},
+getEvent: ${getEvent}
     ''';
   }
 }

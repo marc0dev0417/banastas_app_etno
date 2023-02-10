@@ -1,14 +1,35 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:card_swiper/card_swiper.dart';
+import 'package:etno_app/models/FCMToken.dart';
 import 'package:etno_app/pages/PagePharmacies.dart';
 import 'package:etno_app/pages/PageServices.dart';
 import 'package:etno_app/pages/PageTourism.dart';
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:etno_app/widgets/home_widgets.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'firebase_options.dart';
 
-void main(){
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  await Firebase.initializeApp();
+  print("Handling a background message ${message.messageId}");
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  /// Update the iOS foreground notification presentation options to allow
+  /// heads up notifications.
+  await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+    alert: true,
+    badge: true,
+    sound: true,
+  );
   runApp(const App());
 }
 
@@ -32,14 +53,34 @@ class Home extends StatefulWidget {
     return HomeState();
   }
 }
-class HomeState extends State<Home>{
+class HomeState extends State<Home> {
+  late TextEditingController controller;
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
   int bottomIndex = 0;
   final Section section = Section();
 
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+    await FirebaseMessaging.instance.getInitialMessage();
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    // FirebaseMessaging.onMessageOpenedApp.listen();
+  }
+
   @override
   void initState() {
+    controller = TextEditingController();
     section.getAllNewByLocality('Bolea');
     section.getAllEventsByLocality('Bolea');
+    messaging.getToken().then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
+    setupInteractedMessage();
     super.initState();
   }
 
@@ -58,7 +99,6 @@ class HomeState extends State<Home>{
             const Text('Noticias sugeridas para ti', style: TextStyle(color: Colors.grey)),
             const SizedBox(height: 20.0),
             swiperNews(section),
-
             const SizedBox(height: 20.0),
             const Text('Farmacias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
             const Text('Encuentras las farmacias de tu localidad', style: TextStyle(color: Colors.grey)),
@@ -82,52 +122,22 @@ class HomeState extends State<Home>{
           ],
         )
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: bottomIndex,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xFF6200EE),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(.60),
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
-        onTap: (value) {
-          setState(() {
-            bottomIndex = value;
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(
-            label: 'Inicio',
-            icon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            label: 'Eventos',
-            icon: Icon(Icons.celebration),
-          ),
-          BottomNavigationBarItem(
-            label: 'Noticias',
-            icon: Icon(Icons.newspaper),
-          ),
-          BottomNavigationBarItem(
-            label: 'Menú',
-            icon: Icon(Icons.library_books),
-          ),
-        ],
-      ),
+      bottomNavigationBar: bottomNavigation(context, 0)
     );
   }
 }
 
 Widget cardPharmacies(String title, BuildContext context, double width){
   return InkWell(
-    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => const PagePharmacies())); },
+    onTap: () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); },
     child: Card(
+      elevation: 2.0,
         child:
         Container(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
-                const Icon(Icons.access_time),
+                const Icon(Icons.local_pharmacy),
                 const SizedBox(width: 20.0),
                 Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: width),
@@ -141,14 +151,15 @@ Widget cardPharmacies(String title, BuildContext context, double width){
 
 Widget cardTourism(String title, BuildContext context, double width){
   return InkWell(
-    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => const PageTourism())); },
+    onTap: () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); },
     child: Card(
+      elevation: 2.0,
         child:
         Container(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
-                const Icon(Icons.access_time),
+                const Icon(Icons.map),
                 const SizedBox(width: 20.0),
                 Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: width),
@@ -162,13 +173,14 @@ Widget cardTourism(String title, BuildContext context, double width){
 
 Widget cardServices(String title, BuildContext context, double width){
   return InkWell(
-    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => const PageServices())); },
+    onTap: () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServices(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); },
     child: Card(
+      elevation: 2.0,
       child: Container(
         padding: const EdgeInsets.all(10.0),
         child: Row(
-          children:  [
-            const Icon(Icons.access_time),
+          children: [
+            const Icon(Icons.home_repair_service),
             const SizedBox(width: 20.0),
             Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
             SizedBox(width: width),

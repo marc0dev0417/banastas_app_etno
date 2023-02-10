@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "146712911855",
+    "project_id": "etno-87b26",
+    "storage_bucket": "etno-87b26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146712911855:android:8aadd8ac2387e8e26d601a",
+        "android_client_info": {
+          "package_name": "com.ecomputer.etno_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146712911855-eutg4vgbjb0nba948u7hq2joqgi2a4qt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhCzDMj_Y2pYx2gs281ZGIHPqLqQT4mtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146712911855-eutg4vgbjb0nba948u7hq2joqgi2a4qt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ecomputer.etnoApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

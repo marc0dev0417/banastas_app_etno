@@ -41,6 +41,8 @@ class Event {
       this.long,
       this.images,);
 
+  Event.empty();
+
   Event.fromJson(Map<String, dynamic> json) {
     idEvent = json['idEvent'];
     username = json['username'];
