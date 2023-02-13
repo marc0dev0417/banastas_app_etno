@@ -8,22 +8,32 @@ import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:http/http.dart' as http;
 
+import '../models/Defunction.dart';
 import '../models/Event.dart';
 import '../models/FCMToken.dart';
+import '../models/Link.dart';
 import '../models/New.dart';
 import '../models/Pharmacy.dart';
+import '../models/Sponsor.dart';
 import '../models/Tourism.dart';
 import '../models/Service.dart';
+import '../models/menu/Ad.dart';
 
 part 'section.g.dart';
 
 class Section = SectionBase with _$Section;
 
 abstract class SectionBase with Store {
-  final String urlBase = 'http://192.168.137.1:8080/';
+  String urlBase = 'http://192.168.137.1:8080/';
 
   @observable
   List<New> newList = [];
+  @observable
+  List<Sponsor> sponsorList = [];
+  @observable
+  List<Defunction> defunctionList = [];
+  @observable
+  List<Link> linkList = [];
   @observable
   bool isSubscribe = false;
   @observable
@@ -38,6 +48,8 @@ abstract class SectionBase with Store {
   List<Tourism> tourismList = [];
   @observable
   List<Service> servicesList = [];
+  @observable
+  List<Ad> adsList = [];
   @observable
   List<Menu> sectionList = [
     Menu(Icons.celebration, 'Eventos'),
@@ -84,6 +96,51 @@ abstract class SectionBase with Store {
       eventList = data;
       return data;
     } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+  
+  @action
+  Future<List<Defunction>> getAllDefunctionsByLocality(String locality) async {
+    try {
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/deaths?username=$locality'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => Defunction.fromJson(e)).toList();
+      print(data);
+      defunctionList = data;
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future<List<Sponsor>> getSponsorsByLocality(String locality) async {
+    try {
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/sponsors'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => Sponsor.fromJson(e)).toList();
+      print(data);
+      sponsorList = data;
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future<List<Link>> getAllLinksByLocality(String locality) async {
+    try {
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/links?username=$locality'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => Link.fromJson(e)).toList();
+      print(data);
+      linkList = data;
+      return data;
+    }catch(e){
       debugPrint(e.toString());
       rethrow;
     }
@@ -183,6 +240,20 @@ abstract class SectionBase with Store {
     }
   }
 
+  @action
+  Future<List<Ad>> getAllAdsByLocality(String locality) async {
+    try{
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/ads?username=$locality'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => Ad.fromJson(e)).toList();
+      adsList = data;
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
   @computed
   List<New> get getList => newList;
   @computed
@@ -197,6 +268,14 @@ abstract class SectionBase with Store {
   List<Service> get getListServices => servicesList;
   @computed
   List<Menu> get getSections => sectionList;
+  @computed
+  List<Defunction> get getDefunctions => defunctionList;
+  @computed
+  List<Link> get getLinks => linkList;
+  @computed
+  List<Sponsor> get getSponsors => sponsorList;
+  @computed
+  List<Ad> get getAds => adsList;
   @computed
   Event get getEvent => event;
   @computed

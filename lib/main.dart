@@ -3,6 +3,7 @@ import 'package:etno_app/pages/PagePharmacies.dart';
 import 'package:etno_app/pages/PageServices.dart';
 import 'package:etno_app/pages/PageTourism.dart';
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:etno_app/widgets/home_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -87,6 +88,7 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      appBar: appBarCustom('Inicio', Icons.language, () => print('Internalization')),
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.all(10.0),
@@ -122,7 +124,7 @@ class HomeState extends State<Home> {
           ],
         )
       ),
-      bottomNavigationBar: bottomNavigation(context, 0)
+      bottomNavigationBar: bottomNavigation(context, 0),
     );
   }
 }
