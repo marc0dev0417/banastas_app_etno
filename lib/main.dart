@@ -61,18 +61,8 @@ class HomeState extends State<Home> {
   final Section section = Section();
 
   Future<void> setupInteractedMessage() async {
-    // Get any messages which caused the application to open from
-    // a terminated state.
     RemoteMessage? initialMessage =
     await FirebaseMessaging.instance.getInitialMessage();
-
-    // If the message also contains a data property with a "type" of "chat",
-    // navigate to a chat screen
-
-
-    // Also handle any interaction when the app is in the background via a
-    // Stream listener
-    // FirebaseMessaging.onMessageOpenedApp.listen();
   }
 
   @override
@@ -90,38 +80,44 @@ class HomeState extends State<Home> {
     return  Scaffold(
       appBar: appBarCustom('Inicio', Icons.language, () => print('Internalization')),
       body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.all(10.0),
-          children: [
-           const Text(
-                'Explorar',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              ),
-           // const Text('Noticias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.5)),
-            const Text('Noticias sugeridas para ti', style: TextStyle(color: Colors.grey)),
-            const SizedBox(height: 20.0),
-            swiperNews(section),
-            const SizedBox(height: 20.0),
-            const Text('Farmacias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-            const Text('Encuentras las farmacias de tu localidad', style: TextStyle(color: Colors.grey)),
-            const SizedBox(height: 20.0),
-            cardPharmacies('Farmacias de guardia y normal', context, 80.0),
-            const SizedBox(height: 20.0),
-            const Text('Turismo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-            const Text('Turismo más relevante', style: TextStyle(color: Colors.grey)),
-            const SizedBox(height: 20.0),
-            cardTourism('Turismo', context, 218.0),
-            const SizedBox(height: 20.0),
-            const Text('Eventos', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-            const Text('Mira los eventos más destacados', style: TextStyle(color: Colors.grey)),
-            const SizedBox(height: 20.0),
-            swiperEvent(section),
-            const SizedBox(height: 20.0),
-            const Text('Servicios', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-            const Text('Servicios más relevante', style: TextStyle(color: Colors.grey)),
-            const SizedBox(height: 20.0),
-            cardServices('Los mejores servicios de tu localidad', context, 40.0)
-          ],
+        child: Container(
+          padding: const EdgeInsets.all(15.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  'Explorar',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                ),
+                // const Text('Noticias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.5)),
+                const Text('Noticias sugeridas para ti', style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 20.0),
+                swiperNews(section),
+                const SizedBox(height: 20.0),
+                const Text('Farmacias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                const Text('Encuentras las farmacias de tu localidad', style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 20.0),
+                cardPharmacies('Farmacias de guardia y normal', context, 70.0),
+                const SizedBox(height: 20.0),
+                const Text('Turismo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                const Text('Turismo más relevante', style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 20.0),
+                cardTourism('Turismo', context, 210.0),
+                const SizedBox(height: 20.0),
+                const Text('Eventos', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                const Text('Mira los eventos más destacados', style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 20.0),
+                swiperEvent(section),
+                const SizedBox(height: 10.0),
+                const Text('Servicios', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                const Text('Servicios más relevante', style: TextStyle(color: Colors.grey)),
+                const SizedBox(height: 20.0),
+                cardServices('Los mejores servicios de tu localidad', context, 30.0)
+              ],
+            ),
+          )
         )
       ),
       bottomNavigationBar: bottomNavigation(context, 0),

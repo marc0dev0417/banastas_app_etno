@@ -71,54 +71,48 @@ Widget swiperEvent(Section section) {
           width: double.infinity,
           height: 250,
           child: Swiper(
-                    loop: false,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {
-                          section.getEventByUsernameAndTitle(section.getListEvent[index].username!, section.getListEvent[index].title!).then((value) =>
-                              showDialogEvent(context, value)
-                          );
-                        },
-                        child: Card(
-                          elevation: 5.0,
-                          color: Colors.white,
-                            child: Container(
-                              padding: const EdgeInsets.only(bottom: 4.0),
-                              alignment: Alignment.bottomCenter,
-                              child:
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children:  [
-                                            Container(
-                                              padding: const EdgeInsets.only(top: 80.0),
-                                              child: const CircularProgressIndicator()
-                                            ),
-                                            Container(
-                                             padding: const EdgeInsets.only(top: 75.0),
-                                              alignment: Alignment.bottomCenter,
-                                              child: Row(
-                                                  mainAxisSize: MainAxisSize.min,
-                                                  children: [
-                                                    const Icon(Icons.celebration, size: 20.0),
-                                                    const SizedBox(
-                                                      width: 8.0,
-                                                    ),
-                                                    Text(
-                                                        section.getListEvent[index].title!,
-                                                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)
-                                                    )
-                                                  ]
-                                              ),
-                                            )
-                                          ],
-                                  )
-                            )
-                          )
-                        );
+              loop: false,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                    onTap: () {
+                      section.getEventByUsernameAndTitle(section.getListEvent[index].username!, section.getListEvent[index].title!).then((value) =>
+                          showDialogEvent(context, value)
+                      );
                     },
-                    itemCount: section.getListEvent.length,
-                    viewportFraction: 0.9,
-                    scale: 0.9
+                    child: Card(
+                        elevation: 5.0,
+                        color: Colors.white,
+                        child: Container(
+                            decoration: BoxDecoration(image: DecorationImage(image: NetworkImage(section.getListEvent[index].imageUrl!), fit: BoxFit.fill)),
+                            alignment: Alignment.bottomCenter,
+                            child:
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children:  [
+                                  Container(
+                                    decoration: const BoxDecoration(color: Colors.white),
+                                    child: Row(
+                                        children: [
+                                          const Icon(Icons.celebration, size: 20.0),
+                                          const SizedBox(
+                                            width: 8.0,
+                                          ),
+                                          Text(
+                                              section.getListEvent[index].title!,
+                                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)
+                                          )
+                                        ]
+                                    ),
+                                  )
+                              ],
+                            )
+                        )
+                    )
+                );
+              },
+              itemCount: section.getListEvent.length,
+              viewportFraction: 0.9,
+              scale: 0.9
           )
       );
     }

@@ -1,6 +1,5 @@
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 

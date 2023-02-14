@@ -15,6 +15,13 @@ mixin _$Section on SectionBase, Store {
   List<New> get getList => (_$getListComputed ??=
           Computed<List<New>>(() => super.getList, name: 'SectionBase.getList'))
       .value;
+  Computed<List<New>>? _$getListNewCategoryComputed;
+
+  @override
+  List<New> get getListNewCategory => (_$getListNewCategoryComputed ??=
+          Computed<List<New>>(() => super.getListNewCategory,
+              name: 'SectionBase.getListNewCategory'))
+      .value;
   Computed<List<Event>>? _$getListEventComputed;
 
   @override
@@ -110,6 +117,23 @@ mixin _$Section on SectionBase, Store {
   set newList(List<New> value) {
     _$newListAtom.reportWrite(value, super.newList, () {
       super.newList = value;
+    });
+  }
+
+  late final _$newListEventCategoryAtom =
+      Atom(name: 'SectionBase.newListEventCategory', context: context);
+
+  @override
+  List<New> get newListEventCategory {
+    _$newListEventCategoryAtom.reportRead();
+    return super.newListEventCategory;
+  }
+
+  @override
+  set newListEventCategory(List<New> value) {
+    _$newListEventCategoryAtom.reportWrite(value, super.newListEventCategory,
+        () {
+      super.newListEventCategory = value;
     });
   }
 
@@ -312,6 +336,17 @@ mixin _$Section on SectionBase, Store {
         .run(() => super.getAllNewByLocality(locality));
   }
 
+  late final _$getNewsListByLocalityAndCategoryAsyncAction = AsyncAction(
+      'SectionBase.getNewsListByLocalityAndCategory',
+      context: context);
+
+  @override
+  Future<List<New>> getNewsListByLocalityAndCategory(
+      String locality, String category) {
+    return _$getNewsListByLocalityAndCategoryAsyncAction
+        .run(() => super.getNewsListByLocalityAndCategory(locality, category));
+  }
+
   late final _$getAllEventsByLocalityAsyncAction =
       AsyncAction('SectionBase.getAllEventsByLocality', context: context);
 
@@ -416,6 +451,7 @@ mixin _$Section on SectionBase, Store {
   String toString() {
     return '''
 newList: ${newList},
+newListEventCategory: ${newListEventCategory},
 sponsorList: ${sponsorList},
 defunctionList: ${defunctionList},
 linkList: ${linkList},
@@ -429,6 +465,7 @@ servicesList: ${servicesList},
 adsList: ${adsList},
 sectionList: ${sectionList},
 getList: ${getList},
+getListNewCategory: ${getListNewCategory},
 getListEvent: ${getListEvent},
 getNew: ${getNew},
 getListPharmacy: ${getListPharmacy},

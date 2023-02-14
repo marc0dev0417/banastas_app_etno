@@ -29,6 +29,8 @@ abstract class SectionBase with Store {
   @observable
   List<New> newList = [];
   @observable
+  List<New> newListEventCategory = [];
+  @observable
   List<Sponsor> sponsorList = [];
   @observable
   List<Defunction> defunctionList = [];
@@ -79,6 +81,21 @@ abstract class SectionBase with Store {
       newList = data;
       return data;
     } catch (e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+  @action
+  Future<List<New>> getNewsListByLocalityAndCategory(String locality, String category) async{
+    try {
+      final response = await http.get(
+        Uri.parse('http://192.168.137.1:8080/news?username=$locality&category=$category')
+      );
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => New.fromJson(e)).toList();
+      newListEventCategory = data;
+      return data;
+    }catch (e){
       debugPrint(e.toString());
       rethrow;
     }
@@ -256,6 +273,8 @@ abstract class SectionBase with Store {
 
   @computed
   List<New> get getList => newList;
+  @computed
+  List<New> get getListNewCategory => newListEventCategory;
   @computed
   List<Event> get getListEvent => eventList;
   @computed
