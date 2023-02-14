@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDEKesqeWk8NGAS_iuEzzqd-dt-aepilFw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>146712911855</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ecomputer.etnoApp</string>
+	<key>PROJECT_ID</key>
+	<string>etno-87b26</string>
+	<key>STORAGE_BUCKET</key>
+	<string>etno-87b26.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:146712911855:ios:0627506757bde5ba6d601a</string>
+</dict>
+</plist>
