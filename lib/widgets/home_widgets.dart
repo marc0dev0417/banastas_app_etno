@@ -6,8 +6,6 @@ import 'package:etno_app/store/section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
-
 import '../models/New.dart';
 
 Widget swiperNews(Section section) {
@@ -42,15 +40,13 @@ Widget swiperNews(Section section) {
                           )
                         },
                         child: Card(
-                          child: Column(
-                            children: [
-                              renderImageNew(section, index),
-                              const SizedBox(
-                                height: 10.0,
-                              ),
-                            //  Text(section.getList[index].title!)
-                            ],
-                          ),
+                          child: Container(
+                            alignment: Alignment.bottomCenter,
+                            decoration: BoxDecoration(
+                              image: DecorationImage(image: NetworkImage(section.getList[index].imageUrl!), fit: BoxFit.fill)
+                            ),
+                            child: const Icon(Icons.newspaper, color: Colors.white)
+                          )
                         ),
                       );
                     },
@@ -88,10 +84,12 @@ Widget swiperEvent(Section section) {
                             child:
                             Column(
                               mainAxisSize: MainAxisSize.min,
-                              children:  [
+                              children: [
                                   Container(
+                                    alignment: Alignment.bottomCenter,
                                     decoration: const BoxDecoration(color: Colors.white),
                                     child: Row(
+                                      mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const Icon(Icons.celebration, size: 20.0),
                                           const SizedBox(

@@ -1,5 +1,7 @@
 import 'package:etno_app/pages/PageAd.dart';
+import 'package:etno_app/pages/PageBandos.dart';
 import 'package:etno_app/pages/PageDefunctions.dart';
+import 'package:etno_app/pages/incident/PageIncidents.dart';
 import 'package:etno_app/pages/PageLinks.dart';
 import 'package:etno_app/pages/PageNews.dart';
 import 'package:etno_app/pages/PagePharmacies.dart';
@@ -7,6 +9,7 @@ import 'package:etno_app/pages/PageServices.dart';
 import 'package:etno_app/pages/PageSponsors.dart';
 import 'package:etno_app/pages/PageTourism.dart';
 import 'package:etno_app/pages/event/PageEvents.dart';
+import 'package:etno_app/pages/gallery/PageGallery.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
@@ -45,18 +48,22 @@ class PageState extends State<PageMenuSections> {
                              child: InkWell(
                                onTap: () {
                                  switch(e.title){
-                                   case 'Eventos': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEvents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Turismo': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Farmacias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Anuncios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageAd(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Noticias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageNews(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Enlaces': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageLinks(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Defunciones': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageDefunctions(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Servicios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServices(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Patrocinadores': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageSponsors(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Eventos': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEvents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Turismo': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Farmacias': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Anuncios': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageAd(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Noticias': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageNews(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Galería': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageGallery(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Enlaces': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageLinks(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Defunciones': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageDefunctions(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Servicios': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServices(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Patrocinadores': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageSponsors(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Bandos': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageBandos(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                   case 'Incidentes': Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageIncidents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                  }
                                },
                                child: Card(
+                                 color: Colors.red,
                                  elevation: 1.0,
                                  shadowColor: Colors.grey,
                                  child: Center(
@@ -64,8 +71,8 @@ class PageState extends State<PageMenuSections> {
                                        mainAxisSize: MainAxisSize.min,
                                        crossAxisAlignment: CrossAxisAlignment.center,
                                        children: [
-                                         Icon(e.icon),
-                                         Text(e.title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0))
+                                         Icon(e.icon, color: Colors.white),
+                                         Text(e.title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white))
                                        ],
                                      )
                                  ),

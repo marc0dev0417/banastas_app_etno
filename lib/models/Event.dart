@@ -20,7 +20,7 @@ class Event {
   String? time;
   String? lat;
   String? long;
-  List<Image>? images;
+  List<ImageMedia>? images;
 
   Event(this.idEvent,
       this.username,
@@ -62,9 +62,9 @@ class Event {
     lat = json['lat'];
     long = json['long'];
     if (json['images'] != null) {
-      images = <Image>[];
+      images = <ImageMedia>[];
       json['images'].forEach((v) {
-        images!.add(Image.fromJson(v));
+        images!.add(ImageMedia.fromJson(v));
       });
     }
 

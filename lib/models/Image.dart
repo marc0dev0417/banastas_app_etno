@@ -1,4 +1,4 @@
-class Image {
+class ImageMedia {
   String? idImage;
   String? locality;
   String? section;
@@ -6,9 +6,9 @@ class Image {
   String? category;
   String? link;
 
-  Image(this.idImage, this.locality, this.section, this.name, this.category, this.link);
+  ImageMedia(this.idImage, this.locality, this.section, this.name, this.category, this.link);
 
-  Image.fromJson(Map<String, dynamic> json) {
+  ImageMedia.fromJson(Map<String, dynamic> json) {
     idImage = json['idImage'];
     locality = json['locality'];
     section = json['section'];

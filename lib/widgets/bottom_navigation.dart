@@ -1,4 +1,6 @@
 import 'package:etno_app/pages/PageMenuSections.dart';
+import 'package:etno_app/pages/PageNews.dart';
+import 'package:etno_app/pages/event/PageEvents.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -16,13 +18,25 @@ Widget bottomNavigation(BuildContext context, int bottomIndex){
         bottomIndex = value;
 
       switch(value){
-        case 0 : Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
+        case 0 : Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
         const Home(),
             transitionDuration: Duration.zero,
             reverseTransitionDuration: Duration.zero
         ));
         break;
-        case 3 : Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
+        case 1 : Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
+        const PageEvents(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero
+        ));
+        break;
+        case 2 : Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
+        const PageNews(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero
+        ));
+        break;
+        case 3 : Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
         const PageMenuSections(),
             transitionDuration: Duration.zero,
             reverseTransitionDuration: Duration.zero));

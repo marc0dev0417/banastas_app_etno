@@ -90,6 +90,34 @@ mixin _$Section on SectionBase, Store {
   List<Ad> get getAds => (_$getAdsComputed ??=
           Computed<List<Ad>>(() => super.getAds, name: 'SectionBase.getAds'))
       .value;
+  Computed<List<Bandos>>? _$getBandosComputed;
+
+  @override
+  List<Bandos> get getBandos =>
+      (_$getBandosComputed ??= Computed<List<Bandos>>(() => super.getBandos,
+              name: 'SectionBase.getBandos'))
+          .value;
+  Computed<List<ImageMedia>>? _$getImagesComputed;
+
+  @override
+  List<ImageMedia> get getImages =>
+      (_$getImagesComputed ??= Computed<List<ImageMedia>>(() => super.getImages,
+              name: 'SectionBase.getImages'))
+          .value;
+  Computed<List<Incident>>? _$getIncidentsComputed;
+
+  @override
+  List<Incident> get getIncidents => (_$getIncidentsComputed ??=
+          Computed<List<Incident>>(() => super.getIncidents,
+              name: 'SectionBase.getIncidents'))
+      .value;
+  Computed<Message>? _$getMessageComputed;
+
+  @override
+  Message get getMessage =>
+      (_$getMessageComputed ??= Computed<Message>(() => super.getMessage,
+              name: 'SectionBase.getMessage'))
+          .value;
   Computed<Event>? _$getEventComputed;
 
   @override
@@ -182,6 +210,22 @@ mixin _$Section on SectionBase, Store {
   set linkList(List<Link> value) {
     _$linkListAtom.reportWrite(value, super.linkList, () {
       super.linkList = value;
+    });
+  }
+
+  late final _$bandoListAtom =
+      Atom(name: 'SectionBase.bandoList', context: context);
+
+  @override
+  List<Bandos> get bandoList {
+    _$bandoListAtom.reportRead();
+    return super.bandoList;
+  }
+
+  @override
+  set bandoList(List<Bandos> value) {
+    _$bandoListAtom.reportWrite(value, super.bandoList, () {
+      super.bandoList = value;
     });
   }
 
@@ -308,6 +352,54 @@ mixin _$Section on SectionBase, Store {
   set adsList(List<Ad> value) {
     _$adsListAtom.reportWrite(value, super.adsList, () {
       super.adsList = value;
+    });
+  }
+
+  late final _$imageListAtom =
+      Atom(name: 'SectionBase.imageList', context: context);
+
+  @override
+  List<ImageMedia> get imageList {
+    _$imageListAtom.reportRead();
+    return super.imageList;
+  }
+
+  @override
+  set imageList(List<ImageMedia> value) {
+    _$imageListAtom.reportWrite(value, super.imageList, () {
+      super.imageList = value;
+    });
+  }
+
+  late final _$incidentListAtom =
+      Atom(name: 'SectionBase.incidentList', context: context);
+
+  @override
+  List<Incident> get incidentList {
+    _$incidentListAtom.reportRead();
+    return super.incidentList;
+  }
+
+  @override
+  set incidentList(List<Incident> value) {
+    _$incidentListAtom.reportWrite(value, super.incidentList, () {
+      super.incidentList = value;
+    });
+  }
+
+  late final _$messageAtom =
+      Atom(name: 'SectionBase.message', context: context);
+
+  @override
+  Message get message {
+    _$messageAtom.reportRead();
+    return super.message;
+  }
+
+  @override
+  set message(Message value) {
+    _$messageAtom.reportWrite(value, super.message, () {
+      super.message = value;
     });
   }
 
@@ -447,6 +539,52 @@ mixin _$Section on SectionBase, Store {
         .run(() => super.getAllAdsByLocality(locality));
   }
 
+  late final _$getAllBandosByLocalityAsyncAction =
+      AsyncAction('SectionBase.getAllBandosByLocality', context: context);
+
+  @override
+  Future<List<Bandos>> getAllBandosByLocality(String locality) {
+    return _$getAllBandosByLocalityAsyncAction
+        .run(() => super.getAllBandosByLocality(locality));
+  }
+
+  late final _$getAllImageMediaByLocalityAsyncAction =
+      AsyncAction('SectionBase.getAllImageMediaByLocality', context: context);
+
+  @override
+  Future<List<ImageMedia>> getAllImageMediaByLocality(String locality) {
+    return _$getAllImageMediaByLocalityAsyncAction
+        .run(() => super.getAllImageMediaByLocality(locality));
+  }
+
+  late final _$getAllIncidentByLocalityAndFcmTokenAsyncAction = AsyncAction(
+      'SectionBase.getAllIncidentByLocalityAndFcmToken',
+      context: context);
+
+  @override
+  Future<List<Incident>> getAllIncidentByLocalityAndFcmToken(
+      String locality, String fcmToken) {
+    return _$getAllIncidentByLocalityAndFcmTokenAsyncAction.run(
+        () => super.getAllIncidentByLocalityAndFcmToken(locality, fcmToken));
+  }
+
+  late final _$sendMailMessageAsyncAction =
+      AsyncAction('SectionBase.sendMailMessage', context: context);
+
+  @override
+  Future<Message> sendMailMessage(MailDetails mailDetails) {
+    return _$sendMailMessageAsyncAction
+        .run(() => super.sendMailMessage(mailDetails));
+  }
+
+  late final _$addIncidentAsyncAction =
+      AsyncAction('SectionBase.addIncident', context: context);
+
+  @override
+  Future<dynamic> addIncident(Incident incident) {
+    return _$addIncidentAsyncAction.run(() => super.addIncident(incident));
+  }
+
   @override
   String toString() {
     return '''
@@ -455,6 +593,7 @@ newListEventCategory: ${newListEventCategory},
 sponsorList: ${sponsorList},
 defunctionList: ${defunctionList},
 linkList: ${linkList},
+bandoList: ${bandoList},
 isSubscribe: ${isSubscribe},
 new_: ${new_},
 eventList: ${eventList},
@@ -463,6 +602,9 @@ pharmaciesList: ${pharmaciesList},
 tourismList: ${tourismList},
 servicesList: ${servicesList},
 adsList: ${adsList},
+imageList: ${imageList},
+incidentList: ${incidentList},
+message: ${message},
 sectionList: ${sectionList},
 getList: ${getList},
 getListNewCategory: ${getListNewCategory},
@@ -476,6 +618,10 @@ getDefunctions: ${getDefunctions},
 getLinks: ${getLinks},
 getSponsors: ${getSponsors},
 getAds: ${getAds},
+getBandos: ${getBandos},
+getImages: ${getImages},
+getIncidents: ${getIncidents},
+getMessage: ${getMessage},
 getEvent: ${getEvent},
 getIsSubscribe: ${getIsSubscribe}
     ''';

@@ -15,8 +15,8 @@ class PageNewDetail extends StatelessWidget {
             children: [
               Container(
                   height: 250,
-                  decoration: const BoxDecoration(
-                      image: DecorationImage(image: NetworkImage('http://192.168.137.1:8080/images/sponsors/ecomputer.jpg'), fit: BoxFit.fill)
+                  decoration:  BoxDecoration(
+                      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill)
                   ),
                   child: Container(
                       padding: const EdgeInsets.only(),

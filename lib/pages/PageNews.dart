@@ -1,4 +1,5 @@
 
+import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,8 @@ class PageState extends State<PageNews> {
                 TabBarTecnology(),
                 TabBarSalud()
             ],
-          )
+          ),
+            bottomNavigationBar: bottomNavigation(context, 2)
         ),
       ),
     );

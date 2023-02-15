@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:etno_app/models/FCMToken.dart';
 import 'package:etno_app/pages/PagePharmacies.dart';
 import 'package:etno_app/pages/PageServices.dart';
@@ -9,6 +11,7 @@ import 'package:etno_app/widgets/home_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'firebase_options.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -55,9 +58,11 @@ class Home extends StatefulWidget {
   }
 }
 class HomeState extends State<Home> {
+  late StreamSubscription internetSubscription;
   late TextEditingController controller;
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   int bottomIndex = 0;
+  bool connection = true;
   final Section section = Section();
 
   Future<void> setupInteractedMessage() async {
@@ -67,6 +72,17 @@ class HomeState extends State<Home> {
 
   @override
   void initState() {
+    internetSubscription = InternetConnectionChecker().onStatusChange.listen((status) {
+      setState(() {
+        final hasInternet = status == InternetConnectionStatus.connected;
+        connection = hasInternet;
+        controller = TextEditingController();
+        section.getAllNewByLocality('Bolea');
+        section.getAllEventsByLocality('Bolea');
+        messaging.getToken().then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
+        setupInteractedMessage();
+      });
+    });
     controller = TextEditingController();
     section.getAllNewByLocality('Bolea');
     section.getAllEventsByLocality('Bolea');
@@ -74,13 +90,28 @@ class HomeState extends State<Home> {
     setupInteractedMessage();
     super.initState();
   }
-
   @override
-  Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: appBarCustom('Inicio', Icons.language, () => print('Internalization')),
-      body: SafeArea(
-        child: Container(
+  void dispose() {
+    internetSubscription.cancel();
+    super.dispose();
+  }
+
+  Widget notConnection(){
+    return Container(
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Icon(Icons.wifi_off, size: 160.0),
+          Text('No hay conexión a Internet')
+        ],
+      )
+    );
+  }
+
+  Widget renderWidget(){
+    if(connection){
+     return Container(
           padding: const EdgeInsets.all(15.0),
           child: SingleChildScrollView(
             child: Column(
@@ -118,7 +149,18 @@ class HomeState extends State<Home> {
               ],
             ),
           )
-        )
+      );
+    }else{
+      return notConnection();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+      appBar: appBarCustom('Inicio', Icons.language, () => print('Internalization')),
+      body: SafeArea(
+        child: renderWidget()
       ),
       bottomNavigationBar: bottomNavigation(context, 0),
     );

@@ -1,6 +1,10 @@
 
+import 'dart:async';
+
+import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/Service.dart';
 
@@ -19,24 +23,63 @@ class PageServicesList extends StatefulWidget{
 }
 
 class ServicesListState extends State<PageServicesList> {
+  late StreamSubscription internetSubscription;
+  bool connection = true;
   final Section section = Section();
   PageServicesList get props => super.widget;
 
   @override
   void initState() {
-    super.initState();
+    internetSubscription = InternetConnectionChecker().onStatusChange.listen((status) {
+      setState(() {
+        connection = status == InternetConnectionStatus.connected;
+        section.getAllServiceByLocalityAndCategory(props.locality, props.category);
+      });
+    });
     section.getAllServiceByLocalityAndCategory(props.locality, props.category);
+    super.initState();
+  }
+  @override
+  void dispose() {
+    internetSubscription.cancel();
+    super.dispose();
+  }
+
+  Widget renderWidgets(){
+    if(connection){
+      return Observer(builder: (context) {
+        if(section.getListServices.isNotEmpty){
+          return servicesList(section);
+        }else{
+          return Container(
+            alignment: Alignment.center,
+            child: Text('No hay servicios en este momento'),
+          );
+        }
+      });
+    }else{
+      return Container(
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(Icons.wifi_off, size: 160.0),
+            Text('No hay Conexión a Internet'),
+          ]
+        )
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
+      appBar: appBarCustom(props.category, Icons.language, () => null),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(15.0),
-          child: Observer(builder: (BuildContext context) {
-            return servicesList(section);
-          })
+          child:
+             renderWidgets()
         )
       )
     );
