@@ -1,5 +1,5 @@
 class Service {
-  String? idPhone;
+  String? idService;
   String? username;
   String? category;
   String? owner;
@@ -8,7 +8,7 @@ class Service {
   String? imageUrl;
 
   Service(
-      this.idPhone,
+      this.idService,
       this.username,
       this.category,
       this.owner,
@@ -17,7 +17,7 @@ class Service {
       this.imageUrl
       );
   Service.fromJson(Map<String, dynamic> json) {
-    idPhone = json['idPhone'];
+    idService = json['idService'];
     username = json['username'];
     category = json['category'];
     owner = json['owner'];
@@ -28,7 +28,7 @@ class Service {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idPhone'] = idPhone;
+    data['idService'] = idService;
     data['username'] = username;
     data['category'] = category;
     data['owner'] = owner;
@@ -37,5 +37,4 @@ class Service {
     data['imageUrl'] = imageUrl;
     return data;
   }
-
 }

@@ -1,5 +1,6 @@
 import 'package:etno_app/models/Incident.dart';
 import 'package:etno_app/models/MailDetails.dart';
+import 'package:etno_app/pages/incident/PageIncidents.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -122,7 +123,12 @@ class PageState extends State<IncidentForm> {
               ),
               const SizedBox(height: 20.0),
               ElevatedButton(onPressed: () => addIncidentAPI(), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Enviar')),
-              ElevatedButton(onPressed: () => Navigator.pop(context, -1), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Cancelar'))
+              ElevatedButton(onPressed: (){
+                FirebaseMessaging.instance.getToken().then((value) => section.getAllIncidentByLocalityAndFcmToken('Bolea', value!).then((value) =>
+                    Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const PageIncidents()))
+                ));
+
+              } , style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Cancelar'))
             ]
         ),
       ),

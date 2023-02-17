@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:card_swiper/card_swiper.dart';
+import 'package:etno_app/models/PharmaciesButton.dart';
 import 'package:etno_app/models/Pharmacy.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,13 @@ class PagePharmacies extends StatefulWidget{
 }
 class PharmaciesState extends State<PagePharmacies>{
   final Section section = Section();
-  final List<String> list = ['Todo', 'Normal', 'Guardia'];
   Set<Marker> listMarker = {  };
   Set<Marker> listMarkerSaved = {  };
+  List<PharmaciesButton> pharmaciesButton = [
+    PharmaciesButton(Icons.local_pharmacy, Colors.black, 'Todo'),
+    PharmaciesButton(Icons.local_pharmacy, Colors.blue, 'Normal'),
+    PharmaciesButton(Icons.local_pharmacy, Colors.red, 'Guardia')
+  ];
 
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
@@ -110,13 +115,18 @@ class PharmaciesState extends State<PagePharmacies>{
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body:
-          SafeArea(
-             child:
+    return MaterialApp(
+      title: 'Pharmacies',
+      home: DefaultTabController(
+        initialIndex: 0,
+        length: pharmaciesButton.length,
+        child: Scaffold(
+            body:
+            SafeArea(
+                child:
                 Stack(
                   children: [
-                     GoogleMap(
+                    GoogleMap(
                         mapType: MapType.normal,
                         initialCameraPosition: _kGooglePlex,
                         onMapCreated: (GoogleMapController controller){
@@ -124,58 +134,42 @@ class PharmaciesState extends State<PagePharmacies>{
                         },
                         markers: listMarker
                     ),
-                    SizedBox(
-                      height: 40,
-                      width: 320.0,
-                      child: Swiper(
-                        index: 0,
-                        scrollDirection: Axis.horizontal,
-                          loop: false,
-                          itemBuilder: (BuildContext context, int index){
-                            return  Row(
-                              children: [
-
-                                TextButton(
-                                  style: TextButton.styleFrom(backgroundColor: Colors.white),
-                                  onPressed: () {
-                                    switch(list[index]){
-                                      case 'Normal': setState(() {
-                                        listMarker = listMarkerSaved;
-                                      listMarker = listMarker.where((element) => element.markerId.value == 'Normal').toSet();
-                                      });
-                                        break;
-                                      case 'Guardia': setState(() {
-                                        listMarker = listMarkerSaved;
-                                        listMarker = listMarker.where((element) => element.markerId.value == 'Guardia').toSet();
-                                      });
-                                        break;
-                                      case 'Todo': setState(() {
-                                        listMarker = listMarkerSaved;
-                                      });
-                                    }
-                                  },
-
-                                  child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(Icons.access_time),
-                                      Text(list[index], style: const TextStyle(color: Colors.black))
-                                    ],
-                                  )
-                                )
-
-                              ],
-                            );
-                          },
-                          itemCount: list.length,
-                          viewportFraction: 0.3
-                      ),
-                    )
+                         TabBar(
+                           indicatorColor: Colors.transparent,
+                           isScrollable: true,
+                             tabs: [ for (final tab in pharmaciesButton) ElevatedButton(
+                                style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                                 onPressed: () {
+                                   switch(tab.name){
+                                     case 'Normal': setState(() {
+                                       listMarker = listMarkerSaved;
+                                       listMarker = listMarker.where((element) => element.markerId.value == 'Normal').toSet();
+                                     });
+                                     break;
+                                     case 'Guardia': setState(() {
+                                       listMarker = listMarkerSaved;
+                                       listMarker = listMarker.where((element) => element.markerId.value == 'Guardia').toSet();
+                                     });
+                                     break;
+                                     case 'Todo': setState(() {
+                                       listMarker = listMarkerSaved;
+                                     });
+                                   }
+                                 },
+                                 child: Row(
+                                   children: [
+                                     Icon(tab.iconData, color: tab.color),
+                                     Text(tab.name!, style: const TextStyle(color: Colors.black))
+                                   ]
+                                 )
+                             )]
+                         )
                   ],
                 )
-          )
-      );
+            )
+        ),
+      ),
+    );
   }
 }
 

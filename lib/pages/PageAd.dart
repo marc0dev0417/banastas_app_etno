@@ -1,4 +1,5 @@
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -29,12 +30,33 @@ class PageState extends State<PageAd> {
     return Scaffold(
       appBar: appBarCustom('Anuncios', Icons.language, () => null),
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          child: Observer(builder: (context) => ListView(
-            children: section.getAds.map((e) => cardAd(e)).toList()
-          ))
-        ) ,
+        child: Column(
+          children: [
+            const WarningWidgetValueNotifier(),
+            Container(
+                padding: const EdgeInsets.all(16.0),
+                child: Observer(builder: (context) {
+                  if(section.getAds.isNotEmpty){
+                    return ListView(
+                      shrinkWrap: true,
+                        children: section.getAds.map((e) => cardAd(e)).toList()
+                    );
+                  }else{
+                    return Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(top: 250.0),
+                        child: Column(
+                            children: const [
+                              Text('No hay Anuncios disponibles'),
+                              Icon(Icons.block, size: 120.0)
+                            ]
+                        )
+                    );
+                  }
+                })
+            ),
+          ],
+        )
       ),
     );
   }

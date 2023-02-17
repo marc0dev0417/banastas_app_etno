@@ -1,5 +1,6 @@
 import 'package:etno_app/models/Defunction.dart';
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -32,13 +33,36 @@ class PageState extends State<PageDefunctions> {
           () => null
       ),
       body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(15.0),
-            child: Observer(
-                builder: (context) => ListView(
-                  children: section.getDefunctions.map((e) => cardDefunction(context, e)).toList()
-                )
-            )
+          child: Column(
+            children: [
+              const WarningWidgetValueNotifier(),
+              Container(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Observer(
+                      builder: (context){
+                        if(section.getDefunctions.isNotEmpty){
+                          return ListView(
+                              shrinkWrap: true,
+                              children: section.getDefunctions.map((e) => cardDefunction(context, e)).toList()
+                          );
+                        }else {
+                          return Container(
+                            height: 550.0,
+                            alignment: Alignment.center,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.block, size: 120.0),
+                                  Text('No hay defunciones para mostrar')
+                                ]
+                            ),
+                          );
+                        }
+                      }
+                  )
+              )
+            ]
           )
       )
     );

@@ -1,6 +1,7 @@
 
 import 'dart:async';
 
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -23,63 +24,49 @@ class PageServicesList extends StatefulWidget{
 }
 
 class ServicesListState extends State<PageServicesList> {
-  late StreamSubscription internetSubscription;
-  bool connection = true;
   final Section section = Section();
   PageServicesList get props => super.widget;
 
   @override
   void initState() {
-    internetSubscription = InternetConnectionChecker().onStatusChange.listen((status) {
-      setState(() {
-        connection = status == InternetConnectionStatus.connected;
-        section.getAllServiceByLocalityAndCategory(props.locality, props.category);
-      });
-    });
     section.getAllServiceByLocalityAndCategory(props.locality, props.category);
     super.initState();
   }
-  @override
-  void dispose() {
-    internetSubscription.cancel();
-    super.dispose();
-  }
 
   Widget renderWidgets(){
-    if(connection){
       return Observer(builder: (context) {
         if(section.getListServices.isNotEmpty){
           return servicesList(section);
         }else{
           return Container(
+            padding: const EdgeInsets.only(top: 250.0),
             alignment: Alignment.center,
-            child: Text('No hay servicios en este momento'),
+            child: Column(
+              children: const [
+                Icon(Icons.block, size: 120.0),
+                Text('No hay servicios en este momento'),
+              ]
+            )
           );
         }
       });
-    }else{
-      return Container(
-        alignment: Alignment.center,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: const [
-            Icon(Icons.wifi_off, size: 160.0),
-            Text('No hay Conexión a Internet'),
-          ]
-        )
-      );
     }
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: appBarCustom(props.category, Icons.language, () => null),
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(15.0),
-          child:
-             renderWidgets()
+        child: Column(
+          children: [
+            const WarningWidgetValueNotifier(),
+            Container(
+                padding: const EdgeInsets.all(15.0),
+                child:
+                renderWidgets()
+            )
+          ]
         )
       )
     );
@@ -95,6 +82,7 @@ Widget servicesList(Section section){
     await launchUrl(launchUri);
   }
   return ListView(
+    shrinkWrap: true,
     children:
       section.getListServices.map((e) =>
           InkWell(

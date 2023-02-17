@@ -1,4 +1,5 @@
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -26,11 +27,34 @@ class PageState extends State<PageSponsors> {
     return Scaffold(
       appBar: appBarCustom('Patrocinadores', Icons.language, () => null),
       body: SafeArea(
-        child: Container(
-          padding: const EdgeInsets.all(15.0),
-          child: Observer(builder: (context) => ListView(
-            children: section.getSponsors.map((e) => cardSponsor(e)).toList()
-          ))
+        child: Column(
+          children: [
+            const WarningWidgetValueNotifier(),
+            Container(
+                padding: const EdgeInsets.all(15.0),
+                child: Observer(builder: (context){
+                  if(section.getSponsors.isNotEmpty){
+                    return ListView(
+                        shrinkWrap: true,
+                        children: section.getSponsors.map((e) => cardSponsor(e)).toList()
+                    );
+                  }else{
+                    return Container(
+                      height: 550.0,
+                      alignment: Alignment.center,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            Icon(Icons.block, size: 120.0),
+                            Text('No hay patrocinadores para mostrar')
+                          ]
+                      ),
+                    );
+                  }
+                })
+            )
+          ]
         )
       )
     );

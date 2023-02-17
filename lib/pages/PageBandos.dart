@@ -1,4 +1,5 @@
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import '../models/Bandos.dart';
 
 class PageBandos extends StatefulWidget {
+  const PageBandos({super.key});
+
   @override
   State<StatefulWidget> createState() {
     return PageState();
@@ -23,12 +26,33 @@ class PageState extends State<PageBandos> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustom('Bandos', Icons.language, () => null),
-      body: Container(
-        padding: const EdgeInsets.all(15.0),
-        child: Observer(builder: (context) => ListView(
-          children: section.getBandos.map((e) => carBando(e, context)).toList()
-        ))
-      ),
+      body: Column(
+        children: [
+          const WarningWidgetValueNotifier(),
+          Container(
+              padding: const EdgeInsets.all(15.0),
+              child: Observer(builder: (context) {
+                if(section.getBandos.isNotEmpty){
+                  return ListView(
+                      shrinkWrap: true,
+                      children: section.getBandos.map((e) => carBando(e, context)).toList()
+                  );
+                }else{
+                  return Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(top: 250.0),
+                      child: Column(
+                          children: const [
+                            Text('No hay Bandos disponibles'),
+                            Icon(Icons.block, size: 120.0)
+                          ]
+                      )
+                  );
+                }
+              })
+          ),
+        ]
+      )
     );
   }
 }

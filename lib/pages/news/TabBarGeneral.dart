@@ -1,4 +1,5 @@
 import 'package:etno_app/store/section.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -16,16 +17,38 @@ class TabBarGeneral extends StatefulWidget {
 }
 class PageState extends State<TabBarGeneral>{
   final Section section = Section();
+
   @override
   void initState() {
     section.getAllNewByLocality('Bolea');
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) => ListView(
-      children: section.getList.map((e) => cardNew(e, context)).toList()
-    ));
+    return Column(
+      children: [
+        const WarningWidgetValueNotifier(),
+        Observer(builder: (context){
+          if(section.getList.isNotEmpty){
+            return ListView(
+                shrinkWrap: true,
+                children: section.getList.map((e) => cardNew(e, context)).toList()
+            );
+          }else{
+            return Container(
+                padding: const EdgeInsets.only(top: 250.0),
+                child: Column(
+                    children: const [
+                      Text('No hay noticias disponibles'),
+                      Icon(Icons.block, size: 120.0)
+                    ]
+                )
+            );
+          }
+        })
+      ]
+    );
   }
 }
 Widget cardNew(New new_, BuildContext context){

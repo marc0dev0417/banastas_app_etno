@@ -1,5 +1,6 @@
 import 'package:etno_app/models/Image.dart';
 import 'package:etno_app/pages/gallery/PageGalleryView.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,16 +30,40 @@ class PageState extends State<PageGallery> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBarCustom('Galería', Icons.language, () => null),
-      body: Container(
-        padding: const EdgeInsets.all(15.0),
-        child: Observer(builder: (context) => gridGallery(section.getImages, context))
-      ),
+      body: Column(
+        children: [
+          const WarningWidgetValueNotifier(),
+          Container(
+              padding: const EdgeInsets.all(15.0),
+              child: Observer(builder: (context){
+                if(section.getImages.isNotEmpty){
+                  return gridGallery(section.getImages, context);
+                }else{
+                  return
+                     Container(
+                       height: 550.0,
+                       alignment: Alignment.center,
+                       child: Column(
+                           crossAxisAlignment: CrossAxisAlignment.center,
+                           mainAxisSize: MainAxisSize.min,
+                           children: const [
+                             Icon(Icons.block, size: 120.0),
+                             Text('No hay fotos para mostrar')
+                           ]
+                       ),
+                     );
+                }
+              })
+          ),
+        ],
+      )
     );
   }
 }
 
 Widget gridGallery(List<ImageMedia> imageMediaList, BuildContext context){
   return GridView.count(
+    shrinkWrap: true,
       crossAxisCount: 3,
       children: imageMediaList.map((e) =>
         Center(

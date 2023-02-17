@@ -1,7 +1,7 @@
 import 'package:etno_app/main.dart';
 import 'package:etno_app/pages/PageServicesList.dart';
+import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
-import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 
 class PageServices extends StatefulWidget {
@@ -18,26 +18,34 @@ class PageState extends State<PageServices> {
     return  Scaffold(
       appBar: appBarCustom('Servicios', Icons.language, () => null),
       body: SafeArea(
-            child: Container(
-              padding: const EdgeInsets.all(15.0),
-              child: ListView(
-                padding: const EdgeInsets.only(top: 50.0, left: 15, right: 15),
-                scrollDirection: Axis.vertical,
-                children: [
-                  cardService('Servicio', 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'))); }),
-                  const SizedBox(height: 10.0),
-                  cardService('Salud', 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'))); }),
-                  const SizedBox(height: 10.0),
-                  cardService('Ocio', 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'))); })
-                ],
-              ),
-            ),
+            child: Column(
+              children: [
+                const WarningWidgetValueNotifier(),
+                Expanded(
+                    child: Container(
+                      padding: const EdgeInsets.all(15.0),
+                      child: ListView(
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.only(top: 50.0, left: 15, right: 15),
+                        scrollDirection: Axis.vertical,
+                        children: [
+                          cardService('Servicio', 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
+                          const SizedBox(height: 10.0),
+                          cardService('Salud', 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
+                          const SizedBox(height: 10.0),
+                          cardService('Ocio', 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); })
+                        ],
+                      ),
+                    ),
+                ),
+              ]
+            )
           )
     );
   }
 }
 
-Widget cardService(String type, String assetImage, VoidCallback function){
+Widget cardService(String type, String assetImage, Function() function){
   return InkWell(
     onTap: function,
     child: Container(

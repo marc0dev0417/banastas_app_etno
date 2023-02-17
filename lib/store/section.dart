@@ -257,7 +257,7 @@ abstract class SectionBase with Store {
       String locality, String category) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://192.168.137.1:8080/phones?username=$locality&category=$category'));
+          'http://192.168.137.1:8080/services?username=$locality&category=$category'));
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
           .map((e) => Service.fromJson(e))
