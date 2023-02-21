@@ -1,4 +1,7 @@
+import 'dart:ffi';
+
 import 'package:etno_app/models/Event.dart';
+import 'package:etno_app/widgets/CardFormScreen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +14,9 @@ class PageBookForm extends StatefulWidget {
   }
 }
 class PageState extends State<PageBookForm>{
+
+  double reservePrice = 0.0;
+
   @override
   void initState() {
     super.initState();
@@ -62,6 +68,9 @@ class PageState extends State<PageBookForm>{
                 ),
                 const SizedBox(height: 20.0),
                 TextFormField(
+                  onChanged: (value) => setState(() {
+                    reservePrice = double.parse(value);
+                  }),
                    keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.monetization_on),
@@ -70,7 +79,7 @@ class PageState extends State<PageBookForm>{
                   ),
                 ),
                 const SizedBox(height: 20.0),
-                    ElevatedButton(onPressed: (){}, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Subscribirse')),
+                    ElevatedButton(onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => CardFormScreen(reservePrice: reservePrice), reverseTransitionDuration: Duration.zero, transitionDuration: Duration.zero)), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Subscribirse')),
                     ElevatedButton(onPressed: () => Navigator.pop(context, -1), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Cancelar'))
               ],
             )

@@ -12,8 +12,12 @@ import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:etno_app/widgets/home_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart' as Card;
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'bloc/payment/payment_bloc.dart';
 import 'firebase_options.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -24,12 +28,12 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 final internetChecker = CheckInternetConnection();
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   /// Update the iOS foreground notification presentation options to allow
   /// heads up notifications.
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -37,6 +41,9 @@ Future<void> main() async {
     badge: true,
     sound: true,
   );
+  Stripe.publishableKey =
+      'pk_live_51MdqjZIiwWrt0LxLwUWAcWlZlJRVqzkZE8pvcwx5qgtXMy8OSw9rdPm4X8zb5JDMzblCswJRc6eNcA1PSydYvOE000rpx0MTpS';
+  await Stripe.instance.applySettings();
   runApp(const App());
 }
 
@@ -45,7 +52,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  const MaterialApp(
+    return const MaterialApp(
       title: 'Etno App',
       home: Home(),
     );
@@ -60,6 +67,7 @@ class Home extends StatefulWidget {
     return HomeState();
   }
 }
+
 class HomeState extends State<Home> {
   late TextEditingController controller;
   FirebaseMessaging messaging = FirebaseMessaging.instance;
@@ -68,7 +76,7 @@ class HomeState extends State<Home> {
 
   Future<void> setupInteractedMessage() async {
     RemoteMessage? initialMessage =
-    await FirebaseMessaging.instance.getInitialMessage();
+        await FirebaseMessaging.instance.getInitialMessage();
   }
 
   @override
@@ -76,124 +84,163 @@ class HomeState extends State<Home> {
     controller = TextEditingController();
     section.getAllNewByLocality('Bolea');
     section.getAllEventsByLocality('Bolea');
-    messaging.getToken().then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
+    messaging
+        .getToken()
+        .then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
     setupInteractedMessage();
     super.initState();
   }
 
-
-  Widget notConnection(){
+  Widget notConnection() {
     return Container(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: const [
-          Icon(Icons.wifi_off, size: 160.0),
-          Text('No hay conexión a Internet')
-        ],
-      )
-    );
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Icon(Icons.wifi_off, size: 160.0),
+            Text('No hay conexión a Internet')
+          ],
+        ));
   }
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: appBarCustom('Inicio', Icons.language, () => print('Internalization')),
-      body: SafeArea(
-        child: Container(
-            padding: const EdgeInsets.all(15.0),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  const WarningWidgetValueNotifier(),
-                  const Text(
-                    'Explorar',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+    return BlocProvider(
+      create: (context) => PaymentBloc(),
+      child: Scaffold(
+        appBar: appBarCustom(
+            'Inicio', Icons.language, () => print('Internalization')),
+        body: SafeArea(
+            child: Container(
+              decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
+                padding: const EdgeInsets.all(15.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const WarningWidgetValueNotifier(),
+                      const Text(
+                        'Explorar',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
+                      // const Text('Noticias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.5)),
+                      const Text('Noticias sugeridas para ti',
+                          style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 20.0),
+                      swiperNews(section),
+                      const SizedBox(height: 20.0),
+                      const Text('Farmacias',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0)),
+                      const Text('Encuentras las farmacias de tu localidad',
+                          style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 20.0),
+                      cardPharmacies(
+                          'Farmacias de guardia y normal', context, 70.0),
+                      const SizedBox(height: 20.0),
+                      const Text('Turismo',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0)),
+                      const Text('Turismo más relevante',
+                          style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 20.0),
+                      cardTourism('Turismo', context, 210.0),
+                      const SizedBox(height: 20.0),
+                      const Text('Eventos',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0)),
+                      const Text('Mira los eventos más destacados',
+                          style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 20.0),
+                      swiperEvent(section),
+                      const SizedBox(height: 10.0),
+                      const Text('Servicios',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20.0)),
+                      const Text('Servicios más relevante',
+                          style: TextStyle(color: Colors.grey)),
+                      const SizedBox(height: 20.0),
+                      cardServices('Los mejores servicios de tu localidad',
+                          context, 30.0)
+                    ],
                   ),
-                  // const Text('Noticias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.5)),
-                  const Text('Noticias sugeridas para ti', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 20.0),
-                  swiperNews(section),
-                  const SizedBox(height: 20.0),
-                  const Text('Farmacias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-                  const Text('Encuentras las farmacias de tu localidad', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 20.0),
-                  cardPharmacies('Farmacias de guardia y normal', context, 70.0),
-                  const SizedBox(height: 20.0),
-                  const Text('Turismo', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-                  const Text('Turismo más relevante', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 20.0),
-                  cardTourism('Turismo', context, 210.0),
-                  const SizedBox(height: 20.0),
-                  const Text('Eventos', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-                  const Text('Mira los eventos más destacados', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 20.0),
-                  swiperEvent(section),
-                  const SizedBox(height: 10.0),
-                  const Text('Servicios', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-                  const Text('Servicios más relevante', style: TextStyle(color: Colors.grey)),
-                  const SizedBox(height: 20.0),
-                  cardServices('Los mejores servicios de tu localidad', context, 30.0)
-                ],
-              ),
-            )
-        )
+                ))),
+        bottomNavigationBar: bottomNavigation(context, 0),
       ),
-      bottomNavigationBar: bottomNavigation(context, 0),
     );
   }
 }
 
-Widget cardPharmacies(String title, BuildContext context, double width){
+Widget cardPharmacies(String title, BuildContext context, double width) {
   return InkWell(
-    onTap: () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); },
-    child: Card(
-      elevation: 2.0,
-        child:
-        Container(
+    onTap: () {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) =>
+                  const PagePharmacies(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero));
+    },
+    child: Card.Card(
+        elevation: 2.0,
+        child: Container(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
                 const Icon(Icons.local_pharmacy),
                 const SizedBox(width: 20.0),
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(title,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: width),
                 const Icon(Icons.chevron_right)
               ],
-            )
-        )
-    ),
+            ))),
   );
 }
 
-Widget cardTourism(String title, BuildContext context, double width){
+Widget cardTourism(String title, BuildContext context, double width) {
   return InkWell(
-    onTap: () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); },
-    child: Card(
-      elevation: 2.0,
-        child:
-        Container(
+    onTap: () {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) =>
+                  const PageTourism(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero));
+    },
+    child: Card.Card(
+        elevation: 2.0,
+        child: Container(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               children: [
                 const Icon(Icons.map),
                 const SizedBox(width: 20.0),
-                Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(title,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
                 SizedBox(width: width),
                 const Icon(Icons.chevron_right)
               ],
-            )
-        )
-    ),
+            ))),
   );
 }
 
-Widget cardServices(String title, BuildContext context, double width){
+Widget cardServices(String title, BuildContext context, double width) {
   return InkWell(
-    onTap: () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServices(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); },
-    child: Card(
+    onTap: () {
+      Navigator.push(
+          context,
+          PageRouteBuilder(
+              pageBuilder: (context, animation1, animation2) =>
+                  const PageServices(),
+              transitionDuration: Duration.zero,
+              reverseTransitionDuration: Duration.zero));
+    },
+    child: Card.Card(
       elevation: 2.0,
       child: Container(
         padding: const EdgeInsets.all(10.0),

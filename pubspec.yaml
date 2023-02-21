@@ -50,6 +50,9 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   connectivity_plus: ^3.0.3
   rxdart: ^0.27.7
+  flutter_stripe: ^8.0.0+1
+  flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -73,7 +76,6 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
-
   # To add assets to your application, add an assets section, like this:
   assets:
       - assets/app.png
@@ -83,6 +85,7 @@ flutter:
       - assets/ocio_image.jpg
       - assets/salud_image.jpg
       - assets/tool_image.jpg
+      - assets/Bolea.png
 
   #   - images/a_dot_ham.jpeg
 

@@ -35,6 +35,7 @@ class PageState extends State<PageMenuSections> {
       appBar: appBarCustom('Menú', Icons.language, () => print('Internalization in Menu')),
        body: SafeArea(
          child: Container(
+           decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
            padding: const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
            child: Column(
              children: [
@@ -63,7 +64,7 @@ class PageState extends State<PageMenuSections> {
                                  }
                                },
                                child: Card(
-                                 color: Colors.red,
+                                 color: Colors.transparent,
                                  elevation: 1.0,
                                  shadowColor: Colors.grey,
                                  child: Center(
