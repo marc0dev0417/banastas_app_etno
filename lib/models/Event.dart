@@ -9,6 +9,7 @@ class Event {
   String? address;
   String? description;
   String? organization;
+  bool? hasSubscription;
   double? reservePrice;
   int? seats;
   int? capacity;
@@ -28,6 +29,7 @@ class Event {
       this.address,
       this.description,
       this.organization,
+      this.hasSubscription,
       this.reservePrice,
       this.seats,
       this.capacity,
@@ -50,6 +52,7 @@ class Event {
     address = json['address'];
     description = json['description'];
     organization = json['organization'];
+    hasSubscription = json['hasSubscription'];
     reservePrice = json['reservePrice'];
     seats = json['seats'];
     capacity = json['capacity'];
@@ -67,7 +70,6 @@ class Event {
         images!.add(ImageMedia.fromJson(v));
       });
     }
-
   }
 
   Map<String, dynamic> toJson() {
@@ -78,6 +80,7 @@ class Event {
     data['address'] = address;
     data['description'] = description;
     data['organization'] = organization;
+    data['hasSubscription'] = hasSubscription;
     data['reservePrice'] = reservePrice;
     data['seats'] = seats;
     data['capacity'] = capacity;
