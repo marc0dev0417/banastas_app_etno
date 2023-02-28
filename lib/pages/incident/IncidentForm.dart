@@ -63,7 +63,7 @@ class PageState extends State<IncidentForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: appBarCustom('Añadir Incidencia', Icons.language, () => null),
+      appBar: appBarCustom('Añadir Incidencia', Icons.language, () => null, null),
       body: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(

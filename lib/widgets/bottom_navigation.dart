@@ -2,6 +2,7 @@ import 'package:etno_app/pages/PageMenuSections.dart';
 import 'package:etno_app/pages/PageNews.dart';
 import 'package:etno_app/pages/event/PageEvents.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../main.dart';
 
@@ -43,22 +44,22 @@ Widget bottomNavigation(BuildContext context, int bottomIndex){
         break;
       }
     },
-    items: const [
+    items:  [
       BottomNavigationBarItem(
-        label: 'Inicio',
-        icon: Icon(Icons.home),
+        label: AppLocalizations.of(context)!.bottom_home,
+        icon: const Icon(Icons.home),
       ),
       BottomNavigationBarItem(
-        label: 'Eventos',
-        icon: Icon(Icons.celebration),
+        label: AppLocalizations.of(context)!.bottom_event,
+        icon: const Icon(Icons.celebration),
       ),
       BottomNavigationBarItem(
-        label: 'Noticias',
-        icon: Icon(Icons.newspaper),
+        label: AppLocalizations.of(context)!.bottom_news,
+        icon: const Icon(Icons.newspaper),
       ),
       BottomNavigationBarItem(
-        label: 'Menú',
-        icon: Icon(Icons.library_books),
+        label: AppLocalizations.of(context)!.bottom_menu,
+        icon: const Icon(Icons.library_books),
       ),
     ],
   );

@@ -25,7 +25,7 @@ class PageState extends State<PageBandos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Bandos', Icons.language, () => null),
+      appBar: appBarCustom('Bandos', Icons.language, () => null, null),
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),

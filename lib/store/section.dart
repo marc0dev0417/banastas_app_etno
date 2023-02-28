@@ -29,8 +29,9 @@ part 'section.g.dart';
 class Section = SectionBase with _$Section;
 
 abstract class SectionBase with Store {
-  String urlBase = 'http://192.168.137.1:8080/';
 
+  @observable
+  bool isSubscribe = false;
   @observable
   List<New> newList = [];
   @observable
@@ -43,8 +44,6 @@ abstract class SectionBase with Store {
   List<Link> linkList = [];
   @observable
   List<Bandos> bandoList = [];
-  @observable
-  bool isSubscribe = false;
   @observable
   New new_ = New.empty();
   @observable
@@ -210,13 +209,49 @@ abstract class SectionBase with Store {
       final response = await http.get(Uri.parse('http://192.168.137.1:8080/subscription_users?fcmToken=$fcmToken&title=$title'));
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = UserSubscription.fromJson(jsonDecode(decodeBody));
-      isSubscribe = data.isSubscribe!;
-      return data.isSubscribe!;
+
+      if(data.isSubscribe == null){
+        isSubscribe = false;
+      }else{
+        isSubscribe = data.isSubscribe!;
+      }
+      return isSubscribe;
     }catch(e){
       debugPrint(e.toString());
       rethrow;
     }
   }
+  
+@action
+Future<bool> addSubscription(String locality, String title, UserSubscription userSubscription) async {
+    try{
+      final response = await http.post(Uri.parse('http://192.168.137.1:8080/users/add/event/subscription?username=$locality&title=$title'), body:
+        jsonEncode(userSubscription.toJson()), headers: <String, String> {
+        'Content-Type': 'application/json; charset=UTF-8'
+      });
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = UserSubscription.fromJson(jsonDecode(decodeBody));
+      return data.isSubscribe!;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+}
+  
+@action
+Future<bool> dropSubscription(String locality, String title, String fcmToken) async {
+    try{
+      final response = await http.put(Uri.parse('http://192.168.137.1:8080/users/dropout/event/subscription?username=$locality&title=$title&fcmToken=$fcmToken'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = UserSubscription.fromJson(jsonDecode(decodeBody));
+
+      isSubscribe = data.isSubscribe!;
+      return isSubscribe;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+}
 
   @action
   Future<List<Pharmacy>> getAllPharmaciesByLocality(String locality) async {

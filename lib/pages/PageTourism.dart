@@ -1,10 +1,11 @@
 import 'dart:async';
-
-import 'package:card_swiper/card_swiper.dart';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../models/Tourism.dart';
+import '../models/TourismButton.dart';
 import '../store/section.dart';
 
 class PageTourism extends StatefulWidget {
@@ -18,15 +19,15 @@ class PageTourism extends StatefulWidget {
 
 class TourismState extends State<PageTourism> {
   final Section section = Section();
-  final List<String> list = [
-    'Todo',
-    'Restaurante',
-    'Monumento',
-    'Museo',
-    'Hotel'
-  ];
+
   Set<Marker> listMarker = {};
   Set<Marker> listMarkerSaved = {};
+  List<TourismButton> tourismButton = [
+    TourismButton('', Colors.black, 'Todo'),
+    TourismButton('assets/vajilla.png', Colors.green, 'Restaurante'),
+    TourismButton('assets/museo.png', Colors.yellow, 'Museo'),
+    TourismButton('assets/hotel.png', Colors.indigo, 'Hotel')
+  ];
 
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
@@ -36,13 +37,30 @@ class TourismState extends State<PageTourism> {
     zoom: 14.4746,
   );
 
+  Future<Uint8List?> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))?.buffer.asUint8List();
+  }
+
   @override
   void initState() {
     super.initState();
-    section.getAllTourismByLocality('Bolea').then((value) =>
-        value.forEach((element) {
-          setState(() {
+    section.getAllTourismByLocality('Bolea').then((value) async {
+      Uint8List? markerIcon;
+        for (var element in value) {
+          switch(element.type){
+            case 'Museo': markerIcon = await getBytesFromAsset('assets/museo.png', 80);
+            break;
+            case 'Restaurante': markerIcon = await getBytesFromAsset('assets/vajilla.png', 80);
+            break;
+            case 'Hotel': markerIcon = await getBytesFromAsset('assets/hotel.png', 80);
+            break;
+          }
+          setState(()  {
             listMarker.add(Marker(
+              icon: BitmapDescriptor.fromBytes(markerIcon!),
                 onTap: () {
                   showModalBottomSheet(
                       context: context,
@@ -63,19 +81,19 @@ class TourismState extends State<PageTourism> {
                                               children: [
                                                 Container(
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15.0),
+                                                  const EdgeInsets.only(
+                                                      left: 15.0),
                                                   alignment: Alignment.topLeft,
                                                   child: Text(element.title!,
                                                       style: const TextStyle(
                                                           fontWeight:
-                                                              FontWeight.bold,
+                                                          FontWeight.bold,
                                                           fontSize: 15.0)),
                                                 ),
                                                 Container(
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          left: 15.0),
+                                                  const EdgeInsets.only(
+                                                      left: 15.0),
                                                   alignment: Alignment.topLeft,
                                                   child: Text(
                                                       '${element.username!} · Huesca',
@@ -87,27 +105,27 @@ class TourismState extends State<PageTourism> {
                                                 Container(
                                                   alignment: Alignment.topLeft,
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5.0, left: 15.0),
+                                                  const EdgeInsets.only(
+                                                      top: 5.0, left: 15.0),
                                                   child: Text(element.type!,
                                                       style: const TextStyle(
                                                           fontWeight:
-                                                              FontWeight.bold,
+                                                          FontWeight.bold,
                                                           fontSize: 15.0)),
                                                 ),
                                                 const Divider(),
                                                 Container(
                                                     alignment:
-                                                        Alignment.topLeft,
+                                                    Alignment.topLeft,
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5.0,
-                                                            left: 15.0),
+                                                    const EdgeInsets.only(
+                                                        top: 5.0,
+                                                        left: 15.0),
                                                     child: Text(
                                                         element.description!,
                                                         style: const TextStyle(
                                                             color:
-                                                                Colors.grey))),
+                                                            Colors.grey))),
                                               ],
                                             )),
                                       ],
@@ -125,98 +143,68 @@ class TourismState extends State<PageTourism> {
                 infoWindow: InfoWindow(title: element.title)));
             listMarkerSaved = listMarker;
           });
-        }));
+        }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Stack(
-        children: [
-          GoogleMap(
-            mapType: MapType.normal,
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-            markers: listMarker,
-          ),
-          SizedBox(
-            height: 40,
-            width: double.maxFinite,
-            child: Swiper(
-              index: 0,
-              scrollDirection: Axis.horizontal,
-              loop: false,
-              itemBuilder: (BuildContext context, int index) {
-                return Row(
-                  children: [
-                    TextButton(
-                        style:
-                            TextButton.styleFrom(backgroundColor: Colors.white),
-                        onPressed: () {
-                          switch (list[index]) {
-                            case 'Restaurante':
-                              setState(() {
+    return MaterialApp(
+      title: 'Tourism',
+      home: DefaultTabController(
+        initialIndex: 0,
+        length: tourismButton.length,
+        child: Scaffold(
+          body: SafeArea(
+              child: Stack(
+                children: [
+                  GoogleMap(
+                    mapType: MapType.normal,
+                    initialCameraPosition: _kGooglePlex,
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                    markers: listMarker,
+                  ),
+                  TabBar(
+                      indicatorColor: Colors.transparent,
+                      isScrollable: true,
+                      tabs: [ for (final tab in tourismButton) ElevatedButton(
+                          style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                          onPressed: () {
+                            switch(tab.name){
+                              case 'Restaurante': setState(() {
                                 listMarker = listMarkerSaved;
-                                listMarker = listMarker
-                                    .where((element) =>
-                                        element.markerId.value == 'Restaurante')
-                                    .toSet();
+                                listMarker = listMarker.where((element) => element.markerId.value == 'Restaurante').toSet();
                               });
                               break;
-                            case 'Monumento':
-                              setState(() {
+                              case 'Monumento': setState(() {
                                 listMarker = listMarkerSaved;
-                                listMarker = listMarker
-                                    .where((element) =>
-                                        element.markerId.value == 'Monumento')
-                                    .toSet();
+                                listMarker = listMarker.where((element) => element.markerId.value == 'Monumento').toSet();
                               });
                               break;
-                            case 'Museo':
-                              setState(() {
+                              case 'Museo': setState(() {
                                 listMarker = listMarkerSaved;
-                                listMarker = listMarker
-                                    .where((element) =>
-                                        element.markerId.value == 'Museo')
-                                    .toSet();
+                                listMarker = listMarker.where((element) => element.markerId.value == 'Museo').toSet();
                               });
                               break;
-                            case 'Hotel':
-                              setState(() {
+                              case 'Hotel': setState(() {
                                 listMarker = listMarkerSaved;
-                                listMarker = listMarker
-                                    .where((element) =>
-                                        element.markerId.value == 'Hotel')
-                                    .toSet();
+                                listMarker = listMarker.where((element) => element.markerId.value == 'Hotel').toSet();
                               });
                               break;
-                            case 'Todo':
-                              setState(() {
+                              case 'Todo': setState(() {
                                 listMarker = listMarkerSaved;
                               });
-                          }
-                        },
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Icon(Icons.access_time),
-                            Text(list[index],
-                                style: const TextStyle(color: Colors.black))
-                          ],
-                        ))
-                  ],
-                );
-              },
-              itemCount: list.length,
-              viewportFraction: 0.3,
-            ),
-          )
-        ],
-      )),
+                            }
+                          },
+                          child: renderImageTab(tab.assetUrl!, tab.name!)
+                      )]
+                  )
+                ],
+              )),
+        ),
+      ),
     );
   }
 }
@@ -228,5 +216,21 @@ Widget renderImageTourism(Tourism tourism) {
   } else {
     return Image.network(tourism.imageUrl!,
         fit: BoxFit.fill, height: 200, width: 300);
+  }
+}
+Widget renderImageTab(String urlAsset, String name){
+  if(urlAsset != ''){
+   return Row(
+      children: [
+        Image.asset(urlAsset, height: 35.0, width: 35.0),
+        Text(name, style: const TextStyle(color: Colors.black))
+      ],
+    );
+  } else {
+   return Row(
+      children: [
+        Text(name, style: const TextStyle(color: Colors.black))
+      ],
+    );
   }
 }

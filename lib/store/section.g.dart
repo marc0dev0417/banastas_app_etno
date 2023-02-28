@@ -132,6 +132,22 @@ mixin _$Section on SectionBase, Store {
               name: 'SectionBase.getIsSubscribe'))
           .value;
 
+  late final _$isSubscribeAtom =
+      Atom(name: 'SectionBase.isSubscribe', context: context);
+
+  @override
+  bool get isSubscribe {
+    _$isSubscribeAtom.reportRead();
+    return super.isSubscribe;
+  }
+
+  @override
+  set isSubscribe(bool value) {
+    _$isSubscribeAtom.reportWrite(value, super.isSubscribe, () {
+      super.isSubscribe = value;
+    });
+  }
+
   late final _$newListAtom =
       Atom(name: 'SectionBase.newList', context: context);
 
@@ -226,22 +242,6 @@ mixin _$Section on SectionBase, Store {
   set bandoList(List<Bandos> value) {
     _$bandoListAtom.reportWrite(value, super.bandoList, () {
       super.bandoList = value;
-    });
-  }
-
-  late final _$isSubscribeAtom =
-      Atom(name: 'SectionBase.isSubscribe', context: context);
-
-  @override
-  bool get isSubscribe {
-    _$isSubscribeAtom.reportRead();
-    return super.isSubscribe;
-  }
-
-  @override
-  set isSubscribe(bool value) {
-    _$isSubscribeAtom.reportWrite(value, super.isSubscribe, () {
-      super.isSubscribe = value;
     });
   }
 
@@ -588,13 +588,13 @@ mixin _$Section on SectionBase, Store {
   @override
   String toString() {
     return '''
+isSubscribe: ${isSubscribe},
 newList: ${newList},
 newListEventCategory: ${newListEventCategory},
 sponsorList: ${sponsorList},
 defunctionList: ${defunctionList},
 linkList: ${linkList},
 bandoList: ${bandoList},
-isSubscribe: ${isSubscribe},
 new_: ${new_},
 eventList: ${eventList},
 event: ${event},

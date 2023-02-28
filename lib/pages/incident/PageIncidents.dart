@@ -55,7 +55,7 @@ class PageState extends State<PageIncidents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Mis Incidencias', Icons.language, () => null),
+      appBar: appBarCustom('Mis Incidencias', Icons.language, () => null, null),
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),

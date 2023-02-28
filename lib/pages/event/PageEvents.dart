@@ -2,15 +2,14 @@ import 'dart:async';
 
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:mobx/mobx.dart';
-
 import '../../store/section.dart';
 import '../../widgets/appbar_navigation.dart';
 import '../../widgets/home_widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PageEvents extends StatefulWidget {
   const PageEvents({super.key});
@@ -44,10 +43,13 @@ class PageState extends State<PageEvents> {
                             height: 200.0,
                             child: InkWell(
                               onTap: () =>
-                                  section.getEventByUsernameAndTitle(
-                                      e.username!, e.title!).then((value) =>
-                                      showDialogEvent(context, value)
-                                  ),
+                              FirebaseMessaging.instance.getToken().then((value){
+                                section.getSubscription(value!, e.title!).then((value){
+                                  section.getEventByUsernameAndTitle(e.username!, e.title!).then((event){
+                                    showDialogEvent(context, event, value);
+                                  });
+                                });
+                              }),
                               child: Card(
                                   child: Container(
                                       alignment: Alignment.bottomLeft,
@@ -84,9 +86,9 @@ class PageState extends State<PageEvents> {
       ): Container(
         alignment: Alignment.center,
             child: Column(
-          children: const [
-            Text('No hay eventos Disponibles'),
-            Icon(Icons.block, size: 120.0)
+          children: [
+            Text(AppLocalizations.of(context)!.events_empty),
+            const Icon(Icons.block, size: 120.0)
         ]
       )
       )
@@ -96,7 +98,7 @@ class PageState extends State<PageEvents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Eventos', Icons.language, () => null),
+      appBar: appBarCustom(AppLocalizations.of(context)!.event, Icons.language, () => null, null),
       bottomNavigationBar: bottomNavigation(context, 1),
       body: Column(
         children: [

@@ -32,7 +32,7 @@ class PageState extends State<PageMenuSections> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Menú', Icons.language, () => print('Internalization in Menu')),
+      appBar: appBarCustom('Menú', Icons.language, () => print('Internalization in Menu'), null),
        body: SafeArea(
          child: Container(
            decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),

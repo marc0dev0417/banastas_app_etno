@@ -20,6 +20,14 @@ class UserSubscription {
       this.wallet,
       this.isSubscribe
       );
+  UserSubscription.constructor(this.fcmToken,
+      this.title,
+      this.seats,
+      this.name,
+      this.mail,
+      this.phone,
+      this.wallet,
+      this.isSubscribe);
 
   UserSubscription.fromJson(Map<String, dynamic> json) {
     idSubscriptionUser = json['idSubscriptionUser'];

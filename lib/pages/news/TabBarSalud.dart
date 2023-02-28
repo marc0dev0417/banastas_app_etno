@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'TabBarGeneral.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TabBarSalud extends StatefulWidget {
   const TabBarSalud({super.key});
@@ -38,9 +39,9 @@ class PageState extends State<TabBarSalud> {
             return Container(
               padding: const EdgeInsets.only(top: 250.0),
               child: Column(
-                children: const [
-                  Text('No hay noticias de salud disponibles'),
-                  Icon(Icons.block, size: 120.0)
+                children: [
+                  Text(AppLocalizations.of(context)!.no_news_heal),
+                  const Icon(Icons.block, size: 120.0)
                 ]
               )
             );

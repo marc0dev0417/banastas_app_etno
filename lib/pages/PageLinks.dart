@@ -29,7 +29,7 @@ class PageState extends State<PageLinks> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Enlaces', Icons.language, () => null),
+      appBar: appBarCustom('Enlaces', Icons.language, () => null, null),
       body: SafeArea(
         child: Column(
           children: [

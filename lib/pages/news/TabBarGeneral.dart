@@ -3,6 +3,7 @@ import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/New.dart';
 import '../PageNewDetail.dart';
@@ -39,9 +40,9 @@ class PageState extends State<TabBarGeneral>{
             return Container(
                 padding: const EdgeInsets.only(top: 250.0),
                 child: Column(
-                    children: const [
-                      Text('No hay noticias disponibles'),
-                      Icon(Icons.block, size: 120.0)
+                    children: [
+                      Text(AppLocalizations.of(context)!.no_news),
+                      const Icon(Icons.block, size: 120.0)
                     ]
                 )
             );

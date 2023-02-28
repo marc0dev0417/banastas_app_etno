@@ -4,21 +4,27 @@ import 'package:etno_app/models/FCMToken.dart';
 import 'package:etno_app/pages/PagePharmacies.dart';
 import 'package:etno_app/pages/PageServices.dart';
 import 'package:etno_app/pages/PageTourism.dart';
+import 'package:etno_app/provider/locale_provider.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/utils/ConnectionChecker.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
+import 'package:etno_app/widgets/DropDownLanguage.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:etno_app/widgets/home_widgets.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart' as Card;
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:provider/provider.dart';
 import 'bloc/payment/payment_bloc.dart';
 import 'firebase_options.dart';
+import 'l10n/l10n.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -51,12 +57,24 @@ class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Etno App',
-      home: Home(),
-    );
-  }
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (context) => LocaleProvider(),
+      builder: (context, child){
+        final provider = Provider.of<LocaleProvider>(context);
+        return  MaterialApp(
+          locale: provider.locale,
+          supportedLocales: L10n.all,
+          title: 'Etno App',
+          home: const Home(),
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+        );
+      }
+  );
 }
 
 class Home extends StatefulWidget {
@@ -105,72 +123,71 @@ class HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => PaymentBloc(),
-      child: Scaffold(
-        appBar: appBarCustom(
-            'Inicio', Icons.language, () => print('Internalization')),
-        body: SafeArea(
-            child: Container(
-              decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
-                padding: const EdgeInsets.all(15.0),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const WarningWidgetValueNotifier(),
-                      const Text(
-                        'Explorar',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20.0),
-                      ),
-                      // const Text('Noticias', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.5)),
-                      const Text('Noticias sugeridas para ti',
-                          style: TextStyle(color: Colors.grey)),
-                      const SizedBox(height: 20.0),
-                      swiperNews(section),
-                      const SizedBox(height: 20.0),
-                      const Text('Farmacias',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.0)),
-                      const Text('Encuentras las farmacias de tu localidad',
-                          style: TextStyle(color: Colors.grey)),
-                      const SizedBox(height: 20.0),
-                      cardPharmacies(
-                          'Farmacias de guardia y normal', context, 70.0),
-                      const SizedBox(height: 20.0),
-                      const Text('Turismo',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.0)),
-                      const Text('Turismo más relevante',
-                          style: TextStyle(color: Colors.grey)),
-                      const SizedBox(height: 20.0),
-                      cardTourism('Turismo', context, 210.0),
-                      const SizedBox(height: 20.0),
-                      const Text('Eventos',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.0)),
-                      const Text('Mira los eventos más destacados',
-                          style: TextStyle(color: Colors.grey)),
-                      const SizedBox(height: 20.0),
-                      swiperEvent(section),
-                      const SizedBox(height: 10.0),
-                      const Text('Servicios',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20.0)),
-                      const Text('Servicios más relevante',
-                          style: TextStyle(color: Colors.grey)),
-                      const SizedBox(height: 20.0),
-                      cardServices('Los mejores servicios de tu localidad',
-                          context, 30.0)
-                    ],
-                  ),
-                ))),
-        bottomNavigationBar: bottomNavigation(context, 0),
-      ),
-    );
-  }
+        return MaterialApp(
+            title: 'Main',
+            home: Scaffold(
+              appBar: appBarCustom(AppLocalizations.of(context)!.bottom_home, Icons.language, () => null, null),
+              body: SafeArea(
+                  child: Container(
+                      decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
+                      padding: const EdgeInsets.all(15.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const WarningWidgetValueNotifier(),
+                            Text(
+                              AppLocalizations.of(context)!.discover,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20.0),
+                            ),
+                             Text(AppLocalizations.of(context)!.description_new,
+                                style: const TextStyle(color: Colors.grey)),
+                            const SizedBox(height: 20.0),
+                            swiperNews(section, context),
+                            const SizedBox(height: 20.0),
+                             Text(AppLocalizations.of(context)!.pharmacy,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20.0)),
+                             Text(AppLocalizations.of(context)!.description_pharmacy,
+                                style: const TextStyle(color: Colors.grey)),
+                            const SizedBox(height: 20.0),
+                            cardPharmacies(
+                                AppLocalizations.of(context)!.card_title_pharmacy, context, 70.0),
+                            const SizedBox(height: 20.0),
+                            Text(AppLocalizations.of(context)!.tourism,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20.0)),
+                            Text(AppLocalizations.of(context)!.description_tourism,
+                                style: const TextStyle(color: Colors.grey)),
+                            const SizedBox(height: 20.0),
+                            cardTourism(AppLocalizations.of(context)!.tourism, context, 210.0),
+                            const SizedBox(height: 20.0),
+                            Text(AppLocalizations.of(context)!.event,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20.0)),
+                            Text(AppLocalizations.of(context)!.event_description,
+                                style: const TextStyle(color: Colors.grey)),
+                            const SizedBox(height: 20.0),
+                            swiperEvent(section, context),
+                            const SizedBox(height: 10.0),
+                            Text(AppLocalizations.of(context)!.service,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20.0)),
+                            Text(AppLocalizations.of(context)!.description_service,
+                                style: const TextStyle(color: Colors.grey)),
+                            const SizedBox(height: 20.0),
+                            cardServices(AppLocalizations.of(context)!.card_title_service,
+                                context, 30.0)
+                          ],
+                        ),
+                      ))),
+              bottomNavigationBar: bottomNavigation(context, 0),
+            )
+        );
+    }
+
 }
 
 Widget cardPharmacies(String title, BuildContext context, double width) {

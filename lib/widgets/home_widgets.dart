@@ -3,15 +3,18 @@ import 'package:etno_app/models/Event.dart';
 import 'package:etno_app/pages/PageBookForm.dart';
 import 'package:etno_app/pages/PageNewDetail.dart';
 import 'package:etno_app/store/section.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import '../models/New.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Widget swiperNews(Section section) {
+Widget swiperNews(Section section, BuildContext context) {
   return Observer(builder: (value) {
     if (section.getList.isEmpty) {
-      return const Text('No hay Noticias disponibles');
+      return Text(AppLocalizations.of(context)!.news_empty);
     } else {
       return SizedBox(
           width: double.infinity,
@@ -58,10 +61,10 @@ Widget swiperNews(Section section) {
   });
 }
 
-Widget swiperEvent(Section section) {
+Widget swiperEvent(Section section, BuildContext context) {
   return Observer(builder: (value) {
     if (section.getListEvent.isEmpty) {
-      return const Text('No hay Eventos disponibles');
+      return Text(AppLocalizations.of(context)!.events_empty);
     } else {
       return SizedBox(
           width: double.infinity,
@@ -71,9 +74,13 @@ Widget swiperEvent(Section section) {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                     onTap: () {
-                      section.getEventByUsernameAndTitle(section.getListEvent[index].username!, section.getListEvent[index].title!).then((value) =>
-                          showDialogEvent(context, value)
-                      );
+                      FirebaseMessaging.instance.getToken().then((value){
+                        section.getSubscription(value!, section.getListEvent[index].title!).then((value){
+                          section.getEventByUsernameAndTitle(section.getListEvent[index].username!, section.getListEvent[index].title!).then((event){
+                            showDialogEvent(context, event, value);
+                          });
+                        });
+                      });
                     },
                     child: Card(
                         elevation: 5.0,
@@ -134,7 +141,8 @@ ImageProvider<Object> renderImageEvent(Section section, int index) {
   }
 }
 
-showDialogEvent(BuildContext context, Event event) => showBottomSheet(context: context, builder: (context){
+showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBottomSheet(enableDrag: true ,context: context, builder: (context){
+  final Section section = Section();
   return Wrap(
     children: [
       Column(
@@ -160,7 +168,7 @@ showDialogEvent(BuildContext context, Event event) => showBottomSheet(context: c
                       Container(
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,
-                        child: Text('${event.username} · Huesca', style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
+                        child: Text('${event.username}', style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 15.0, top: 4.0),
@@ -196,8 +204,27 @@ showDialogEvent(BuildContext context, Event event) => showBottomSheet(context: c
                                 ),
                                 Container(
                                   alignment: Alignment.bottomRight,
-                                  child: ElevatedButton(style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageBookForm(event: event), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)), child: const Text('Subscribirse')),
-                                )
+                                  child: ElevatedButton(style:  ButtonStyle(backgroundColor: !isSubscribe ? const MaterialStatePropertyAll(Colors.red) : const MaterialStatePropertyAll(Colors.grey)), onPressed: (){
+                                    if(!isSubscribe){
+                                      Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => MaterialAppBookForm(event: event), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero));
+                                    }else{
+                                      FirebaseMessaging.instance.getToken().then((value) => section.dropSubscription('Bolea', event.title!, value!));
+                                      Fluttertoast.showToast(
+                                          msg: 'Se ha desuscrito del evento',
+                                          toastLength: Toast.LENGTH_SHORT,
+                                          fontSize: 12,
+                                          textColor: Colors.white,
+                                          backgroundColor: Colors.green
+                                      );
+                                      FirebaseMessaging.instance.getToken().then((value){
+                                        section.getSubscription(value!, event.title!).then((value){
+                                          section.getEventByUsernameAndTitle(event.username!, event.title!).then((event){
+                                            showDialogEvent(context, event, false);
+                                          });
+                                        });
+                                      });
+                                    }
+                                  }, child: !isSubscribe ? const Text('Subscribirse') : const Text('Desuscribirse'))),
                               ],
                             )
                           ],

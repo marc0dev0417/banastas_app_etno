@@ -3,6 +3,7 @@ import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'TabBarGeneral.dart';
 
 class TabBarTecnology extends StatefulWidget {
@@ -35,8 +36,8 @@ class PageState extends State<TabBarTecnology> {
             return Container(
               padding: const EdgeInsets.only(top: 250.0),
               child: Column(
-                children: const [
-                  Text('No hay noticias de tecnología disponible'),
+                children: [
+                  Text(AppLocalizations.of(context)!.no_news_tech),
                   Icon(Icons.block, size: 120.0)
                 ]
               )

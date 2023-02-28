@@ -30,7 +30,8 @@ class PageState extends State<PageDefunctions> {
       appBar: appBarCustom(
         'Defunciones',
         Icons.language,
-          () => null
+          () => null,
+        null
       ),
       body: SafeArea(
           child: Column(
