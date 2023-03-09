@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:etno_app/models/PharmaciesButton.dart';
 import 'package:etno_app/models/Pharmacy.dart';
@@ -109,9 +110,22 @@ class PharmaciesState extends State<PagePharmacies>{
         });
       })
       );
+      BackButtonInterceptor.add(myInterceptor);
     super.initState();
   }
 
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  Future<bool> myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) async {
+    // Navigator.of(context).push(MaterialPageRoute(builder: (_) => ));
+    await Future.delayed(const Duration(milliseconds: 500));
+    Navigator.of(context).pop();
+    return true;
+  }
 
   @override
   Widget build(BuildContext context) {

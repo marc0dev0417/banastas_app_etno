@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui' as ui;
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -46,7 +47,7 @@ class TourismState extends State<PageTourism> {
 
   @override
   void initState() {
-    super.initState();
+
     section.getAllTourismByLocality('Bolea').then((value) async {
       Uint8List? markerIcon;
         for (var element in value) {
@@ -145,6 +146,21 @@ class TourismState extends State<PageTourism> {
           });
         }
     });
+    BackButtonInterceptor.add(myInterceptor);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  Future<bool> myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) async {
+   // Navigator.of(context).push(MaterialPageRoute(builder: (_) => ));
+    await Future.delayed(const Duration(milliseconds: 500));
+    Navigator.of(context).pop();
+    return true;
   }
 
   @override
@@ -152,59 +168,60 @@ class TourismState extends State<PageTourism> {
     return MaterialApp(
       title: 'Tourism',
       home: DefaultTabController(
+        animationDuration: Duration.zero,
         initialIndex: 0,
         length: tourismButton.length,
         child: Scaffold(
-          body: SafeArea(
-              child: Stack(
-                children: [
-                  GoogleMap(
-                    mapType: MapType.normal,
-                    initialCameraPosition: _kGooglePlex,
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                    markers: listMarker,
-                  ),
-                  TabBar(
-                      indicatorColor: Colors.transparent,
-                      isScrollable: true,
-                      tabs: [ for (final tab in tourismButton) ElevatedButton(
-                          style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
-                          onPressed: () {
-                            switch(tab.name){
-                              case 'Restaurante': setState(() {
-                                listMarker = listMarkerSaved;
-                                listMarker = listMarker.where((element) => element.markerId.value == 'Restaurante').toSet();
-                              });
-                              break;
-                              case 'Monumento': setState(() {
-                                listMarker = listMarkerSaved;
-                                listMarker = listMarker.where((element) => element.markerId.value == 'Monumento').toSet();
-                              });
-                              break;
-                              case 'Museo': setState(() {
-                                listMarker = listMarkerSaved;
-                                listMarker = listMarker.where((element) => element.markerId.value == 'Museo').toSet();
-                              });
-                              break;
-                              case 'Hotel': setState(() {
-                                listMarker = listMarkerSaved;
-                                listMarker = listMarker.where((element) => element.markerId.value == 'Hotel').toSet();
-                              });
-                              break;
-                              case 'Todo': setState(() {
-                                listMarker = listMarkerSaved;
-                              });
-                            }
-                          },
-                          child: renderImageTab(tab.assetUrl!, tab.name!)
-                      )]
-                  )
-                ],
-              )),
-        ),
-      ),
+            body: SafeArea(
+                child: Stack(
+                  children: [
+                    GoogleMap(
+                      mapType: MapType.normal,
+                      initialCameraPosition: _kGooglePlex,
+                      onMapCreated: (GoogleMapController controller) {
+                        _controller.complete(controller);
+                      },
+                      markers: listMarker,
+                    ),
+                    TabBar(
+                        indicatorColor: Colors.transparent,
+                        isScrollable: true,
+                        tabs: [ for (final tab in tourismButton) ElevatedButton(
+                            style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                            onPressed: () {
+                              switch(tab.name){
+                                case 'Restaurante': setState(() {
+                                  listMarker = listMarkerSaved;
+                                  listMarker = listMarker.where((element) => element.markerId.value == 'Restaurante').toSet();
+                                });
+                                break;
+                                case 'Monumento': setState(() {
+                                  listMarker = listMarkerSaved;
+                                  listMarker = listMarker.where((element) => element.markerId.value == 'Monumento').toSet();
+                                });
+                                break;
+                                case 'Museo': setState(() {
+                                  listMarker = listMarkerSaved;
+                                  listMarker = listMarker.where((element) => element.markerId.value == 'Museo').toSet();
+                                });
+                                break;
+                                case 'Hotel': setState(() {
+                                  listMarker = listMarkerSaved;
+                                  listMarker = listMarker.where((element) => element.markerId.value == 'Hotel').toSet();
+                                });
+                                break;
+                                case 'Todo': setState(() {
+                                  listMarker = listMarkerSaved;
+                                });
+                              }
+                            },
+                            child: renderImageTab(tab.assetUrl!, tab.name!)
+                        )]
+                    )
+                  ],
+                )),
+          ),
+        )
     );
   }
 }

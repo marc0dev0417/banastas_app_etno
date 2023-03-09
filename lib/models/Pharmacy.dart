@@ -37,7 +37,7 @@ class Pharmacy {
     longitude = json['longitude'];
   }
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['idPharmacy'] = idPharmacy;
     data['username'] = username;
     data['type'] = type;

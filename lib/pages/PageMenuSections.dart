@@ -1,6 +1,8 @@
 import 'package:etno_app/pages/PageAd.dart';
 import 'package:etno_app/pages/PageBandos.dart';
 import 'package:etno_app/pages/PageDefunctions.dart';
+import 'package:etno_app/pages/PageListReserves.dart';
+import 'package:etno_app/pages/PageReserve.dart';
 import 'package:etno_app/pages/incident/PageIncidents.dart';
 import 'package:etno_app/pages/PageLinks.dart';
 import 'package:etno_app/pages/PageNews.dart';
@@ -31,64 +33,66 @@ class PageState extends State<PageMenuSections> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarCustom('Menú', Icons.language, () => print('Internalization in Menu'), null),
-       body: SafeArea(
-         child: Container(
-           decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
-           padding: const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
-           child: Column(
-             children: [
-               Expanded(child: Observer(builder: (context) => GridView.count(
-                   crossAxisCount: 3,
-                   children: sectionStore.getSections.map((e) =>
-                       Center(
-                           child: SizedBox(
-                             height: 150,
-                             width: 150,
-                             child: InkWell(
-                               onTap: () {
-                                 switch(e.title){
-                                   case 'Eventos': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEvents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Turismo': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Farmacias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Anuncios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageAd(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Noticias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageNews(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Galería': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageGallery(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Enlaces': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageLinks(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Defunciones': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageDefunctions(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Servicios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServices(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Patrocinadores': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageSponsors(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Bandos': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageBandos(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                   case 'Incidentes': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageIncidents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                 }
-                               },
-                               child: Card(
-                                 color: Colors.transparent,
-                                 elevation: 1.0,
-                                 shadowColor: Colors.grey,
-                                 child: Center(
-                                     child: Column(
-                                       mainAxisSize: MainAxisSize.min,
-                                       crossAxisAlignment: CrossAxisAlignment.center,
-                                       children: [
-                                         Icon(e.icon, color: Colors.white),
-                                         Text(e.title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.white))
-                                       ],
-                                     )
-                                 ),
-                               ),
-                             ),
-                           )
-                       )
-                   ).toList()
-               )
-               ))
-             ],
-           )
-         ),
-       ),
-      bottomNavigationBar: bottomNavigation(context, 3)
+    return  Scaffold(
+          backgroundColor: Colors.white,
+          appBar: appBarCustom('Menú', Icons.language, () => print('Internalization in Menu'), null),
+          body: SafeArea(
+            child: Container(
+                decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
+                padding: const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
+                child: Column(
+                  children: [
+                    Expanded(child: Observer(builder: (context) => GridView.count(
+                        crossAxisCount: 3,
+                        children: sectionStore.getSections.map((e) =>
+                            Center(
+                                child: SizedBox(
+                                  height: 150,
+                                  width: 150,
+                                  child: InkWell(
+                                    onTap: () {
+                                      switch(e.title){
+                                        case 'Eventos': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEvents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Turismo': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Farmacias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Anuncios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageAd(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Noticias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageNews(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Galería': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageGallery(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Enlaces': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageLinks(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Defunciones': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageDefunctions(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Servicios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServices(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Patrocinadores': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageSponsors(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Bandos': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageBandos(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Incidentes': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageIncidents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Reservas': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageListReserves(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero));
+                                      }
+                                    },
+                                    child: Card(
+                                      color: Colors.white,
+                                      elevation: 1.0,
+                                      shadowColor: Colors.grey,
+                                      child: Center(
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            children: [
+                                              Image.asset(e.assetImage!, width: 30.0, height: 30.0),
+                                              Text(e.title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.black))
+                                            ],
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                )
+                            )
+                        ).toList()
+                    )
+                    ))
+                  ],
+                )
+            ),
+          ),
+          bottomNavigationBar: bottomNavigation(context, 3)
     );
   }
 }

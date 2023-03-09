@@ -31,10 +31,12 @@ class PageState extends State<TabBarSalud> {
         const WarningWidgetValueNotifier(),
         Observer(builder: (context){
           if(section.getListNewCategory.isNotEmpty){
-         return ListView(
-              shrinkWrap: true,
-              children: section.getListNewCategory.map((e) => cardNew(e, context)).toList()
-          );
+         return Expanded(
+             child: ListView(
+                 shrinkWrap: true,
+                 children: section.getListNewCategory.map((e) => cardNew(e, context)).toList()
+             )
+         );
         }else{
             return Container(
               padding: const EdgeInsets.only(top: 250.0),

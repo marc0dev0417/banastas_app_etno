@@ -9,6 +9,13 @@ part of 'section.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$Section on SectionBase, Store {
+  Computed<Weather>? _$getLocalityWeatherComputed;
+
+  @override
+  Weather get getLocalityWeather => (_$getLocalityWeatherComputed ??=
+          Computed<Weather>(() => super.getLocalityWeather,
+              name: 'SectionBase.getLocalityWeather'))
+      .value;
   Computed<List<New>>? _$getListComputed;
 
   @override
@@ -124,6 +131,20 @@ mixin _$Section on SectionBase, Store {
   Event get getEvent => (_$getEventComputed ??=
           Computed<Event>(() => super.getEvent, name: 'SectionBase.getEvent'))
       .value;
+  Computed<List<Reserve>>? _$getReservesComputed;
+
+  @override
+  List<Reserve> get getReserves => (_$getReservesComputed ??=
+          Computed<List<Reserve>>(() => super.getReserves,
+              name: 'SectionBase.getReserves'))
+      .value;
+  Computed<List<ReserveUser>>? _$getReserveUserComputed;
+
+  @override
+  List<ReserveUser> get getReserveUser => (_$getReserveUserComputed ??=
+          Computed<List<ReserveUser>>(() => super.getReserveUser,
+              name: 'SectionBase.getReserveUser'))
+      .value;
   Computed<bool>? _$getIsSubscribeComputed;
 
   @override
@@ -131,6 +152,22 @@ mixin _$Section on SectionBase, Store {
       (_$getIsSubscribeComputed ??= Computed<bool>(() => super.getIsSubscribe,
               name: 'SectionBase.getIsSubscribe'))
           .value;
+
+  late final _$weatherAtom =
+      Atom(name: 'SectionBase.weather', context: context);
+
+  @override
+  Weather get weather {
+    _$weatherAtom.reportRead();
+    return super.weather;
+  }
+
+  @override
+  set weather(Weather value) {
+    _$weatherAtom.reportWrite(value, super.weather, () {
+      super.weather = value;
+    });
+  }
 
   late final _$isSubscribeAtom =
       Atom(name: 'SectionBase.isSubscribe', context: context);
@@ -387,6 +424,38 @@ mixin _$Section on SectionBase, Store {
     });
   }
 
+  late final _$reserveListAtom =
+      Atom(name: 'SectionBase.reserveList', context: context);
+
+  @override
+  List<Reserve> get reserveList {
+    _$reserveListAtom.reportRead();
+    return super.reserveList;
+  }
+
+  @override
+  set reserveList(List<Reserve> value) {
+    _$reserveListAtom.reportWrite(value, super.reserveList, () {
+      super.reserveList = value;
+    });
+  }
+
+  late final _$reserveUserListAtom =
+      Atom(name: 'SectionBase.reserveUserList', context: context);
+
+  @override
+  List<ReserveUser> get reserveUserList {
+    _$reserveUserListAtom.reportRead();
+    return super.reserveUserList;
+  }
+
+  @override
+  set reserveUserList(List<ReserveUser> value) {
+    _$reserveUserListAtom.reportWrite(value, super.reserveUserList, () {
+      super.reserveUserList = value;
+    });
+  }
+
   late final _$messageAtom =
       Atom(name: 'SectionBase.message', context: context);
 
@@ -417,6 +486,14 @@ mixin _$Section on SectionBase, Store {
     _$sectionListAtom.reportWrite(value, super.sectionList, () {
       super.sectionList = value;
     });
+  }
+
+  late final _$getWeatherAsyncAction =
+      AsyncAction('SectionBase.getWeather', context: context);
+
+  @override
+  Future<Weather> getWeather(String locality) {
+    return _$getWeatherAsyncAction.run(() => super.getWeather(locality));
   }
 
   late final _$getAllNewByLocalityAsyncAction =
@@ -499,6 +576,26 @@ mixin _$Section on SectionBase, Store {
   Future<bool> getSubscription(String fcmToken, String title) {
     return _$getSubscriptionAsyncAction
         .run(() => super.getSubscription(fcmToken, title));
+  }
+
+  late final _$addSubscriptionAsyncAction =
+      AsyncAction('SectionBase.addSubscription', context: context);
+
+  @override
+  Future<bool> addSubscription(
+      String locality, String title, UserSubscription userSubscription) {
+    return _$addSubscriptionAsyncAction
+        .run(() => super.addSubscription(locality, title, userSubscription));
+  }
+
+  late final _$dropSubscriptionAsyncAction =
+      AsyncAction('SectionBase.dropSubscription', context: context);
+
+  @override
+  Future<bool> dropSubscription(
+      String locality, String title, String fcmToken) {
+    return _$dropSubscriptionAsyncAction
+        .run(() => super.dropSubscription(locality, title, fcmToken));
   }
 
   late final _$getAllPharmaciesByLocalityAsyncAction =
@@ -585,9 +682,38 @@ mixin _$Section on SectionBase, Store {
     return _$addIncidentAsyncAction.run(() => super.addIncident(incident));
   }
 
+  late final _$getReservesByLocalityAsyncAction =
+      AsyncAction('SectionBase.getReservesByLocality', context: context);
+
+  @override
+  Future<List<Reserve>> getReservesByLocality(String username) {
+    return _$getReservesByLocalityAsyncAction
+        .run(() => super.getReservesByLocality(username));
+  }
+
+  late final _$getReserveUserByFcmTokenAsyncAction =
+      AsyncAction('SectionBase.getReserveUserByFcmToken', context: context);
+
+  @override
+  Future<List<ReserveUser>> getReserveUserByFcmToken(String fcmToken) {
+    return _$getReserveUserByFcmTokenAsyncAction
+        .run(() => super.getReserveUserByFcmToken(fcmToken));
+  }
+
+  late final _$sendReserveAsyncAction =
+      AsyncAction('SectionBase.sendReserve', context: context);
+
+  @override
+  Future<dynamic> sendReserve(
+      String username, String reserveName, ReserveUser reserveUser) {
+    return _$sendReserveAsyncAction
+        .run(() => super.sendReserve(username, reserveName, reserveUser));
+  }
+
   @override
   String toString() {
     return '''
+weather: ${weather},
 isSubscribe: ${isSubscribe},
 newList: ${newList},
 newListEventCategory: ${newListEventCategory},
@@ -604,8 +730,11 @@ servicesList: ${servicesList},
 adsList: ${adsList},
 imageList: ${imageList},
 incidentList: ${incidentList},
+reserveList: ${reserveList},
+reserveUserList: ${reserveUserList},
 message: ${message},
 sectionList: ${sectionList},
+getLocalityWeather: ${getLocalityWeather},
 getList: ${getList},
 getListNewCategory: ${getListNewCategory},
 getListEvent: ${getListEvent},
@@ -623,6 +752,8 @@ getImages: ${getImages},
 getIncidents: ${getIncidents},
 getMessage: ${getMessage},
 getEvent: ${getEvent},
+getReserves: ${getReserves},
+getReserveUser: ${getReserveUser},
 getIsSubscribe: ${getIsSubscribe}
     ''';
   }

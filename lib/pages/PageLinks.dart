@@ -28,19 +28,22 @@ class PageState extends State<PageLinks> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarCustom('Enlaces', Icons.language, () => null, null),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const WarningWidgetValueNotifier(),
-            Container(
-                padding: const EdgeInsets.all(15.0),
-                child: Observer(builder: (context){
+    return MaterialApp(
+      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white)),
+      title: 'Page Enlaces',
+      home: Scaffold(
+          appBar: appBarCustom('Enlaces', Icons.language, () => null, null),
+          body: SafeArea(
+            child: Column(
+              children: [
+                const WarningWidgetValueNotifier(),
+                Observer(builder: (context){
                   if(section.getLinks.isNotEmpty){
-                    return ListView(
-                        shrinkWrap: true,
-                        children: section.getLinks.map((e) => cardLink(e)).toList()
+                    return Expanded(
+                        child: ListView(
+                            shrinkWrap: true,
+                            children: section.getLinks.map((e) => cardLink(e)).toList()
+                        )
                     );
                   }else{
                     return Container(
@@ -57,10 +60,10 @@ class PageState extends State<PageLinks> {
                     );
                   }
                 })
-            )
-          ],
-        ),
-      )
+              ],
+            ),
+          )
+      ),
     );
   }
 }
@@ -83,8 +86,8 @@ Widget cardLink(Link link){
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Icon(Icons.link, size: 30.0, color: Colors.red),
-                     Text(link.title!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ElevatedButton(style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), onPressed: () => launchInBrowser(Uri.parse(link.url!)), child: const Text('Visitar'))
+                    Flexible(child: Text(link.title!, style: const TextStyle(fontWeight: FontWeight.bold))),
+                    ElevatedButton(style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), onPressed: () => launchInBrowser(Uri.parse(link.url!)), child: const Text('Visitar', style: TextStyle(color: Colors.white)))
                   ]
               )
             )

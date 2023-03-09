@@ -36,6 +36,7 @@ class PageState extends State<PageNews> {
           AppLocalizations.of(context)!.news_heal
         ];
         return MaterialApp(
+          theme: ThemeData(useMaterial3: true, tabBarTheme: const TabBarTheme(labelColor: Colors.white)),
           locale: provider.locale,
           supportedLocales: L10n.all,
           title: 'Noticias',
@@ -43,6 +44,7 @@ class PageState extends State<PageNews> {
             initialIndex: tabIndex,
             length: tabs.length,
             child: Scaffold(
+                backgroundColor: Colors.white,
                 appBar: appBarNews(AppLocalizations.of(context)!.bottom_news, Icons.language, () => null, tabs),
                 body: const TabBarView(
                   children: [

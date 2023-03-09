@@ -32,9 +32,11 @@ class PageState extends State<TabBarGeneral>{
         const WarningWidgetValueNotifier(),
         Observer(builder: (context){
           if(section.getList.isNotEmpty){
-            return ListView(
-                shrinkWrap: true,
-                children: section.getList.map((e) => cardNew(e, context)).toList()
+            return Expanded(
+                child: ListView(
+                    shrinkWrap: true,
+                    children: section.getList.map((e) => cardNew(e, context)).toList()
+                )
             );
           }else{
             return Container(
@@ -78,14 +80,17 @@ Widget cardNew(New new_, BuildContext context){
       Container(
         height: 200.0,
         alignment: Alignment.bottomLeft,
-      decoration: const BoxDecoration(
-      image: DecorationImage(image: NetworkImage('https://mercadoindustrial.mbzpress.com/wp-content/uploads/2018/03/mercado-industrial-industria-4.0.jpg'), fit: BoxFit.fill)),
+      decoration:  BoxDecoration(
+      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill)),
           child: Container(
+            alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.all(4.0),
             child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisSize: MainAxisSize.max,
                     children: [
                       Text(new_.category!, style: const TextStyle(color: Colors.white,  fontWeight: FontWeight.bold, fontSize: 12.0, backgroundColor: Colors.black)),
                       const SizedBox(width: 4.0),

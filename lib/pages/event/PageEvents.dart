@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
@@ -98,15 +97,16 @@ class PageState extends State<PageEvents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom(AppLocalizations.of(context)!.event, Icons.language, () => null, null),
-      bottomNavigationBar: bottomNavigation(context, 1),
-      body: Column(
-        children: [
-          const WarningWidgetValueNotifier(),
-          Image.asset('assets/event.jpg', height: 260.0),
-          nothingEvents()
-        ],
-      ),
-    );
+        backgroundColor: Colors.white,
+        appBar: appBarCustom(AppLocalizations.of(context)!.event, Icons.language, () => null, null),
+        bottomNavigationBar: bottomNavigation(context, 1),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const WarningWidgetValueNotifier(),
+            nothingEvents()
+          ],
+        ),
+      );
   }
 }

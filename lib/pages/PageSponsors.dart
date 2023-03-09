@@ -24,39 +24,45 @@ class PageState extends State<PageSponsors> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarCustom('Patrocinadores', Icons.language, () => null),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const WarningWidgetValueNotifier(),
-            Container(
+    return MaterialApp(
+      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white)),
+      title: 'Page Sponsors',
+      home: Scaffold(
+          appBar: appBarCustom('Patrocinadores', Icons.language, () => null),
+          body: SafeArea(
+              child: Container(
                 padding: const EdgeInsets.all(15.0),
-                child: Observer(builder: (context){
-                  if(section.getSponsors.isNotEmpty){
-                    return ListView(
-                        shrinkWrap: true,
-                        children: section.getSponsors.map((e) => cardSponsor(e)).toList()
-                    );
-                  }else{
-                    return Container(
-                      height: 550.0,
-                      alignment: Alignment.center,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Icon(Icons.block, size: 120.0),
-                            Text('No hay patrocinadores para mostrar')
-                          ]
-                      ),
-                    );
-                  }
-                })
-            )
-          ]
-        )
-      )
+                child: Column(
+                    children: [
+                      const WarningWidgetValueNotifier(),
+                      Observer(builder: (context){
+                        if(section.getSponsors.isNotEmpty){
+                          return Expanded(
+                              child: ListView(
+                                  shrinkWrap: true,
+                                  children: section.getSponsors.map((e) => cardSponsor(e)).toList()
+                              )
+                          );
+                        }else{
+                          return Container(
+                            height: 550.0,
+                            alignment: Alignment.center,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: const [
+                                  Icon(Icons.block, size: 120.0),
+                                  Text('No hay patrocinadores para mostrar')
+                                ]
+                            ),
+                          );
+                        }
+                      })
+                    ]
+                ),
+              )
+          )
+      ),
     );
   }
 }

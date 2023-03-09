@@ -55,20 +55,24 @@ class ServicesListState extends State<PageServicesList> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: appBarCustom(props.category, Icons.language, () => null),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const WarningWidgetValueNotifier(),
-            Container(
-                padding: const EdgeInsets.all(15.0),
-                child:
-                renderWidgets()
-            )
-          ]
-        )
-      )
+    return MaterialApp(
+      theme: ThemeData(cardTheme: const CardTheme(color: Colors.white)),
+      title: 'Page services',
+      home: Scaffold(
+          appBar: appBarCustom(props.category, Icons.language, () => null),
+          body: SafeArea(
+              child: Column(
+                  children: [
+                    const WarningWidgetValueNotifier(),
+                    Container(
+                        padding: const EdgeInsets.all(15.0),
+                        child:
+                        renderWidgets()
+                    )
+                  ]
+              )
+          )
+      ),
     );
   }
 }

@@ -29,14 +29,12 @@ class PageState extends State<PageBandos> {
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),
-          Container(
-              padding: const EdgeInsets.all(15.0),
-              child: Observer(builder: (context) {
+          Observer(builder: (context) {
                 if(section.getBandos.isNotEmpty){
-                  return ListView(
+                  return Expanded(child: ListView(
                       shrinkWrap: true,
                       children: section.getBandos.map((e) => carBando(e, context)).toList()
-                  );
+                  ));
                 }else{
                   return Container(
                       alignment: Alignment.center,
@@ -50,7 +48,7 @@ class PageState extends State<PageBandos> {
                   );
                 }
               })
-          ),
+
         ]
       )
     );

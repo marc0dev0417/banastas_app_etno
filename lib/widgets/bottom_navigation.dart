@@ -10,9 +10,9 @@ Widget bottomNavigation(BuildContext context, int bottomIndex){
   return BottomNavigationBar(
     currentIndex: bottomIndex,
     type: BottomNavigationBarType.fixed,
-    backgroundColor: Colors.red,
-    selectedItemColor: Colors.black,
-    unselectedItemColor: Colors.white,
+    backgroundColor: Colors.white,
+    selectedItemColor: Colors.red,
+    unselectedItemColor: Colors.black,
     selectedFontSize: 10,
     unselectedFontSize: 12,
     onTap: (value) {

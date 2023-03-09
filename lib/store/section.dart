@@ -1,10 +1,13 @@
 import 'dart:convert';
 
 import 'package:etno_app/models/MailDetails.dart';
+import 'package:etno_app/models/ReserveUser.dart';
 import 'package:etno_app/models/UserSubscription.dart';
+import 'package:etno_app/models/Weather/Weather.dart';
 import 'package:etno_app/models/menu/Menu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 import 'package:mobx/mobx.dart';
 import 'package:http/http.dart' as http;
@@ -19,6 +22,7 @@ import '../models/Link.dart';
 import '../models/Message.dart';
 import '../models/New.dart';
 import '../models/Pharmacy.dart';
+import '../models/Reserve.dart';
 import '../models/Sponsor.dart';
 import '../models/Tourism.dart';
 import '../models/Service.dart';
@@ -30,6 +34,8 @@ class Section = SectionBase with _$Section;
 
 abstract class SectionBase with Store {
 
+  @observable
+  Weather weather = Weather.empty();
   @observable
   bool isSubscribe = false;
   @observable
@@ -63,23 +69,47 @@ abstract class SectionBase with Store {
   @observable
   List<Incident> incidentList = [];
   @observable
+  List<Reserve> reserveList = [];
+  @observable
+  List<ReserveUser> reserveUserList = [];
+  @observable
   Message message = Message.empty();
   @observable
   List<Menu> sectionList = [
-    Menu(Icons.celebration, 'Eventos'),
-    Menu(Icons.map, 'Turismo'),
-    Menu(Icons.local_pharmacy, 'Farmacias'),
-    Menu(Icons.home_repair_service, 'Servicios'),
-    Menu(Icons.newspaper, 'Noticias'),
-    Menu(Icons.campaign, 'Bandos'),
-    Menu(Icons.picture_in_picture, 'Anuncios'),
-    Menu(Icons.collections, 'Galería'),
-    Menu(Icons.sentiment_very_dissatisfied, 'Defunciones'),
-    Menu(Icons.link, 'Enlaces'),
-    Menu(Icons.handshake, 'Patrocinadores'),
-    Menu(Icons.report_problem, 'Incidentes'),
-    Menu(Icons.book_online, 'Reservaciones')
+    Menu('assets/event.png', 'Eventos'),
+    Menu('assets/tour.png', 'Turismo'),
+    Menu('assets/phar.png', 'Farmacias'),
+    Menu('assets/service.png', 'Servicios'),
+    Menu('assets/news.png', 'Noticias'),
+    Menu('assets/band.png', 'Bandos'),
+    Menu('assets/ad.png', 'Anuncios'),
+    Menu('assets/gallery.png', 'Galería'),
+    Menu('assets/death.png', 'Defunciones'),
+    Menu('assets/link.png', 'Enlaces'),
+    Menu('assets/sponsor.png', 'Patrocinadores'),
+    Menu('assets/incident.png', 'Incidentes'),
+    Menu('assets/reserve.png', 'Reservas')
   ];
+
+  @action
+  Future<Weather> getWeather(String locality) async {
+    try{
+      final response = await http.get(
+          Uri.parse('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=$locality'),
+          headers: <String, String> {
+            'X-RapidAPI-Key': '07a7694006msh2c464354d7c2337p1f07ddjsn4f706776347b',
+            'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
+          }
+      );
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = Weather.fromJson(jsonDecode(decodeBody));
+      weather = data;
+      return data;
+    } catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
 
   @action
   Future<List<New>> getAllNewByLocality(String locality) async {
@@ -387,6 +417,59 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
     }
   }
 
+  @action
+  Future<List<Reserve>> getReservesByLocality(String username) async {
+    try{
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/reserves?username=$username'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => Reserve.fromJson(e)).toList();
+      reserveList = data;
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future<List<ReserveUser>> getReserveUserByFcmToken(String fcmToken) async {
+    try{
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/reserveUsers?fcmToken=$fcmToken'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => ReserveUser.fromJson(e)).toList();
+      reserveUserList = data;
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future sendReserve(String username, String reserveName, ReserveUser reserveUser) async {
+    try {
+      final response = await http.put(Uri.parse('http://192.168.137.1:8080/users/update/reserve?username=$username&reserveName=$reserveName'), body: jsonEncode(reserveUser.toJson()), headers: <String, String> {
+        'Content-Type': 'application/json; charset=UTF-8'
+      });
+      if(response.statusCode == 200){
+        Fluttertoast.showToast(
+            msg: 'Se ha reservado, espere la confirmación',
+            toastLength: Toast.LENGTH_SHORT,
+            fontSize: 12,
+            textColor: Colors.white,
+            backgroundColor: Colors.green
+        );
+      }else{
+        print('No se ha reservado exitosamente');
+      }
+    }catch(e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @computed
+  Weather get getLocalityWeather => weather;
   @computed
   List<New> get getList => newList;
   @computed
@@ -421,6 +504,10 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
   Message get getMessage => message;
   @computed
   Event get getEvent => event;
+  @computed
+  List<Reserve> get getReserves => reserveList;
+  @computed
+  List<ReserveUser> get getReserveUser => reserveUserList;
   @computed
   bool get getIsSubscribe => isSubscribe;
 }

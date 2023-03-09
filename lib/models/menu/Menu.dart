@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
 class Menu {
-  IconData? icon;
+  String? assetImage;
   String? title;
 
-  Menu(this.icon, this.title);
+  Menu(this.assetImage, this.title);
 }

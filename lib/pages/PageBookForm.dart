@@ -115,8 +115,8 @@ class PageState extends State<PageBookForm>{
                       }else{
                         Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => MaterialAppCardForm(event: props.event, name: name, mail: mail, phone: phone, reservePrice: reservePrice), reverseTransitionDuration: Duration.zero, transitionDuration: Duration.zero));
                       }
-                    }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.subscribe)),
-                    ElevatedButton(onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const Home())), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.cancel))
+                    }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.subscribe, style: const TextStyle(color: Colors.white))),
+                    ElevatedButton(onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const Home())), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.cancel, style: const TextStyle(color: Colors.white)))
                   ],
                 )
             )
@@ -134,6 +134,7 @@ class MaterialAppBookForm extends StatelessWidget {
     builder: (context, child){
       final provider = Provider.of<LocaleProvider>(context);
       return MaterialApp(
+        theme: ThemeData(useMaterial3: true),
         locale: provider.locale,
         supportedLocales: L10n.all,
         title: 'Book Form',

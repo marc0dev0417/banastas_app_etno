@@ -70,7 +70,7 @@ class PageState extends State<CardFormScreen> {
                       style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
                               Colors.red)),
-                      child: Text(AppLocalizations.of(context)!.pay))
+                      child: Text(AppLocalizations.of(context)!.pay, style: const TextStyle(color: Colors.white)))
                 ],
               ),
             );
@@ -145,6 +145,7 @@ class MaterialAppCardForm extends StatelessWidget {
     builder: (context, child){
       final provider = Provider.of<LocaleProvider>(context);
       return MaterialApp(
+        theme: ThemeData(useMaterial3: true),
           locale: provider.locale,
           supportedLocales: L10n.all,
           title: 'Book Form',

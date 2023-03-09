@@ -30,32 +30,33 @@ class PageState extends State<PageAd> {
     return Scaffold(
       appBar: appBarCustom('Anuncios', Icons.language, () => null, null),
       body: SafeArea(
-        child: Column(
-          children: [
-            const WarningWidgetValueNotifier(),
-            Container(
-                padding: const EdgeInsets.all(16.0),
-                child: Observer(builder: (context) {
-                  if(section.getAds.isNotEmpty){
-                    return ListView(
-                      shrinkWrap: true,
+        child: Container(
+          padding: const EdgeInsets.all(14.0),
+          child: Column(
+            children: [
+              const WarningWidgetValueNotifier(),
+              Observer(builder: (context) {
+                if(section.getAds.isNotEmpty){
+                  return
+                    Expanded(child: ListView(
+                        shrinkWrap: true,
                         children: section.getAds.map((e) => cardAd(e)).toList()
-                    );
-                  }else{
-                    return Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.only(top: 250.0),
-                        child: Column(
-                            children: const [
-                              Text('No hay Anuncios disponibles'),
-                              Icon(Icons.block, size: 120.0)
-                            ]
-                        )
-                    );
-                  }
-                })
-            ),
-          ],
+                    ));
+                }else{
+                  return Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.only(top: 250.0),
+                      child: Column(
+                          children: const [
+                            Text('No hay Anuncios disponibles'),
+                            Icon(Icons.block, size: 120.0)
+                          ]
+                      )
+                  );
+                }
+              })
+            ],
+          ),
         )
       ),
     );
@@ -82,12 +83,16 @@ Widget cardAd(Ad ad){
                 children: [
                   const Icon(Icons.apartment),
                   const SizedBox(width: 4.0),
-                  Text(ad.title!, style: const TextStyle(color: Colors.red))
+                  Flexible(child: Text(ad.title!, style: const TextStyle(color: Colors.red)))
                 ]
             ),
             const SizedBox(height: 4.0),
             Text(ad.description!),
-            if(ad.imageUrl != null) Image.network(ad.imageUrl!)
+            const SizedBox(
+              height: 4.0
+            ),
+            if(ad.imageUrl != null)
+                 Image.network(ad.imageUrl!, width: 320.0)
           ],
         ),
       )

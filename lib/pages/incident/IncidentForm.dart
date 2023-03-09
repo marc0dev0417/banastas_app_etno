@@ -26,7 +26,7 @@ class PageState extends State<IncidentForm> {
 
   addIncidentAPI(){
     if(subject != '' || name != '' || description != '' || phone != ''){
-      FirebaseMessaging.instance.getToken().then((value) => section.addIncident(Incident(null, 'Bolea', value, subject, description)));
+      FirebaseMessaging.instance.getToken().then((value) => section.addIncident(Incident(null, 'Bolea', value, subject, description, false, null)));
       Fluttertoast.showToast(
           msg: 'Se esta enviando el correo...',
           toastLength: Toast.LENGTH_SHORT,

@@ -21,6 +21,8 @@ Widget swiperNews(Section section, BuildContext context) {
           height: 250,
           child: Observer(
               builder: (value) => Swiper(
+                autoplay: true,
+                    autoplayDelay: 5000,
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () => {
@@ -70,7 +72,8 @@ Widget swiperEvent(Section section, BuildContext context) {
           width: double.infinity,
           height: 250,
           child: Swiper(
-              loop: false,
+              autoplay: true,
+              autoplayDelay: 5000,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                     onTap: () {
@@ -202,29 +205,36 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.2,
                                 ),
-                                Container(
-                                  alignment: Alignment.bottomRight,
-                                  child: ElevatedButton(style:  ButtonStyle(backgroundColor: !isSubscribe ? const MaterialStatePropertyAll(Colors.red) : const MaterialStatePropertyAll(Colors.grey)), onPressed: (){
-                                    if(!isSubscribe){
-                                      Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => MaterialAppBookForm(event: event), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero));
-                                    }else{
-                                      FirebaseMessaging.instance.getToken().then((value) => section.dropSubscription('Bolea', event.title!, value!));
-                                      Fluttertoast.showToast(
-                                          msg: 'Se ha desuscrito del evento',
-                                          toastLength: Toast.LENGTH_SHORT,
-                                          fontSize: 12,
-                                          textColor: Colors.white,
-                                          backgroundColor: Colors.green
-                                      );
-                                      FirebaseMessaging.instance.getToken().then((value){
-                                        section.getSubscription(value!, event.title!).then((value){
-                                          section.getEventByUsernameAndTitle(event.username!, event.title!).then((event){
-                                            showDialogEvent(context, event, false);
-                                          });
-                                        });
-                                      });
-                                    }
-                                  }, child: !isSubscribe ? const Text('Subscribirse') : const Text('Desuscribirse'))),
+                                Visibility(
+                                  maintainSize: true,
+                                  maintainAnimation: true,
+                                  maintainState: true,
+                                  visible: event.hasSubscription!,
+                                    child: Container(
+                                        alignment: Alignment.bottomRight,
+                                        child: ElevatedButton(style:  ButtonStyle(backgroundColor: !isSubscribe ? const MaterialStatePropertyAll(Colors.red) : const MaterialStatePropertyAll(Colors.grey)), onPressed: (){
+                                          if(!isSubscribe){
+                                            Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => MaterialAppBookForm(event: event), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero));
+                                          }else{
+                                            FirebaseMessaging.instance.getToken().then((value) => section.dropSubscription('Bolea', event.title!, value!));
+                                            Fluttertoast.showToast(
+                                                msg: 'Se ha desuscrito del evento',
+                                                toastLength: Toast.LENGTH_SHORT,
+                                                fontSize: 12,
+                                                textColor: Colors.white,
+                                                backgroundColor: Colors.green
+                                            );
+                                            FirebaseMessaging.instance.getToken().then((value){
+                                              section.getSubscription(value!, event.title!).then((value){
+                                                section.getEventByUsernameAndTitle(event.username!, event.title!).then((event){
+                                                  showDialogEvent(context, event, false);
+                                                });
+                                              });
+                                            });
+                                          }
+                                        }, child: !isSubscribe ? const Text('Subscribirse', style: TextStyle(color: Colors.white)) : const Text('Desuscribirse', style: TextStyle(color: Colors.white)))
+                                    ),
+                                )
                               ],
                             )
                           ],

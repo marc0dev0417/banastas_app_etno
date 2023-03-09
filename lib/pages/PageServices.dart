@@ -15,32 +15,36 @@ class PageServices extends StatefulWidget {
 class PageState extends State<PageServices> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: appBarCustom('Servicios', Icons.language, () => null),
-      body: SafeArea(
-            child: Column(
-              children: [
-                const WarningWidgetValueNotifier(),
-                Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.all(15.0),
-                      child: ListView(
-                        shrinkWrap: true,
-                        padding: const EdgeInsets.only(top: 50.0, left: 15, right: 15),
-                        scrollDirection: Axis.vertical,
-                        children: [
-                          cardService('Servicio', 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
-                          const SizedBox(height: 10.0),
-                          cardService('Salud', 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
-                          const SizedBox(height: 10.0),
-                          cardService('Ocio', 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); })
-                        ],
+    return  MaterialApp(
+      theme: ThemeData(useMaterial3: true),
+      title: 'Page services',
+      home: Scaffold(
+          appBar: appBarCustom('Servicios', Icons.language, () => null),
+          body: SafeArea(
+              child: Column(
+                  children: [
+                    const WarningWidgetValueNotifier(),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        child: ListView(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.only(top: 50.0, left: 15, right: 15),
+                          scrollDirection: Axis.vertical,
+                          children: [
+                            cardService('Servicio', 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
+                            const SizedBox(height: 10.0),
+                            cardService('Salud', 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
+                            const SizedBox(height: 10.0),
+                            cardService('Ocio', 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); })
+                          ],
+                        ),
                       ),
                     ),
-                ),
-              ]
-            )
+                  ]
+              )
           )
+      ),
     );
   }
 }

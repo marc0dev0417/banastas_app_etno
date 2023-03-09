@@ -36,7 +36,7 @@ class PageState extends State<PageIncidents> {
     if(incidents.isNotEmpty){
       return ListView(
           shrinkWrap: true,
-          children: incidents.map((e) => cardIncident(e)).toList()
+          children: incidents.map((e) => cardIncidents(e)).toList()
       );
     }else{
       return Container(
@@ -54,21 +54,24 @@ class PageState extends State<PageIncidents> {
   
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBarCustom('Mis Incidencias', Icons.language, () => null, null),
-      body: Column(
-        children: [
-          const WarningWidgetValueNotifier(),
-          Container(
-              padding: const EdgeInsets.all(4.0),
-              child: renderIncidents()
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const IncidentForm(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)),
-        backgroundColor: Colors.red,
-        child: const Icon(Icons.add),
+    return MaterialApp(
+      title: 'Mis incidencias',
+      home: Scaffold(
+        appBar: appBarCustom('Mis Incidencias', Icons.language, () => null, null),
+        body: Column(
+          children: [
+            const WarningWidgetValueNotifier(),
+            Container(
+                padding: const EdgeInsets.all(4.0),
+                child: renderIncidents()
+            )
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const IncidentForm(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)),
+          backgroundColor: Colors.red,
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
@@ -91,5 +94,41 @@ Widget cardIncident(Incident incident){
         ),
       )
     )
+  );
+}
+
+Widget cardIncidents(Incident incident) {
+  return SizedBox(
+    height: 130.0,
+    width: double.maxFinite,
+    child: GestureDetector(
+      onTap: () {  },
+      child: Card(
+        child: Row(
+          children: [
+            const VerticalDivider(
+              color: Colors.blue,
+              thickness: 5,
+            ),
+            const SizedBox(width: 22.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children:  [
+                Text(incident.title! , style: const TextStyle(fontWeight: FontWeight.bold))
+              ],
+            ),
+            const SizedBox(width: 40.0),
+            Container(
+                alignment: Alignment.center,
+                height: 30.0,
+                width: 150.0,
+                color: !incident.isSolved! ? Colors.red : Colors.green,
+                child: !incident.isSolved! ?  const Text('Esperando resolución', style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
+            )
+          ],
+        ),
+      ),
+    ),
   );
 }

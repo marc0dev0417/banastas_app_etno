@@ -33,11 +33,9 @@ class PageState extends State<PageGallery> {
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),
-          Container(
-              padding: const EdgeInsets.all(15.0),
-              child: Observer(builder: (context){
+           Observer(builder: (context){
                 if(section.getImages.isNotEmpty){
-                  return gridGallery(section.getImages, context);
+                  return Expanded(child: gridGallery(section.getImages, context));
                 }else{
                   return
                      Container(
@@ -54,7 +52,7 @@ class PageState extends State<PageGallery> {
                      );
                 }
               })
-          ),
+
         ],
       )
     );
@@ -71,7 +69,7 @@ Widget gridGallery(List<ImageMedia> imageMediaList, BuildContext context){
             child: InkWell(
               onTap: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  PageGalleryView(imageMedia: e), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)),
                 child: Card(
-                  child: Image.network(e.link!, fit: BoxFit.fill),
+                  child: Image.network(e.link!, fit: BoxFit.fill, width: 120.0, height: 120.0)
                 ),
             ),
           )

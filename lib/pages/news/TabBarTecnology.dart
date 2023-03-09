@@ -28,9 +28,11 @@ class PageState extends State<TabBarTecnology> {
         const WarningWidgetValueNotifier(),
         Observer(builder: (context){
           if(section.getListNewCategory.isNotEmpty){
-            return ListView(
-              shrinkWrap: true,
-              children: section.getListNewCategory.map((e) => cardNew(e, context)).toList()
+            return Expanded(
+                child: ListView(
+                    shrinkWrap: true,
+                    children: section.getListNewCategory.map((e) => cardNew(e, context)).toList()
+                )
             );
           }else{
             return Container(
@@ -38,7 +40,7 @@ class PageState extends State<TabBarTecnology> {
               child: Column(
                 children: [
                   Text(AppLocalizations.of(context)!.no_news_tech),
-                  Icon(Icons.block, size: 120.0)
+                 const Icon(Icons.block, size: 120.0)
                 ]
               )
             );
