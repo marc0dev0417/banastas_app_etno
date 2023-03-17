@@ -4,7 +4,6 @@ import 'package:etno_app/store/section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:readmore/readmore.dart';
 
 import '../models/Reserve.dart';
 import '../widgets/appbar_navigation.dart';
@@ -33,15 +32,28 @@ class PageState extends State<PageListReserves> {
         home: Scaffold(
           appBar: appBarCustom('Reservas', Icons.language, () => null),
           body: SafeArea(
-            child: Container(
-              padding: const EdgeInsets.all(16.0),
-              child: Observer(builder: (context){
-                return ListView(
-                  children: section.getReserves.map((e) => cardReserve(context, e)).toList()
+            child: Observer(builder: (context) {
+              if (section.getReserves.isNotEmpty){
+                return Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ListView(
+                      children: section.getReserves.map((e) => cardReserve(context, e)).toList()
+                  )
+                );
+              } else{
+                return Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        Icon(Icons.block, size: 120.0),
+                        Text('No hay reservas para mostrar')
+                      ]
+                  ),
                 );
               }
-              )
-            ),
+            })
           ),
           floatingActionButton: Container(
             width: 200.0,
@@ -71,9 +83,13 @@ Widget cardReserve(BuildContext context, Reserve reserve){
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            reserve.place?.imageUrl == null ? Container(
+              padding: const EdgeInsets.only(left: 60.0),
+              child: const CircularProgressIndicator(),
+            ):
             SizedBox(
                 height: 200.0,
-                child: Image.network('https://allforpadel.com/img/cms/pistas/fx2-1.jpg', width: 160.0, height: 200.0, fit: BoxFit.fill)
+                child: Image.network(reserve.place!.imageUrl!, width: 160.0, height: 200.0, fit: BoxFit.fill)
             ),
             const SizedBox(width: 45.0),
             Column(

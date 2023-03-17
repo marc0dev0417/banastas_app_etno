@@ -9,6 +9,13 @@ part of 'section.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
 mixin _$Section on SectionBase, Store {
+  Computed<SectionDetails>? _$getDetailsToSectionComputed;
+
+  @override
+  SectionDetails get getDetailsToSection => (_$getDetailsToSectionComputed ??=
+          Computed<SectionDetails>(() => super.getDetailsToSection,
+              name: 'SectionBase.getDetailsToSection'))
+      .value;
   Computed<Weather>? _$getLocalityWeatherComputed;
 
   @override
@@ -16,6 +23,13 @@ mixin _$Section on SectionBase, Store {
           Computed<Weather>(() => super.getLocalityWeather,
               name: 'SectionBase.getLocalityWeather'))
       .value;
+  Computed<List<Quiz>>? _$getQuizzesComputed;
+
+  @override
+  List<Quiz> get getQuizzes =>
+      (_$getQuizzesComputed ??= Computed<List<Quiz>>(() => super.getQuizzes,
+              name: 'SectionBase.getQuizzes'))
+          .value;
   Computed<List<New>>? _$getListComputed;
 
   @override
@@ -153,6 +167,22 @@ mixin _$Section on SectionBase, Store {
               name: 'SectionBase.getIsSubscribe'))
           .value;
 
+  late final _$sectionDetailsAtom =
+      Atom(name: 'SectionBase.sectionDetails', context: context);
+
+  @override
+  SectionDetails get sectionDetails {
+    _$sectionDetailsAtom.reportRead();
+    return super.sectionDetails;
+  }
+
+  @override
+  set sectionDetails(SectionDetails value) {
+    _$sectionDetailsAtom.reportWrite(value, super.sectionDetails, () {
+      super.sectionDetails = value;
+    });
+  }
+
   late final _$weatherAtom =
       Atom(name: 'SectionBase.weather', context: context);
 
@@ -166,6 +196,22 @@ mixin _$Section on SectionBase, Store {
   set weather(Weather value) {
     _$weatherAtom.reportWrite(value, super.weather, () {
       super.weather = value;
+    });
+  }
+
+  late final _$quizListAtom =
+      Atom(name: 'SectionBase.quizList', context: context);
+
+  @override
+  List<Quiz> get quizList {
+    _$quizListAtom.reportRead();
+    return super.quizList;
+  }
+
+  @override
+  set quizList(List<Quiz> value) {
+    _$quizListAtom.reportWrite(value, super.quizList, () {
+      super.quizList = value;
     });
   }
 
@@ -488,12 +534,41 @@ mixin _$Section on SectionBase, Store {
     });
   }
 
+  late final _$getCustomLinksAsyncAction =
+      AsyncAction('SectionBase.getCustomLinks', context: context);
+
+  @override
+  Future<List<CustomLink>> getCustomLinks(String locality) {
+    return _$getCustomLinksAsyncAction
+        .run(() => super.getCustomLinks(locality));
+  }
+
+  late final _$sendEnserAsyncAction =
+      AsyncAction('SectionBase.sendEnser', context: context);
+
+  @override
+  Future<dynamic> sendEnser(String address, String message, String subject,
+      String attachment, String fileName) {
+    return _$sendEnserAsyncAction.run(
+        () => super.sendEnser(address, message, subject, attachment, fileName));
+  }
+
+  late final _$getSectionDetailsAsyncAction =
+      AsyncAction('SectionBase.getSectionDetails', context: context);
+
+  @override
+  Future<SectionDetails> getSectionDetails(String username) {
+    return _$getSectionDetailsAsyncAction
+        .run(() => super.getSectionDetails(username));
+  }
+
   late final _$getWeatherAsyncAction =
       AsyncAction('SectionBase.getWeather', context: context);
 
   @override
-  Future<Weather> getWeather(String locality) {
-    return _$getWeatherAsyncAction.run(() => super.getWeather(locality));
+  Future<Weather> getWeather(double latitude, double longitude) {
+    return _$getWeatherAsyncAction
+        .run(() => super.getWeather(latitude, longitude));
   }
 
   late final _$getAllNewByLocalityAsyncAction =
@@ -710,10 +785,29 @@ mixin _$Section on SectionBase, Store {
         .run(() => super.sendReserve(username, reserveName, reserveUser));
   }
 
+  late final _$getQuizAsyncAction =
+      AsyncAction('SectionBase.getQuiz', context: context);
+
+  @override
+  Future<List<Quiz>> getQuiz(String username) {
+    return _$getQuizAsyncAction.run(() => super.getQuiz(username));
+  }
+
+  late final _$sendResultQuizAsyncAction =
+      AsyncAction('SectionBase.sendResultQuiz', context: context);
+
+  @override
+  Future<dynamic> sendResultQuiz(String username, String idQuiz, int option) {
+    return _$sendResultQuizAsyncAction
+        .run(() => super.sendResultQuiz(username, idQuiz, option));
+  }
+
   @override
   String toString() {
     return '''
+sectionDetails: ${sectionDetails},
 weather: ${weather},
+quizList: ${quizList},
 isSubscribe: ${isSubscribe},
 newList: ${newList},
 newListEventCategory: ${newListEventCategory},
@@ -734,7 +828,9 @@ reserveList: ${reserveList},
 reserveUserList: ${reserveUserList},
 message: ${message},
 sectionList: ${sectionList},
+getDetailsToSection: ${getDetailsToSection},
 getLocalityWeather: ${getLocalityWeather},
+getQuizzes: ${getQuizzes},
 getList: ${getList},
 getListNewCategory: ${getListNewCategory},
 getListEvent: ${getListEvent},

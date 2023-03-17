@@ -6,5 +6,5 @@ class PharmaciesButton {
   Color? color;
   String? name;
 
-  PharmaciesButton(this.iconData, this.color, this.name,);
+  PharmaciesButton(this.iconData, this.color, this.name);
 }

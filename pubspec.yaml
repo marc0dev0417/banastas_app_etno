@@ -61,15 +61,21 @@ dependencies:
   flutter_native_splash: ^2.2.18
   readmore: ^2.2.0
   back_button_interceptor: ^6.0.2
+  swipe_refresh: ^1.0.2
+  flutter_launcher_icons: ^0.12.0
 
 flutter_native_splash:
-  color: "#ffffff"
+  color: "#F8F9F9"
   image: 'assets/app.png'
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  image_picker: ^0.8.7
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/app.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -95,6 +101,9 @@ flutter:
       - assets/news.png
       - assets/event.jpg
       - assets/pass.png
+      - assets/pharmacy_red.png
+      - assets/pharmacy_blue.png
+      - assets/todo_pharmacy.png
       - assets/Loading_icon.gif
       - assets/ocio_image.jpg
       - assets/salud_image.jpg
@@ -108,9 +117,13 @@ flutter:
       - assets/tour.png
       - assets/phar.png
       - assets/service.png
+      - assets/box_enser.png
+      - assets/custom_link.png
+      - assets/quiz_decide.png
       - assets/band.png
       - assets/ad.png
       - assets/gallery.png
+      - assets/reserva.png
       - assets/death.png
       - assets/link.png
       - assets/sponsor.png

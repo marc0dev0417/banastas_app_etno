@@ -3,6 +3,7 @@ import 'Hall.dart';
 class Place {
   String? idPlace;
   String? username;
+  String? imageUrl;
   String? name;
   double? latitude;
   double? longitude;
@@ -11,6 +12,7 @@ class Place {
   Place(
       this.idPlace,
         this.username,
+        this.imageUrl,
         this.name,
         this.latitude,
         this.longitude,
@@ -19,6 +21,7 @@ class Place {
   Place.fromJson(Map<String, dynamic> json) {
     idPlace = json['idPlace'];
     username = json['username'];
+    imageUrl = json['imageUrl'];
     name = json['name'];
     latitude = json['latitude'];
     longitude = json['longitude'];
@@ -33,6 +36,7 @@ class Place {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['idPlace'] = idPlace;
     data['username'] = username;
+    data['imageUrl'] = imageUrl;
     data['name'] = name;
     data['latitude'] = latitude;
     data['longitude'] = longitude;

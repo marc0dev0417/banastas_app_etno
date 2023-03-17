@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:etno_app/models/MailDetails.dart';
 import 'package:etno_app/models/ReserveUser.dart';
@@ -26,7 +27,10 @@ import '../models/Reserve.dart';
 import '../models/Sponsor.dart';
 import '../models/Tourism.dart';
 import '../models/Service.dart';
+import '../models/custom_link/CustomLink.dart';
 import '../models/menu/Ad.dart';
+import '../models/quiz/Quiz.dart';
+import '../models/section_details/SectionDetails.dart';
 
 part 'section.g.dart';
 
@@ -35,7 +39,11 @@ class Section = SectionBase with _$Section;
 abstract class SectionBase with Store {
 
   @observable
+  SectionDetails sectionDetails = SectionDetails.empty();
+  @observable
   Weather weather = Weather.empty();
+  @observable
+  List<Quiz> quizList = [];
   @observable
   bool isSubscribe = false;
   @observable
@@ -76,31 +84,84 @@ abstract class SectionBase with Store {
   Message message = Message.empty();
   @observable
   List<Menu> sectionList = [
-    Menu('assets/event.png', 'Eventos'),
-    Menu('assets/tour.png', 'Turismo'),
-    Menu('assets/phar.png', 'Farmacias'),
-    Menu('assets/service.png', 'Servicios'),
-    Menu('assets/news.png', 'Noticias'),
-    Menu('assets/band.png', 'Bandos'),
-    Menu('assets/ad.png', 'Anuncios'),
-    Menu('assets/gallery.png', 'Galería'),
-    Menu('assets/death.png', 'Defunciones'),
-    Menu('assets/link.png', 'Enlaces'),
-    Menu('assets/sponsor.png', 'Patrocinadores'),
-    Menu('assets/incident.png', 'Incidentes'),
-    Menu('assets/reserve.png', 'Reservas')
+    Menu('assets/event.png', 'Eventos', ''),
+    Menu('assets/tour.png', 'Turismo', ''),
+    Menu('assets/phar.png', 'Farmacias', ''),
+    Menu('assets/service.png', 'Servicios', ''),
+    Menu('assets/news.png', 'Noticias', ''),
+    Menu('assets/band.png', 'Bandos', ''),
+    Menu('assets/ad.png', 'Anuncios', ''),
+    Menu('assets/gallery.png', 'Galería', ''),
+    Menu('assets/death.png', 'Defunciones', ''),
+    Menu('assets/link.png', 'Enlaces', ''),
+    Menu('assets/sponsor.png', 'Patrocinadores', ''),
+    Menu('assets/incident.png', 'Incidentes', ''),
+    Menu('assets/reserve.png', 'Reservas', ''),
+    Menu('assets/box_enser.png', 'Retirada de Enseres', ''),
+    Menu('assets/quiz_decide.png', 'Yo decido', '')
   ];
 
   @action
-  Future<Weather> getWeather(String locality) async {
+  Future<List<CustomLink>> getCustomLinks(String locality) async {
     try{
-      final response = await http.get(
-          Uri.parse('https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=$locality'),
-          headers: <String, String> {
-            'X-RapidAPI-Key': '07a7694006msh2c464354d7c2337p1f07ddjsn4f706776347b',
-            'X-RapidAPI-Host': 'weather-by-api-ninjas.p.rapidapi.com'
-          }
-      );
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/custom_links?username=$locality'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => CustomLink.fromJson(e)).toList();
+      for (var element in data) {
+        sectionList.add(Menu('assets/custom_link.png', element.name, element.webUrl));
+      }
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future sendEnser(String address, String message, String subject, String attachment, String fileName) async{
+    try {
+      final responseImage = http.MultipartRequest('POST' ,Uri.parse('http://192.168.137.1:8080/images?section=enseres&category=enseres&username=Bolea'));
+      responseImage.files.add( await http.MultipartFile.fromPath('image', fileName));
+      responseImage.send().then((value) async {
+        if (value.statusCode == 200) {
+          String fileNameLast = fileName.split('/').last;
+          final response = await http.post(Uri.parse('http://192.168.137.1:8080/sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=http://192.168.137.1:8080/images/enseres/$fileNameLast'));
+          final decodeBody = utf8.decode(response.bodyBytes);
+          final data = Message.fromJson(jsonDecode(decodeBody));
+
+          Fluttertoast.showToast(
+              msg: data.message!,
+              toastLength: Toast.LENGTH_SHORT,
+              fontSize: 12,
+              textColor: Colors.white,
+              backgroundColor: Colors.green
+          );
+        }
+      });
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future<SectionDetails> getSectionDetails(String username) async{
+    try{
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/users/section_details?username=$username'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = SectionDetails.fromJson(jsonDecode(decodeBody));
+      sectionDetails = data;
+      return data;
+    }catch(e) {
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future<Weather> getWeather(double latitude, double longitude) async {
+    try{
+      final response = await http.get(Uri.parse('https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&current_weather=true'));
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = Weather.fromJson(jsonDecode(decodeBody));
       weather = data;
@@ -468,8 +529,54 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
     }
   }
 
+  @action
+  Future<List<Quiz>> getQuiz(String username) async {
+    try{
+      final response = await http.get(Uri.parse('http://192.168.137.1:8080/quizzes'));
+      final decodeBody = utf8.decode(response.bodyBytes);
+      final data = (jsonDecode(decodeBody) as List).map((e) => Quiz.fromJson(e)).toList();
+      quizList = data;
+      return data;
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+  @action
+  Future sendResultQuiz(String username, String idQuiz, int option) async {
+    try{
+      final response = await http.put(Uri.parse('http://192.168.137.1:8080/users/update/result/quiz?username=$username&idQuiz=$idQuiz&option=$option'));
+      if (response.statusCode == 200) {
+        Fluttertoast.showToast(
+            msg: 'Se ha enviado la encuesta',
+            toastLength: Toast.LENGTH_SHORT,
+            fontSize: 12,
+            textColor: Colors.white,
+            backgroundColor: Colors.green
+        );
+      } else {
+        Fluttertoast.showToast(
+            msg: 'No se ha podido enviar la encuesta',
+            toastLength: Toast.LENGTH_SHORT,
+            fontSize: 12,
+            textColor: Colors.white,
+            backgroundColor: Colors.red
+        );
+      }
+    }catch(e){
+      debugPrint(e.toString());
+      rethrow;
+    }
+  }
+
+
+  @computed
+  SectionDetails get getDetailsToSection => sectionDetails;
   @computed
   Weather get getLocalityWeather => weather;
+  @computed
+  List<Quiz> get getQuizzes => quizList;
   @computed
   List<New> get getList => newList;
   @computed

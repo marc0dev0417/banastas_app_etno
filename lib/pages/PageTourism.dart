@@ -103,16 +103,24 @@ class TourismState extends State<PageTourism> {
                                                           fontSize: 10.0)),
                                                 ),
                                                 const Divider(),
-                                                Container(
-                                                  alignment: Alignment.topLeft,
-                                                  padding:
-                                                  const EdgeInsets.only(
-                                                      top: 5.0, left: 15.0),
-                                                  child: Text(element.type!,
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                          FontWeight.bold,
-                                                          fontSize: 15.0)),
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      alignment: Alignment.topLeft,
+                                                      padding:
+                                                      const EdgeInsets.only(
+                                                          top: 5.0, left: 15.0),
+                                                      child: Text(element.type!,
+                                                          style: const TextStyle(
+                                                              fontWeight: FontWeight.bold,
+                                                              fontSize: 15.0,
+                                                              color: Colors.blue
+                                                          ),
+                                                      ),
+                                                    ),
+                                                  //  Text('Mostrar mapa', style: TextStyle(color: Colors.blue))
+                                                  ],
                                                 ),
                                                 const Divider(),
                                                 Container(
@@ -239,7 +247,7 @@ Widget renderImageTab(String urlAsset, String name){
   if(urlAsset != ''){
    return Row(
       children: [
-        Image.asset(urlAsset, height: 35.0, width: 35.0),
+        Image.asset(urlAsset, height: 30.0, width: 30.0),
         Text(name, style: const TextStyle(color: Colors.black))
       ],
     );

@@ -15,10 +15,9 @@ class PageLinks extends StatefulWidget {
     return PageState();
   }
 }
+
 class PageState extends State<PageLinks> {
   final Section section = Section();
-
-  
 
   @override
   void initState() {

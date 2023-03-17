@@ -9,10 +9,12 @@ class ReserveUser {
   bool? isReserved;
   String? description;
   String? reservePhone;
+  double? latitude;
+  double? longitude;
   String? date;
   List<ReserveSchedule>? reserveSchedules;
 
-  ReserveUser(this.fcmToken, this.data, this.place, this.isReserved, this.description, this.reservePhone, this.date, this.reserveSchedules);
+  ReserveUser(this.fcmToken, this.data, this.place, this.isReserved, this.description, this.reservePhone, this.latitude, this.longitude, this.date, this.reserveSchedules);
 
   ReserveUser.fromJson(Map<String, dynamic> json) {
     idReserveUser = json['idReserveUser'];
@@ -22,6 +24,8 @@ class ReserveUser {
     isReserved = json['isReserved'];
     description = json['description'];
     reservePhone = json['reservePhone'];
+    latitude = json['latitude'];
+    longitude = json["longitude"];
     date = json['date'];
     if (json['reserveSchedules'] != null) {
       reserveSchedules = <ReserveSchedule> [];
@@ -41,6 +45,8 @@ class ReserveUser {
         data['isReserved'] = isReserved;
         data['description'] = description;
         data['reservePhone'] = reservePhone;
+        data['latitude'] = latitude;
+        data['longitude'] = longitude;
         data['date'] = date;
         if (reserveSchedules != null) {
           data['reserveSchedules'] = reserveSchedules?.map((e) => e.toJson()).toList();

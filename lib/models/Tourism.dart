@@ -28,7 +28,7 @@ class Tourism {
     latitude = json['latitude'];
   }
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{ };
     data['idTourism'] = idTourism;
     data['type'] = type;
     data['username'] = username;

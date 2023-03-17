@@ -36,7 +36,7 @@ class PageState extends State<PageIncidents> {
     if(incidents.isNotEmpty){
       return ListView(
           shrinkWrap: true,
-          children: incidents.map((e) => cardIncidents(e)).toList()
+          children: incidents.map((e) => cardIncidents(context, e)).toList()
       );
     }else{
       return Container(
@@ -77,8 +77,6 @@ class PageState extends State<PageIncidents> {
   }
 }
 
-
-
 Widget cardIncident(Incident incident){
   return InkWell(
     child: Card(
@@ -97,12 +95,27 @@ Widget cardIncident(Incident incident){
   );
 }
 
-Widget cardIncidents(Incident incident) {
+Widget cardIncidents(BuildContext context, Incident incident) {
   return SizedBox(
     height: 130.0,
     width: double.maxFinite,
     child: GestureDetector(
-      onTap: () {  },
+      onTap: () {
+        showDialog<String>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            backgroundColor: Colors.white,
+            title: Text('Resolución'),
+            content: incident.solution != null ? Text(incident.solution!, style: TextStyle(color: Colors.green)) : Text('No hay solución disponible aún', style: TextStyle(color: Colors.red)),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () => Navigator.pop(context, 'Salir'),
+                child: const Text('Salir'),
+              ),
+            ],
+          ),
+        );
+      },
       child: Card(
         child: Row(
           children: [
@@ -114,7 +127,7 @@ Widget cardIncidents(Incident incident) {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children:  [
+              children: [
                 Text(incident.title! , style: const TextStyle(fontWeight: FontWeight.bold))
               ],
             ),

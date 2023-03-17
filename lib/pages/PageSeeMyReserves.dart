@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../models/Reserve.dart';
 import '../models/ReserveUser.dart';
@@ -33,14 +34,30 @@ class PageState extends State<PageSeeMyReserves> {
       home: Scaffold(
         appBar: appBarCustom("Mis Reservas", Icons.language, () => null),
         body: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Observer(builder: (context){
-              return ListView(
-                children: section.getReserveUser.map((e) => cardMyReserve(context, e)).toList()
+          child: Observer(builder: (context){
+            if (section.getReserveUser.isNotEmpty){
+              return Container(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Observer(builder: (context){
+                    return ListView(
+                        children: section.getReserveUser.map((e) => cardMyReserve(context, e)).toList()
+                    );
+                  })
               );
-            })
-          ),
+            } else {
+              return Container(
+                alignment: Alignment.center,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: const [
+                      Icon(Icons.block, size: 120.0),
+                      Text('Aun no dispones de reservas')
+                    ]
+                ),
+              );
+            }
+          })
         )
       )
     );
@@ -65,7 +82,7 @@ Widget cardMyReserve(BuildContext context, ReserveUser reserveUser) {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children:  [
-                Text(reserveUser.place!.name! , style: const TextStyle(fontWeight: FontWeight.bold)),
+               Flexible(child: Text(reserveUser.place!.name! , style: const TextStyle(fontWeight: FontWeight.bold)),),
                  Text(reserveUser.date!, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 10.0)),
                 Text(reserveUser.place!.username!, style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 10.0)),
               ],
@@ -74,7 +91,7 @@ Widget cardMyReserve(BuildContext context, ReserveUser reserveUser) {
             Container(
                 alignment: Alignment.center,
                 height: 30.0,
-                width: 150.0,
+                width: 100.0,
                 color: !reserveUser.isReserved! ? Colors.red : Colors.green,
                 child: !reserveUser.isReserved! ?  const Text('En espera...', style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Confirmado', style: TextStyle(fontSize: 12.0, color: Colors.white))
             )

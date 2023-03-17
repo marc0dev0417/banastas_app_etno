@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:etno_app/store/section.dart';
 import 'package:rxdart/rxdart.dart';
 
 enum ConnectionStatus {
@@ -10,6 +11,7 @@ enum ConnectionStatus {
 }
 class CheckInternetConnection {
   final Connectivity _connectivity = Connectivity();
+  final Section section = Section();
 
   // Default will be online. This controller will help to emit new states when the connection changes.
   final _controller = BehaviorSubject.seeded(ConnectionStatus.online);
