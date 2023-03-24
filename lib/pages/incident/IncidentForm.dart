@@ -62,6 +62,7 @@ class PageState extends State<IncidentForm> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: appBarCustom('Añadir Incidencia', Icons.language, () => null, null),
       body: Container(
@@ -122,13 +123,12 @@ class PageState extends State<IncidentForm> {
                 ),
               ),
               const SizedBox(height: 20.0),
-              ElevatedButton(onPressed: () => addIncidentAPI(), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Enviar')),
+              ElevatedButton(onPressed: () => addIncidentAPI(), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Enviar', style: TextStyle(color: Colors.white))),
               ElevatedButton(onPressed: (){
                 FirebaseMessaging.instance.getToken().then((value) => section.getAllIncidentByLocalityAndFcmToken('Bolea', value!).then((value) =>
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const PageIncidents()))
                 ));
-
-              } , style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Cancelar'))
+              }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Cancelar', style: TextStyle(color: Colors.white)))
             ]
         ),
       ),

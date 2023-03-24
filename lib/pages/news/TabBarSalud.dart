@@ -42,8 +42,8 @@ class PageState extends State<TabBarSalud> {
               padding: const EdgeInsets.only(top: 250.0),
               child: Column(
                 children: [
-                  Text(AppLocalizations.of(context)!.no_news_heal),
-                  const Icon(Icons.block, size: 120.0)
+                  Text(AppLocalizations.of(context)!.no_news_heal, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Image.asset('assets/news.png', width: 50.0)
                 ]
               )
             );

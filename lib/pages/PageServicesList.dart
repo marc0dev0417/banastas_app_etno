@@ -39,12 +39,12 @@ class ServicesListState extends State<PageServicesList> {
           return servicesList(section);
         }else{
           return Container(
-            padding: const EdgeInsets.only(top: 250.0),
+            padding: const EdgeInsets.only(top: 300.0),
             alignment: Alignment.center,
             child: Column(
-              children: const [
-                Icon(Icons.block, size: 120.0),
-                Text('No hay servicios en este momento'),
+              children: [
+                Text('No hay servicios en este momento', style: TextStyle(fontWeight: FontWeight.bold)),
+                Image.asset('assets/service.png', width: 50.0)
               ]
             )
           );

@@ -49,66 +49,68 @@ class PageState extends State<PageReserve> {
       theme: ThemeData(useMaterial3: true, floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.red), dialogTheme: const DialogTheme(backgroundColor: Colors.white)),
       home: Scaffold(
         floatingActionButton:
-        Visibility(
-        visible:  props.reserveUsers!.isNotEmpty ? false : true,
-          child: SizedBox(
-            width: 150.0,
-            child: FloatingActionButton(
-              backgroundColor: isReserved! ? Colors.grey : Colors.red,
-              onPressed: () {
-                if (props.reserveUsers!.isEmpty){
-                  showDialog<String>(
-                    context: context,
-                    builder: (BuildContext context) => AlertDialog(
-                      backgroundColor: Colors.white,
-                      title: Column(
-                        children: const [Text('Introduce Email o teléfono', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)), Text('Confirmaremos tu reserva por correo electrónico o por teléfono', textAlign: TextAlign.center, style: TextStyle(fontSize: 10.0))],
-                      ),
-                      content: TextFormField(
-                        onChanged: (value) => setState(() {
-                          data = value;
-                        }),
-                        decoration: const InputDecoration(fillColor: Colors.white),
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () => Navigator.pop(context, 'Cancel'),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)),
-                          onPressed: () {
-                            if (data != ''){
-                              FirebaseMessaging.instance.getToken().then((fcmToken) => section.sendReserve('Bolea', props.name!, ReserveUser(fcmToken,data, props.place, props.isReserved, props.description, props.phone, props.place?.latitude, props.place?.longitude, props.date, props.reserveSchedules)));
-                              Navigator.pop((context));
-                            } else {
-                              Fluttertoast.showToast(
-                                  msg: 'Debe rellenar el campo',
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  fontSize: 12,
-                                  textColor: Colors.white,
-                                  backgroundColor: Colors.red
-                              );
-                            }
-                          },
-                          child: const Text('Susbscribirse', style: TextStyle(color: Colors.white)),
-                        ),
+            Container(
+              width: 200.0,
+              child: Visibility(
+                visible:  props.reserveUsers!.isNotEmpty ? false : true,
+                child: Container(
+                  width: 600.0,
+                  child: FloatingActionButton(
+                    backgroundColor: isReserved! ? Colors.grey : Colors.red,
+                    onPressed: () {
+                      if (props.reserveUsers!.isEmpty){
+                        showDialog<String>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            backgroundColor: Colors.white,
+                            title: Column(
+                              children: const [Text('Introduce Email o teléfono', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)), Text('Confirmaremos tu reserva por correo electrónico o por teléfono', textAlign: TextAlign.center, style: TextStyle(fontSize: 10.0))],
+                            ),
+                            content: TextFormField(
+                              onChanged: (value) => setState(() {
+                                data = value;
+                              }),
+                              decoration: const InputDecoration(fillColor: Colors.white),
+                            ),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'Cancel'),
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)),
+                                onPressed: () {
+                                  if (data != ''){
+                                    FirebaseMessaging.instance.getToken().then((fcmToken) => section.sendReserve('Bolea', props.name!, ReserveUser(fcmToken,data, props.place, props.isReserved, props.description, props.phone, props.place?.latitude, props.place?.longitude, props.date, props.reserveSchedules)));
+                                    Navigator.pop((context));
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg: 'Debe rellenar el campo',
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        fontSize: 12,
+                                        textColor: Colors.white,
+                                        backgroundColor: Colors.red
+                                    );
+                                  }
+                                },
+                                child: const Text('Susbscribirse', style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children:  [
+                        Text(!isReserved! ? 'Reservar ahora' : 'Ya esta reservado', style: const TextStyle(color: Colors.white)),
+                        const Icon(Icons.arrow_forward, color: Colors.white)
                       ],
                     ),
-                  );
-                }
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children:  [
-                  Text(!isReserved! ? 'Reservar ahora' : 'Ya esta reservado', style: const TextStyle(color: Colors.white)),
-                  const Icon(Icons.arrow_forward, color: Colors.white)
-                ],
+                  ),
+                ),
               ),
             ),
-          ),
-      ),
-
         appBar: appBarCustom('Reservar', Icons.language, () => null),
         body: SafeArea(
         child: Container(

@@ -272,6 +272,7 @@ abstract class SectionBase with Store {
       final response = await http.get(Uri.parse('http://192.168.137.1:8080/events?username=$username&title=$title'));
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = Event.fromJson(jsonDecode(decodeBody));
+      print(data.long);
       return data;
     }catch(e){
       debugPrint(e.toString());

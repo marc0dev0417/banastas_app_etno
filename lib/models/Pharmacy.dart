@@ -7,7 +7,7 @@ class Pharmacy {
   String? imageUrl;
   String? phone;
   String? schedule;
-  String? description;
+  String? direction;
   double? latitude;
   double? longitude;
 
@@ -19,7 +19,7 @@ class Pharmacy {
       this.imageUrl,
       this.phone,
       this.schedule,
-      this.description,
+      this.direction,
       this.latitude,
       this.longitude);
 
@@ -32,7 +32,7 @@ class Pharmacy {
     imageUrl = json['imageUrl'];
     phone = json['phone'];
     schedule = json['schedule'];
-    description = json['description'];
+    direction = json['direction'];
     latitude = json['latitude'];
     longitude = json['longitude'];
   }
@@ -46,7 +46,7 @@ class Pharmacy {
     data['imageUrl'] = imageUrl;
     data['phone'] = phone;
     data['schedule'] = schedule;
-    data['description'] = description;
+    data['direction'] = direction;
     data['latitude'] = latitude;
     data['longitude'] = longitude;
     return data;

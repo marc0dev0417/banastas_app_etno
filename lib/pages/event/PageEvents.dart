@@ -86,8 +86,8 @@ class PageState extends State<PageEvents> {
         alignment: Alignment.center,
             child: Column(
           children: [
-            Text(AppLocalizations.of(context)!.events_empty),
-            const Icon(Icons.block, size: 120.0)
+            Text(AppLocalizations.of(context)!.events_empty, style: TextStyle(fontWeight: FontWeight.bold)),
+            Image.asset('assets/event.png', width: 50.0)
         ]
       )
       )

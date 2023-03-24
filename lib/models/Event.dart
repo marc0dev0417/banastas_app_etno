@@ -19,8 +19,8 @@ class Event {
   String? endDate;
   String? publicationDate;
   String? time;
-  String? lat;
-  String? long;
+  double? lat;
+  double? long;
   List<ImageMedia>? images;
 
   Event(this.idEvent,

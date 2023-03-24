@@ -1,10 +1,12 @@
 import 'dart:async';
-
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:etno_app/models/PharmaciesButton.dart';
 import 'package:etno_app/models/Pharmacy.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PagePharmacies extends StatefulWidget {
@@ -34,12 +36,29 @@ class PharmaciesState extends State<PagePharmacies> {
     zoom: 14.4746,
   );
 
+  Future<Uint8List?> getBytesFromAsset(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))?.buffer.asUint8List();
+  }
+
   @override
   void initState() {
     section.getAllPharmaciesByLocality('Bolea').then((value) =>
-        value.forEach((element) {
+        value.forEach((element) async {
+          Uint8List? markerIcon;
+            switch (element.type) {
+              case 'Guardia':
+                markerIcon = await getBytesFromAsset('assets/pharmacy_blue.png', 80);
+                break;
+              case 'Normal':
+                markerIcon = await getBytesFromAsset('assets/pharmacy_red.png', 80);
+                break;
+            }
           setState(() {
             listMarker.add(Marker(
+              icon: BitmapDescriptor.fromBytes(markerIcon!),
                 onTap: () {
                   showModalBottomSheet(
                       backgroundColor: Colors.white,
@@ -106,7 +125,7 @@ class PharmaciesState extends State<PagePharmacies> {
                                                                 fontSize: 15.0,
                                                                 backgroundColor:
                                                                     element.type ==
-                                                                            'Normal'
+                                                                            'Guardia'
                                                                         ? Colors
                                                                             .blue
                                                                         : Colors
@@ -122,7 +141,7 @@ class PharmaciesState extends State<PagePharmacies> {
                                                             top: 5.0,
                                                             left: 15.0),
                                                     child: Text(
-                                                        element.description!,
+                                                        element.direction!,
                                                         style: const TextStyle(
                                                             color:
                                                                 Colors.grey))),

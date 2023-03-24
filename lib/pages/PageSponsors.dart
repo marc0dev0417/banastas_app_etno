@@ -25,7 +25,7 @@ class PageState extends State<PageSponsors> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white)),
+      theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page Sponsors',
       home: Scaffold(
           appBar: appBarCustom('Patrocinadores', Icons.language, () => null),
@@ -45,14 +45,14 @@ class PageState extends State<PageSponsors> {
                           );
                         }else{
                           return Container(
-                            height: 550.0,
+                            height: 600.0,
                             alignment: Alignment.center,
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisSize: MainAxisSize.min,
-                                children: const [
-                                  Icon(Icons.block, size: 120.0),
-                                  Text('No hay patrocinadores para mostrar')
+                                children: [
+                                  Text('No hay patrocinadores para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                                  Image.asset('assets/sponsor.png', width: 50.0)
                                 ]
                             ),
                           );

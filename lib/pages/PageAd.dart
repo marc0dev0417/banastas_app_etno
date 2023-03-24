@@ -45,11 +45,11 @@ class PageState extends State<PageAd> {
                 }else{
                   return Container(
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.only(top: 250.0),
+                      padding: const EdgeInsets.only(top: 300.0),
                       child: Column(
-                          children: const [
-                            Text('No hay Anuncios disponibles'),
-                            Icon(Icons.block, size: 120.0)
+                          children: [
+                            Text('No hay Anuncios disponibles', style: TextStyle(fontWeight: FontWeight.bold)),
+                            Image.asset('assets/ad.png', width: 50.0)
                           ]
                       )
                   );

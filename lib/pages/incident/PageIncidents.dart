@@ -4,7 +4,6 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../../models/Incident.dart';
 import '../../store/section.dart';
@@ -43,9 +42,9 @@ class PageState extends State<PageIncidents> {
         padding: EdgeInsets.only(top: 280.0),
         alignment: Alignment.center,
         child: Column(
-          children: const [
-            Icon(Icons.block, size: 120.0),
-            Text('No tienes incidencias en este momento')
+          children: [
+            Text('No tienes incidencias en este momento', style: TextStyle(fontWeight: FontWeight.bold)),
+            Image.asset('assets/incident.png', width: 50.0)
           ],
         ),
       );

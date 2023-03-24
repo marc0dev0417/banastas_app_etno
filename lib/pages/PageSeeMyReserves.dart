@@ -50,9 +50,9 @@ class PageState extends State<PageSeeMyReserves> {
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(Icons.block, size: 120.0),
-                      Text('Aun no dispones de reservas')
+                    children: [
+                      Text('Aun no dispones de reservas', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Image.asset('assets/reserva.png', width: 50.0)
                     ]
                 ),
               );

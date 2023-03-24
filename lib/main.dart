@@ -74,6 +74,7 @@ class App extends StatelessWidget {
       builder: (context, child) {
         final provider = Provider.of<LocaleProvider>(context);
         return MaterialApp(
+          theme: ThemeData(useMaterial3: true),
           locale: provider.locale,
           supportedLocales: L10n.all,
           title: 'Etno App',
@@ -129,20 +130,20 @@ class HomeState extends State<Home> {
         .getToken()
         .then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
     setupInteractedMessage();
+
     super.initState();
 
-    setState(() => {
-          section
-              .getSectionDetails('Bolea')
-              .then((value) => sectionDetails = value)
-        });
+    section
+        .getSectionDetails('Bolea')
+        .then((value) => setState(() => sectionDetails = value));
+
     section.getCustomLinks('Bolea');
 
     timer = Timer.periodic(
         const Duration(seconds: 1),
-        (Timer t) => setState(() {
-              section.getWeather(42.138642896056545, -0.40759873321216106).then((value) => weather = value);  //42.138642896056545, -0.40759873321216106
-            }));
+            (Timer t) => setState(() {
+          section.getWeather(42.138642896056545, -0.40759873321216106).then((value) => weather = value);  //42.138642896056545, -0.40759873321216106
+        }));
   }
 
   @override
@@ -408,6 +409,7 @@ class HomeState extends State<Home> {
                                     }
                                   },
                                   child: Card.Card(
+                                    color: Colors.white,
                                       elevation: 2.0,
                                       child: Container(
                                         padding: const EdgeInsets.all(16.0),
@@ -450,88 +452,88 @@ Widget renderTextSection(String sectionName, SectionDetails sectionDetails) {
     case 'Eventos':
       return sectionDetails.eventQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.eventQuantity} eventos',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Turismo':
       return sectionDetails.tourismQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.tourismQuantity} lugares turisticos',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Farmacias':
       return sectionDetails.pharmacyQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.pharmacyQuantity} farmacias',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Anuncios':
       return sectionDetails.adQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.adQuantity} anuncios',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Noticias':
       return sectionDetails.newsQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.newsQuantity} noticias',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Galería':
       return sectionDetails.galleryQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.galleryQuantity} photos',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Enlaces':
       return sectionDetails.linkQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.linkQuantity} enlaces',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Defunciones':
       return sectionDetails.deathQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.deathQuantity} defunciones',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Servicios':
       return sectionDetails.serviceQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.serviceQuantity} servicios',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Patrocinadores':
       return sectionDetails.sponsorQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.sponsorQuantity} patrocinadores',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Bandos':
       return sectionDetails.bandoQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.bandoQuantity} bandos',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Incidentes':
       return sectionDetails.incidentQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.incidentQuantity} incidentes',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Reservas':
       return sectionDetails.reserveQuantity == null
           ? const SizedBox(
-              width: 20.0, height: 20.0, child: CircularProgressIndicator())
+              width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.reserveQuantity} reservas',
-              style: const TextStyle(color: Colors.blue));
+              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Retirada de Enseres':
       return const Text('Enviar aviso de enser',
-          style: TextStyle(color: Colors.blue));
+          style: TextStyle(color: Colors.blue, fontSize: 10.0));
 
     case 'Yo decido':
-      return const Text('Encuesta', style: TextStyle(color: Colors.blue));
+      return const Text('Encuesta', style: TextStyle(color: Colors.blue, fontSize: 10.0));
     default:
-      return const Text('Link Personalizado', style: TextStyle(color: Colors.blue));
+      return const Text('Link Personalizado', style: TextStyle(color: Colors.blue, fontSize: 10.0));
   }
 }

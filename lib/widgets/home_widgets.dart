@@ -8,6 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../models/New.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -144,6 +145,15 @@ ImageProvider<Object> renderImageEvent(Section section, int index) {
   }
 }
 
+Future<void> launchInBrowser(Uri url) async{
+  if(!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication
+  )){
+    throw Exception('Could not launch $url');
+  }
+}
+
 showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBottomSheet(enableDrag: true ,context: context, builder: (context){
   final Section section = Section();
   return Wrap(
@@ -248,6 +258,15 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                             event.description!,
                           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11.0)
                         )
+                      ),
+                      SizedBox(height: 16.0),
+                      Container(
+                          padding: const EdgeInsets.only(left: 15.0),
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                              onTap: () => launchInBrowser(Uri.parse('https://maps.google.com/?daddr=${event.lat},${event.long}')),
+                              child: const Text('Mostrar Mapa', style: TextStyle(color: Colors.blue))
+                          )
                       )
                     ],
                   ),

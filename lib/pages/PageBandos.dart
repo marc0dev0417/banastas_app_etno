@@ -25,6 +25,7 @@ class PageState extends State<PageBandos> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: appBarCustom('Bandos', Icons.language, () => null, null),
       body: Column(
         children: [
@@ -38,11 +39,11 @@ class PageState extends State<PageBandos> {
                 }else{
                   return Container(
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.only(top: 250.0),
+                      padding: const EdgeInsets.only(top: 300.0),
                       child: Column(
-                          children: const [
-                            Text('No hay Bandos disponibles'),
-                            Icon(Icons.block, size: 120.0)
+                          children: [
+                            Text('No hay Bandos disponibles', style: TextStyle(fontWeight: FontWeight.bold)),
+                            Image.asset('assets/band.png', width: 50.0)
                           ]
                       )
                   );
@@ -60,6 +61,7 @@ Widget carBando(Bandos bandos, BuildContext context){
     child: InkWell(
       onTap: () { showDialogBandos(context, bandos); },
       child: Card(
+        color: Colors.white,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -81,7 +83,7 @@ Widget carBando(Bandos bandos, BuildContext context){
   );
 }
 
-showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(context: context, builder: (context){
+showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(backgroundColor: Colors.white, context: context, builder: (context){
   return Wrap(
     children: [
       Column(

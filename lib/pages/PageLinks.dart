@@ -28,7 +28,7 @@ class PageState extends State<PageLinks> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white)),
+      theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page Enlaces',
       home: Scaffold(
           appBar: appBarCustom('Enlaces', Icons.language, () => null, null),
@@ -46,14 +46,14 @@ class PageState extends State<PageLinks> {
                     );
                   }else{
                     return Container(
-                      height: 550.0,
+                      height: 600.0,
                       alignment: Alignment.center,
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
-                            Icon(Icons.block, size: 120.0),
-                            Text('No hay enlaces para mostrar')
+                          children: [
+                            Text('No hay enlaces para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                            Image.asset('assets/link.png', width: 50.0)
                           ]
                       ),
                     );

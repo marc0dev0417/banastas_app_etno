@@ -1,4 +1,3 @@
-import 'package:etno_app/models/quiz/Quiz.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,7 +26,7 @@ class PageState extends State<PageQuiz>{
  }
 
  @override
-  void initState()  {
+  void initState() {
     section.getQuiz('Bolea');
     super.initState();
   }
@@ -122,9 +121,9 @@ class PageState extends State<PageQuiz>{
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    children: const [
-                      Icon(Icons.block, size: 120.0),
-                      Text('No hay encuesta disponible')
+                    children: [
+                      Text('No hay encuesta disponible', style: TextStyle(fontWeight: FontWeight.bold)),
+                      Image.asset('assets/quiz_decide.png', width: 50.0)
                     ]
                 ),
               );
@@ -135,4 +134,3 @@ class PageState extends State<PageQuiz>{
     );
   }
 }
-

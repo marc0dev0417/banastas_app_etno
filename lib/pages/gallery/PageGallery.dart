@@ -39,20 +39,19 @@ class PageState extends State<PageGallery> {
                 }else{
                   return
                      Container(
-                       height: 550.0,
+                       height: 600.0,
                        alignment: Alignment.center,
                        child: Column(
                            crossAxisAlignment: CrossAxisAlignment.center,
                            mainAxisSize: MainAxisSize.min,
-                           children: const [
-                             Icon(Icons.block, size: 120.0),
-                             Text('No hay fotos para mostrar')
+                           children: [
+                             Text('No hay fotos para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                             Image.asset('assets/gallery.png', width: 50.0)
                            ]
                        ),
                      );
                 }
               })
-
         ],
       )
     );

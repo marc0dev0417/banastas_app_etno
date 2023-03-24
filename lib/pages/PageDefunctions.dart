@@ -27,7 +27,7 @@ class PageState extends State<PageDefunctions> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
+      theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
       title: 'Page defunctions',
       home: Scaffold(
           appBar: appBarCustom(
@@ -56,9 +56,9 @@ class PageState extends State<PageDefunctions> {
                                   child: Column(
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisSize: MainAxisSize.min,
-                                      children: const [
-                                        Icon(Icons.block, size: 120.0),
-                                        Text('No hay defunciones para mostrar')
+                                      children: [
+                                        Text('No hay defunciones para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                                        Image.asset('assets/death.png', width: 50.0)
                                       ]
                                   ),
                                 );

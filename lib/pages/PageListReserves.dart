@@ -30,6 +30,7 @@ class PageState extends State<PageListReserves> {
     return MaterialApp(
         theme: ThemeData(useMaterial3: true, floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.red)),
         home: Scaffold(
+          backgroundColor: Colors.white,
           appBar: appBarCustom('Reservas', Icons.language, () => null),
           body: SafeArea(
             child: Observer(builder: (context) {
@@ -46,9 +47,9 @@ class PageState extends State<PageListReserves> {
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
-                      children: const [
-                        Icon(Icons.block, size: 120.0),
-                        Text('No hay reservas para mostrar')
+                      children: [
+                        Text('No hay reservas para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                        Image.asset('assets/reserva.png', width: 50.0)
                       ]
                   ),
                 );

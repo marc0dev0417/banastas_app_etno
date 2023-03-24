@@ -1,6 +1,5 @@
-
+import 'package:etno_app/pages/news/TabBarDeport.dart';
 import 'package:etno_app/provider/locale_provider.dart';
-import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +32,8 @@ class PageState extends State<PageNews> {
         final List<String> tabs = [
           AppLocalizations.of(context)!.news_general,
           AppLocalizations.of(context)!.news_tecnology,
-          AppLocalizations.of(context)!.news_heal
+          AppLocalizations.of(context)!.news_heal,
+          'Deporte'
         ];
         return MaterialApp(
           theme: ThemeData(useMaterial3: true, tabBarTheme: const TabBarTheme(labelColor: Colors.white)),
@@ -46,11 +46,12 @@ class PageState extends State<PageNews> {
             child: Scaffold(
                 backgroundColor: Colors.white,
                 appBar: appBarNews(AppLocalizations.of(context)!.bottom_news, Icons.language, () => null, tabs),
-                body: const TabBarView(
+                body: TabBarView(
                   children: [
                     TabBarGeneral(),
                     TabBarTecnology(),
-                    TabBarSalud()
+                    TabBarSalud(),
+                    TabBarDeport()
                   ],
                 ),
                 bottomNavigationBar: bottomNavigation(context, 2)
