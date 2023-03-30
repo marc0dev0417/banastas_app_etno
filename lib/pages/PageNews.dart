@@ -45,7 +45,7 @@ class PageState extends State<PageNews> {
             length: tabs.length,
             child: Scaffold(
                 backgroundColor: Colors.white,
-                appBar: appBarNews(AppLocalizations.of(context)!.bottom_news, Icons.language, () => null, tabs),
+                appBar: appBarNews(context, AppLocalizations.of(context)!.bottom_news, Icons.language, () => null, tabs),
                 body: TabBarView(
                   children: [
                     TabBarGeneral(),

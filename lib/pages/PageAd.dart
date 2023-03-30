@@ -28,7 +28,7 @@ class PageState extends State<PageAd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Anuncios', Icons.language, () => null, null),
+      appBar: appBarCustom(context, true ,'Anuncios', Icons.language, () => null, null),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(14.0),

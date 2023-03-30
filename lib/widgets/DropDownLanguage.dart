@@ -14,20 +14,14 @@ class LanguagePickerWidget extends StatelessWidget {
     final locale = provider.locale;
     return DropdownButtonHideUnderline(
         child: DropdownButton(
+          iconEnabledColor: Colors.white,
           value: locale,
-          icon: Container(
-            padding: const EdgeInsets.only(right: 15.0),
-            child: const Icon(Icons.language, size: 45.0),
-          ),
           items: L10n.all.map((locale){
             final flag = L10n.getFlag(locale.languageCode);
             return DropdownMenuItem(
                 value: locale,
                 child: Center(
-                  child: Text(
-                    flag,
-                    style: const TextStyle(fontSize: 32.0)
-                  ),
+                  child: Image.asset(flag, width: 25.0, height: 25.0)
                 ),
               onTap: () {
                 final provider = Provider.of<LocaleProvider>(context, listen: false);

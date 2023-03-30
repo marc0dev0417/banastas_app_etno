@@ -1,8 +1,8 @@
-
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:etno_app/models/Event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../store/section.dart';
@@ -21,11 +21,12 @@ class PageEvents extends StatefulWidget {
 
 class PageState extends State<PageEvents> {
   final Section section = Section();
+  List<Event> eventList = [];
   int tabIndex = 0;
 
   @override
   void initState() {
-    section.getAllEventsByLocality('Bolea');
+    section.getAllEventsByLocality('Bolea').then((value) => eventList = value);
     super.initState();
   }
 
@@ -34,6 +35,7 @@ class PageState extends State<PageEvents> {
       section.getListEvent.isNotEmpty ? Expanded(
           child: Observer(builder: (context) =>
               GridView.count(
+                padding: EdgeInsets.all(16.0),
                   crossAxisCount: 2,
                   children: section.getListEvent.map((e) =>
                       Center(
@@ -98,7 +100,7 @@ class PageState extends State<PageEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: appBarCustom(AppLocalizations.of(context)!.event, Icons.language, () => null, null),
+        appBar: appBarCustom(context , false, AppLocalizations.of(context)!.event, Icons.language, () => null, null),
         bottomNavigationBar: bottomNavigation(context, 1),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,

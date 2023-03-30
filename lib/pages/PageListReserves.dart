@@ -31,7 +31,7 @@ class PageState extends State<PageListReserves> {
         theme: ThemeData(useMaterial3: true, floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.red)),
         home: Scaffold(
           backgroundColor: Colors.white,
-          appBar: appBarCustom('Reservas', Icons.language, () => null),
+          appBar: appBarCustom(context, true, 'Reservas', Icons.language, () => null),
           body: SafeArea(
             child: Observer(builder: (context) {
               if (section.getReserves.isNotEmpty){

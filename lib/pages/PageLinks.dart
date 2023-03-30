@@ -31,7 +31,7 @@ class PageState extends State<PageLinks> {
       theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page Enlaces',
       home: Scaffold(
-          appBar: appBarCustom('Enlaces', Icons.language, () => null, null),
+          appBar: appBarCustom(context, true, 'Enlaces', Icons.language, () => null, null),
           body: SafeArea(
             child: Column(
               children: [

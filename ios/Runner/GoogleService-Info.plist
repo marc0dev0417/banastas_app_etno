@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi.apps.googleusercontent.com</string>
+	<string>146712911855-a4g86tnsfrt79h7meau8s40smub0h5rj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi</string>
+	<string>com.googleusercontent.apps.146712911855-a4g86tnsfrt79h7meau8s40smub0h5rj</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDEKesqeWk8NGAS_iuEzzqd-dt-aepilFw</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.ecomputer.etnoApp</string>
+	<string>com.ecomputer.etno.app</string>
 	<key>PROJECT_ID</key>
 	<string>etno-87b26</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:146712911855:ios:0627506757bde5ba6d601a</string>
+	<string>1:146712911855:ios:aafd8cebc03ba1166d601a</string>
 </dict>
 </plist>

@@ -36,7 +36,7 @@ class PageState extends State<PageQuiz>{
     return MaterialApp(
       title: 'Quiz Page',
       home: Scaffold(
-        appBar: appBarCustom('Encuesta', Icons.language, () => null),
+        appBar: appBarCustom(context, true, 'Encuesta', Icons.language, () => null),
         body: SafeArea(
           child: Observer(builder: (context){
             if (section.getQuizzes.isNotEmpty){
@@ -53,9 +53,9 @@ class PageState extends State<PageQuiz>{
                       const Divider(thickness: 1.0),
 
                       Visibility(
-                        visible: section.getQuizzes[0].answerOne == null ? false : true,
+                        visible: section.getQuizzes[0].answerOne == '' ? false : true,
                           child: RadioListTile(
-                        title: Text('1. ${section.getQuizzes[0].answerOne}'),
+                        title: Text('${section.getQuizzes[0].answerOne}'),
                         value: "1",
                         groupValue: answer,
                         onChanged: (value){
@@ -63,9 +63,9 @@ class PageState extends State<PageQuiz>{
                         },
                       )),
                       Visibility(
-                        visible: section.getQuizzes[0].answerTwo == null ? false : true,
+                        visible: section.getQuizzes[0].answerTwo == '' ? false : true,
                           child: RadioListTile(
-                        title: Text('2. ${section.getQuizzes[0].answerTwo}'),
+                        title: Text('${section.getQuizzes[0].answerTwo}'),
                         value: "2",
                         groupValue: answer,
                         onChanged: (value){
@@ -73,9 +73,9 @@ class PageState extends State<PageQuiz>{
                         },
                       )),
                       Visibility(
-                        visible: section.getQuizzes[0].answerThree == null ? false : true,
+                        visible: section.getQuizzes[0].answerThree == '' ? false : true,
                           child: RadioListTile(
-                        title: Text('3. ${section.getQuizzes[0].answerThree}'),
+                        title: Text('${section.getQuizzes[0].answerThree}'),
                         value: "3",
                         groupValue: answer,
                         onChanged: (value){
@@ -83,9 +83,9 @@ class PageState extends State<PageQuiz>{
                         },
                       )),
                       Visibility(
-                          visible: section.getQuizzes[0].answerFour == null ? false : true,
+                          visible: section.getQuizzes[0].answerFour == '' ? false : true,
                           child: RadioListTile(
-                        title: Text('4. ${section.getQuizzes[0].answerFour}'),
+                        title: Text('${section.getQuizzes[0].answerFour}'),
                         value: "4",
                         groupValue: answer,
                         onChanged: (value){

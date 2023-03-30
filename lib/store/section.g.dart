@@ -547,10 +547,10 @@ mixin _$Section on SectionBase, Store {
       AsyncAction('SectionBase.sendEnser', context: context);
 
   @override
-  Future<dynamic> sendEnser(String address, String message, String subject,
-      String attachment, String fileName) {
-    return _$sendEnserAsyncAction.run(
-        () => super.sendEnser(address, message, subject, attachment, fileName));
+  Future<dynamic> sendEnser(
+      String address, String message, String subject, File fileName) {
+    return _$sendEnserAsyncAction
+        .run(() => super.sendEnser(address, message, subject, fileName));
   }
 
   late final _$getSectionDetailsAsyncAction =

@@ -44,5 +44,20 @@
   "back_form": "Itzuli formulariora",
   "fail_subscription": "Ezin izan da ekitaldira harpidetu",
   "pay_fail": "Errore bat gertatu da ordainketan",
-  "try_again": "Saiatu berriro"
+  "try_again": "Saiatu berriro",
+    "section_event" : "Gertaera",
+    "section_turism" : "Turismoa",
+    "section_pharmacy" : "Farmazia",
+    "section_service" : "Zerbitzuak",
+    "section_news" : "Berriak",
+    "section_bando" : "Aldeak",
+    "section_ad" : "Iragarkiak",
+    "section_gallery" : "Galeria",
+    "section_death" : "Hildako",
+    "section_link" : "Estekak",
+    "section_sponsor" : "Babesleak",
+    "section_incident" : "Gorabeherak",
+    "section_booking" : "Erreserbak",
+    "section_trash" : "Ondasunak kentzea",
+    "section_quiz" : "Inkesta"
 }

@@ -74,20 +74,40 @@ class PharmaciesState extends State<PagePharmacies> {
                                     child: Column(
                                       children: [
                                         Container(
-                                            padding: const EdgeInsets.all(15.0),
+                                            padding: const EdgeInsets.all(16.0),
                                             alignment: Alignment.topLeft,
                                             child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                Container(
-                                                  padding:
+                                                Row(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      padding:
                                                       const EdgeInsets.only(
                                                           left: 15.0),
-                                                  alignment: Alignment.topLeft,
-                                                  child: Text(element.name!,
-                                                      style: const TextStyle(
-                                                          fontWeight:
+                                                      alignment: Alignment.topLeft,
+                                                      child: Text(element.name!,
+                                                          style: const TextStyle(
+                                                              fontWeight:
                                                               FontWeight.bold,
-                                                          fontSize: 15.0)),
+                                                              fontSize: 15.0)),
+                                                    ),
+                                                    Container(
+                                                      padding: EdgeInsets.only(right: 15.0),
+                                                      child: Text(element.type!,
+                                                          style: TextStyle(
+                                                              fontSize: 15.0,
+                                                              backgroundColor:
+                                                              element.type ==
+                                                                  'Guardia'
+                                                                  ? Colors
+                                                                  .blue
+                                                                  : Colors
+                                                                  .red)),
+                                                    )
+                                                  ],
                                                 ),
                                                 Container(
                                                   padding:
@@ -115,21 +135,8 @@ class PharmaciesState extends State<PagePharmacies> {
                                                       children: [
                                                         Text(element.schedule!,
                                                             style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
                                                                 fontSize:
-                                                                    15.0)),
-                                                        Text(element.type!,
-                                                            style: TextStyle(
-                                                                fontSize: 15.0,
-                                                                backgroundColor:
-                                                                    element.type ==
-                                                                            'Guardia'
-                                                                        ? Colors
-                                                                            .blue
-                                                                        : Colors
-                                                                            .red))
+                                                                    12.0)),
                                                       ],
                                                     )),
                                                 const Divider(),
@@ -148,7 +155,8 @@ class PharmaciesState extends State<PagePharmacies> {
                                               ],
                                             )),
                                       ],
-                                    ))
+                                    )),
+
                               ],
                             ),
                           ],
@@ -189,10 +197,12 @@ class PharmaciesState extends State<PagePharmacies> {
         initialIndex: 0,
         length: pharmaciesButton.length,
         child: Scaffold(
-            body: SafeArea(
-                child: Stack(
+          backgroundColor: Colors.red,
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+            body: Stack(
           children: [
             GoogleMap(
+                myLocationButtonEnabled: false,
                 mapType: MapType.normal,
                 initialCameraPosition: _kGooglePlex,
                 onMapCreated: (GoogleMapController controller) {
@@ -200,6 +210,7 @@ class PharmaciesState extends State<PagePharmacies> {
                 },
                 markers: listMarker),
             TabBar(
+                padding: EdgeInsets.only(top: 66.0, left: 16.0, right: 16.0),
                 indicatorColor: Colors.transparent,
                 isScrollable: true,
                 tabs: [
@@ -241,7 +252,13 @@ class PharmaciesState extends State<PagePharmacies> {
                         ]))
                 ])
           ],
-        ))),
+            ),
+                floatingActionButton: FloatingActionButton(
+                  backgroundColor: Colors.red,
+            onPressed: () => Navigator.pop(context),
+              child: Icon(Icons.chevron_left),
+        ),
+        ),
       ),
     );
   }

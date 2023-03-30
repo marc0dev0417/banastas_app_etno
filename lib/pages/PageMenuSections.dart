@@ -50,7 +50,7 @@ class PageState extends State<PageMenuSections> {
   Widget build(BuildContext context) {
     return  Scaffold(
           backgroundColor: Colors.white,
-          appBar: appBarCustom('Menú', Icons.language, () => print('Internalization in Menu'), null),
+          appBar: appBarCustom(context, false, 'Menú', Icons.language, () => print('Internalization in Menu'), null),
           body: SafeArea(
             child: Container(
                // decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),

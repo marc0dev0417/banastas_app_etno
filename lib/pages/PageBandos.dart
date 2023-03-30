@@ -26,7 +26,7 @@ class PageState extends State<PageBandos> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarCustom('Bandos', Icons.language, () => null, null),
+      appBar: appBarCustom(context, true, 'Bandos', Icons.language, () => null, null),
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),
@@ -84,7 +84,9 @@ Widget carBando(Bandos bandos, BuildContext context){
 }
 
 showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(backgroundColor: Colors.white, context: context, builder: (context){
-  return Wrap(
+  return SafeArea(
+      minimum: EdgeInsets.only(bottom: 16.0),
+      child: Wrap(
     children: [
       Column(
         children: [
@@ -140,5 +142,5 @@ showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(backgro
         ],
       )
     ],
-  );
+  ));
 });

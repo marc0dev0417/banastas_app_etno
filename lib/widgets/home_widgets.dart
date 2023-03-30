@@ -213,7 +213,7 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                                   child:  const Text('- Fecha de Inicio', style: TextStyle(color: Colors.grey, fontSize: 10.0)),
                                 ),
                                 SizedBox(
-                                  width: MediaQuery.of(context).size.width * 0.2,
+                                  width: MediaQuery.of(context).size.width * 0.1,
                                 ),
                                 Visibility(
                                   maintainSize: true,

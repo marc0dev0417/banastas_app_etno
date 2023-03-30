@@ -59,7 +59,7 @@ class ServicesListState extends State<PageServicesList> {
       theme: ThemeData(cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom(props.category, Icons.language, () => null),
+          appBar: appBarCustom(context, true ,props.category, Icons.language, () => null),
           body: SafeArea(
               child: Column(
                   children: [
@@ -98,6 +98,7 @@ Widget servicesList(Section section){
                       Row(
                         children: [
                           renderImageServiceList(e),
+                          SizedBox(width: 5.0),
                           Text(e.owner!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
                           const SizedBox(width: 100.0),
                           const Icon(Icons.phone, size: 15.0),
@@ -146,7 +147,8 @@ Widget renderImageServiceList(Service service){
       child: Image.network(
           service.imageUrl!,
           width: 50,
-          height: 50
+          height: 50,
+        fit: BoxFit.cover,
       )); //Image.network(service.imageUrl!, fit: BoxFit.fill, height: 40, width: 40);
   }
 }

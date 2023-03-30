@@ -28,7 +28,7 @@ class PageState extends State<PageSponsors> {
       theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page Sponsors',
       home: Scaffold(
-          appBar: appBarCustom('Patrocinadores', Icons.language, () => null),
+          appBar: appBarCustom(context, true, 'Patrocinadores', Icons.language, () => null),
           body: SafeArea(
               child: Container(
                 padding: const EdgeInsets.all(15.0),

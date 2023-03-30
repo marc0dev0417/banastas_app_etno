@@ -56,7 +56,7 @@ class PageState extends State<PageIncidents> {
     return MaterialApp(
       title: 'Mis incidencias',
       home: Scaffold(
-        appBar: appBarCustom('Mis Incidencias', Icons.language, () => null, null),
+        appBar: appBarCustom(context, true ,'Mis Incidencias', Icons.language, () => null, null),
         body: Column(
           children: [
             const WarningWidgetValueNotifier(),

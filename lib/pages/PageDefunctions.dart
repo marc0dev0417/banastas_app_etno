@@ -31,6 +31,8 @@ class PageState extends State<PageDefunctions> {
       title: 'Page defunctions',
       home: Scaffold(
           appBar: appBarCustom(
+            context,
+            true,
               'Defunciones',
               Icons.language,
                   () => null,

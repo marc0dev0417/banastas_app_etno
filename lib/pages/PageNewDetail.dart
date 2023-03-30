@@ -18,10 +18,25 @@ class PageNewDetail extends StatelessWidget {
                   decoration:  BoxDecoration(
                       image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill)
                   ),
-                  child: Container(
-                      padding: const EdgeInsets.only(),
-                      alignment: Alignment.bottomLeft,
-                      child:  Text(new_.category!, style: const TextStyle(color: Colors.white, backgroundColor: Colors.amber, height: 1.5))
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.only(top: 16.0, left: 16.0),
+                      alignment: Alignment.topLeft,
+                        child: ElevatedButton(
+                          style: ButtonStyle(shape: MaterialStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.zero)), backgroundColor: MaterialStatePropertyAll(Colors.white)),
+                          onPressed: () => Navigator.pop(context),
+                          child: Icon(Icons.chevron_left)
+                        )
+                      ),
+                      Container(
+                          padding: const EdgeInsets.only(),
+                          alignment: Alignment.bottomLeft,
+                          child:  Text(new_.category!, style: const TextStyle(color: Colors.white, backgroundColor: Colors.amber, height: 1.5))
+                      )
+                    ],
                   )
               ),
               Container(

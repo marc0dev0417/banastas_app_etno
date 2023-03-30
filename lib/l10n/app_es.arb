@@ -47,5 +47,20 @@
     "back_form": "Regresar al formulario",
     "fail_subscription": "No se ha podido subscribir al evento",
     "pay_fail": "Ocurrió un error en su pago",
-    "try_again": "Intentar de nuevo"
+    "try_again": "Intentar de nuevo",
+    "section_event" : "Eventos",
+    "section_turism" : "Turismo",
+    "section_pharmacy" : "Farmacias",
+    "section_service" : "Servicios",
+    "section_news" : "Noticias",
+    "section_bando" : "Bandos",
+    "section_ad" : "Anuncios",
+    "section_gallery" : "Galeria",
+    "section_death" : "Defunciones",
+    "section_link" : "Enlaces",
+    "section_sponsor" : "Patrocinadores",
+    "section_incident" : "Incidentes",
+    "section_booking" : "Reservas",
+    "section_trash" : "Retirada de enseres",
+    "section_quiz" : "Yo decido"
 }

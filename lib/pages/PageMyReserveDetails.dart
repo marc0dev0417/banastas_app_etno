@@ -32,7 +32,7 @@ class PageState extends State<PageMyReserveDetails> {
     return MaterialApp(
       title: 'My reserve details',
       home: Scaffold(
-        appBar: appBarCustom('Reserva detalles', Icons.language, () => null),
+        appBar: appBarCustom(context, true, 'Reserva detalles', Icons.language, () => null),
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(16.0),

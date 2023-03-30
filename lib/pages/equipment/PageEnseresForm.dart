@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:etno_app/store/section.dart';
@@ -24,15 +22,17 @@ class PageState extends State<PageEnseres> {
   String enser = '';
 
   Future getImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.camera);
+    final image = await ImagePicker().pickImage(source: ImageSource.camera, maxHeight: 1080, maxWidth: 1920, imageQuality: 5);
     if (image == null) return;
+
     final imageTemporary = File(image.path);
     setState(() {
       _image = imageTemporary;
     });
   }
+
   Future getImageFromGallery() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery, maxHeight: 1080, maxWidth: 1920, imageQuality: 5);
     if (image == null) return;
     final imageTemporary = File(image.path);
     setState(() {
@@ -45,7 +45,7 @@ class PageState extends State<PageEnseres> {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true, primaryColor: Colors.white),
       home: Scaffold(
-        appBar: appBarCustom('Retirada de Enseres', Icons.language, () => null),
+        appBar: appBarCustom(context ,true,'Retirada de Enseres', Icons.language, () => null),
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(16.0),
@@ -112,7 +112,7 @@ class PageState extends State<PageEnseres> {
                     style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
                     onPressed: () {
                   if(name != '' && phone != '' && enser != '' && _image != null){
-                    section.sendEnser('etnoapp2@gmail.com', 'Hola mi nombre es $name con el telefono $phone. \n $enser', 'Enser', _image!.path, _image!.path);
+                    section.sendEnser('ecomputerapps@gmail.com', 'Hola mi nombre es $name con el telefono $phone. \n $enser', 'Enser', _image!);
                   } else {
                     Fluttertoast.showToast(
                         msg: 'Rellene los campos',

@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
+import 'package:image/image.dart' as IMG;
+import 'package:http_parser/http_parser.dart';
 
 import 'package:etno_app/models/MailDetails.dart';
 import 'package:etno_app/models/ReserveUser.dart';
@@ -118,14 +121,15 @@ abstract class SectionBase with Store {
   }
 
   @action
-  Future sendEnser(String address, String message, String subject, String attachment, String fileName) async{
+  Future sendEnser(String address, String message, String subject, File fileName) async{
     try {
-      final responseImage = http.MultipartRequest('POST' ,Uri.parse('http://192.168.137.1:8080/images?section=enseres&category=enseres&username=Bolea'));
-      responseImage.files.add( await http.MultipartFile.fromPath('image', fileName));
+      final responseImage = http.MultipartRequest('POST', Uri.parse('http://192.168.137.1:8080/images?section=enseres&category=enseres&username=Bolea'));
+      responseImage.files.add( await http.MultipartFile.fromPath('image', fileName.path));
       responseImage.send().then((value) async {
+        print(value.statusCode);
+
         if (value.statusCode == 200) {
-          String fileNameLast = fileName.split('/').last;
-          final response = await http.post(Uri.parse('http://192.168.137.1:8080/sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=http://192.168.137.1:8080/images/enseres/$fileNameLast'));
+          final response = await http.post(Uri.parse('http://192.168.137.1:8080/sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=http://192.168.137.1:8080/images/enseres/${fileName.path.split("/").last}'));
           final decodeBody = utf8.decode(response.bodyBytes);
           final data = Message.fromJson(jsonDecode(decodeBody));
 

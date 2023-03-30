@@ -39,7 +39,7 @@ class PageState extends State<CardFormScreen> {
     return BlocProvider(
   create: (context) => PaymentBloc(),
   child: Scaffold(
-      appBar: appBarCustom(AppLocalizations.of(context)!.card_pay_title, Icons.language, () => null),
+      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.card_pay_title, Icons.language, () => null),
       body: BlocBuilder<PaymentBloc, PaymentState>(
         builder: (context, state){
           CardFormEditController controller = CardFormEditController(
@@ -59,7 +59,7 @@ class PageState extends State<CardFormScreen> {
                   const SizedBox(height: 20.0),
                   CardFormField(controller: controller,
                       style: CardFormStyle(borderColor: Colors.black,
-                          backgroundColor: Colors.grey,
+                          backgroundColor: Colors.white,
                           textColor: Colors.black,
                           placeholderColor: Colors.black)),
                   const SizedBox(height: 10.0),

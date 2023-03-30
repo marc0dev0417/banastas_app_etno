@@ -19,7 +19,7 @@ class PageState extends State<PageServices> {
       theme: ThemeData(useMaterial3: true),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom('Servicios', Icons.language, () => null),
+          appBar: appBarCustom(context, true, 'Servicios', Icons.language, () => null),
           body: SafeArea(
               child: Column(
                   children: [

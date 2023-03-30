@@ -1,0 +1,17 @@
+{
+    "section_event" : "Events",
+    "section_turism" : "Turism",
+    "section_pharmacy" : "Pharmacy",
+    "section_service" : "Services",
+    "section_news" : "News",
+    "section_bando" : "Laws",
+    "section_ad" : "Advertisements",
+    "section_gallery" : "Gallery",
+    "section_death" : "Deaths",
+    "section_link" : "Links",
+    "section_sponsor" : "Sponsor",
+    "section_incident" : "Incidents",
+    "section_booking" : "Bookings",
+    "section_trash" : "Removal of belongings",
+    "section_quiz" : "Surveys"
+}

@@ -180,10 +180,16 @@ class TourismState extends State<PageTourism> {
         initialIndex: 0,
         length: tourismButton.length,
         child: Scaffold(
-            body: SafeArea(
-                child: Stack(
+          floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.red,
+            onPressed: () => Navigator.pop(context),
+            child: Icon(Icons.chevron_left),
+          ),
+            body: Stack(
                   children: [
                     GoogleMap(
+                      myLocationButtonEnabled: false,
                       mapType: MapType.normal,
                       initialCameraPosition: _kGooglePlex,
                       onMapCreated: (GoogleMapController controller) {
@@ -192,6 +198,7 @@ class TourismState extends State<PageTourism> {
                       markers: listMarker,
                     ),
                     TabBar(
+                      padding: EdgeInsets.only(top: 66.0, left: 16.0, right: 16.0),
                         indicatorColor: Colors.transparent,
                         isScrollable: true,
                         tabs: [ for (final tab in tourismButton) ElevatedButton(
@@ -227,9 +234,9 @@ class TourismState extends State<PageTourism> {
                         )]
                     )
                   ],
-                )),
+                )
+        ),
           ),
-        )
     );
   }
 }

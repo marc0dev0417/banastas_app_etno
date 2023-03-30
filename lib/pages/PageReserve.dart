@@ -111,7 +111,7 @@ class PageState extends State<PageReserve> {
                 ),
               ),
             ),
-        appBar: appBarCustom('Reservar', Icons.language, () => null),
+        appBar: appBarCustom(context, true, 'Reservar', Icons.language, () => null),
         body: SafeArea(
         child: Container(
         padding: const EdgeInsets.all(16.0),

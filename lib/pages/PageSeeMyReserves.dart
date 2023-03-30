@@ -32,7 +32,7 @@ class PageState extends State<PageSeeMyReserves> {
     return MaterialApp(
       title: 'See My reserves Page',
       home: Scaffold(
-        appBar: appBarCustom("Mis Reservas", Icons.language, () => null),
+        appBar: appBarCustom(context, true,"Mis Reservas", Icons.language, () => null),
         body: SafeArea(
           child: Observer(builder: (context){
             if (section.getReserveUser.isNotEmpty){

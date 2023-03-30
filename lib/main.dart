@@ -168,7 +168,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarCustom(AppLocalizations.of(context)!.bottom_home,
+      appBar: appBarCustom(context, false, AppLocalizations.of(context)!.bottom_home,
           Icons.language, () => null, null),
       body: SafeArea(
           child: Container(
@@ -194,7 +194,8 @@ class HomeState extends State<Home> {
                           Column(
                             children: [
                               weather.currentWeather?.temperature! == null
-                                  ? Container(
+                                  ?
+                              Container(
                                 padding: const EdgeInsets.only(top: 16.0),
                                 child: const SizedBox(
                                     width: 15.0,
@@ -202,19 +203,29 @@ class HomeState extends State<Home> {
                                     child: CircularProgressIndicator(
                                         color: Colors.white)),
                               )
-                                  : Text('${weather.currentWeather?.temperature!}ºC',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30.0,
-                                          color: Colors.white
-                                      )),
+                                  :
+                                  Container(
+                                    padding: EdgeInsets.only(top: 16.0),
+                                    child: Column(
+                                      children: [
+                                        Text('${weather.currentWeather?.temperature!}ºC',
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 30.0,
+                                                color: Colors.white
+                                            )
+                                        ),
 
-                              const Text('Bolea',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 18.0,
-                                      color: Colors.white
-                                  )),
+                                        const Text('Bolea',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 18.0,
+                                                color: Colors.white
+                                            )
+                                        ),
+                                      ],
+                                    ),
+                                  )
                             ],
                           )
                         ],
@@ -409,7 +420,8 @@ class HomeState extends State<Home> {
                                     }
                                   },
                                   child: Card.Card(
-                                    color: Colors.white,
+                                    margin: EdgeInsets.all(16.0),
+                                    color: Colors.white.withOpacity(0.9),
                                       elevation: 2.0,
                                       child: Container(
                                         padding: const EdgeInsets.all(16.0),
@@ -425,7 +437,7 @@ class HomeState extends State<Home> {
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Text(e.title!,
+                                                Text(getSectionText(e.title!, context),
                                                     style: const TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -446,6 +458,30 @@ class HomeState extends State<Home> {
     );
   }
 }
+
+
+String getSectionText(String sectionText, BuildContext context) {
+  switch(sectionText) {
+    case 'Eventos': return AppLocalizations.of(context)!.section_event;
+    case 'Turismo': return AppLocalizations.of(context)!.section_turism;
+    case 'Farmacias': return AppLocalizations.of(context)!.section_pharmacy;
+    case 'Servicios': return AppLocalizations.of(context)!.section_service;
+    case 'Noticias': return AppLocalizations.of(context)!.section_news;
+    case 'Bandos': return AppLocalizations.of(context)!.section_bando;
+    case 'Anuncios': return AppLocalizations.of(context)!.section_ad;
+    case 'Galería': return AppLocalizations.of(context)!.section_gallery;
+    case 'Defunciones': return AppLocalizations.of(context)!.section_death;
+    case 'Enlaces': return AppLocalizations.of(context)!.section_death;
+    case 'Patrocinadores': return AppLocalizations.of(context)!.section_sponsor;
+    case 'Incidentes': return AppLocalizations.of(context)!.section_incident;
+    case 'Reservas': return AppLocalizations.of(context)!.section_booking;
+    case 'Incidentes': return AppLocalizations.of(context)!.section_incident;
+    case 'Retirada de Enseres': return AppLocalizations.of(context)!.section_trash;
+    case 'Yo decido': return AppLocalizations.of(context)!.section_quiz;
+    default: return '';
+  }
+}
+
 
 Widget renderTextSection(String sectionName, SectionDetails sectionDetails) {
   switch (sectionName) {

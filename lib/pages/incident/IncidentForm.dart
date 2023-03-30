@@ -64,7 +64,7 @@ class PageState extends State<IncidentForm> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: appBarCustom('Añadir Incidencia', Icons.language, () => null, null),
+      appBar: appBarCustom(context, true, 'Añadir Incidencia', Icons.language, () => null, null),
       body: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(

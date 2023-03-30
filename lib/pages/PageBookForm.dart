@@ -41,7 +41,7 @@ class PageState extends State<PageBookForm>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom(AppLocalizations.of(context)!.subscribe, Icons.language, () => null),
+      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.subscribe, Icons.language, () => null),
         resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: Container(

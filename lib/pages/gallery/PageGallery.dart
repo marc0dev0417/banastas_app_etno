@@ -29,7 +29,7 @@ class PageState extends State<PageGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom('Galería', Icons.language, () => null),
+      appBar: appBarCustom(context, true,'Galería', Icons.language, () => null),
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),
