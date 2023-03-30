@@ -13,5 +13,21 @@
     "section_incident" : "Incidents",
     "section_booking" : "Bookings",
     "section_trash" : "Removal of belongings",
-    "section_quiz" : "Surveys"
+    "section_quiz" : "Surveys",
+
+    "subsection_event": "Events",
+    "subsection_tourism": "Tourism places",
+    "subsection_pharmacy": "Pharmacies",
+    "subsection_service": "Services",
+    "subsection_news": "News",
+    "subsection_bando": "Laws",
+    "subsection_ad": "Ads",
+    "subsection_gallery": "Photos",
+    "subsection_death": "Deaths",
+    "subsection_link": "Link",
+    "subsection_sponsor": "Sponsors",
+    "subsection_incident": "Incidents",
+    "subsection_booking": "Bookings",
+    "subsection_trash": "Send a belongins",
+    "subsection_quiz": "Quiz"
 }
