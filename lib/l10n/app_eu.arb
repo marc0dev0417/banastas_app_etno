@@ -63,5 +63,17 @@
 
     "subsection_event": "Gertaerak",
     "subsection_tourism": "Turismoa",
-    "subsection_pharmacy":
+    "subsection_pharmacy": "Farmazia",
+    "subsection_service": "Zerbitzuak",
+    "subsection_news": "Berriak",
+    "subsection_bando": "Alde",
+    "subsection_ad": "Iragarkia",
+    "subsection_gallery": "Argazkiak",
+    "subsection_death": "Hildako",
+    "subsection_link": "Estekak",
+    "subsection_sponsor": "Babesleak",
+    "subsection_incident": "Gorabeherak",
+    "subsection_booking": "Erreserbak",
+    "subsection_trash": "Altzariak kentzea",
+    "subsection_quiz": "Inkesta"
 }
