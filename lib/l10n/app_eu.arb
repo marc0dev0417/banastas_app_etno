@@ -59,5 +59,9 @@
     "section_incident" : "Gorabeherak",
     "section_booking" : "Erreserbak",
     "section_trash" : "Ondasunak kentzea",
-    "section_quiz" : "Inkesta"
+    "section_quiz" : "Inkesta",
+
+    "subsection_event": "Gertaerak",
+    "subsection_tourism": "Turismoa",
+    "subsection_pharmacy":
 }
