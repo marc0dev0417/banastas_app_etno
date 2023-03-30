@@ -14,5 +14,21 @@
     "section_incident": "Incidents",
     "section_booking": "Réservations",
     "section_trash": "Retrait des biens",
-    "section_quiz": "Enquête"
+    "section_quiz": "Enquête",
+
+    "subsection_event" : "Événements",
+    "subsection_tourism" : "Lieux touristiques",
+    "subsection_pharmacy" : "Pharmacie",
+    "subsection_service" : "Prestations de service",
+    "subsection_news" : "Informations",
+    "subsection_bando" : "Côtés",
+    "subsection_ad" : "Annonces",
+    "subsection_gallery" : "Photographies",
+    "subsection_death" : "Décès",
+    "subsection_link" : "Liens",
+    "subsection_sponsor" : "Parrainer",
+    "subsection_incident" : "Incidents",
+    "subsection_booking" : "Réservations",
+    "subsection_trash" : "Envoyer un avis d'ensemencement",
+    "subsection_quiz" : "Enquête"
 }
