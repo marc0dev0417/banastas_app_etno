@@ -49,7 +49,7 @@
     "pay_fail": "Ocurrió un error en su pago",
     "try_again": "Intentar de nuevo",
     "section_event" : "Eventos",
-    "section_turism" : "Turismo",
+    "section_tourism" : "Turismo",
     "section_pharmacy" : "Farmacias",
     "section_service" : "Servicios",
     "section_news" : "Noticias",
@@ -62,5 +62,21 @@
     "section_incident" : "Incidentes",
     "section_booking" : "Reservas",
     "section_trash" : "Retirada de enseres",
-    "section_quiz" : "Yo decido"
+    "section_quiz" : "Yo decido",
+
+    "subsection_event" : "Eventos",
+    "subsection_tourism" : "Lugares turisticos",
+    "subsection_pharmacy" : "Farmacias",
+    "subsection_service" : "Servicios",
+    "subsection_news" : "Noticias",
+    "subsection_bando" : "Bandos",
+    "subsection_ad" : "Anuncios",
+    "subsection_gallery" : "Fotografías",
+    "subsection_death" : "Defunciones",
+    "subsection_link" : "Enlaces",
+    "subsection_sponsor" : "Patrocinadores",
+    "subsection_incident" : "Incidentes",
+    "subsection_booking" : "Reservas",
+    "subsection_trash" : "Enviar aviso de enser",
+    "subsection_quiz" : "Encuesta"
 }
