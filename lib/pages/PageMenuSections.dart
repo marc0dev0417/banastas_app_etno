@@ -1,4 +1,5 @@
 import 'package:etno_app/main.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:etno_app/pages/PageAd.dart';
 import 'package:etno_app/pages/PageBandos.dart';
 import 'package:etno_app/pages/PageDefunctions.dart';
@@ -94,8 +95,8 @@ class PageState extends State<PageMenuSections> {
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
                                               Image.asset(e.assetImage!, width: 30.0, height: 30.0),
-                                              Text(e.title!, style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.black)),
-                                              renderTextSection(e.title!, sectionDetails)
+                                              Text(getSectionText(e.title!, context), style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.black), textAlign: TextAlign.center),
+                                              renderTextSection(e.title!, sectionDetails, context)
                                             ]
                                           )
                                       ),
@@ -115,92 +116,92 @@ class PageState extends State<PageMenuSections> {
   }
 }
 
-Widget renderTextSection(String sectionName, SectionDetails sectionDetails) {
+Widget renderTextSection(String sectionName, SectionDetails sectionDetails, BuildContext context) {
   switch (sectionName) {
     case 'Eventos':
       return sectionDetails.eventQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.eventQuantity} eventos',
+          : Text('${sectionDetails.eventQuantity} ${AppLocalizations.of(context)!.section_event}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Turismo':
       return sectionDetails.tourismQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.tourismQuantity} lugares turisticos',
+          : Text('${sectionDetails.tourismQuantity} ${AppLocalizations.of(context)!.section_tourism}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Farmacias':
       return sectionDetails.pharmacyQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.pharmacyQuantity} farmacias',
+          : Text('${sectionDetails.pharmacyQuantity} ${AppLocalizations.of(context)!.section_pharmacy}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Anuncios':
       return sectionDetails.adQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.adQuantity} anuncios',
+          : Text('${sectionDetails.adQuantity} ${AppLocalizations.of(context)!.section_ad}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Noticias':
       return sectionDetails.newsQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.newsQuantity} noticias',
+          : Text('${sectionDetails.newsQuantity} ${AppLocalizations.of(context)!.section_news}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Galería':
       return sectionDetails.galleryQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.galleryQuantity} photos',
+          : Text('${sectionDetails.galleryQuantity} ${AppLocalizations.of(context)!.section_gallery}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Enlaces':
       return sectionDetails.linkQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.linkQuantity} enlaces',
+          : Text('${sectionDetails.linkQuantity} ${AppLocalizations.of(context)!.section_link}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Defunciones':
       return sectionDetails.deathQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.deathQuantity} defunciones',
+          : Text('${sectionDetails.deathQuantity} ${AppLocalizations.of(context)!.section_death}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Servicios':
       return sectionDetails.serviceQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.serviceQuantity} servicios',
+          : Text('${sectionDetails.serviceQuantity} ${AppLocalizations.of(context)!.section_service}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Patrocinadores':
       return sectionDetails.sponsorQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.sponsorQuantity} patrocinadores',
+          : Text('${sectionDetails.sponsorQuantity} ${AppLocalizations.of(context)!.section_sponsor}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Bandos':
       return sectionDetails.bandoQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.bandoQuantity} bandos',
+          : Text('${sectionDetails.bandoQuantity} ${AppLocalizations.of(context)!.section_bando}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Incidentes':
       return sectionDetails.incidentQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.incidentQuantity} incidentes',
+          : Text('${sectionDetails.incidentQuantity} ${AppLocalizations.of(context)!.section_incident}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Reservas':
       return sectionDetails.reserveQuantity == null
           ? const SizedBox(
           width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.reserveQuantity} reservas',
+          : Text('${sectionDetails.reserveQuantity} ${AppLocalizations.of(context)!.section_booking}',
           style: const TextStyle(color: Colors.blue, fontSize: 10.0));
     case 'Retirada de Enseres':
-      return const Text('Enviar aviso de enser',
-          style: TextStyle(color: Colors.blue, fontSize: 10.0));
+      return Text(AppLocalizations.of(context)!.subsection_trash,
+          style: TextStyle(color: Colors.blue, fontSize: 10.0), textAlign: TextAlign.center,);
 
     case 'Yo decido':
-      return const Text('Encuesta', style: TextStyle(color: Colors.blue, fontSize: 10.0));
+      return Text(AppLocalizations.of(context)!.section_quiz, style: TextStyle(color: Colors.blue, fontSize: 10.0));
     default:
       return const Text('Link Personalizado', style: TextStyle(color: Colors.blue, fontSize: 10.0));
   }

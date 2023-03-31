@@ -576,6 +576,6 @@ Widget renderTextSection(String sectionName, SectionDetails sectionDetails, Buil
       return Text(AppLocalizations.of(context)!.subsection_quiz,
           style: TextStyle(color: Colors.blue, fontSize: 10.0));
     default:
-      return const Text('Link Personalizado', style: TextStyle(color: Colors.blue, fontSize: 10.0));
+      return const Text('', style: TextStyle(color: Colors.blue, fontSize: 10.0));
   }
 }
