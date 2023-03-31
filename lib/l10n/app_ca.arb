@@ -29,5 +29,10 @@
     "subsection_incident" : "Incidents",
     "subsection_booking" : "Reserves",
     "subsection_trash" : "Enviar avís d'estris",
-    "subsection_quiz" : "Enquesta"
+    "subsection_quiz" : "Enquesta",
+
+    "bottom_home": "Inici",
+    "bottom_event": "Esdeveniments",
+    "bottom_news": "Notícies",
+    "bottom_menu": "Menu"
 }

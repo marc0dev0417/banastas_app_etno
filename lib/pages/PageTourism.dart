@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:back_button_interceptor/back_button_interceptor.dart';
+import 'package:etno_app/bloc/color/color_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../models/Tourism.dart';
@@ -182,7 +184,7 @@ class TourismState extends State<PageTourism> {
         child: Scaffold(
           floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.red,
+            backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
             onPressed: () => Navigator.pop(context),
             child: Icon(Icons.chevron_left),
           ),

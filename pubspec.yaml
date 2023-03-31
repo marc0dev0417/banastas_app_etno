@@ -133,6 +133,9 @@ flutter:
       - assets/sponsor.png
       - assets/incident.png
       - assets/reserve.png
+      - assets/cataluna.png
+      - assets/uk.jpg
+      - assets/galicia.jpg
 
   #   - images/a_dot_ham.jpeg
 

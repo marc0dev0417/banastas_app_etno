@@ -29,5 +29,10 @@
     "subsection_incident": "Incidents",
     "subsection_booking": "Bookings",
     "subsection_trash": "Send a belongins",
-    "subsection_quiz": "Quiz"
+    "subsection_quiz": "Quiz",
+
+    "bottom_home": "Home",
+    "bottom_event": "Events",
+    "bottom_news": "News",
+    "bottom_menu": "Menu"
 }

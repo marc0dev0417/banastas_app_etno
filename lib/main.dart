@@ -26,6 +26,7 @@ import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart' as Card;
 import 'package:flutter/material.dart';
@@ -34,6 +35,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'bloc/color/color_bloc.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
 import 'models/Weather/Weather.dart';
@@ -73,18 +75,21 @@ class App extends StatelessWidget {
       create: (context) => LocaleProvider(),
       builder: (context, child) {
         final provider = Provider.of<LocaleProvider>(context);
-        return MaterialApp(
-          theme: ThemeData(useMaterial3: true),
-          locale: provider.locale,
-          supportedLocales: L10n.all,
-          title: 'Etno App',
-          home: const Home(),
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
-          ],
+        return BlocProvider<ColorBloc>(
+            create: (context) => ColorBloc(),
+          child: MaterialApp(
+            theme: ThemeData(useMaterial3: true),
+            locale: provider.locale,
+            supportedLocales: L10n.all,
+            title: 'Etno App',
+            home: const Home(),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate
+            ],
+          ),
         );
       });
 }
@@ -181,7 +186,7 @@ class HomeState extends State<Home> {
               width: double.maxFinite,
               child: GestureDetector(
                 child: Card.Card(
-                    color: Colors.redAccent,
+                    color: context.watch<ColorBloc>().state.colorPrimary,
                     elevation: 2.0,
                     child: Container(
                       alignment: Alignment.center,

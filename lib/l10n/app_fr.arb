@@ -30,5 +30,10 @@
     "subsection_incident" : "Incidents",
     "subsection_booking" : "Réservations",
     "subsection_trash" : "Envoyer un avis d'ensemencement",
-    "subsection_quiz" : "Enquête"
+    "subsection_quiz" : "Enquête",
+
+    "bottom_home": "Début",
+    "bottom_event": "Événements",
+    "bottom_news": "Informations",
+    "bottom_menu": "Menu"
 }

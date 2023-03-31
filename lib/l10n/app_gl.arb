@@ -3,7 +3,7 @@
     "section_turism" : "Turismo",
     "section_pharmacy" : "Farmacias",
     "section_service" : "Servizos",
-    "section_news" : "Novas",
+    "section_news" : "Noticias",
     "section_bando" : "Bandos",
     "section_ad" : "Anuncios",
     "section_gallery" : "Galería",
@@ -19,7 +19,7 @@
     "subsection_tourism" : "Lugares turísticos",
     "subsection_pharmacy" : "Farmacias",
     "subsection_service" : "Servizos",
-    "subsection_news" : "Novas",
+    "subsection_news" : "Noticias",
     "subsection_bando" : "Bandos",
     "subsection_ad" : "Anuncios",
     "subsection_gallery" : "Fotografías",
@@ -29,5 +29,10 @@
     "subsection_incident" : "Incidentes",
     "subsection_booking" : "Reservas",
     "subsection_trash" : "Enviar aviso de enser",
-    "subsection_quiz" : "Enquisa"
+    "subsection_quiz" : "Enquisa",
+
+    "bottom_home": "Comezar",
+    "bottom_event": "Eventos",
+    "bottom_news": "Noticias",
+    "bottom_menu": "Menú"
 }
