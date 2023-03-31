@@ -10,9 +10,9 @@ Widget bottomNavigation(BuildContext context, int bottomIndex){
   return BottomNavigationBar(
     currentIndex: bottomIndex,
     type: BottomNavigationBarType.fixed,
-    backgroundColor: Colors.white,
-    selectedItemColor: Colors.red,
-    unselectedItemColor: Colors.black,
+    backgroundColor: Color.fromRGBO(255, 50, 50, 1.0),
+    selectedItemColor: Color.fromRGBO(31, 41, 43, 1.0),
+    unselectedItemColor: Colors.white,
     selectedFontSize: 10,
     unselectedFontSize: 12,
     onTap: (value) {
@@ -32,7 +32,7 @@ Widget bottomNavigation(BuildContext context, int bottomIndex){
         ));
         break;
         case 2 : Navigator.pushReplacement(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>
-        const PageNews(),
+         PageNews(pageContext: context),
             transitionDuration: Duration.zero,
             reverseTransitionDuration: Duration.zero
         ));

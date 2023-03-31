@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../store/section.dart';
 
@@ -64,7 +65,7 @@ class PageState extends State<IncidentForm> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: appBarCustom(context, true, 'Añadir Incidencia', Icons.language, () => null, null),
+      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_incident, Icons.language, false, () => null, null),
       body: Container(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -80,9 +81,9 @@ class PageState extends State<IncidentForm> {
                   subject = value;
                 }),
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.warning),
-                    labelText: 'Motivo',
+                    labelText: AppLocalizations.of(context)!.reason,
                     border: OutlineInputBorder()
                 ),
               ),
@@ -92,9 +93,9 @@ class PageState extends State<IncidentForm> {
                   description = value;
                 }),
                 keyboardType: TextInputType.text,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.description),
-                    labelText: 'Descripción',
+                    labelText: AppLocalizations.of(context)!.description,
                     border: OutlineInputBorder()
                 ),
               ),
@@ -104,9 +105,9 @@ class PageState extends State<IncidentForm> {
                   name = value;
                 }),
                 keyboardType: TextInputType.name,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.person),
-                    labelText: 'Nombre',
+                    labelText: AppLocalizations.of(context)!.form_name,
                     border: OutlineInputBorder()
                 ),
               ),
@@ -116,19 +117,19 @@ class PageState extends State<IncidentForm> {
                   phone = value;
                 }),
                 keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                     prefixIcon: Icon(Icons.phone),
-                    labelText: 'Teléfono',
+                    labelText: AppLocalizations.of(context)!.form_phone,
                     border: OutlineInputBorder()
                 ),
               ),
               const SizedBox(height: 20.0),
-              ElevatedButton(onPressed: () => addIncidentAPI(), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Enviar', style: TextStyle(color: Colors.white))),
+              ElevatedButton(onPressed: () => addIncidentAPI(), style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.send, style: TextStyle(color: Colors.white))),
               ElevatedButton(onPressed: (){
                 FirebaseMessaging.instance.getToken().then((value) => section.getAllIncidentByLocalityAndFcmToken('Bolea', value!).then((value) =>
                     Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const PageIncidents()))
                 ));
-              }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Cancelar', style: TextStyle(color: Colors.white)))
+              }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.cancel, style: TextStyle(color: Colors.white)))
             ]
         ),
       ),

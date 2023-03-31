@@ -14,7 +14,9 @@ import 'news/TabBarTecnology.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PageNews extends StatefulWidget {
-  const PageNews({super.key});
+  const PageNews({super.key, required this.pageContext});
+
+final BuildContext pageContext;
 
   @override
   State<StatefulWidget> createState() {
@@ -23,6 +25,8 @@ class PageNews extends StatefulWidget {
 }
 class PageState extends State<PageNews> {
   int tabIndex = 0;
+
+  PageNews get prop => widget;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
@@ -33,36 +37,24 @@ class PageState extends State<PageNews> {
           AppLocalizations.of(context)!.news_general,
           AppLocalizations.of(context)!.news_tecnology,
           AppLocalizations.of(context)!.news_heal,
-          'Deporte'
+          AppLocalizations.of(context)!.sport
         ];
-        return MaterialApp(
-          theme: ThemeData(useMaterial3: true, tabBarTheme: const TabBarTheme(labelColor: Colors.white)),
-          locale: provider.locale,
-          supportedLocales: L10n.all,
-          title: 'Noticias',
-          home: DefaultTabController(
+        return DefaultTabController(
             initialIndex: tabIndex,
             length: tabs.length,
             child: Scaffold(
-                backgroundColor: Colors.white,
-                appBar: appBarNews(context, AppLocalizations.of(context)!.bottom_news, Icons.language, () => null, tabs),
-                body: TabBarView(
-                  children: [
-                    TabBarGeneral(),
-                    TabBarTecnology(),
-                    TabBarSalud(),
-                    TabBarDeport()
-                  ],
-                ),
-                bottomNavigationBar: bottomNavigation(context, 2)
-            ),
-          ),
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
-          ],
+              backgroundColor: Colors.white,
+              appBar: appBarNews(context, AppLocalizations.of(context)!.bottom_news, Icons.language, () => null, tabs),
+              body: TabBarView(
+                    children: [
+                      TabBarGeneral(),
+                      TabBarTecnology(),
+                      TabBarSalud(),
+                      TabBarDeport()
+                    ],
+                  ),
+              bottomNavigationBar: bottomNavigation(context, 2)
+              ),
         );
       }
   );

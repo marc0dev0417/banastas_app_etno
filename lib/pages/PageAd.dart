@@ -4,6 +4,7 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/menu/Ad.dart';
 
@@ -28,7 +29,7 @@ class PageState extends State<PageAd> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom(context, true ,'Anuncios', Icons.language, () => null, null),
+      appBar: appBarCustom(context, true , AppLocalizations.of(context)!.section_ad, Icons.language, false, () => null, null),
       body: SafeArea(
         child: Container(
           padding: const EdgeInsets.all(14.0),
@@ -48,8 +49,8 @@ class PageState extends State<PageAd> {
                       padding: const EdgeInsets.only(top: 300.0),
                       child: Column(
                           children: [
-                            Text('No hay Anuncios disponibles', style: TextStyle(fontWeight: FontWeight.bold)),
-                            Image.asset('assets/ad.png', width: 50.0)
+                            Text(AppLocalizations.of(context)!.no_ad, style: TextStyle(fontWeight: FontWeight.bold)),
+                            Icon(Icons.tab, size: 50.0)
                           ]
                       )
                   );

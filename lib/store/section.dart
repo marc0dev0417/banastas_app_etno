@@ -1,9 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
-import 'package:image/image.dart' as IMG;
-import 'package:http_parser/http_parser.dart';
-
 import 'package:etno_app/models/MailDetails.dart';
 import 'package:etno_app/models/ReserveUser.dart';
 import 'package:etno_app/models/UserSubscription.dart';
@@ -87,21 +83,21 @@ abstract class SectionBase with Store {
   Message message = Message.empty();
   @observable
   List<Menu> sectionList = [
-    Menu('assets/event.png', 'Eventos', ''),
-    Menu('assets/tour.png', 'Turismo', ''),
-    Menu('assets/phar.png', 'Farmacias', ''),
-    Menu('assets/service.png', 'Servicios', ''),
-    Menu('assets/news.png', 'Noticias', ''),
-    Menu('assets/band.png', 'Bandos', ''),
-    Menu('assets/ad.png', 'Anuncios', ''),
-    Menu('assets/gallery.png', 'Galería', ''),
-    Menu('assets/death.png', 'Defunciones', ''),
-    Menu('assets/link.png', 'Enlaces', ''),
-    Menu('assets/sponsor.png', 'Patrocinadores', ''),
-    Menu('assets/incident.png', 'Incidentes', ''),
-    Menu('assets/reserve.png', 'Reservas', ''),
-    Menu('assets/box_enser.png', 'Retirada de Enseres', ''),
-    Menu('assets/quiz_decide.png', 'Yo decido', '')
+    Menu('assets/event.png', 'Eventos', '', Icons.celebration),
+    Menu('assets/tour.png', 'Turismo', '', Icons.map),
+    Menu('assets/phar.png', 'Farmacias', '', Icons.medication),
+    Menu('assets/service.png', 'Servicios', '', Icons.medical_information),
+    Menu('assets/news.png', 'Noticias', '', Icons.newspaper),
+    Menu('assets/band.png', 'Bandos', '', Icons.campaign),
+    Menu('assets/ad.png', 'Anuncios', '', Icons.tab),
+    Menu('assets/gallery.png', 'Galería', '', Icons.perm_media),
+    Menu('assets/death.png', 'Defunciones', '', Icons.heart_broken_sharp),
+    Menu('assets/link.png', 'Enlaces', '', Icons.link),
+    Menu('assets/sponsor.png', 'Patrocinadores', '', Icons.handshake),
+    Menu('assets/incident.png', 'Incidentes', '', Icons.dangerous),
+    Menu('assets/reserve.png', 'Reservas', '', Icons.beenhere),
+    Menu('assets/box_enser.png', 'Retirada de Enseres', '', Icons.recycling),
+    Menu('assets/quiz_decide.png', 'Yo decido', '', Icons.quiz)
   ];
 
   @action
@@ -111,7 +107,7 @@ abstract class SectionBase with Store {
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) => CustomLink.fromJson(e)).toList();
       for (var element in data) {
-        sectionList.add(Menu('assets/custom_link.png', element.name, element.webUrl));
+        sectionList.add(Menu('assets/custom_link.png', element.name, element.webUrl, Icons.add_link));
       }
       return data;
     }catch(e){

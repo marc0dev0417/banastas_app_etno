@@ -3,6 +3,7 @@ import 'package:etno_app/pages/PageServicesList.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PageServices extends StatefulWidget {
   const PageServices({super.key});
@@ -19,7 +20,7 @@ class PageState extends State<PageServices> {
       theme: ThemeData(useMaterial3: true),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom(context, true, 'Servicios', Icons.language, () => null),
+          appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_service, Icons.language, false, () => null),
           body: SafeArea(
               child: Column(
                   children: [
@@ -32,11 +33,11 @@ class PageState extends State<PageServices> {
                           padding: const EdgeInsets.only(top: 50.0, left: 15, right: 15),
                           scrollDirection: Axis.vertical,
                           children: [
-                            cardService('Servicio', 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
+                            cardService(AppLocalizations.of(context)!.service, 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
                             const SizedBox(height: 10.0),
-                            cardService('Salud', 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
+                            cardService(AppLocalizations.of(context)!.heal, 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
                             const SizedBox(height: 10.0),
-                            cardService('Ocio', 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); })
+                            cardService(AppLocalizations.of(context)!.leisure, 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); })
                           ],
                         ),
                       ),

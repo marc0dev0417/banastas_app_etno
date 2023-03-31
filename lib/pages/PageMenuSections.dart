@@ -51,7 +51,7 @@ class PageState extends State<PageMenuSections> {
   Widget build(BuildContext context) {
     return  Scaffold(
           backgroundColor: Colors.white,
-          appBar: appBarCustom(context, false, 'Menú', Icons.language, () => print('Internalization in Menu'), null),
+          appBar: appBarCustom(context, false, 'Menú', Icons.language, false, () => print('Internalization in Menu'), null),
           body: SafeArea(
             child: Container(
                // decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
@@ -72,7 +72,7 @@ class PageState extends State<PageMenuSections> {
                                         case 'Turismo': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Farmacias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Anuncios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageAd(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                        case 'Noticias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageNews(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Noticias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageNews(pageContext: context), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Galería': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageGallery(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Enlaces': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageLinks(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Defunciones': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageDefunctions(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
@@ -94,7 +94,7 @@ class PageState extends State<PageMenuSections> {
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment: CrossAxisAlignment.center,
                                             children: [
-                                              Image.asset(e.assetImage!, width: 30.0, height: 30.0),
+                                              Icon(e.iconData, size: 40.0),
                                               Text(getSectionText(e.title!, context), style: const TextStyle( fontWeight: FontWeight.bold, fontSize: 10.0, color: Colors.black), textAlign: TextAlign.center),
                                               renderTextSection(e.title!, sectionDetails, context)
                                             ]

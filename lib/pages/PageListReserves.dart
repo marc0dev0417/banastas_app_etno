@@ -4,7 +4,7 @@ import 'package:etno_app/store/section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Reserve.dart';
 import '../widgets/appbar_navigation.dart';
 
@@ -26,12 +26,12 @@ class PageState extends State<PageListReserves> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return MaterialApp(
         theme: ThemeData(useMaterial3: true, floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.red)),
         home: Scaffold(
           backgroundColor: Colors.white,
-          appBar: appBarCustom(context, true, 'Reservas', Icons.language, () => null),
+          appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_booking, Icons.language, false, () => null),
           body: SafeArea(
             child: Observer(builder: (context) {
               if (section.getReserves.isNotEmpty){
@@ -48,8 +48,8 @@ class PageState extends State<PageListReserves> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text('No hay reservas para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
-                        Image.asset('assets/reserva.png', width: 50.0)
+                        Text(AppLocalizations.of(pageContext)!.no_book, style: TextStyle(fontWeight: FontWeight.bold)),
+                       Icon(Icons.beenhere, size: 50.0)
                       ]
                   ),
                 );
@@ -62,9 +62,9 @@ class PageState extends State<PageListReserves> {
               onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageSeeMyReserves(), reverseTransitionDuration: Duration.zero, transitionDuration: Duration.zero)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: const [
+                children: [
                   Icon(Icons.sell, color: Colors.white),
-                  Text('Ver mis reservas', style: TextStyle(color: Colors.white))
+                  Text(AppLocalizations.of(context)!.see_book, style: TextStyle(color: Colors.white))
                 ],
               ),
             ),

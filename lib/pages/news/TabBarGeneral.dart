@@ -44,7 +44,7 @@ class PageState extends State<TabBarGeneral>{
                 child: Column(
                     children: [
                       Text(AppLocalizations.of(context)!.no_news, style: TextStyle(fontWeight: FontWeight.bold)),
-                      Image.asset('assets/news.png', width: 50.0)
+                      Icon(Icons.newspaper, size: 50.0)
                     ]
                 )
             );

@@ -39,7 +39,7 @@ class PageState extends State<CardFormScreen> {
     return BlocProvider(
   create: (context) => PaymentBloc(),
   child: Scaffold(
-      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.card_pay_title, Icons.language, () => null),
+      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.card_pay_title, Icons.language, false, () => null),
       body: BlocBuilder<PaymentBloc, PaymentState>(
         builder: (context, state){
           CardFormEditController controller = CardFormEditController(

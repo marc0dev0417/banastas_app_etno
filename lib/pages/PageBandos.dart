@@ -4,7 +4,7 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Bandos.dart';
 
 class PageBandos extends StatefulWidget {
@@ -26,7 +26,7 @@ class PageState extends State<PageBandos> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: appBarCustom(context, true, 'Bandos', Icons.language, () => null, null),
+      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_bando, Icons.language, false, () => null, null),
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),
@@ -42,8 +42,8 @@ class PageState extends State<PageBandos> {
                       padding: const EdgeInsets.only(top: 300.0),
                       child: Column(
                           children: [
-                            Text('No hay Bandos disponibles', style: TextStyle(fontWeight: FontWeight.bold)),
-                            Image.asset('assets/band.png', width: 50.0)
+                            Text(AppLocalizations.of(context)!.no_band, style: TextStyle(fontWeight: FontWeight.bold)),
+                            Icon(Icons.campaign, size: 50.0)
                           ]
                       )
                   );

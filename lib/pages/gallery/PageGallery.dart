@@ -5,6 +5,7 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../store/section.dart';
 
@@ -29,7 +30,7 @@ class PageState extends State<PageGallery> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBarCustom(context, true,'Galería', Icons.language, () => null),
+      appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_gallery, Icons.language, false, () => null),
       body: Column(
         children: [
           const WarningWidgetValueNotifier(),
@@ -45,8 +46,8 @@ class PageState extends State<PageGallery> {
                            crossAxisAlignment: CrossAxisAlignment.center,
                            mainAxisSize: MainAxisSize.min,
                            children: [
-                             Text('No hay fotos para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
-                             Image.asset('assets/gallery.png', width: 50.0)
+                             Text(AppLocalizations.of(context)!.no_photo, style: TextStyle(fontWeight: FontWeight.bold)),
+                             Icon(Icons.perm_media, size: 50.0)
                            ]
                        ),
                      );

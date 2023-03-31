@@ -174,9 +174,10 @@ class HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: appBarCustom(context, false, AppLocalizations.of(context)!.bottom_home,
-          Icons.language, () => null, null),
+          Icons.language, true, () => null, null),
       body: SafeArea(
           child: Container(
+            color: context.watch<ColorBloc>().state.colorPrimary,
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -186,7 +187,7 @@ class HomeState extends State<Home> {
               width: double.maxFinite,
               child: GestureDetector(
                 child: Card.Card(
-                    color: context.watch<ColorBloc>().state.colorPrimary,
+                    color: context.watch<ColorBloc>().state.colorPrimary.withOpacity(0.1),
                     elevation: 2.0,
                     child: Container(
                       alignment: Alignment.center,
@@ -194,7 +195,7 @@ class HomeState extends State<Home> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image.asset('assets/bolea_shield.png'),
+                          Image.asset('assets/bolea_shield.png', width: 100.0, height: 100.0),
                           const SizedBox(width: 16.0),
                           Column(
                             children: [
@@ -308,7 +309,7 @@ class HomeState extends State<Home> {
                                                 pageBuilder: (context,
                                                         animation1,
                                                         animation2) =>
-                                                    const PageNews(),
+                                                     PageNews(pageContext: context),
                                                 transitionDuration:
                                                     Duration.zero,
                                                 reverseTransitionDuration:
@@ -424,38 +425,33 @@ class HomeState extends State<Home> {
                                       default: launchInBrowser(Uri.parse(e.webUrl!));
                                     }
                                   },
-                                  child: Card.Card(
-                                    margin: EdgeInsets.all(16.0),
-                                    color: Colors.white.withOpacity(0.9),
-                                      elevation: 2.0,
-                                      child: Container(
+                                  child: Container(
+                                    alignment: Alignment.center,
                                         padding: const EdgeInsets.all(16.0),
                                         child: Column(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                              CrossAxisAlignment.center,
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Image.asset(e.assetImage!,
-                                                width: 45.0, height: 45.0),
+                                            Icon(e.iconData, size: 40, color: Colors.white),
                                             Column(
+                                              mainAxisSize: MainAxisSize.min,
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 Text(getSectionText(e.title!, context),
                                                     style: const TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 15.0)),
+                                                      color: Colors.white,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 15.0), textAlign: TextAlign.center,),
                                                 renderTextSection(
                                                     e.title!, sectionDetails, context)
                                               ],
-                                            )
-                                          ],
+                                            )],
                                         ),
-                                      )),
-                                ))
-                            .toList())))
+                                      ),
+                                )).toList())))
           ],
         ),
       )),
@@ -495,86 +491,86 @@ Widget renderTextSection(String sectionName, SectionDetails sectionDetails, Buil
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.eventQuantity} ${AppLocalizations.of(context)!.subsection_event}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Turismo':
       return sectionDetails.tourismQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.tourismQuantity} ${AppLocalizations.of(context)!.subsection_tourism}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Farmacias':
       return sectionDetails.pharmacyQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.pharmacyQuantity} ${AppLocalizations.of(context)!.subsection_pharmacy}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Anuncios':
       return sectionDetails.adQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.adQuantity} ${AppLocalizations.of(context)!.subsection_ad}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Noticias':
       return sectionDetails.newsQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.newsQuantity} ${AppLocalizations.of(context)!.subsection_news}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Galería':
       return sectionDetails.galleryQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.galleryQuantity} ${AppLocalizations.of(context)!.subsection_gallery}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Enlaces':
       return sectionDetails.linkQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.linkQuantity} ${AppLocalizations.of(context)!.subsection_link}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Defunciones':
       return sectionDetails.deathQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.deathQuantity} ${AppLocalizations.of(context)!.subsection_death}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Servicios':
       return sectionDetails.serviceQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.serviceQuantity} ${AppLocalizations.of(context)!.subsection_service}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Patrocinadores':
       return sectionDetails.sponsorQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.sponsorQuantity} ${AppLocalizations.of(context)!.subsection_sponsor}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Bandos':
       return sectionDetails.bandoQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.bandoQuantity} ${AppLocalizations.of(context)!.subsection_bando}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Incidentes':
       return sectionDetails.incidentQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.incidentQuantity} ${AppLocalizations.of(context)!.subsection_incident}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Reservas':
       return sectionDetails.reserveQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
           : Text('${sectionDetails.reserveQuantity} ${AppLocalizations.of(context)!.subsection_booking}',
-              style: const TextStyle(color: Colors.blue, fontSize: 10.0));
+              style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Retirada de Enseres':
       return Text(AppLocalizations.of(context)!.subsection_trash,
-          style: TextStyle(color: Colors.blue, fontSize: 10.0));
+          style: TextStyle(color: Colors.white, fontSize: 10.0), textAlign: TextAlign.center);
 
     case 'Yo decido':
       return Text(AppLocalizations.of(context)!.subsection_quiz,
-          style: TextStyle(color: Colors.blue, fontSize: 10.0));
+          style: TextStyle(color: Colors.white, fontSize: 10.0));
     default:
       return const Text('', style: TextStyle(color: Colors.blue, fontSize: 10.0));
   }

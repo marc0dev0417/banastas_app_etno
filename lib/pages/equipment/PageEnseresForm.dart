@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -41,11 +42,11 @@ class PageState extends State<PageEnseres> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: true, primaryColor: Colors.white),
       home: Scaffold(
-        appBar: appBarCustom(context ,true,'Retirada de Enseres', Icons.language, () => null),
+        appBar: appBarCustom(context ,true,AppLocalizations.of(context)!.section_trash, Icons.language, false, () => null, ),
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(16.0),
@@ -55,9 +56,9 @@ class PageState extends State<PageEnseres> {
                 TextFormField(
                   onChanged: (value) => setState(() => name = value),
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       prefixIcon: Icon(Icons.person),
-                      labelText: 'Nombre',
+                      labelText: AppLocalizations.of(pageContext)!.form_name,
                       border: OutlineInputBorder()
                   ),
                 ),
@@ -65,9 +66,9 @@ class PageState extends State<PageEnseres> {
                 TextFormField(
                   onChanged: (value) => setState(() => phone = value),
                   keyboardType: TextInputType.text,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       prefixIcon: Icon(Icons.phone),
-                      labelText: 'Mi teléfono',
+                      labelText: AppLocalizations.of(pageContext)!.form_phone,
                       border: OutlineInputBorder()
                   ),
                 ),
@@ -76,9 +77,9 @@ class PageState extends State<PageEnseres> {
                   onChanged: (value) => setState(() => enser = value),
                   maxLines: 8,
                   keyboardType: TextInputType.multiline,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       prefixIcon: Icon(Icons.warning),
-                      labelText: 'Enser',
+                      labelText: AppLocalizations.of(pageContext)!.trash,
                       border: OutlineInputBorder()
                   ),
                 ),
@@ -92,7 +93,7 @@ class PageState extends State<PageEnseres> {
                     builder: (BuildContext context) => AlertDialog(
                       backgroundColor: Colors.white,
                       title: Column(
-                        children: const [Text('Fotografía de Enser', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold))],
+                        children: [Text(AppLocalizations.of(context)!.ad_photo, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold))],
                       ),
                       content: const Text('Adjuntar foto desde'),
                       actions: <Widget>[
@@ -107,7 +108,7 @@ class PageState extends State<PageEnseres> {
                       ],
                     ),
                   );
-                }, child: Row(mainAxisSize: MainAxisSize.min, children: const [Icon(Icons.camera_alt), SizedBox(width: 16.0), Text('Añadir Imágen')])),
+                }, child: Row(mainAxisSize: MainAxisSize.min, children: [Icon(Icons.camera_alt), SizedBox(width: 16.0), Text(AppLocalizations.of(context)!.ad_photo)])),
                 ElevatedButton(
                     style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
                     onPressed: () {
@@ -123,7 +124,7 @@ class PageState extends State<PageEnseres> {
                     );
                   }
                 },
-                    child: const Text('Enviar petición')
+                    child: Text(AppLocalizations.of(context)!.send)
                 )
               ],
             )

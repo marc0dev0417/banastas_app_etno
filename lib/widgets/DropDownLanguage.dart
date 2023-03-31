@@ -28,7 +28,9 @@ class LanguagePickerWidget extends StatelessWidget {
                 provider.setLocale(locale);
               },
             );
-          }).toList(), onChanged: (Locale? value) {  },
+          }).toList(), onChanged: (Locale? value) {
+
+        },
         )
     );
   }

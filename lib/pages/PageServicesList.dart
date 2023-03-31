@@ -1,14 +1,12 @@
-
 import 'dart:async';
 
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../models/Service.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../store/section.dart';
 
 class PageServicesList extends StatefulWidget{
@@ -33,7 +31,7 @@ class ServicesListState extends State<PageServicesList> {
     super.initState();
   }
 
-  Widget renderWidgets(){
+  Widget renderWidgets(BuildContext contextState){
       return Observer(builder: (context) {
         if(section.getListServices.isNotEmpty){
           return servicesList(section);
@@ -43,8 +41,8 @@ class ServicesListState extends State<PageServicesList> {
             alignment: Alignment.center,
             child: Column(
               children: [
-                Text('No hay servicios en este momento', style: TextStyle(fontWeight: FontWeight.bold)),
-                Image.asset('assets/service.png', width: 50.0)
+                Text(AppLocalizations.of(contextState)!.no_service, style: TextStyle(fontWeight: FontWeight.bold)),
+                Icon(Icons.medical_information, size: 50.0)
               ]
             )
           );
@@ -59,7 +57,7 @@ class ServicesListState extends State<PageServicesList> {
       theme: ThemeData(cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom(context, true ,props.category, Icons.language, () => null),
+          appBar: appBarCustom(context, true ,props.category, Icons.language, false, () => null),
           body: SafeArea(
               child: Column(
                   children: [
@@ -67,7 +65,7 @@ class ServicesListState extends State<PageServicesList> {
                     Container(
                         padding: const EdgeInsets.all(15.0),
                         child:
-                        renderWidgets()
+                        renderWidgets(context)
                     )
                   ]
               )

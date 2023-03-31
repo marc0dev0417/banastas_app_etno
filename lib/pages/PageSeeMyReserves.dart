@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/Reserve.dart';
 import '../models/ReserveUser.dart';
@@ -28,11 +29,11 @@ class PageState extends State<PageSeeMyReserves> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return MaterialApp(
       title: 'See My reserves Page',
       home: Scaffold(
-        appBar: appBarCustom(context, true,"Mis Reservas", Icons.language, () => null),
+        appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_booking, Icons.language, false, () => null),
         body: SafeArea(
           child: Observer(builder: (context){
             if (section.getReserveUser.isNotEmpty){
@@ -51,8 +52,8 @@ class PageState extends State<PageSeeMyReserves> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('Aun no dispones de reservas', style: TextStyle(fontWeight: FontWeight.bold)),
-                      Image.asset('assets/reserva.png', width: 50.0)
+                      Text(AppLocalizations.of(pageContext)!.no_now_book, style: TextStyle(fontWeight: FontWeight.bold)),
+                      Icon(Icons.beenhere, size: 50.0,)
                     ]
                 ),
               );

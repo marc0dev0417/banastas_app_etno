@@ -7,8 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../models/Reserve.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PageReserve extends StatefulWidget {
   const PageReserve({super.key, required this.reserve});
@@ -111,7 +111,7 @@ class PageState extends State<PageReserve> {
                 ),
               ),
             ),
-        appBar: appBarCustom(context, true, 'Reservar', Icons.language, () => null),
+        appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_booking, Icons.language, false, () => null),
         body: SafeArea(
         child: Container(
         padding: const EdgeInsets.all(16.0),

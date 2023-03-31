@@ -6,10 +6,12 @@ PreferredSizeWidget appBarCustom(
     bool isVisibleBack,
     String title,
     IconData iconData,
-    Function() action, [tabs]
+    bool isVisibleLanguage,
+    Function() action,
+    [tabs]
     ){
   return AppBar(
-    backgroundColor: Colors.red,
+    backgroundColor: Color.fromRGBO(255, 50, 50, 1.0),
     automaticallyImplyLeading: false,
     leading: Visibility(
       visible: isVisibleBack,
@@ -19,8 +21,11 @@ PreferredSizeWidget appBarCustom(
       ),
     ),
     title: Text(title, style: const TextStyle(color: Colors.white)),
-    actions: const [
-      LanguagePickerWidget()
+    actions:  [
+      Visibility(
+        visible: isVisibleLanguage,
+          child: LanguagePickerWidget()
+      )
     ],
   );
 }
@@ -35,15 +40,13 @@ PreferredSizeWidget appBarNews(
 
   return AppBar(
       backgroundColor: Colors.red,
+
       automaticallyImplyLeading: false,
       title: Text(title, style: const TextStyle(color: Colors.white)),
-      actions: const [
-        LanguagePickerWidget()
-      ],
-    bottom:
-
-    TabBar(
+    bottom: TabBar(
+      labelColor: Colors.white,
       indicatorColor: Colors.white,
+      unselectedLabelColor: Colors.black,
       isScrollable: true,
       tabs: [ for (final tab in tabs) Tab(text: tab)]
     ),

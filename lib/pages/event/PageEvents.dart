@@ -89,7 +89,7 @@ class PageState extends State<PageEvents> {
             child: Column(
           children: [
             Text(AppLocalizations.of(context)!.events_empty, style: TextStyle(fontWeight: FontWeight.bold)),
-            Image.asset('assets/event.png', width: 50.0)
+            Icon(Icons.celebration, size: 50.0)
         ]
       )
       )
@@ -100,7 +100,7 @@ class PageState extends State<PageEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: appBarCustom(context , false, AppLocalizations.of(context)!.event, Icons.language, () => null, null),
+        appBar: appBarCustom(context , false, AppLocalizations.of(context)!.event, Icons.language, false,() => null, null),
         bottomNavigationBar: bottomNavigation(context, 1),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,

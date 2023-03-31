@@ -3,7 +3,7 @@ import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Link.dart';
 import '../widgets/appbar_navigation.dart';
 
@@ -26,12 +26,12 @@ class PageState extends State<PageLinks> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page Enlaces',
       home: Scaffold(
-          appBar: appBarCustom(context, true, 'Enlaces', Icons.language, () => null, null),
+          appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_link, Icons.language, false, () => null, null),
           body: SafeArea(
             child: Column(
               children: [
@@ -52,8 +52,8 @@ class PageState extends State<PageLinks> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text('No hay enlaces para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
-                            Image.asset('assets/link.png', width: 50.0)
+                            Text(AppLocalizations.of(pageContext)!.no_link, style: TextStyle(fontWeight: FontWeight.bold)),
+                            Icon(Icons.link, size: 50.0)
                           ]
                       ),
                     );

@@ -4,6 +4,7 @@ import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../widgets/appbar_navigation.dart';
 
@@ -25,7 +26,7 @@ class PageState extends State<PageDefunctions> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return MaterialApp(
       theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
       title: 'Page defunctions',
@@ -33,8 +34,9 @@ class PageState extends State<PageDefunctions> {
           appBar: appBarCustom(
             context,
             true,
-              'Defunciones',
+              AppLocalizations.of(context)!.section_death,
               Icons.language,
+                  false,
                   () => null,
               null
           ),
@@ -59,8 +61,8 @@ class PageState extends State<PageDefunctions> {
                                       crossAxisAlignment: CrossAxisAlignment.center,
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        Text('No hay defunciones para mostrar', style: TextStyle(fontWeight: FontWeight.bold)),
-                                        Image.asset('assets/death.png', width: 50.0)
+                                        Text(AppLocalizations.of(pageContext)!.no_death, style: TextStyle(fontWeight: FontWeight.bold)),
+                                        Icon(Icons.heart_broken_sharp, size: 50.0)
                                       ]
                                   ),
                                 );

@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 
 class PageQuiz extends StatefulWidget {
   const PageQuiz({super.key});
@@ -32,11 +34,11 @@ class PageState extends State<PageQuiz>{
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return MaterialApp(
       title: 'Quiz Page',
       home: Scaffold(
-        appBar: appBarCustom(context, true, 'Encuesta', Icons.language, () => null),
+        appBar: appBarCustom(context, true, AppLocalizations.of(pageContext)!.section_quiz, Icons.language, false, () => null),
         body: SafeArea(
           child: Observer(builder: (context){
             if (section.getQuizzes.isNotEmpty){
@@ -46,7 +48,7 @@ class PageState extends State<PageQuiz>{
                     children: [
                       Row(
                           children: [
-                            Image.asset('assets/quiz_decide.png', width: 50.0, height: 50.0),
+                            Icon(Icons.quiz, size: 50.0),
                             Text(section.getQuizzes[0].question!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0))
                           ]
                       ),
@@ -122,8 +124,8 @@ class PageState extends State<PageQuiz>{
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('No hay encuesta disponible', style: TextStyle(fontWeight: FontWeight.bold)),
-                      Image.asset('assets/quiz_decide.png', width: 50.0)
+                      Text(AppLocalizations.of(pageContext)!.no_quiz, style: TextStyle(fontWeight: FontWeight.bold)),
+                      Icon(Icons.quiz, size: 50.0)
                     ]
                 ),
               );

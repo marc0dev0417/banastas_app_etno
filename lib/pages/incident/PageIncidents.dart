@@ -4,7 +4,7 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/Incident.dart';
 import '../../store/section.dart';
 
@@ -43,8 +43,8 @@ class PageState extends State<PageIncidents> {
         alignment: Alignment.center,
         child: Column(
           children: [
-            Text('No tienes incidencias en este momento', style: TextStyle(fontWeight: FontWeight.bold)),
-            Image.asset('assets/incident.png', width: 50.0)
+            Text(AppLocalizations.of(context)!.no_incident, style: TextStyle(fontWeight: FontWeight.bold)),
+            Icon(Icons.dangerous, size: 50.0)
           ],
         ),
       );
@@ -56,7 +56,7 @@ class PageState extends State<PageIncidents> {
     return MaterialApp(
       title: 'Mis incidencias',
       home: Scaffold(
-        appBar: appBarCustom(context, true ,'Mis Incidencias', Icons.language, () => null, null),
+        appBar: appBarCustom(context, true , AppLocalizations.of(context)!.section_incident, Icons.language, false, () => null, null),
         body: Column(
           children: [
             const WarningWidgetValueNotifier(),
