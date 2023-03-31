@@ -1,5 +1,4 @@
 {
-  "discover": "Miatu",
   "description_new": "Albiste aipagarriak",
   "news_empty": "Berririk ez",
   "pharmacy": "Botika",
@@ -45,6 +44,8 @@
   "fail_subscription": "Ezin izan da ekitaldira harpidetu",
   "pay_fail": "Errore bat gertatu da ordainketan",
   "try_again": "Saiatu berriro",
+  "sport" : "Kirola",
+
     "section_event" : "Gertaera",
     "section_tourism" : "Turismoa",
     "section_pharmacy" : "Farmazia",
