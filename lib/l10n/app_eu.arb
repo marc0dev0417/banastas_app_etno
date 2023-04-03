@@ -1,4 +1,6 @@
 {
+  "no_connection": "Ez dago Interneteko konexiorik",
+
   "events_empty": "No hay eventos disponibles",
   "event": "Eventos",
   "no_news_heal": "No hay noticias de salud disponibles",
@@ -89,5 +91,9 @@
   "no_now_book":  "Oraindik ez duzu erreserbarik",
   "trash":  "Izatean",
   "ad_photo":  "Gehitu irudia",
-  "no_quiz": "Ez dago inkestarik eskuragarri"
+  "no_quiz": "Ez dago inkestarik eskuragarri",
+
+  "identification": "Identifikazio",
+  "vote": "Bozkatu",
+  "invalid_dni": "NANa ez da baliozkoa"
 }

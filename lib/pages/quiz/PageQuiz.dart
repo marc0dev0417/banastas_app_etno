@@ -6,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class PageQuiz extends StatefulWidget {
   const PageQuiz({super.key});
 
@@ -95,8 +94,11 @@ class PageState extends State<PageQuiz>{
                         },
                       )),
                       const SizedBox(height: 16.0),
-                      const Text('Indentificación', style: TextStyle(color: Colors.red)),
+                      Text(AppLocalizations.of(pageContext)!.identification, style: TextStyle(color: Colors.red)),
                       TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'DNI'
+                        ),
                         onChanged: (value) => setState(() {
                           dni = value;
                         }),
@@ -106,14 +108,14 @@ class PageState extends State<PageQuiz>{
                           section.sendResultQuiz('Bolea', section.getQuizzes[0].idQuiz!, int.parse(answer!));
                         } else {
                           Fluttertoast.showToast(
-                              msg: 'No es valido el DNI',
+                              msg: AppLocalizations.of(pageContext)!.invalid_dni,
                               toastLength: Toast.LENGTH_SHORT,
                               fontSize: 12,
                               textColor: Colors.white,
                               backgroundColor: Colors.red
                           );
                         }
-                      }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: const Text('Votar'))
+                      }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(pageContext)!.vote))
                     ],
                   )
               );

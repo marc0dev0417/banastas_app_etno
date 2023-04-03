@@ -1,4 +1,6 @@
 {
+    "no_connection": "There is no connection to Internet",
+
     "events_empty": "No events",
     "event": "Events",
     "no_news_heal": "No heal news",
@@ -89,5 +91,9 @@
     "no_now_book":  "You don't have reservations yet",
     "trash":  "Furniture",
     "ad_photo":  "Add photo",
-    "no_quiz": "No quiz available"
+    "no_quiz": "No quiz available",
+
+    "identification": "Identification",
+    "vote": "Vote",
+    "invalid_dni": "The id is not valid"
 }

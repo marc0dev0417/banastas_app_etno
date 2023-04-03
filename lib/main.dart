@@ -479,7 +479,7 @@ String getSectionText(String sectionText, BuildContext context) {
     case 'Incidentes': return AppLocalizations.of(context)!.section_incident;
     case 'Retirada de Enseres': return AppLocalizations.of(context)!.section_trash;
     case 'Yo decido': return AppLocalizations.of(context)!.section_quiz;
-    default: return '';
+    default: return sectionText;
   }
 }
 

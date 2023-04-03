@@ -89,5 +89,9 @@
     "no_now_book":  "Aínda non tes reservas",
     "trash":  "Mobles",
     "ad_photo":  "Engadir imaxe",
-    "no_quiz": "Non hai enquisas dispoñibles"
+    "no_quiz": "Non hai enquisas dispoñibles",
+
+    "identification": "Indetificación",
+    "vote": "Votar",
+    "invalid_dni": "O DNI non é válido"
 }

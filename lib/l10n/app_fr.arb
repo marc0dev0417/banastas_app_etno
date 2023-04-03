@@ -89,5 +89,9 @@
     "no_now_book":  "Vous n'avez pas encore de réservation",
     "trash":  "En étant",
     "ad_photo":  "Ajouter une image",
-    "no_quiz": "Aucune enquête disponible"
+    "no_quiz": "Aucune enquête disponible",
+
+    "identification": "Identifiant",
+    "vote": "Vote",
+    "invalid_dni": "L'identifiant n'est pas valide"
 }

@@ -1,4 +1,6 @@
 {
+    "no_connection": "No hi ha connexió a internet",
+
     "events_empty": "No hi ha esdeveniments disponibles",
     "event": "Esdeveniments",
     "no_news_heal": "No hi ha notícies de salut disponibles",
@@ -90,5 +92,9 @@
     "no_now_book":  "Encara no tens reserves",
     "trash":  "Mobiliari",
     "ad_photo":  "Afegir imatge",
-    "no_quiz": "No hi ha enquestes disponibles"
+    "no_quiz": "No hi ha enquestes disponibles",
+
+    "identification": "Identificació",
+    "vote": "Votar",
+    "invalid_dni": "No és vàlid el DNI"
 }

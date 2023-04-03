@@ -81,7 +81,7 @@ Widget cardNew(New new_, BuildContext context){
         height: 200.0,
         alignment: Alignment.bottomLeft,
       decoration:  BoxDecoration(
-      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill)),
+      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill, colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken))),
           child: Container(
             alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.all(4.0),
@@ -92,7 +92,7 @@ Widget cardNew(New new_, BuildContext context){
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Text(new_.category!, style: const TextStyle(color: Colors.white,  fontWeight: FontWeight.bold, fontSize: 12.0, backgroundColor: Colors.black)),
+                      Text(new_.category!, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12.0, backgroundColor: Colors.black)),
                       const SizedBox(width: 4.0),
                       Text(new_.username!, style: const TextStyle(color: Colors.white, backgroundColor: Colors.red, fontWeight: FontWeight.bold, fontSize: 12.0))
                     ],
