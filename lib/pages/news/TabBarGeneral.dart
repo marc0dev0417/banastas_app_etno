@@ -98,7 +98,7 @@ Widget cardNew(New new_, BuildContext context){
                     ],
                   ),
                   const SizedBox(height: 4.0),
-                   Text(new_.description!, style: const TextStyle(color: Colors.white), maxLines: 2)
+                   Text(new_.description!, style: const TextStyle(color: Colors.black, backgroundColor: Colors.white), maxLines: 2)
                 ]
             ),
           )
