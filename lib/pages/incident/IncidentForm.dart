@@ -31,15 +31,15 @@ class PageState extends State<IncidentForm> {
       FirebaseMessaging.instance.getToken().then((value) => section.addIncident(
           Incident(null, 'Bolea', value, subject, description, false, null)));
       Fluttertoast.showToast(
-          msg: 'Se esta enviando el correo...',
+          msg: 'Se está enviando el correo...',
           toastLength: Toast.LENGTH_SHORT,
           fontSize: 12,
           textColor: Colors.white,
-          backgroundColor: Colors.yellow);
+          backgroundColor: Colors.orange);
       section
           .sendMailMessage(MailDetails(
               'ecomputerapps@gmail.com',
-              'Mi nombre es $name y mi telefono es el $phone, y tengo la siguiente incidencia: $description',
+              'Mi nombre es $name y mi teléfono es el $phone, y tengo la siguiente incidencia: $description',
               subject,
               null))
           .then((value) => Fluttertoast.showToast(
@@ -48,6 +48,7 @@ class PageState extends State<IncidentForm> {
               fontSize: 12,
               textColor: Colors.white,
               backgroundColor: Colors.green));
+      Navigator.pop(context);
     } else {
       Fluttertoast.showToast(
           msg: 'Debe rellenar los campos',
