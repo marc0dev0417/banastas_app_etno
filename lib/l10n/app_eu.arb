@@ -89,5 +89,12 @@
   "no_now_book":  "Oraindik ez duzu erreserbarik",
   "trash":  "Izatean",
   "ad_photo":  "Gehitu irudia",
-  "no_quiz": "Ez dago inkestarik eskuragarri"
+  "no_quiz": "Ez dago inkestarik eskuragarri",
+
+  "toast_send_mail": "Posta bidaltzen ari da...",
+  "toast_send_mail_correct": "Posta bidali da",
+  "toast_error": "Eremuak bete behar dituzu",
+
+  "awaiting_resolution": "ebazpenaren zain",
+  "see": "Ikus erreserba"
 }

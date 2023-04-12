@@ -275,7 +275,7 @@ class HomeState extends State<Home> {
                                                   pageBuilder: (context,
                                                           animation1,
                                                           animation2) =>
-                                                      const PageTourism(),
+                                                       PageTourism(),
                                                   transitionDuration:
                                                       Duration.zero,
                                                   reverseTransitionDuration:
@@ -288,7 +288,7 @@ class HomeState extends State<Home> {
                                                   pageBuilder: (context,
                                                           animation1,
                                                           animation2) =>
-                                                      const PagePharmacies(),
+                                                       PagePharmacies(),
                                                   transitionDuration:
                                                       Duration.zero,
                                                   reverseTransitionDuration:

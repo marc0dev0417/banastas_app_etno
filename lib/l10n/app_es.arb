@@ -89,5 +89,12 @@
     "bottom_home": "Inicio",
     "bottom_event": "Eventos",
     "bottom_news": "Noticias",
-    "bottom_menu": "Menu"
+    "bottom_menu": "Menu",
+
+    "toast_send_mail": "Se está enviando el correo...",
+    "toast_send_mail_correct": "Se ha enviado el correo",
+    "toast_error": "Debe rellenar los campos",
+
+    "awaiting_resolution": "Esperando resolución",
+    "see": "Ver reserva"
 }
