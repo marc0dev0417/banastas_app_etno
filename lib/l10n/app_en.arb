@@ -102,5 +102,6 @@
     "vote": "Vote",
     "day_defunction": "day of death",
     "type_service": "Type of service",
-    "call": "Call"
+    "call": "Call",
+    "defunction": "Deceased on "
 }

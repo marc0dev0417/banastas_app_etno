@@ -102,5 +102,6 @@
     "vote": "Votar",
     "day_defunction": "Día da morte",
     "type_service": "Tipo de servizo",
-    "call": "Chamar"
+    "call": "Chamar",
+    "defunction": "Falecido en "
 }

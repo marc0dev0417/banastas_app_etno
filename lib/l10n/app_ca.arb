@@ -103,5 +103,6 @@
     "vote": "Votar",
     "day_defunction": "Dia de defunció",
     "type_service": "Tipus de servei",
-    "call": "Trucar"
+    "call": "Trucar",
+    "defunction": "Mort el "
 }

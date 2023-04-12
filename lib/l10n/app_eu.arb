@@ -102,5 +102,6 @@
   "vote": "Bozkatu",
   "day_defunction": "heriotza eguna",
   "type_service": "Zerbitzu mota",
-  "call": "Deitu"
+  "call": "Deitu",
+  "defunction": "Egunean hildakoa "
 }
