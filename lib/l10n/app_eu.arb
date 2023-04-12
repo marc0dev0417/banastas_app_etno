@@ -96,5 +96,11 @@
   "toast_error": "Eremuak bete behar dituzu",
 
   "awaiting_resolution": "ebazpenaren zain",
-  "see": "Ikus erreserba"
+  "see": "Ikus erreserba",
+  "identification": "Identifikazioa",
+  "invalid_dni": "ID baliogabea",
+  "vote": "Bozkatu",
+  "day_defunction": "heriotza eguna",
+  "type_service": "Zerbitzu mota",
+  "call": "Deitu"
 }

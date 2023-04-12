@@ -97,5 +97,11 @@
     "toast_error": "Heu d'emplenar els camps",
 
     "awaiting_resolution": "Esperant resolució",
-    "see": "Veure reserva"
+    "see": "Veure reserva",
+    "identification": "Identificació",
+    "invalid_dni": "DNI no vàlid",
+    "vote": "Votar",
+    "day_defunction": "Dia de defunció",
+    "type_service": "Tipus de servei",
+    "call": "Trucar"
 }

@@ -96,5 +96,11 @@
     "toast_error": "You must fill in the fields",
 
     "awaiting_resolution": "Awaiting resolution",
-    "see": "See reservation"
+    "see": "See reservation",
+    "identification": "Identification",
+    "invalid_dni": "Invalid DNI",
+    "vote": "Vote",
+    "day_defunction": "day of death",
+    "type_service": "Type of service",
+    "call": "Call"
 }

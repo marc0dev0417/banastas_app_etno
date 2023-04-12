@@ -149,7 +149,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
                       Container(
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,
-                        child: const Text('Día de fallecimiento', style: TextStyle(color: Colors.grey, fontSize: 10.0)),
+                        child: Text(AppLocalizations.of(context)!.day_defunction, style: TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
                       const Divider(),
                       Container(

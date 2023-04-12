@@ -96,5 +96,11 @@
     "toast_error": "Debes cubrir os campos",
 
     "awaiting_resolution": "en espera de resolución",
-    "see": "Ver reserva"
+    "see": "Ver reserva",
+    "identification": "Identificación",
+    "invalid_dni": "ID non válido",
+    "vote": "Votar",
+    "day_defunction": "Día da morte",
+    "type_service": "Tipo de servizo",
+    "call": "Chamar"
 }

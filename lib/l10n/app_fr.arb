@@ -96,5 +96,11 @@
     "toast_error": "Vous devez remplir les champs",
 
     "awaiting_resolution": "en attente de résolution",
-    "see": "Voir réservation"
+    "see": "Voir réservation",
+    "identification": "identifiant",
+    "invalid_dni": "ID invalide",
+    "vote": "Vote",
+    "day_defunction": "jour de la mort",
+    "type_service": "Type de service",
+    "call": "Appel"
 }
