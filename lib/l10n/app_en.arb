@@ -69,7 +69,7 @@
     "museum": "Museum",
     "hotel":  "Hotel",
     "normal": "Pharmacy",
-    "guard":  "Guard pharamcy",
+    "guard":  "Guard pharmacy",
     "service":  "Services",
     "heal": "Health",
     "leisure":  "Leisure",
@@ -89,5 +89,19 @@
     "no_now_book":  "You don't have reservations yet",
     "trash":  "Furniture",
     "ad_photo":  "Add photo",
-    "no_quiz": "No quiz available"
+    "no_quiz": "No quiz available",
+
+    "toast_send_mail": "Mail is being sent",
+    "toast_send_mail_correct": "The mail has been sent",
+    "toast_error": "You must fill in the fields",
+
+    "awaiting_resolution": "Awaiting resolution",
+    "see": "See reservation",
+    "identification": "Identification",
+    "invalid_dni": "Invalid DNI",
+    "vote": "Vote",
+    "day_defunction": "day of death",
+    "type_service": "Type of service",
+    "call": "Call",
+    "defunction": "Deceased on "
 }

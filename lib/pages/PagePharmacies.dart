@@ -8,6 +8,7 @@ import 'package:etno_app/store/section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PagePharmacies extends StatefulWidget {
   const PagePharmacies({super.key});
@@ -247,7 +248,7 @@ class PharmaciesState extends State<PagePharmacies> {
                         },
                         child: Row(children: [
                           renderImageToTab(tab.name!),
-                          Text(tab.name!,
+                          Text(renderTextTraslated(tab.name!, context),
                               style: const TextStyle(color: Colors.black))
                         ]))
                 ])
@@ -261,6 +262,18 @@ class PharmaciesState extends State<PagePharmacies> {
         ),
       ),
     );
+  }
+}
+
+String renderTextTraslated(String name, BuildContext context) {
+  switch (name) {
+    case 'Guardia':
+      return AppLocalizations.of(context)!.guard;
+      break;
+    case 'Normal':
+      return AppLocalizations.of(context)!.normal;
+    default:
+      return '';
   }
 }
 
