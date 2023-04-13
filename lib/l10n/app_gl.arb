@@ -103,5 +103,10 @@
     "day_defunction": "Día da morte",
     "type_service": "Tipo de servizo",
     "call": "Chamar",
-    "defunction": "Falecido en "
+    "defunction": "Falecido en ",
+
+    "see_more": "Ver máis",
+    "restaurants": "Restaurantes",
+    "hotels": "Hoteis",
+    "others": "Outros"
 }

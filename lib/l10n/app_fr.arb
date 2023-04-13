@@ -103,5 +103,10 @@
     "day_defunction": "jour de la mort",
     "type_service": "Type de service",
     "call": "Appel",
-    "defunction": "Décédé le "
+    "defunction": "Décédé le ",
+
+    "see_more": "Voir plus",
+    "restaurants": "Restaurants",
+    "hotels": "Hôtels",
+    "others": "Autres"
 }
