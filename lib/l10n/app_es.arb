@@ -108,5 +108,14 @@
     "see_more": "Ver más",
     "restaurants": "Restaurantes",
     "hotels": "Hoteles",
-    "others": "Otros"
+    "others": "Otros",
+
+    "show_map": "Mostrar mapa",
+    "schedule": "Horario:",
+    "read_more": "Leer más",
+    "show_less": "Mostrar menos",
+    "reserve_now": "Reservar ahora",
+    "no_reserve": "Ya está reservado",
+    "intro_email_phone": "Introduce email o teléfono",
+    "confirm_reserve": "Confirmaremos tu reserva por correo electrónico o por teléfono"
 }

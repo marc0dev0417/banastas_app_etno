@@ -1,3 +1,4 @@
+import 'package:etno_app/main.dart';
 import 'package:etno_app/pages/incident/IncidentForm.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
@@ -57,7 +58,7 @@ class PageState extends State<PageIncidents> {
       title: 'Mis incidencias',
       home: Scaffold(
         appBar: appBarCustom(context, true , AppLocalizations.of(context)!.section_incident, Icons.language, false, () => null, null),
-        body: Column(
+        body: ListView(
           children: [
             const WarningWidgetValueNotifier(),
             Container(

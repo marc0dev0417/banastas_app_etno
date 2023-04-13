@@ -109,5 +109,14 @@
     "see_more": "Veure més",
     "restaurants": "Restaurants",
     "hotels": "Hotels",
-    "others": "Altres"
+    "others": "Altres",
+
+    "show_map": "Mostrar mapa",
+    "schedule": "Horari:",
+    "read_more": "Llegir més",
+    "show_less": "Mostrar menys",
+    "reserve_now": "Reservar ara",
+    "no_reserve": "Ja està reservat",
+    "intro_email_phone": "Introdueix email o telèfon",
+    "confirm_reserve": "Confirmarem la teva reserva per correu electrònic o per telèfon"
 }

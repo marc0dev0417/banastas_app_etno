@@ -108,5 +108,14 @@
   "see_more": "Gehiago ikusi",
   "restaurants": "Jatetxeak",
   "hotels": "Hotelak",
-  "others": "Beste batzuk"
+  "others": "Beste batzuk",
+
+  "show_map": "Mapa erakutsi",
+  "schedule": "Ordutegia:",
+  "read_more": "Gehiago irakurri",
+  "show_less": "Gutxiago erakutsi",
+  "reserve_now": "Orain erreserbatu",
+  "no_reserve": "Jadanik erreserbatuta dago",
+  "intro_email_phone": "Sartu emaila edo telefonoa",
+  "confirm_reserve": "Zure erreserba email bidez edo telefono bidez baieztatuko dugu"
 }
