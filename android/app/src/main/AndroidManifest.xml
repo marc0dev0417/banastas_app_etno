@@ -4,7 +4,7 @@
    <application
         android:label="Etno"
         android:name="${applicationName}"
-        android:icon="@mipmap/launcher_icon">
+        android:icon="@mipmap/ic_launcher">
        <meta-data android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyDZcqlsS-nn_OIV9-ZsoC_HCGYSdgWld0U">
        </meta-data>

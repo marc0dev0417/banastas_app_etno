@@ -51,7 +51,7 @@ class PageState extends State<PageDefunctions> {
                               if(section.getDefunctions.isNotEmpty){
                                 return Expanded(child: ListView(
                                     shrinkWrap: true,
-                                    children: section.getDefunctions.map((e) => cardDefunction(context, e)).toList()
+                                    children: section.getDefunctions.map((e) => cardDefunction(pageContext, e)).toList()
                                 ));
                               }else {
                                 return Container(
@@ -100,7 +100,7 @@ Widget cardDefunction(BuildContext context, Defunction defunction){
                     children: [
                       Text(defunction.name!, style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 2.0),
-                      Text('Fallecido el ${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
+                      Text('${AppLocalizations.of(context)!.defunction} ${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
                       ]
                 ),
                 const Icon(Icons.chevron_right, size: 40.0)
@@ -149,7 +149,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
                       Container(
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,
-                        child: const Text('Día de fallecimiento', style: TextStyle(color: Colors.grey, fontSize: 10.0)),
+                        child: Text(AppLocalizations.of(context)!.day_defunction, style: TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
                       const Divider(),
                       Container(
