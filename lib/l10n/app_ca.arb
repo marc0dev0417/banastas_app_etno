@@ -104,5 +104,10 @@
     "day_defunction": "Dia de defunció",
     "type_service": "Tipus de servei",
     "call": "Trucar",
-    "defunction": "Mort el "
+    "defunction": "Mort el ",
+
+    "see_more": "Veure més",
+    "restaurants": "Restaurants",
+    "hotels": "Hotels",
+    "others": "Altres"
 }
