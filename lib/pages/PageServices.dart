@@ -1,8 +1,9 @@
-import 'package:etno_app/main.dart';
+import 'package:etno_app/bloc/color/color_bloc.dart';
 import 'package:etno_app/pages/PageServicesList.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PageServices extends StatefulWidget {
@@ -27,17 +28,23 @@ class PageState extends State<PageServices> {
                     const WarningWidgetValueNotifier(),
                     Expanded(
                       child: Container(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.all(16.0),
                         child: ListView(
                           shrinkWrap: true,
-                          padding: const EdgeInsets.only(top: 50.0, left: 15, right: 15),
+                          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                           scrollDirection: Axis.vertical,
                           children: [
-                            cardService(AppLocalizations.of(context)!.service, 'tool_image.jpg', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
-                            const SizedBox(height: 10.0),
-                            cardService(AppLocalizations.of(context)!.heal, 'salud_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }),
-                            const SizedBox(height: 10.0),
-                            cardService(AppLocalizations.of(context)!.leisure, 'ocio_image.jpg', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); })
+                            Text('Bienvenido a,', style: TextStyle(color: Colors.grey)),
+                            Text('Servicios', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40.0)),
+                            cardServiceTest('Restaurantes', 'Ver restaurantes', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            SizedBox(height: 16.0),
+                            cardServiceTest('Hoteles', 'Ver hoteles', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            SizedBox(height: 16.0),
+                            cardServiceTest('Salud', 'Ver salud', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            SizedBox(height: 16.0),
+                            cardServiceTest('Ocio', 'Ver ocios', (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            SizedBox(height: 16.0),
+                            cardServiceTest('Otro', 'Ver otros', () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageServicesList(locality: 'Bolea', category: 'Servicio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
                           ],
                         ),
                       ),
@@ -50,21 +57,36 @@ class PageState extends State<PageServices> {
   }
 }
 
-Widget cardService(String type, String assetImage, Function() function){
-  return InkWell(
+Widget cardServiceTest(
+    String title,
+    String description,
+    Function() function,
+    Color color
+    ) {
+  return Container(
+  child: GestureDetector(
     onTap: function,
-    child: Container(
-      height: 200,
-      decoration: BoxDecoration(
-        image: DecorationImage(image: AssetImage('assets/$assetImage'), fit: BoxFit.fill)
-      ),
-      child: Card(
-        elevation: 5.0,
-        color: Colors.transparent,
-        child: Center(
-          child: Text(type, style: const TextStyle(color: Colors.white, fontSize: 25.0)),
-        )
-      ),
+    child: Card(
+      elevation: 5.0,
+      color: color,
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.face, size: 40.0, color: Colors.white),
+            SizedBox(width: 16.0),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0)),
+                Text(description, style: TextStyle(color: Colors.yellow))
+              ],
+            )
+          ],
+        ),
+      )
     ),
-  );
+  ),
+);
 }

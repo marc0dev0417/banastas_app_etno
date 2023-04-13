@@ -34,7 +34,7 @@ class ServicesListState extends State<PageServicesList> {
   Widget renderWidgets(BuildContext contextState){
       return Observer(builder: (context) {
         if(section.getListServices.isNotEmpty){
-          return servicesList(section);
+          return servicesList(section, contextState);
         }else{
           return Container(
             padding: const EdgeInsets.only(top: 300.0),
@@ -57,7 +57,7 @@ class ServicesListState extends State<PageServicesList> {
       theme: ThemeData(cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom(context, true ,props.category, Icons.language, false, () => null),
+          appBar: appBarCustom(context, true ,AppLocalizations.of(context)!.section_service, Icons.language, false, () => null),
           body: SafeArea(
               child: Column(
                   children: [
@@ -75,7 +75,7 @@ class ServicesListState extends State<PageServicesList> {
   }
 }
 
-Widget servicesList(Section section){
+Widget servicesList(Section section, BuildContext context){
   Future<void> launchCaller(String phoneNumber) async {
     final Uri launchUri = Uri(
       scheme: 'tel',
@@ -111,18 +111,18 @@ Widget servicesList(Section section){
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('Tipo de servicio', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
+                            Text(AppLocalizations.of(context)!.type_service, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text(e.category!, style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
+                                      Text(AppLocalizations.of(context)!.service, style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
                                      const SizedBox(
                                         width: 180.0,
                                       ),
                                       ElevatedButton(
                                           onPressed: (){ launchCaller(e.number!); },
                                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                                          child: const Text('Llamar'),
+                                          child: Text(AppLocalizations.of(context)!.call),
                                       )
                             ]),
                           ],
@@ -136,6 +136,7 @@ Widget servicesList(Section section){
       ).toList()
   );
 }
+
 
 Widget renderImageServiceList(Service service){
   if (service.imageUrl == null){

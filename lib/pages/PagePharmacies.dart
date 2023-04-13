@@ -277,6 +277,8 @@ String renderTextTraslated(String name, BuildContext context) {
   }
 }
 
+
+
 Widget renderImagePharmacy(Pharmacy pharmacy) {
   if (pharmacy.imageUrl == null) {
     return const SizedBox(

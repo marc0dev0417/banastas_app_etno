@@ -48,7 +48,7 @@ class PageState extends State<PageMenuSections> {
   }
   
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext pageContext) {
     return  Scaffold(
           backgroundColor: Colors.white,
           appBar: appBarCustom(context, false, 'Menú', Icons.language, false, () => print('Internalization in Menu'), null),
@@ -69,7 +69,7 @@ class PageState extends State<PageMenuSections> {
                                     onTap: () {
                                       switch(e.title){
                                         case 'Eventos': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEvents(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
-                                        case 'Turismo': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
+                                        case 'Turismo': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageTourism(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Farmacias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PagePharmacies(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Anuncios': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageAd(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                         case 'Noticias': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageNews(pageContext: context), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
