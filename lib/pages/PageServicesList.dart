@@ -58,7 +58,7 @@ class ServicesListState extends State<PageServicesList> {
       theme: ThemeData(cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom(context, true ,AppLocalizations.of(context)!.section_service, Icons.language, false, () => null),
+          appBar: appBarCustom(context, true , props.category, Icons.language, false, () => null),
           body: SafeArea(
               child: Column(
                   children: [
