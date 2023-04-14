@@ -1,3 +1,3 @@
 class Globals {
-  static String url_microservice_etno = 'https://etnoapp2-42ec3.lm.r.appspot.com/';
+  static String url_microservice_etno = 'http://tomcat.vpsecomputer.com:8080/';
 }
