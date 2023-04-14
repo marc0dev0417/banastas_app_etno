@@ -279,12 +279,13 @@ String renderTextTraslated(String name, BuildContext context) {
 
 Widget renderImagePharmacy(Pharmacy pharmacy) {
   if (pharmacy.imageUrl == null) {
-    return const SizedBox(
-        width: 20.0, height: 20.0, child: CircularProgressIndicator());
+    return SizedBox(
+        width: 200.0, height: 200.0, child: Image.asset('assets/pharmacies.png'));
   } else {
     return Image.network(pharmacy.imageUrl!,
         fit: BoxFit.fill, height: 200, width: 300);
   }
+
 }
 Widget renderImageToTab(String tabName){
   switch(tabName){
