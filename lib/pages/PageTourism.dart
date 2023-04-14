@@ -295,8 +295,8 @@ String renderTextTraslated(String name, BuildContext context) {
 
 Widget renderImageTourism(Tourism tourism) {
   if (tourism.imageUrl == null) {
-    return Image.asset('assets/Loading_icon.gif',
-        height: 200, fit: BoxFit.fill, width: 400);
+    return Image.asset('assets/tourism.jpg',
+        height: 200, fit: BoxFit.fill, width: 300);
   } else {
     return Image.network(tourism.imageUrl!,
         fit: BoxFit.fill, height: 200, width: 300);

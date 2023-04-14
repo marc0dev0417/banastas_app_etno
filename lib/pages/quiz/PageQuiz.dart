@@ -95,7 +95,7 @@ class PageState extends State<PageQuiz>{
                         },
                       )),
                       const SizedBox(height: 16.0),
-                      Text(AppLocalizations.of(context)!.identification, style: TextStyle(color: Colors.red)),
+                      Text(AppLocalizations.of(pageContext)!.identification, style: TextStyle(color: Colors.red)),
                       TextFormField(
                         onChanged: (value) => setState(() {
                           dni = value;
@@ -106,14 +106,14 @@ class PageState extends State<PageQuiz>{
                           section.sendResultQuiz('Bolea', section.getQuizzes[0].idQuiz!, int.parse(answer!));
                         } else {
                           Fluttertoast.showToast(
-                              msg: AppLocalizations.of(context)!.invalid_dni,
+                              msg: AppLocalizations.of(pageContext)!.invalid_dni,
                               toastLength: Toast.LENGTH_SHORT,
                               fontSize: 12,
                               textColor: Colors.white,
                               backgroundColor: Colors.red
                           );
                         }
-                      }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(context)!.vote))
+                      }, style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), child: Text(AppLocalizations.of(pageContext)!.vote))
                     ],
                   )
               );

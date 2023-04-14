@@ -85,7 +85,7 @@ Widget cardSponsor(Sponsor sponsor){
             ),
            const SizedBox(height: 4.0),
             Text(sponsor.description!),
-           if(sponsor.urlImage != null) Image.network(sponsor.urlImage!)
+           if(sponsor.urlImage != null) Image.network(sponsor.urlImage!) else Image.asset('assets/sponsors.png')
           ],
         ),
       )
