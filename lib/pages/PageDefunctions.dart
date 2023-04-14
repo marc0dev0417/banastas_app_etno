@@ -28,7 +28,7 @@ class PageState extends State<PageDefunctions> {
   @override
   Widget build(BuildContext pageContext) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
+      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
       title: 'Page defunctions',
       home: Scaffold(
           appBar: appBarCustom(
@@ -51,7 +51,7 @@ class PageState extends State<PageDefunctions> {
                               if(section.getDefunctions.isNotEmpty){
                                 return Expanded(child: ListView(
                                     shrinkWrap: true,
-                                    children: section.getDefunctions.map((e) => cardDefunction(pageContext, e)).toList()
+                                    children: section.getDefunctions.map((e) => cardDefunction(context, e)).toList()
                                 ));
                               }else {
                                 return Container(
@@ -100,7 +100,7 @@ Widget cardDefunction(BuildContext context, Defunction defunction){
                     children: [
                       Text(defunction.name!, style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 2.0),
-                      Text('${AppLocalizations.of(context)!.defunction} ${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
+                      Text('${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
                       ]
                 ),
                 const Icon(Icons.chevron_right, size: 40.0)
@@ -145,11 +145,6 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,
                         child: Text(defunction.deathDate!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 15.0),
-                        alignment: Alignment.topLeft,
-                        child: Text(AppLocalizations.of(context)!.day_defunction, style: TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
                       const Divider(),
                       Container(
