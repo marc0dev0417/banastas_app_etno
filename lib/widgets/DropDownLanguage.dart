@@ -31,6 +31,7 @@ class LanguagePickerWidget extends StatelessWidget {
           }).toList(), onChanged: (Locale? value) {
 
         },
+          dropdownColor: Color.fromRGBO(255, 255, 255, 0.45),
         )
     );
   }
