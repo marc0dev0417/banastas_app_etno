@@ -13,11 +13,11 @@ class L10n {
   static String getFlag(String code) {
     switch (code) {
       case 'es': return 'assets/spain_flag.png';
-      case 'en': return 'assets/uk.jpg';
+      case 'en': return 'assets/england.png';
       case 'fr': return 'assets/france.png';
       case 'eu': return 'assets/pais_vasco.png';
       case 'ca': return 'assets/cataluna.png';
-      case 'gl': return 'assets/galicia.jpg';
+      case 'gl': return 'assets/galicia.png';
       default: return 'assets/spain_flag.png';
     }
   }

@@ -119,7 +119,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
         children: [
           Container(
               padding: const EdgeInsets.only(top: 15.0),
-              child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 100.0, width: 100.0) : Image.network(defunction.imageUrl!)
+              child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 200.0, width: 200.0) : Image.network(defunction.imageUrl!)
           ),
           Container(
             alignment: Alignment.topLeft,
