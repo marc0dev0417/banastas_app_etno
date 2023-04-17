@@ -236,14 +236,12 @@ class PharmaciesState extends State<PagePharmacies> {
                                 });
                             }
                           },
-                          child: Row(children: [
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                              children: [
                               renderImageToTab(tab.name!),
-
-                          Text(renderTextTraslated(tab.name!, context)),
-
                               SizedBox(width: 8.0),
-                              Text(tab.name!,
-
+                              Text(renderTextTraslated(tab.name!, context),
                                   style: const TextStyle(color: Colors.black))
                               ]))
                   ])

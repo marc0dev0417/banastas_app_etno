@@ -96,7 +96,8 @@ class PageState extends State<PageEvents> {
                   style: TextStyle(fontWeight: FontWeight.bold)),
               Icon(Icons.celebration, size: 50.0)
             ])));
-    return Observer(builder: (context) =>
+
+return Observer(builder: (context) =>
     section.getListEvent.isNotEmpty ? Expanded(
         child: Observer(builder: (context) =>
             ListView(
@@ -113,7 +114,7 @@ class PageState extends State<PageEvents> {
         )
     )
     );
-  }
+}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
