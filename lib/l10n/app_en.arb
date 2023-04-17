@@ -71,7 +71,7 @@
     "museum": "Museum",
     "hotel":  "Hotel",
     "normal": "Pharmacy",
-    "guard":  "Guard pharamcy",
+    "guard":  "Guard pharmacy",
     "service":  "Services",
     "heal": "Health",
     "leisure":  "Leisure",
@@ -92,8 +92,37 @@
     "trash":  "Furniture",
     "ad_photo":  "Add photo",
     "no_quiz": "No quiz available",
+    
+    "toast_send_mail": "Mail is being sent",
+    "toast_send_mail_correct": "The mail has been sent",
+    "toast_error": "You must fill in the fields",
 
+    "awaiting_resolution": "Awaiting resolution",
+    "see": "See reservation",
+    "identification": "Identification",
+    "invalid_dni": "Invalid DNI",
+    "vote": "Vote",
+    "day_defunction": "day of death",
+    "type_service": "Type of service",
+    "call": "Call",
+    "defunction": "Deceased on ",
+
+    "see_more": "See more",
+    "restaurants": "Restaurants",
+    "hotels": "Hotels",
+    "others": "Others",
+
+    "show_map": "Show map",
+    "schedule": "Schedule:",
+    "read_more": "Read more",
+    "show_less": "Show less",
+    "reserve_now": "Book now",
+    "no_reserve": "Already reserved",
+    "intro_email_phone": "Enter email or phone",
+    "confirm_reserve": "We will confirm your reservation by email or phone"
+    
     "identification": "Identification",
     "vote": "Vote",
     "invalid_dni": "The id is not valid"
+    
 }

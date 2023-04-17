@@ -64,7 +64,7 @@ class PageState extends State<PageReserve> {
                           builder: (BuildContext context) => AlertDialog(
                             backgroundColor: Colors.white,
                             title: Column(
-                              children: const [Text('Introduce Email o teléfono', textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)), Text('Confirmaremos tu reserva por correo electrónico o por teléfono', textAlign: TextAlign.center, style: TextStyle(fontSize: 10.0))],
+                              children: [Text(AppLocalizations.of(context)!.intro_email_phone, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold)), Text(AppLocalizations.of(context)!.confirm_reserve, textAlign: TextAlign.center, style: TextStyle(fontSize: 10.0))],
                             ),
                             content: TextFormField(
                               onChanged: (value) => setState(() {
@@ -74,8 +74,8 @@ class PageState extends State<PageReserve> {
                             ),
                             actions: <Widget>[
                               TextButton(
-                                onPressed: () => Navigator.pop(context, 'Cancel'),
-                                child: const Text('Cancel'),
+                                onPressed: () => Navigator.pop(context, AppLocalizations.of(context)!.cancel),
+                                child: Text(AppLocalizations.of(context)!.cancel),
                               ),
                               TextButton(
                                 style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)),
@@ -85,7 +85,7 @@ class PageState extends State<PageReserve> {
                                     Navigator.pop((context));
                                   } else {
                                     Fluttertoast.showToast(
-                                        msg: 'Debe rellenar el campo',
+                                        msg: AppLocalizations.of(context)!.toast_error,
                                         toastLength: Toast.LENGTH_SHORT,
                                         fontSize: 12,
                                         textColor: Colors.white,
@@ -93,7 +93,7 @@ class PageState extends State<PageReserve> {
                                     );
                                   }
                                 },
-                                child: const Text('Susbscribirse', style: TextStyle(color: Colors.white)),
+                                child: Text(AppLocalizations.of(context)!.subscribe, style: TextStyle(color: Colors.white)),
                               ),
                             ],
                           ),
@@ -103,7 +103,7 @@ class PageState extends State<PageReserve> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:  [
-                        Text(!isReserved! ? 'Reservar ahora' : 'Ya esta reservado', style: const TextStyle(color: Colors.white)),
+                        Text(!isReserved! ? AppLocalizations.of(context)!.reserve_now : AppLocalizations.of(context)!.no_reserve, style: const TextStyle(color: Colors.white)),
                         const Icon(Icons.arrow_forward, color: Colors.white)
                       ],
                     ),
@@ -134,7 +134,7 @@ class PageState extends State<PageReserve> {
                   Text(props.place!.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
                   GestureDetector(
                     onTap: () => launchInBrowser(Uri.parse('https://maps.google.com/?daddr=${props.place?.latitude!},${props.place?.longitude!}')),
-                    child: const Text('Mostrar Mapa', style: TextStyle(color: Colors.blue))
+                    child: Text(AppLocalizations.of(context)!.show_map, style: TextStyle(color: Colors.blue))
                   )
                 ],
               ),
@@ -144,13 +144,13 @@ class PageState extends State<PageReserve> {
                 trimLines: 2,
                 colorClickableText: Colors.blue,
                 trimMode: TrimMode.Line,
-                trimCollapsedText: 'Leer Más',
-                trimExpandedText: ' Mostrar menos',
+                trimCollapsedText: AppLocalizations.of(context)!.read_more,
+                trimExpandedText: AppLocalizations.of(context)!.show_less,
                 moreStyle: const TextStyle(fontSize: 12.0, color: Colors.blue),
                 lessStyle: const TextStyle(fontSize: 12.0, color: Colors.blue),
               ),
               const SizedBox(height: 16.0),
-              const Text('Horario:', style: TextStyle(fontWeight: FontWeight.bold)),
+              Text(AppLocalizations.of(context)!.schedule, style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8.0),
               Text(props.date!),
               Column(
