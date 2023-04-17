@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:etno_app/main.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +34,7 @@ class ServicesListState extends State<PageServicesList> {
   Widget renderWidgets(BuildContext contextState){
       return Observer(builder: (context) {
         if(section.getListServices.isNotEmpty){
-          return servicesList(section, contextState);
+          return servicesList(section);
         }else{
           return Container(
             padding: const EdgeInsets.only(top: 300.0),
@@ -58,7 +57,7 @@ class ServicesListState extends State<PageServicesList> {
       theme: ThemeData(cardTheme: const CardTheme(color: Colors.white)),
       title: 'Page services',
       home: Scaffold(
-          appBar: appBarCustom(context, true , props.category, Icons.language, false, () => null),
+          appBar: appBarCustom(context, true ,props.category, Icons.language, false, () => null),
           body: SafeArea(
               child: Column(
                   children: [
@@ -76,7 +75,7 @@ class ServicesListState extends State<PageServicesList> {
   }
 }
 
-Widget servicesList(Section section, BuildContext context){
+Widget servicesList(Section section){
   Future<void> launchCaller(String phoneNumber) async {
     final Uri launchUri = Uri(
       scheme: 'tel',
@@ -112,18 +111,18 @@ Widget servicesList(Section section, BuildContext context){
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(AppLocalizations.of(context)!.type_service, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
+                            const Text('Tipo de servicio', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
                                   Row(
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     children: [
-                                      Text(AppLocalizations.of(context)!.service, style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
+                                      Text(e.category!, style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
                                      const SizedBox(
                                         width: 180.0,
                                       ),
                                       ElevatedButton(
                                           onPressed: (){ launchCaller(e.number!); },
                                           style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                                          child: Text(AppLocalizations.of(context)!.call),
+                                          child: const Text('Llamar'),
                                       )
                             ]),
                           ],

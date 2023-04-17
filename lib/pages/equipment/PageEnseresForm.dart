@@ -113,8 +113,7 @@ class PageState extends State<PageEnseres> {
                     style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
                     onPressed: () {
                   if(name != '' && phone != '' && enser != '' && _image != null){
-                    section.sendEnser('ecomputerapps@gmail.com', 'Hola mi nombre es $name con el teléfono $phone. \n $enser', 'Enser', _image!);
-                    Navigator.pop(context);
+                    section.sendEnser('ecomputerapps@gmail.com', 'Hola mi nombre es $name con el telefono $phone. \n $enser', 'Enser', _image!);
                   } else {
                     Fluttertoast.showToast(
                         msg: 'Rellene los campos',

@@ -28,7 +28,7 @@ class PageState extends State<PageDefunctions> {
   @override
   Widget build(BuildContext pageContext) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
+      theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white), bottomSheetTheme: const BottomSheetThemeData(backgroundColor: Colors.white)),
       title: 'Page defunctions',
       home: Scaffold(
           appBar: appBarCustom(
@@ -100,7 +100,7 @@ Widget cardDefunction(BuildContext context, Defunction defunction){
                     children: [
                       Text(defunction.name!, style: const TextStyle(fontWeight: FontWeight.bold)),
                       const SizedBox(height: 2.0),
-                      Text('${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
+                      Text('Fallecido el ${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
                       ]
                 ),
                 const Icon(Icons.chevron_right, size: 40.0)
@@ -119,6 +119,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
         children: [
           Container(
               padding: const EdgeInsets.only(top: 15.0),
+              
               child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 200.0, width: 200.0) : Image.network(defunction.imageUrl!)
           ),
           Container(
@@ -145,6 +146,11 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,
                         child: Text(defunction.deathDate!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.only(left: 15.0),
+                        alignment: Alignment.topLeft,
+                        child: const Text('Día de fallecimiento', style: TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
                       const Divider(),
                       Container(

@@ -1,5 +1,7 @@
+import 'package:etno_app/pages/event/PageEvents.dart';
 import 'package:etno_app/widgets/DropDownLanguage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 PreferredSizeWidget appBarCustom(
     BuildContext context,
@@ -16,7 +18,13 @@ PreferredSizeWidget appBarCustom(
     leading: Visibility(
       visible: isVisibleBack,
       child: GestureDetector(
-        onTap: () => Navigator.pop(context),
+        onTap: () {
+          if (title == AppLocalizations.of(context)!.subscribe){
+            Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageEvents()));
+          } else {
+            Navigator.pop(context);
+          }
+        },
         child: Icon(Icons.chevron_left, color: Colors.white),
       ),
     ),
@@ -40,7 +48,6 @@ PreferredSizeWidget appBarNews(
 
   return AppBar(
       backgroundColor: Colors.red,
-
       automaticallyImplyLeading: false,
       title: Text(title, style: const TextStyle(color: Colors.white)),
     bottom: TabBar(
