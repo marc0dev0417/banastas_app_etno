@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:etno_app/models/FCMToken.dart';
 import 'package:etno_app/models/section_details/SectionDetails.dart';
 import 'package:etno_app/pages/PageAd.dart';
@@ -130,18 +129,14 @@ class HomeState extends State<Home> {
     controller = TextEditingController();
     section.getAllNewByLocality('Bolea');
     section.getAllEventsByLocality('Bolea');
-
     messaging
         .getToken()
         .then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
     setupInteractedMessage();
-
     super.initState();
-
     section
         .getSectionDetails('Bolea')
         .then((value) => setState(() => sectionDetails = value));
-
     section.getCustomLinks('Bolea');
 
     timer = Timer.periodic(
@@ -275,7 +270,7 @@ class HomeState extends State<Home> {
                                                   pageBuilder: (context,
                                                           animation1,
                                                           animation2) =>
-                                                       PageTourism(),
+                                                      PageTourism(),
                                                   transitionDuration:
                                                       Duration.zero,
                                                   reverseTransitionDuration:
@@ -288,7 +283,7 @@ class HomeState extends State<Home> {
                                                   pageBuilder: (context,
                                                           animation1,
                                                           animation2) =>
-                                                       PagePharmacies(),
+                                                      PagePharmacies(),
                                                   transitionDuration:
                                                       Duration.zero,
                                                   reverseTransitionDuration:
@@ -489,28 +484,78 @@ class HomeState extends State<Home> {
 }
 
 String getSectionText(String sectionText, BuildContext context) {
+  switch (sectionText) {
+    case 'Eventos':
+      return AppLocalizations.of(context)!.section_event;
+    case 'Turismo':
+      return AppLocalizations.of(context)!.section_tourism;
+    case 'Farmacias':
+      return AppLocalizations.of(context)!.section_pharmacy;
+    case 'Servicios':
+      return AppLocalizations.of(context)!.section_service;
+    case 'Noticias':
+      return AppLocalizations.of(context)!.section_news;
+    case 'Bandos':
+      return AppLocalizations.of(context)!.section_bando;
+    case 'Anuncios':
+      return AppLocalizations.of(context)!.section_ad;
+    case 'Galería':
+      return AppLocalizations.of(context)!.section_gallery;
+    case 'Defunciones':
+      return AppLocalizations.of(context)!.section_death;
+    case 'Enlaces':
+      return AppLocalizations.of(context)!.section_link;
+    case 'Patrocinadores':
+      return AppLocalizations.of(context)!.section_sponsor;
+    case 'Incidentes':
+      return AppLocalizations.of(context)!.section_incident;
+    case 'Reservas':
+      return AppLocalizations.of(context)!.section_booking;
+    case 'Incidentes':
+      return AppLocalizations.of(context)!.section_incident;
+    case 'Retirada de Enseres':
+      return AppLocalizations.of(context)!.section_trash;
+    case 'Yo decido':
+      return AppLocalizations.of(context)!.section_quiz;
+    default:
+      return '';
 
-
-
-  switch(sectionText) {
-    case 'Eventos': return AppLocalizations.of(context)!.section_event;
-    case 'Turismo': return AppLocalizations.of(context)!.section_tourism;
-    case 'Farmacias': return AppLocalizations.of(context)!.section_pharmacy;
-    case 'Servicios': return AppLocalizations.of(context)!.section_service;
-    case 'Noticias': return AppLocalizations.of(context)!.section_news;
-    case 'Bandos': return AppLocalizations.of(context)!.section_bando;
-    case 'Anuncios': return AppLocalizations.of(context)!.section_ad;
-    case 'Galería': return AppLocalizations.of(context)!.section_gallery;
-    case 'Defunciones': return AppLocalizations.of(context)!.section_death;
-    case 'Enlaces': return AppLocalizations.of(context)!.section_link;
-    case 'Patrocinadores': return AppLocalizations.of(context)!.section_sponsor;
-    case 'Incidentes': return AppLocalizations.of(context)!.section_incident;
-    case 'Reservas': return AppLocalizations.of(context)!.section_booking;
-    case 'Incidentes': return AppLocalizations.of(context)!.section_incident;
-    case 'Retirada de Enseres': return AppLocalizations.of(context)!.section_trash;
-    case 'Yo decido': return AppLocalizations.of(context)!.section_quiz;
-    default: return sectionText;
-    
+      switch (sectionText) {
+        case 'Eventos':
+          return AppLocalizations.of(context)!.section_event;
+        case 'Turismo':
+          return AppLocalizations.of(context)!.section_tourism;
+        case 'Farmacias':
+          return AppLocalizations.of(context)!.section_pharmacy;
+        case 'Servicios':
+          return AppLocalizations.of(context)!.section_service;
+        case 'Noticias':
+          return AppLocalizations.of(context)!.section_news;
+        case 'Bandos':
+          return AppLocalizations.of(context)!.section_bando;
+        case 'Anuncios':
+          return AppLocalizations.of(context)!.section_ad;
+        case 'Galería':
+          return AppLocalizations.of(context)!.section_gallery;
+        case 'Defunciones':
+          return AppLocalizations.of(context)!.section_death;
+        case 'Enlaces':
+          return AppLocalizations.of(context)!.section_link;
+        case 'Patrocinadores':
+          return AppLocalizations.of(context)!.section_sponsor;
+        case 'Incidentes':
+          return AppLocalizations.of(context)!.section_incident;
+        case 'Reservas':
+          return AppLocalizations.of(context)!.section_booking;
+        case 'Incidentes':
+          return AppLocalizations.of(context)!.section_incident;
+        case 'Retirada de Enseres':
+          return AppLocalizations.of(context)!.section_trash;
+        case 'Yo decido':
+          return AppLocalizations.of(context)!.section_quiz;
+        default:
+          return sectionText;
+      }
   }
 }
 

@@ -7,10 +7,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Reserve.dart';
 import '../widgets/appbar_navigation.dart';
-
 class PageListReserves extends StatefulWidget {
   const PageListReserves({super.key});
-
   @override
   State<StatefulWidget> createState() {
     return PageState();
@@ -25,14 +23,13 @@ class PageState extends State<PageListReserves> {
     section.getReservesByLocality('Bolea');
     super.initState();
   }
-
   @override
   Widget build(BuildContext pageContext) {
     return MaterialApp(
       theme: ThemeData(
           useMaterial3: true,
           floatingActionButtonTheme:
-              const FloatingActionButtonThemeData(backgroundColor: Colors.red)),
+          const FloatingActionButtonThemeData(backgroundColor: Colors.red)),
       home: Scaffold(
           backgroundColor: Colors.white,
           appBar: appBarCustom(
@@ -41,7 +38,7 @@ class PageState extends State<PageListReserves> {
               AppLocalizations.of(context)!.section_booking,
               Icons.language,
               false,
-              () => null),
+                  () => null),
           body: SafeArea(child: Observer(builder: (context) {
             if (section.getReserves.isNotEmpty) {
               return Container(
@@ -71,7 +68,7 @@ class PageState extends State<PageListReserves> {
                   context,
                   PageRouteBuilder(
                       pageBuilder: (context, animation1, animation2) =>
-                          const PageSeeMyReserves(),
+                      const PageSeeMyReserves(),
                       reverseTransitionDuration: Duration.zero,
                       transitionDuration: Duration.zero)),
               child: Row(
@@ -100,13 +97,13 @@ Widget cardReserve(BuildContext context, Reserve reserve) {
           children: [
             reserve.place?.imageUrl == null
                 ? Container(
-                    padding: const EdgeInsets.only(left: 60.0),
-                    child: const CircularProgressIndicator(),
-                  )
+              padding: const EdgeInsets.only(left: 60.0),
+              child: const CircularProgressIndicator(),
+            )
                 : SizedBox(
-                    height: 200.0,
-                    child: Image.network(reserve.place!.imageUrl!,
-                        width: 160.0, height: 200.0, fit: BoxFit.fill)),
+                height: 200.0,
+                child: Image.network(reserve.place!.imageUrl!,
+                    width: 160.0, height: 200.0, fit: BoxFit.fill)),
             const SizedBox(width: 45.0),
             Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Text(reserve.place!.name!,

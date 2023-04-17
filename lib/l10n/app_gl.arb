@@ -26,7 +26,6 @@
     "pay_fail": "Produciuse un erro no teu pago",
     "try_again": "Téntao de novo",
     "sport": "Deporte",
-
     "section_event" : "Eventos",
     "section_turism" : "Turismo",
     "section_pharmacy" : "Farmacias",
@@ -42,7 +41,6 @@
     "section_booking" : "Reservas",
     "section_trash" : "Retirada de pertenzas",
     "section_quiz" : "Enquisa",
-
     "subsection_event" : "Eventos",
     "subsection_tourism" : "Lugares turísticos",
     "subsection_pharmacy" : "Farmacias",
@@ -58,12 +56,10 @@
     "subsection_booking" : "Reservas",
     "subsection_trash" : "Enviar aviso de enser",
     "subsection_quiz" : "Enquisa",
-
     "bottom_home": "Comezar",
     "bottom_event": "Eventos",
     "bottom_news": "Noticias",
     "bottom_menu": "Menú",
-
     "all": "Todos",
     "restaurant": "Restaurante",
     "museum": "Museo",
@@ -117,10 +113,5 @@
     "reserve_now": "Reservar agora",
     "no_reserve": "Xa está reservado",
     "intro_email_phone": "Introduce o teu email ou teléfono",
-    "confirm_reserve": "Confirmaremos a túa reserva por correo electrónico ou por teléfono",
-    
-    "identification": "Indetificación",
-    "vote": "Votar",
-    "invalid_dni": "O DNI non é válido"
-    
+    "confirm_reserve": "Confirmaremos a túa reserva por correo electrónico ou por teléfono"
 }

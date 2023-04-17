@@ -7,12 +7,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../../store/section.dart';
-
 class IncidentForm extends StatefulWidget {
   const IncidentForm({super.key});
-
   @override
   State<StatefulWidget> createState() {
     return PageState();
@@ -38,16 +35,16 @@ class PageState extends State<IncidentForm> {
           backgroundColor: Colors.orange);
       section
           .sendMailMessage(MailDetails(
-              'ecomputerapps@gmail.com',
-              'Mi nombre es $name y mi teléfono es el $phone, y tengo la siguiente incidencia: $description',
-              subject,
-              null))
+          'ecomputerapps@gmail.com',
+          'Mi nombre es $name y mi teléfono es el $phone, y tengo la siguiente incidencia: $description',
+          subject,
+          null))
           .then((value) => Fluttertoast.showToast(
           msg: AppLocalizations.of(context)!.toast_send_mail_correct,
-              toastLength: Toast.LENGTH_SHORT,
-              fontSize: 12,
-              textColor: Colors.white,
-              backgroundColor: Colors.green));
+          toastLength: Toast.LENGTH_SHORT,
+          fontSize: 12,
+          textColor: Colors.white,
+          backgroundColor: Colors.green));
       Navigator.pop(context);
     } else {
       Fluttertoast.showToast(
@@ -63,7 +60,6 @@ class PageState extends State<IncidentForm> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +71,7 @@ class PageState extends State<IncidentForm> {
           AppLocalizations.of(context)!.section_incident,
           Icons.language,
           false,
-          () => null,
+              () => null,
           null),
       body: Container(
         padding: const EdgeInsets.all(8.0),

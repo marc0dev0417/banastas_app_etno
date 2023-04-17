@@ -10,19 +10,15 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Tourism.dart';
 import '../models/TourismButton.dart';
 import '../store/section.dart';
-
 class PageTourism extends StatefulWidget {
   const PageTourism({super.key});
-
   @override
   State<StatefulWidget> createState() {
     return TourismState();
   }
 }
-
 class TourismState extends State<PageTourism> {
   final Section section = Section();
-
   Set<Marker> listMarker = {};
   Set<Marker> listMarkerSaved = {};
   List<TourismButton> tourismButton = [
@@ -31,10 +27,8 @@ class TourismState extends State<PageTourism> {
     TourismButton('assets/museo.png', Colors.yellow, 'Museo'),
     TourismButton('assets/hotel.png', Colors.indigo, 'Hotel')
   ];
-
   final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-
+  Completer<GoogleMapController>();
   static const CameraPosition _kGooglePlex = CameraPosition(
     target: LatLng(42.13639592850662, -0.41057481476933433),
     zoom: 14.4746,
@@ -94,7 +88,7 @@ class TourismState extends State<PageTourism> {
                                                 child: Text(element.title!,
                                                     style: const TextStyle(
                                                         fontWeight:
-                                                            FontWeight.bold,
+                                                        FontWeight.bold,
                                                         fontSize: 15.0)),
                                               ),
                                               Container(
@@ -110,21 +104,21 @@ class TourismState extends State<PageTourism> {
                                               const Divider(),
                                               Row(
                                                 mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
+                                                MainAxisAlignment
+                                                    .spaceBetween,
                                                 children: [
                                                   Container(
                                                     alignment:
-                                                        Alignment.topLeft,
+                                                    Alignment.topLeft,
                                                     padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5.0,
-                                                            left: 15.0),
+                                                    const EdgeInsets.only(
+                                                        top: 5.0,
+                                                        left: 15.0),
                                                     child: Text(
                                                       element.type!,
                                                       style: const TextStyle(
                                                           fontWeight:
-                                                              FontWeight.bold,
+                                                          FontWeight.bold,
                                                           fontSize: 15.0,
                                                           color: Colors.blue),
                                                     ),
@@ -136,8 +130,8 @@ class TourismState extends State<PageTourism> {
                                               Container(
                                                   alignment: Alignment.topLeft,
                                                   padding:
-                                                      const EdgeInsets.only(
-                                                          top: 5.0, left: 15.0),
+                                                  const EdgeInsets.only(
+                                                      top: 5.0, left: 15.0),
                                                   child: Text(
                                                       element.description!,
                                                       style: const TextStyle(
@@ -164,7 +158,6 @@ class TourismState extends State<PageTourism> {
     BackButtonInterceptor.add(myInterceptor);
     super.initState();
   }
-
   @override
   void dispose() {
     BackButtonInterceptor.remove(myInterceptor);
@@ -178,7 +171,6 @@ class TourismState extends State<PageTourism> {
     Navigator.of(context).pop();
     return true;
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -189,7 +181,7 @@ class TourismState extends State<PageTourism> {
         length: tourismButton.length,
         child: Scaffold(
             floatingActionButtonLocation:
-                FloatingActionButtonLocation.startFloat,
+            FloatingActionButtonLocation.startFloat,
             floatingActionButton: FloatingActionButton(
               backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
               onPressed: () => Navigator.pop(context),
@@ -208,7 +200,7 @@ class TourismState extends State<PageTourism> {
                 ),
                 TabBar(
                     padding:
-                        EdgeInsets.only(top: 66.0, left: 16.0, right: 16.0),
+                    EdgeInsets.only(top: 66.0, left: 16.0, right: 16.0),
                     indicatorColor: Colors.transparent,
                     isScrollable: true,
                     tabs: [
@@ -216,7 +208,7 @@ class TourismState extends State<PageTourism> {
                         ElevatedButton(
                             style: const ButtonStyle(
                                 backgroundColor:
-                                    MaterialStatePropertyAll(Colors.white)),
+                                MaterialStatePropertyAll(Colors.white)),
                             onPressed: () {
                               switch (tab.name) {
                                 case 'Restaurante':
@@ -224,8 +216,8 @@ class TourismState extends State<PageTourism> {
                                     listMarker = listMarkerSaved;
                                     listMarker = listMarker
                                         .where((element) =>
-                                            element.markerId.value ==
-                                            'Restaurante')
+                                    element.markerId.value ==
+                                        'Restaurante')
                                         .toSet();
                                   });
                                   break;
@@ -234,8 +226,8 @@ class TourismState extends State<PageTourism> {
                                     listMarker = listMarkerSaved;
                                     listMarker = listMarker
                                         .where((element) =>
-                                            element.markerId.value ==
-                                            'Monumento')
+                                    element.markerId.value ==
+                                        'Monumento')
                                         .toSet();
                                   });
                                   break;
@@ -244,7 +236,7 @@ class TourismState extends State<PageTourism> {
                                     listMarker = listMarkerSaved;
                                     listMarker = listMarker
                                         .where((element) =>
-                                            element.markerId.value == 'Museo')
+                                    element.markerId.value == 'Museo')
                                         .toSet();
                                   });
                                   break;
@@ -253,7 +245,7 @@ class TourismState extends State<PageTourism> {
                                     listMarker = listMarkerSaved;
                                     listMarker = listMarker
                                         .where((element) =>
-                                            element.markerId.value == 'Hotel')
+                                    element.markerId.value == 'Hotel')
                                         .toSet();
                                   });
                                   break;
@@ -265,7 +257,7 @@ class TourismState extends State<PageTourism> {
                             },
                             child: renderImageTab(tab.assetUrl!,
                                 renderTextTraslated(tab.name!, context)) //aei
-                            )
+                        )
                     ])
               ],
             )),

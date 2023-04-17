@@ -1,73 +1,138 @@
 {
+
     "no_connection": "There is no connection to Internet",
 
+
     "events_empty": "No events",
+
     "event": "Events",
+
     "no_news_heal": "No heal news",
+
     "no_news": "No news",
+
     "no_news_tech": "No technology news",
+
     "subscribe": "Subscribe",
+
     "form_name": "Name",
+
     "form_mail": "Email",
+
     "form_phone": "Phone",
+
     "form_wallet": "Reserve price",
+
     "no_fields_empty": "No empty fields",
+
     "cancel": "Cancel",
+
     "news_general": "General",
+
     "news_tecnology": "Technology",
+
     "news_heal": "Health",
+
     "news_empty": "No news",
+
     "card_pay_title": "Pay with credit card",
+
     "card_pay_form": "Card form",
+
     "no_form_complete": "The form is not complete",
+
     "pay": "Pay",
+
     "is_subscribe": "You have subscribed to the event",
+
     "pay_success": "The payment was made successfully",
+
     "back_form": "Return to the form",
+
     "fail_subscription": "Unable to subscribe to event",
+
     "pay_fail": "An error occurred in your payment",
+
     "try_again": "Try again",
+
     "sport": "Sport",
 
+
     "section_event" : "Events",
+
     "section_tourism" : "Tourism",
+
     "section_pharmacy" : "Pharmacy",
+
     "section_service" : "Services",
+
     "section_news" : "News",
+
     "section_bando" : "Laws",
+
     "section_ad" : "Advertisements",
+
     "section_gallery" : "Gallery",
+
     "section_death" : "Deaths",
+
     "section_link" : "Links",
+
     "section_sponsor" : "Sponsor",
+
     "section_incident" : "Incidents",
+
     "section_booking" : "Bookings",
+
     "section_trash" : "Removal of belongings",
+
     "section_quiz" : "Surveys",
 
+
     "subsection_event": "Events",
+
     "subsection_tourism": "Tourism places",
+
     "subsection_pharmacy": "Pharmacies",
+
     "subsection_service": "Services",
+
     "subsection_news": "News",
+
     "subsection_bando": "Laws",
+
     "subsection_ad": "Ads",
+
     "subsection_gallery": "Photos",
+
     "subsection_death": "Deaths",
+
     "subsection_link": "Link",
+
     "subsection_sponsor": "Sponsors",
+
     "subsection_incident": "Incidents",
+
     "subsection_booking": "Bookings",
+
     "subsection_trash": "Send a belongins",
+
     "subsection_quiz": "Quiz",
 
+
     "bottom_home": "Home",
+
     "bottom_event": "Events",
+
     "bottom_news": "News",
+
     "bottom_menu": "Menu",
 
+
     "all": "All",
+
     "restaurant": "Restaurant",
+
     "museum": "Museum",
     "hotel":  "Hotel",
     "normal": "Pharmacy",
@@ -76,23 +141,37 @@
     "heal": "Health",
     "leisure":  "Leisure",
     "no_service":  "No services available",
+
     "no_band":  "No laws available",
+
     "no_ad":  "No advertisements available",
+
     "no_photo":  "No photos available",
+
     "no_death":  "No death available",
+
     "no_link":  "No links available",
+
     "no_sponsor":  "No sponsors available",
+
     "no_incident":  "No incidents",
+
     "reason":  "Reason",
+
     "description":  "Description",
+
     "send":  "Send",
+
     "no_book":  "No bookings available",
+
     "see_book":  "See my bookings",
+
     "no_now_book":  "You don't have reservations yet",
+
     "trash":  "Furniture",
     "ad_photo":  "Add photo",
     "no_quiz": "No quiz available",
-    
+
     "toast_send_mail": "Mail is being sent",
     "toast_send_mail_correct": "The mail has been sent",
     "toast_error": "You must fill in the fields",
@@ -119,10 +198,5 @@
     "reserve_now": "Book now",
     "no_reserve": "Already reserved",
     "intro_email_phone": "Enter email or phone",
-    "confirm_reserve": "We will confirm your reservation by email or phone",
-    
-    "identification": "Identification",
-    "vote": "Vote",
-    "invalid_dni": "The id is not valid"
-    
+    "confirm_reserve": "We will confirm your reservation by email or phone"
 }

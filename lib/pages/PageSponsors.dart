@@ -4,12 +4,9 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../models/Sponsor.dart';
-
 class PageSponsors extends StatefulWidget {
   const PageSponsors({super.key});
-
   @override
   State<StatefulWidget> createState() {
     return PageState();
@@ -22,7 +19,6 @@ class PageState extends State<PageSponsors> {
     section.getSponsorsByLocality('Bolea');
     super.initState();
   }
-
   @override
   Widget build(BuildContext pageContext) {
     return MaterialApp(
@@ -53,7 +49,7 @@ class PageState extends State<PageSponsors> {
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Text(AppLocalizations.of(pageContext)!.no_sponsor, style: TextStyle(fontWeight: FontWeight.bold)),
-                                 Icon(Icons.handshake, size: 50.0)
+                                  Icon(Icons.handshake, size: 50.0)
                                 ]
                             ),
                           );
@@ -67,28 +63,27 @@ class PageState extends State<PageSponsors> {
     );
   }
 }
-
 Widget cardSponsor(Sponsor sponsor){
   return InkWell(
     child: Card(
-      child: Container(
-        padding: const EdgeInsets.all(14.0),
-        child:  Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Row(
-              children: [
-                const Icon(Icons.apartment_sharp),
-                const SizedBox(width: 4.0),
-                Text(sponsor.title!)
-              ],
-            ),
-           const SizedBox(height: 4.0),
-            Text(sponsor.description!),
-            if(sponsor.urlImage != null) Image.network(sponsor.urlImage!) else Image.asset('assets/sponsors.png', width: 50, height: 50)
-          ],
-        ),
-      )
+        child: Container(
+          padding: const EdgeInsets.all(14.0),
+          child:  Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.apartment_sharp),
+                  const SizedBox(width: 4.0),
+                  Text(sponsor.title!)
+                ],
+              ),
+              const SizedBox(height: 4.0),
+              Text(sponsor.description!),
+              if(sponsor.urlImage != null) Image.network(sponsor.urlImage!) else Image.asset('assets/sponsors.png')
+            ],
+          ),
+        )
     ),
   );
 }

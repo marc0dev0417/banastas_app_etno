@@ -26,7 +26,6 @@
     "pay_fail": "Une erreur s'est produite dans votre paiement",
     "try_again": "Essayer à nouveau",
     "sport": "Sport",
-
     "section_event": "Événements",
     "section_tourism": "Tourisme",
     "section_pharmacy": "Pharmacie",
@@ -42,7 +41,6 @@
     "section_booking": "Réservations",
     "section_trash": "Retrait des biens",
     "section_quiz": "Enquête",
-
     "subsection_event" : "Événements",
     "subsection_tourism" : "Lieux touristiques",
     "subsection_pharmacy" : "Pharmacie",
@@ -58,12 +56,10 @@
     "subsection_booking" : "Réservations",
     "subsection_trash" : "Envoyer un avis d'ensemencement",
     "subsection_quiz" : "Enquête",
-
     "bottom_home": "Début",
     "bottom_event": "Événements",
     "bottom_news": "Informations",
     "bottom_menu": "Menu",
-
     "all": "Tout",
     "restaurant": "Restaurant",
     "museum": "Musée",
@@ -117,10 +113,5 @@
     "reserve_now": "Réserver maintenant",
     "no_reserve": "Déjà réservé",
     "intro_email_phone": "Entrez votre e-mail ou votre téléphone",
-    "confirm_reserve": "Nous confirmerons votre réservation par courrier électronique ou par téléphone",
-    
-    "identification": "Identifiant",
-    "vote": "Vote",
-    "invalid_dni": "L'identifiant n'est pas valide"
-    
+    "confirm_reserve": "Nous confirmerons votre réservation par courrier électronique ou par téléphone"
 }

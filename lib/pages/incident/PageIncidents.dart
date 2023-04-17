@@ -8,30 +8,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../models/Incident.dart';
 import '../../store/section.dart';
-
 class PageIncidents extends StatefulWidget {
   const PageIncidents({super.key});
-
   @override
   State<StatefulWidget> createState() {
     return PageState();
   }
 }
-
 class PageState extends State<PageIncidents> {
   final Section section = Section();
   List<Incident> incidents = [];
-  
+
   @override
   void initState() {
     FirebaseMessaging.instance.getToken().then((value) => section.getAllIncidentByLocalityAndFcmToken('Bolea', value!).then((value) =>
         setState(() {
-            incidents = value;
+          incidents = value;
         })
     ));
     super.initState();
   }
-
   Widget renderIncidents(){
     if(incidents.isNotEmpty){
       return ListView(
@@ -51,7 +47,7 @@ class PageState extends State<PageIncidents> {
       );
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,25 +72,23 @@ class PageState extends State<PageIncidents> {
     );
   }
 }
-
 Widget cardIncident(Incident incident){
   return InkWell(
-    child: Card(
-      child: Container(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Icon(Icons.warning, color: Colors.yellow),
-              Text('INCIDENTE - ${incident.title!}', style: const TextStyle(fontWeight: FontWeight.bold)),
-              const Icon(Icons.verified, color: Colors.red)
-            ]
-        ),
+      child: Card(
+          child: Container(
+            padding: const EdgeInsets.all(4.0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Icon(Icons.warning, color: Colors.yellow),
+                  Text('INCIDENTE - ${incident.title!}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                  const Icon(Icons.verified, color: Colors.red)
+                ]
+            ),
+          )
       )
-    )
   );
 }
-
 Widget cardIncidents(BuildContext context, Incident incident) {
   return SizedBox(
     height: 130.0,

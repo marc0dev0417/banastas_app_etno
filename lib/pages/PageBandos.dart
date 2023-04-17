@@ -6,10 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Bandos.dart';
-
 class PageBandos extends StatefulWidget {
   const PageBandos({super.key});
-
   @override
   State<StatefulWidget> createState() {
     return PageState();
@@ -35,7 +33,7 @@ class PageState extends State<PageBandos> {
             AppLocalizations.of(context)!.section_bando,
             Icons.language,
             false,
-            () => null,
+                () => null,
             null),
         body: Column(children: [
           const WarningWidgetValueNotifier(),
@@ -84,7 +82,7 @@ Widget carBando(Bandos bandos, BuildContext context) {
                         style: const TextStyle(fontWeight: FontWeight.bold)),
                     Text(bandos.issuedDate!,
                         style:
-                            const TextStyle(color: Colors.grey, fontSize: 12.0))
+                        const TextStyle(color: Colors.grey, fontSize: 12.0))
                   ]),
               const Icon(Icons.subdirectory_arrow_right, color: Colors.red)
             ]),
@@ -108,7 +106,7 @@ showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(
                       child: bandos.imageUrl != null
                           ? Image.network(bandos.imageUrl!, fit: BoxFit.fill)
                           : const Icon(Icons.campaign,
-                              size: 80.0, color: Colors.red)),
+                          size: 80.0, color: Colors.red)),
                   Container(
                     alignment: Alignment.topLeft,
                     child: Column(
@@ -136,7 +134,7 @@ showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(
                               const Divider(),
                               Container(
                                 padding:
-                                    const EdgeInsets.only(left: 15.0, top: 4.0),
+                                const EdgeInsets.only(left: 15.0, top: 4.0),
                                 alignment: Alignment.topLeft,
                                 child: const Text('Emitido',
                                     style: TextStyle(

@@ -5,9 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import '../widgets/appbar_navigation.dart';
-
 class PageDefunctions extends StatefulWidget {
   const PageDefunctions({super.key});
   @override
@@ -15,16 +13,13 @@ class PageDefunctions extends StatefulWidget {
     return PageState();
   }
 }
-
 class PageState extends State<PageDefunctions> {
   final Section section = Section();
-
   @override
   void initState() {
     section.getAllDefunctionsByLocality('Bolea');
     super.initState();
   }
-
   @override
   Widget build(BuildContext pageContext) {
     return MaterialApp(
@@ -32,11 +27,11 @@ class PageState extends State<PageDefunctions> {
       title: 'Page defunctions',
       home: Scaffold(
           appBar: appBarCustom(
-            context,
-            true,
+              context,
+              true,
               AppLocalizations.of(context)!.section_death,
               Icons.language,
-                  false,
+              false,
                   () => null,
               null
           ),
@@ -77,39 +72,39 @@ class PageState extends State<PageDefunctions> {
     );
   }
 }
-
 Widget cardDefunction(BuildContext context, Defunction defunction){
   return SizedBox(
-    height: 100,
-    child: InkWell(
-      onTap: () => showDialogDefunction(context, defunction),
-      child: Card(
-        child: Container(
-          padding: const EdgeInsets.all(14.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset('assets/pass.png', height: 35.0, width: 35.0),
-
-                Column(
+      height: 100,
+      child: InkWell(
+          onTap: () => showDialogDefunction(context, defunction),
+          child: Card(
+              child: Container(
+                padding: const EdgeInsets.all(14.0),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(defunction.name!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 2.0),
-                      Text('${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
-                      ]
+                      Image.asset('assets/pass.png', height: 35.0, width: 35.0),
+                      const SizedBox(
+                          width: 16.0
+                      ),
+                      Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(defunction.name!, style: const TextStyle(fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 2.0),
+                            Text('${defunction.deathDate}', style: const TextStyle(color: Colors.grey)),
+                          ]
+                      ),
+                      const Icon(Icons.chevron_right, size: 40.0)
+                    ]
                 ),
-                const Icon(Icons.chevron_right, size: 40.0)
-              ]
-          ),
-        )
+              )
+          )
       )
-    )
   );
 }
-
 showDialogDefunction(BuildContext context, Defunction defunction) => showBottomSheet(enableDrag: true ,context: context, builder: (context){
   return Wrap(
     children: [
@@ -117,7 +112,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
         children: [
           Container(
               padding: const EdgeInsets.only(top: 15.0),
-              child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 300.0, width: 300.0, fit: BoxFit.fill) : Image.network(defunction.imageUrl!, fit: BoxFit.fill)
+              child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 100.0, width: 100.0) : Image.network(defunction.imageUrl!)
           ),
           Container(
             alignment: Alignment.topLeft,
@@ -138,7 +133,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
                         alignment: Alignment.topLeft,
                         child: Text('${defunction.username}', style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
-                     const SizedBox(height: 4.0),
+                      const SizedBox(height: 4.0),
                       Container(
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,

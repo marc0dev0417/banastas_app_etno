@@ -1,13 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ecomputer.etno_app">
     <uses-permission android:name="android.permission.INTERNET"/>
-   <application
+    <application
         android:label="Etno"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
-       <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyDZcqlsS-nn_OIV9-ZsoC_HCGYSdgWld0U">
-       </meta-data>
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDZcqlsS-nn_OIV9-ZsoC_HCGYSdgWld0U">
+        </meta-data>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -21,18 +21,17 @@
                  while the Flutter UI initializes. After that, this theme continues
                  to determine the Window background behind the Flutter UI. -->
             <meta-data
-              android:name="io.flutter.embedding.android.NormalTheme"
-              android:resource="@style/NormalTheme"
-              />
+                android:name="io.flutter.embedding.android.NormalTheme"
+                android:resource="@style/NormalTheme"
+                />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
-
-                <intent-filter>
-                    <action android:name="com.google.firebase.MESSAGING_EVENT" />
-                    <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-                </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->

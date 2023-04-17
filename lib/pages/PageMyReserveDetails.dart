@@ -16,8 +16,6 @@ class PageMyReserveDetails extends StatefulWidget {
 }
 class PageState extends State<PageMyReserveDetails> {
   Reserve get props => widget.reserve;
-
-
   Future<void> launchInBrowser(Uri url) async {
     if(!await launchUrl(
         url,
@@ -26,7 +24,6 @@ class PageState extends State<PageMyReserveDetails> {
       throw Exception('Could not launch $url');
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

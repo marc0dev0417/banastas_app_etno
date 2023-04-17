@@ -9,49 +9,41 @@ import 'package:url_launcher/url_launcher.dart';
 import '../models/Service.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../store/section.dart';
-
 class PageServicesList extends StatefulWidget{
   const PageServicesList({super.key, required this.locality, required this.category});
-
   final String locality;
   final String category;
-
   @override
   State<StatefulWidget> createState() {
     return ServicesListState();
   }
 }
-
 class ServicesListState extends State<PageServicesList> {
   final Section section = Section();
   PageServicesList get props => super.widget;
-
   @override
   void initState() {
     section.getAllServiceByLocalityAndCategory(props.locality, props.category);
     super.initState();
   }
-
   Widget renderWidgets(BuildContext contextState){
-      return Observer(builder: (context) {
-        if(section.getListServices.isNotEmpty){
-          return servicesList(section, contextState);
-        }else{
-          return Container(
+    return Observer(builder: (context) {
+      if(section.getListServices.isNotEmpty){
+        return servicesList(section, contextState);
+      }else{
+        return Container(
             padding: const EdgeInsets.only(top: 300.0),
             alignment: Alignment.center,
             child: Column(
-              children: [
-                Text(AppLocalizations.of(contextState)!.no_service, style: TextStyle(fontWeight: FontWeight.bold)),
-                Icon(Icons.medical_information, size: 50.0)
-              ]
+                children: [
+                  Text(AppLocalizations.of(contextState)!.no_service, style: TextStyle(fontWeight: FontWeight.bold)),
+                  Icon(Icons.medical_information, size: 50.0)
+                ]
             )
-          );
-        }
-      });
-    }
-
-
+        );
+      }
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -85,8 +77,8 @@ Widget servicesList(Section section, BuildContext context){
     await launchUrl(launchUri);
   }
   return ListView(
-    shrinkWrap: true,
-    children:
+      shrinkWrap: true,
+      children:
       section.getListServices.map((e) =>
           InkWell(
             child: Container(
@@ -94,7 +86,7 @@ Widget servicesList(Section section, BuildContext context){
               child: Card(
                   child: Column(
                     children: [
-                      Column(
+                      Row(
                         children: [
                           renderImageServiceList(e),
                           SizedBox(width: 5.0),
@@ -113,19 +105,19 @@ Widget servicesList(Section section, BuildContext context){
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(AppLocalizations.of(context)!.type_service, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
-                                  Row(
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-                                      Text(AppLocalizations.of(context)!.service, style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
-                                     const SizedBox(
-                                        width: 180.0,
-                                      ),
-                                      ElevatedButton(
-                                          onPressed: (){ launchCaller(e.number!); },
-                                          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                                          child: Text(AppLocalizations.of(context)!.call),
-                                      )
-                            ]),
+                            Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(AppLocalizations.of(context)!.service, style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
+                                  const SizedBox(
+                                    width: 180.0,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: (){ launchCaller(e.number!); },
+                                    style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                                    child: Text(AppLocalizations.of(context)!.call),
+                                  )
+                                ]),
                           ],
                         ),
                       )
@@ -137,17 +129,16 @@ Widget servicesList(Section section, BuildContext context){
       ).toList()
   );
 }
-
 Widget renderImageServiceList(Service service){
   if (service.imageUrl == null){
-    return Image.asset('assets/services.png', height: 200, width: 200);
+    return Image.asset('assets/Loading_icon.gif', height: 20, width: 20);
   }else{
     return  ClipRRect(borderRadius: BorderRadius.circular(500.0),
-      child: Image.network(
+        child: Image.network(
           service.imageUrl!,
           width: 50,
           height: 50,
-        fit: BoxFit.cover,
-      )); //Image.network(service.imageUrl!, fit: BoxFit.fill, height: 40, width: 40);
+          fit: BoxFit.cover,
+        )); //Image.network(service.imageUrl!, fit: BoxFit.fill, height: 40, width: 40);
   }
 }
