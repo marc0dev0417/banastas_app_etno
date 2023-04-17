@@ -91,9 +91,7 @@ Widget cardDefunction(BuildContext context, Defunction defunction){
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset('assets/pass.png', height: 35.0, width: 35.0),
-                const SizedBox(
-                    width: 16.0
-                ),
+
                 Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +117,7 @@ showDialogDefunction(BuildContext context, Defunction defunction) => showBottomS
         children: [
           Container(
               padding: const EdgeInsets.only(top: 15.0),
-              child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 100.0, width: 100.0) : Image.network(defunction.imageUrl!)
+              child: defunction.imageUrl == null ? Image.asset('assets/defunctions.png', height: 300.0, width: 300.0, fit: BoxFit.fill) : Image.network(defunction.imageUrl!, fit: BoxFit.fill)
           ),
           Container(
             alignment: Alignment.topLeft,

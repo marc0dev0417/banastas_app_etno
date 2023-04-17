@@ -148,10 +148,9 @@
   "reserve_now": "Orain erreserbatu",
   "no_reserve": "Jadanik erreserbatuta dago",
   "intro_email_phone": "Sartu emaila edo telefonoa",
-  "confirm_reserve": "Zure erreserba email bidez edo telefono bidez baieztatuko dugu"
+  "confirm_reserve": "Zure erreserba email bidez edo telefono bidez baieztatuko dugu",
   
   "identification": "Identifikazio",
   "vote": "Bozkatu",
   "invalid_dni": "NANa ez da baliozkoa"
-  
 }
