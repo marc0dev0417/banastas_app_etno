@@ -1,4 +1,3 @@
-import 'package:etno_app/main.dart';
 import 'package:etno_app/pages/incident/IncidentForm.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
@@ -58,7 +57,7 @@ class PageState extends State<PageIncidents> {
       title: 'Mis incidencias',
       home: Scaffold(
         appBar: appBarCustom(context, true , AppLocalizations.of(context)!.section_incident, Icons.language, false, () => null, null),
-        body: ListView(
+        body: Column(
           children: [
             const WarningWidgetValueNotifier(),
             Container(
@@ -137,7 +136,7 @@ Widget cardIncidents(BuildContext context, Incident incident) {
                 height: 30.0,
                 width: 150.0,
                 color: !incident.isSolved! ? Colors.red : Colors.green,
-                child: !incident.isSolved! ?  Text(AppLocalizations.of(context)!.awaiting_resolution, style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
+                child: !incident.isSolved! ?  const Text('Esperando resolución', style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
             )
           ],
         ),

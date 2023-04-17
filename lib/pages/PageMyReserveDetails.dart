@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 import '../models/Reserve.dart';
 
 class PageMyReserveDetails extends StatefulWidget {
@@ -55,7 +55,7 @@ class PageState extends State<PageMyReserveDetails> {
                     Text(props.place!.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
                     GestureDetector(
                         onTap: () => launchInBrowser(Uri.parse('https://maps.google.com/?daddr=${props.place?.latitude!},${props.place?.longitude!}')),
-                        child: Text(AppLocalizations.of(context)!.show_map, style: TextStyle(color: Colors.blue))
+                        child: const Text('Mostrar Mapa', style: TextStyle(color: Colors.blue))
                     )
                   ],
                 ),
@@ -65,13 +65,13 @@ class PageState extends State<PageMyReserveDetails> {
                   trimLines: 2,
                   colorClickableText: Colors.blue,
                   trimMode: TrimMode.Line,
-                  trimCollapsedText: AppLocalizations.of(context)!.read_more,
-                  trimExpandedText: AppLocalizations.of(context)!.show_less,
+                  trimCollapsedText: 'Leer Más',
+                  trimExpandedText: ' Mostrar menos',
                   moreStyle: const TextStyle(fontSize: 12.0, color: Colors.blue),
                   lessStyle: const TextStyle(fontSize: 12.0, color: Colors.blue),
                 ),
                 const SizedBox(height: 16.0),
-                Text(AppLocalizations.of(context)!.schedule, style: TextStyle(fontWeight: FontWeight.bold)),
+                const Text('Horario:', style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8.0),
                 const Text('9:30 a 13:30 h'),
 
