@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/New.dart';
+import 'news/TabBarGeneral.dart';
 
 class PageNewDetail extends StatelessWidget {
   const PageNewDetail({super.key, required this.new_});
@@ -16,7 +17,7 @@ class PageNewDetail extends StatelessWidget {
               Container(
                   height: 250,
                   decoration:  BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill)
+                      image: DecorationImage(image: renderBackgroundImage(new_), fit: BoxFit.fill)
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

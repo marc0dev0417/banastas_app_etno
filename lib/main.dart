@@ -48,6 +48,7 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 }
 
 final internetChecker = CheckInternetConnection();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -76,7 +77,7 @@ class App extends StatelessWidget {
       builder: (context, child) {
         final provider = Provider.of<LocaleProvider>(context);
         return BlocProvider<ColorBloc>(
-            create: (context) => ColorBloc(),
+          create: (context) => ColorBloc(),
           child: MaterialApp(
             theme: ThemeData(useMaterial3: true),
             locale: provider.locale,
@@ -115,16 +116,15 @@ class HomeState extends State<Home> {
     RemoteMessage? initialMessage =
         await FirebaseMessaging.instance.getInitialMessage();
   }
-  Future<void> launchInBrowser(Uri url) async{
-    if(!await launchUrl(
-        url,
-        mode: LaunchMode.externalApplication
-    )){
+
+  Future<void> launchInBrowser(Uri url) async {
+    if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
       throw Exception('Could not launch $url');
     }
   }
 
   late var timer;
+
   @override
   void initState() {
     controller = TextEditingController();
@@ -146,9 +146,11 @@ class HomeState extends State<Home> {
 
     timer = Timer.periodic(
         const Duration(seconds: 1),
-            (Timer t) => setState(() {
-          section.getWeather(42.138642896056545, -0.40759873321216106).then((value) => weather = value);  //42.138642896056545, -0.40759873321216106
-        }));
+        (Timer t) => setState(() {
+              section.getWeather(42.138642896056545, -0.40759873321216106).then(
+                  (value) => weather =
+                      value); //42.138642896056545, -0.40759873321216106
+            }));
   }
 
   @override
@@ -172,296 +174,358 @@ class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: appBarCustom(context, false, AppLocalizations.of(context)!.bottom_home,
-          Icons.language, true, () => null, null),
-      body: SafeArea(
-          child: Container(
-            color: context.watch<ColorBloc>().state.colorPrimary,
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const WarningWidgetValueNotifier(),
-            SizedBox(
-              height: 120.0,
-              width: double.maxFinite,
-              child: GestureDetector(
-                child: Card.Card(
-                    color: context.watch<ColorBloc>().state.colorPrimary.withOpacity(0.1),
-                    elevation: 2.0,
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.only(left: 16.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Image.asset('assets/bolea_shield.png', width: 100.0, height: 100.0),
-                          const SizedBox(width: 16.0),
-                          Column(
-                            children: [
-                              weather.currentWeather?.temperature! == null
-                                  ?
-                              Container(
-                                padding: const EdgeInsets.only(top: 16.0),
-                                child: const SizedBox(
-                                    width: 15.0,
-                                    height: 15.0,
-                                    child: CircularProgressIndicator(
-                                        color: Colors.white)),
-                              )
-                                  :
-                                  Container(
-                                    padding: EdgeInsets.only(top: 16.0),
-                                    child: Column(
-                                      children: [
-                                        Text('${weather.currentWeather?.temperature!}ºC',
-                                            style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 30.0,
-                                                color: Colors.white
-                                            )
-                                        ),
-
-                                        const Text('Bolea',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 18.0,
-                                                color: Colors.white
-                                            )
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                            ],
-                          )
-                        ],
-                      ),
-                    )),
-              ),
-            ),
-            Expanded(
-                child: Observer(
-                    builder: (context) => GridView.count(
-                        crossAxisCount: 2,
-                        children: section.getSections
-                            .map((e) => GestureDetector(
-                                  onTap: () {
-                                    switch (e.title) {
-                                      case 'Eventos':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageEvents(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Turismo':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageTourism(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Farmacias':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PagePharmacies(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Retirada de Enseres':
-                                        Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEnseres()));
-                                        break;
-                                      case 'Anuncios':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageAd(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Noticias':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                     PageNews(pageContext: context),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Galería':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageGallery(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Enlaces':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageLinks(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Defunciones':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageDefunctions(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Servicios':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageServices(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Patrocinadores':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageSponsors(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Bandos':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageBandos(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Incidentes':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageIncidents(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Reservas':
-                                        Navigator.push(
-                                            context,
-                                            PageRouteBuilder(
-                                                pageBuilder: (context,
-                                                        animation1,
-                                                        animation2) =>
-                                                    const PageListReserves(),
-                                                transitionDuration:
-                                                    Duration.zero,
-                                                reverseTransitionDuration:
-                                                    Duration.zero));
-                                        break;
-                                      case 'Yo decido':
-                                        Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageQuiz()));
-                                        break;
-                                      default: launchInBrowser(Uri.parse(e.webUrl!));
-                                    }
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                        padding: const EdgeInsets.all(16.0),
+        backgroundColor: Colors.white,
+        appBar: appBarCustom(
+            context,
+            false,
+            AppLocalizations.of(context)!.bottom_home,
+            Icons.language,
+            true,
+            () => null,
+            null),
+        body: SafeArea(
+            child: Container(
+          color: context.watch<ColorBloc>().state.colorPrimary,
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const WarningWidgetValueNotifier(),
+              SizedBox(
+                height: 120.0,
+                width: double.maxFinite,
+                child: GestureDetector(
+                  child: Card.Card(
+                      color: context
+                          .watch<ColorBloc>()
+                          .state
+                          .colorPrimary
+                          .withOpacity(0.1),
+                      elevation: 2.0,
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: const EdgeInsets.only(left: 16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset('assets/bolea_shield.png',
+                                width: 100.0, height: 100.0),
+                            const SizedBox(width: 16.0),
+                            Column(
+                              children: [
+                                weather.currentWeather?.temperature! == null
+                                    ? Container(
+                                        padding:
+                                            const EdgeInsets.only(top: 16.0),
+                                        child: const SizedBox(
+                                            width: 15.0,
+                                            height: 15.0,
+                                            child: CircularProgressIndicator(
+                                                color: Colors.white)),
+                                      )
+                                    : Container(
+                                        padding: EdgeInsets.only(top: 16.0),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Icon(e.iconData, size: 40, color: Colors.white),
-                                            Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                Text(getSectionText(e.title!, context),
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                        fontWeight: FontWeight.bold,
-                                                        fontSize: 15.0), textAlign: TextAlign.center,),
-                                                renderTextSection(
-                                                    e.title!, sectionDetails, context)
-                                              ],
-                                            )],
+                                            Text(
+                                                '${weather.currentWeather?.temperature!}ºC',
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30.0,
+                                                    color: Colors.white)),
+                                            const Text('Bolea',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w400,
+                                                    fontSize: 18.0,
+                                                    color: Colors.white)),
+                                          ],
                                         ),
+                                      )
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                ),
+              ),
+              Expanded(
+                  child: Observer(
+                      builder: (context) => GridView.count(
+                          crossAxisCount: 2,
+                          children: section.getSections
+                              .map((e) => GestureDetector(
+                                    onTap: () {
+                                      switch (e.title) {
+                                        case 'Eventos':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageEvents(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Turismo':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                       PageTourism(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Farmacias':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                       PagePharmacies(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Retirada de Enseres':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageEnseres()));
+                                          break;
+                                        case 'Anuncios':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageAd(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Noticias':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      PageNews(
+                                                          pageContext: context),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Galería':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageGallery(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Enlaces':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageLinks(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Defunciones':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageDefunctions(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Servicios':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageServices(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Patrocinadores':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageSponsors(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Bandos':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageBandos(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Incidentes':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageIncidents(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Reservas':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageListReserves(),
+                                                  transitionDuration:
+                                                      Duration.zero,
+                                                  reverseTransitionDuration:
+                                                      Duration.zero));
+                                          break;
+                                        case 'Yo decido':
+                                          Navigator.push(
+                                              context,
+                                              PageRouteBuilder(
+                                                  pageBuilder: (context,
+                                                          animation1,
+                                                          animation2) =>
+                                                      const PageQuiz()));
+                                          break;
+                                        default:
+                                          launchInBrowser(Uri.parse(e.webUrl!));
+                                      }
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Icon(e.iconData,
+                                              size: 40, color: Colors.white),
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                getSectionText(
+                                                    e.title!, context),
+                                                style: const TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15.0),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              renderTextSection(e.title!,
+                                                  sectionDetails, context)
+                                            ],
+                                          )
+                                        ],
                                       ),
-                                )).toList())))
-          ],
-        ),
-      )),
-      bottomNavigationBar: bottomNavigation(context, 0)
-    );
+                                    ),
+                                  ))
+                              .toList())))
+            ],
+          ),
+        )),
+        bottomNavigationBar: bottomNavigation(context, 0));
   }
 }
 
-
 String getSectionText(String sectionText, BuildContext context) {
+
+  switch (sectionText) {
+    case 'Eventos':
+      return AppLocalizations.of(context)!.section_event;
+    case 'Turismo':
+      return AppLocalizations.of(context)!.section_tourism;
+    case 'Farmacias':
+      return AppLocalizations.of(context)!.section_pharmacy;
+    case 'Servicios':
+      return AppLocalizations.of(context)!.section_service;
+    case 'Noticias':
+      return AppLocalizations.of(context)!.section_news;
+    case 'Bandos':
+      return AppLocalizations.of(context)!.section_bando;
+    case 'Anuncios':
+      return AppLocalizations.of(context)!.section_ad;
+    case 'Galería':
+      return AppLocalizations.of(context)!.section_gallery;
+    case 'Defunciones':
+      return AppLocalizations.of(context)!.section_death;
+    case 'Enlaces':
+      return AppLocalizations.of(context)!.section_link;
+    case 'Patrocinadores':
+      return AppLocalizations.of(context)!.section_sponsor;
+    case 'Incidentes':
+      return AppLocalizations.of(context)!.section_incident;
+    case 'Reservas':
+      return AppLocalizations.of(context)!.section_booking;
+    case 'Incidentes':
+      return AppLocalizations.of(context)!.section_incident;
+    case 'Retirada de Enseres':
+      return AppLocalizations.of(context)!.section_trash;
+    case 'Yo decido':
+      return AppLocalizations.of(context)!.section_quiz;
+    default:
+      return '';
+      
   switch(sectionText) {
     case 'Eventos': return AppLocalizations.of(context)!.section_event;
     case 'Turismo': return AppLocalizations.of(context)!.section_tourism;
@@ -480,98 +544,114 @@ String getSectionText(String sectionText, BuildContext context) {
     case 'Retirada de Enseres': return AppLocalizations.of(context)!.section_trash;
     case 'Yo decido': return AppLocalizations.of(context)!.section_quiz;
     default: return sectionText;
+    
   }
 }
 
-
-Widget renderTextSection(String sectionName, SectionDetails sectionDetails, BuildContext context) {
+Widget renderTextSection(
+    String sectionName, SectionDetails sectionDetails, BuildContext context) {
   switch (sectionName) {
     case 'Eventos':
       return sectionDetails.eventQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.eventQuantity} ${AppLocalizations.of(context)!.subsection_event}',
+          : Text(
+              '${sectionDetails.eventQuantity} ${AppLocalizations.of(context)!.subsection_event}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Turismo':
       return sectionDetails.tourismQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.tourismQuantity} ${AppLocalizations.of(context)!.subsection_tourism}',
+          : Text(
+              '${sectionDetails.tourismQuantity} ${AppLocalizations.of(context)!.subsection_tourism}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Farmacias':
       return sectionDetails.pharmacyQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.pharmacyQuantity} ${AppLocalizations.of(context)!.subsection_pharmacy}',
+          : Text(
+              '${sectionDetails.pharmacyQuantity} ${AppLocalizations.of(context)!.subsection_pharmacy}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Anuncios':
       return sectionDetails.adQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.adQuantity} ${AppLocalizations.of(context)!.subsection_ad}',
+          : Text(
+              '${sectionDetails.adQuantity} ${AppLocalizations.of(context)!.subsection_ad}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Noticias':
       return sectionDetails.newsQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.newsQuantity} ${AppLocalizations.of(context)!.subsection_news}',
+          : Text(
+              '${sectionDetails.newsQuantity} ${AppLocalizations.of(context)!.subsection_news}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Galería':
       return sectionDetails.galleryQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.galleryQuantity} ${AppLocalizations.of(context)!.subsection_gallery}',
+          : Text(
+              '${sectionDetails.galleryQuantity} ${AppLocalizations.of(context)!.subsection_gallery}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Enlaces':
       return sectionDetails.linkQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.linkQuantity} ${AppLocalizations.of(context)!.subsection_link}',
+          : Text(
+              '${sectionDetails.linkQuantity} ${AppLocalizations.of(context)!.subsection_link}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Defunciones':
       return sectionDetails.deathQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.deathQuantity} ${AppLocalizations.of(context)!.subsection_death}',
+          : Text(
+              '${sectionDetails.deathQuantity} ${AppLocalizations.of(context)!.subsection_death}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Servicios':
       return sectionDetails.serviceQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.serviceQuantity} ${AppLocalizations.of(context)!.subsection_service}',
+          : Text(
+              '${sectionDetails.serviceQuantity} ${AppLocalizations.of(context)!.subsection_service}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Patrocinadores':
       return sectionDetails.sponsorQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.sponsorQuantity} ${AppLocalizations.of(context)!.subsection_sponsor}',
+          : Text(
+              '${sectionDetails.sponsorQuantity} ${AppLocalizations.of(context)!.subsection_sponsor}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Bandos':
       return sectionDetails.bandoQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.bandoQuantity} ${AppLocalizations.of(context)!.subsection_bando}',
+          : Text(
+              '${sectionDetails.bandoQuantity} ${AppLocalizations.of(context)!.subsection_bando}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Incidentes':
       return sectionDetails.incidentQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.incidentQuantity} ${AppLocalizations.of(context)!.subsection_incident}',
+          : Text(
+              '${sectionDetails.incidentQuantity} ${AppLocalizations.of(context)!.subsection_incident}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Reservas':
       return sectionDetails.reserveQuantity == null
           ? const SizedBox(
               width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text('${sectionDetails.reserveQuantity} ${AppLocalizations.of(context)!.subsection_booking}',
+          : Text(
+              '${sectionDetails.reserveQuantity} ${AppLocalizations.of(context)!.subsection_booking}',
               style: const TextStyle(color: Colors.white, fontSize: 10.0));
     case 'Retirada de Enseres':
       return Text(AppLocalizations.of(context)!.subsection_trash,
-          style: TextStyle(color: Colors.white, fontSize: 10.0), textAlign: TextAlign.center);
+          style: TextStyle(color: Colors.white, fontSize: 10.0),
+          textAlign: TextAlign.center);
 
     case 'Yo decido':
       return Text(AppLocalizations.of(context)!.subsection_quiz,
           style: TextStyle(color: Colors.white, fontSize: 10.0));
     default:
-      return const Text('', style: TextStyle(color: Colors.blue, fontSize: 10.0));
+      return const Text('',
+          style: TextStyle(color: Colors.blue, fontSize: 10.0));
   }
 }

@@ -91,7 +91,36 @@
     "ad_photo":  "Engadir imaxe",
     "no_quiz": "Non hai enquisas dispoñibles",
 
+    "toast_send_mail": "Estase enviando correo...",
+    "toast_send_mail_correct": "O correo foi enviado",
+    "toast_error": "Debes cubrir os campos",
+
+    "awaiting_resolution": "en espera de resolución",
+    "see": "Ver reserva",
+    "identification": "Identificación",
+    "invalid_dni": "ID non válido",
+    "vote": "Votar",
+    "day_defunction": "Día da morte",
+    "type_service": "Tipo de servizo",
+    "call": "Chamar",
+    "defunction": "Falecido en ",
+
+    "see_more": "Ver máis",
+    "restaurants": "Restaurantes",
+    "hotels": "Hoteis",
+    "others": "Outros",
+
+    "show_map": "Amosar mapa",
+    "schedule": "Horario:",
+    "read_more": "Ler máis",
+    "show_less": "Amosar menos",
+    "reserve_now": "Reservar agora",
+    "no_reserve": "Xa está reservado",
+    "intro_email_phone": "Introduce o teu email ou teléfono",
+    "confirm_reserve": "Confirmaremos a túa reserva por correo electrónico ou por teléfono"
+    
     "identification": "Indetificación",
     "vote": "Votar",
     "invalid_dni": "O DNI non é válido"
+    
 }

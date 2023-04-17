@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '146712911855',
     projectId: 'etno-87b26',
     storageBucket: 'etno-87b26.appspot.com',
-    iosClientId: '146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi.apps.googleusercontent.com',
+    iosClientId:
+        '146712911855-gvst7lp8bc1ov6l16qd5qep8u39pnuoi.apps.googleusercontent.com',
     iosBundleId: 'com.ecomputer.etnoApp',
   );
 }
