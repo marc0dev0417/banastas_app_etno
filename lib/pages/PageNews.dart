@@ -25,14 +25,12 @@ final BuildContext pageContext;
 }
 class PageState extends State<PageNews> {
   int tabIndex = 0;
-
   PageNews get prop => widget;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (context) => LocaleProvider(),
       builder: (context, child){
-        final provider = Provider.of<LocaleProvider>(context);
         final List<String> tabs = [
           AppLocalizations.of(context)!.news_general,
           AppLocalizations.of(context)!.news_tecnology,

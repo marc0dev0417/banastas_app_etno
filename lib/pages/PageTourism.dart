@@ -308,6 +308,7 @@ Widget renderImageTab(String urlAsset, String name) {
     return Row(
       children: [
         Image.asset(urlAsset, height: 30.0, width: 30.0),
+        SizedBox(width: 8.0),
         Text(name, style: const TextStyle(color: Colors.black))
       ],
     );

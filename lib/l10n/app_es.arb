@@ -1,4 +1,6 @@
 {
+    "no_connection": "No hay conexión a internet",
+
     "events_empty": "No hay eventos disponibles",
     "event": "Eventos",
     "no_news_heal": "No hay noticias de salud disponibles",
@@ -118,4 +120,9 @@
     "no_reserve": "Ya está reservado",
     "intro_email_phone": "Introduce email o teléfono",
     "confirm_reserve": "Confirmaremos tu reserva por correo electrónico o por teléfono"
+    
+    "identification": "Identificación",
+    "vote": "Votar",
+    "invalid_dni": "No es valido el DNI"
+    
 }

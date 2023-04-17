@@ -6,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-
 class PageQuiz extends StatefulWidget {
   const PageQuiz({super.key});
 
@@ -97,6 +96,9 @@ class PageState extends State<PageQuiz>{
                       const SizedBox(height: 16.0),
                       Text(AppLocalizations.of(pageContext)!.identification, style: TextStyle(color: Colors.red)),
                       TextFormField(
+                        decoration: InputDecoration(
+                          hintText: 'DNI'
+                        ),
                         onChanged: (value) => setState(() {
                           dni = value;
                         }),

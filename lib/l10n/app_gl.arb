@@ -118,4 +118,9 @@
     "no_reserve": "Xa está reservado",
     "intro_email_phone": "Introduce o teu email ou teléfono",
     "confirm_reserve": "Confirmaremos a túa reserva por correo electrónico ou por teléfono"
+    
+    "identification": "Indetificación",
+    "vote": "Votar",
+    "invalid_dni": "O DNI non é válido"
+    
 }

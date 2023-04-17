@@ -248,7 +248,12 @@ class PharmaciesState extends State<PagePharmacies> {
                         },
                         child: Row(children: [
                           renderImageToTab(tab.name!),
+                          
                           Text(renderTextTraslated(tab.name!, context),
+                          
+                          SizedBox(width: 8.0),
+                          Text(tab.name!,
+                          
                               style: const TextStyle(color: Colors.black))
                         ]))
                 ])

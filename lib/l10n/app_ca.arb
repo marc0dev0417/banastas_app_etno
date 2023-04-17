@@ -1,4 +1,6 @@
 {
+    "no_connection": "No hi ha connexió a internet",
+
     "events_empty": "No hi ha esdeveniments disponibles",
     "event": "Esdeveniments",
     "no_news_heal": "No hi ha notícies de salut disponibles",
@@ -119,4 +121,8 @@
     "no_reserve": "Ja està reservat",
     "intro_email_phone": "Introdueix email o telèfon",
     "confirm_reserve": "Confirmarem la teva reserva per correu electrònic o per telèfon"
+    
+    "identification": "Identificació",
+    "vote": "Votar",
+    "invalid_dni": "No és vàlid el DNI"
 }

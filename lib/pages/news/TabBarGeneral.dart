@@ -61,6 +61,7 @@ class PageState extends State<TabBarGeneral> {
 
 Widget cardNew(New new_, BuildContext context) {
   return
+  
     InkWell(
         onTap: () =>
         {
@@ -80,6 +81,53 @@ Widget cardNew(New new_, BuildContext context) {
                               new_.imageUrl)),
                   transitionDuration: Duration.zero,
                   reverseTransitionDuration: Duration.zero)
+                  
+     InkWell(
+       onTap: () => {
+         Navigator.push(
+             context,
+             PageRouteBuilder(
+                 pageBuilder:
+                     (context, animation1, animation2) => PageNewDetail(
+                     new_: New(
+                         new_.idNew,
+                         new_.username,
+                         new_.category,
+                         new_.title,
+                         new_.publicationDate,
+                         new_.description,
+                         new_.imageUrl)),
+                 transitionDuration: Duration.zero,
+                 reverseTransitionDuration: Duration.zero)
+         )
+       },
+      child: Card(
+      child:
+      Container(
+        height: 200.0,
+        alignment: Alignment.bottomLeft,
+      decoration:  BoxDecoration(
+      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill, colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken))),
+          child: Container(
+            alignment: Alignment.bottomLeft,
+            padding: const EdgeInsets.all(4.0),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Text(new_.category!, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12.0, backgroundColor: Colors.black)),
+                      const SizedBox(width: 4.0),
+                      Text(new_.username!, style: const TextStyle(color: Colors.white, backgroundColor: Colors.red, fontWeight: FontWeight.bold, fontSize: 12.0))
+                    ],
+                  ),
+                  const SizedBox(height: 4.0),
+                   Text(new_.description!, style: const TextStyle(color: Colors.white), maxLines: 2)
+                ]
+            ),
+            
           )
         },
         child: Card(
