@@ -245,7 +245,7 @@ class TourismState extends State<PageTourism> {
 
 Widget renderImageTourism(Tourism tourism) {
   if (tourism.imageUrl == null) {
-    return Image.asset('assets/Loading_icon.gif',
+    return Image.asset('assets/tourism.jpg',
         height: 200, fit: BoxFit.fill, width: 400);
   } else {
     return Image.network(tourism.imageUrl!,
