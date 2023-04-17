@@ -19,10 +19,10 @@ class LanguagePickerWidget extends StatelessWidget {
           items: L10n.all.map((locale){
             final flag = L10n.getFlag(locale.languageCode);
             return DropdownMenuItem(
-                value: locale,
-                child: Center(
+              value: locale,
+              child: Center(
                   child: Image.asset(flag, width: 25.0, height: 25.0)
-                ),
+              ),
               onTap: () {
                 final provider = Provider.of<LocaleProvider>(context, listen: false);
                 provider.setLocale(locale);

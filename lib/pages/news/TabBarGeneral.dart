@@ -2,6 +2,7 @@ import 'package:etno_app/store/section.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/constants.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -16,7 +17,8 @@ class TabBarGeneral extends StatefulWidget {
     return PageState();
   }
 }
-class PageState extends State<TabBarGeneral>{
+
+class PageState extends State<TabBarGeneral> {
   final Section section = Section();
 
   @override
@@ -28,33 +30,36 @@ class PageState extends State<TabBarGeneral>{
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        const WarningWidgetValueNotifier(),
-        Observer(builder: (context){
-          if(section.getList.isNotEmpty){
-            return Expanded(
-                child: ListView(
-                    shrinkWrap: true,
-                    children: section.getList.map((e) => cardNew(e, context)).toList()
-                )
-            );
-          }else{
-            return Container(
-                padding: const EdgeInsets.only(top: 250.0),
-                child: Column(
-                    children: [
-                      Text(AppLocalizations.of(context)!.no_news, style: TextStyle(fontWeight: FontWeight.bold)),
-                      Icon(Icons.newspaper, size: 50.0)
-                    ]
-                )
-            );
-          }
-        })
-      ]
+        children: [
+          const WarningWidgetValueNotifier(),
+          Observer(builder: (context) {
+            if (section.getList.isNotEmpty) {
+              return Expanded(
+                  child: ListView(
+                      shrinkWrap: true,
+                      children: section.getList.map((e) => cardNew(e, context))
+                          .toList()
+                  )
+              );
+            } else {
+              return Container(
+                  padding: const EdgeInsets.only(top: 250.0),
+                  child: Column(
+                      children: [
+                        Text(AppLocalizations.of(context)!.no_news,
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        Icon(Icons.newspaper, size: 50.0)
+                      ]
+                  )
+              );
+            }
+          })
+        ]
     );
   }
 }
-Widget cardNew(New new_, BuildContext context){
+
+Widget cardNew(New new_, BuildContext context) {
   return
      InkWell(
        onTap: () => {
@@ -81,7 +86,7 @@ Widget cardNew(New new_, BuildContext context){
         height: 200.0,
         alignment: Alignment.bottomLeft,
       decoration:  BoxDecoration(
-      image: DecorationImage(image: NetworkImage(new_.imageUrl!), fit: BoxFit.fill, colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken))),
+      image: DecorationImage(image: renderBackgroundImage(new_), fit: BoxFit.fill, colorFilter: ColorFilter.mode(Colors.grey, BlendMode.darken))),
           child: Container(
             alignment: Alignment.bottomLeft,
             padding: const EdgeInsets.all(4.0),
@@ -101,7 +106,15 @@ Widget cardNew(New new_, BuildContext context){
                    Text(new_.description!, style: const TextStyle(color: Colors.white), maxLines: 2)
                 ]
             ),
-          )
-      ),
-    ));
+        )
+      )
+      )
+     );
+        }
+
+ImageProvider<Object> renderBackgroundImage(New news) {
+  if (news.imageUrl == null)
+    return AssetImage('assets/news.png');
+  else
+    return NetworkImage(news.imageUrl!);
 }

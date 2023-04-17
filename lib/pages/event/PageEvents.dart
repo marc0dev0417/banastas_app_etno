@@ -15,7 +15,7 @@ class PageEvents extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-   return PageState();
+    return PageState();
   }
 }
 
@@ -32,38 +32,38 @@ class PageState extends State<PageEvents> {
 
   Widget nothingEvents() {
     return Observer(builder: (context) =>
-      section.getListEvent.isNotEmpty ? Expanded(
-          child: Observer(builder: (context) =>
-              ListView(
-                children: section.getListEvent.map((e) => cardEvent(e, section, context)).toList(),
-              )
-              )
-      ): Container(
+    section.getListEvent.isNotEmpty ? Expanded(
+        child: Observer(builder: (context) =>
+            ListView(
+              children: section.getListEvent.map((e) => cardEvent(e, section, context)).toList(),
+            )
+        )
+    ): Container(
         alignment: Alignment.center,
-            child: Column(
-          children: [
-            Text(AppLocalizations.of(context)!.events_empty, style: TextStyle(fontWeight: FontWeight.bold)),
-            Icon(Icons.celebration, size: 50.0)
-        ]
-      )
-      )
+        child: Column(
+            children: [
+              Text(AppLocalizations.of(context)!.events_empty, style: TextStyle(fontWeight: FontWeight.bold)),
+              Icon(Icons.celebration, size: 50.0)
+            ]
+        )
+    )
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: appBarCustom(context , false, AppLocalizations.of(context)!.event, Icons.language, false,() => null, null),
-        bottomNavigationBar: bottomNavigation(context, 1),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const WarningWidgetValueNotifier(),
-            nothingEvents()
-          ],
-        ),
-      );
+      backgroundColor: Colors.white,
+      appBar: appBarCustom(context , false, AppLocalizations.of(context)!.event, Icons.language, false,() => null, null),
+      bottomNavigationBar: bottomNavigation(context, 1),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const WarningWidgetValueNotifier(),
+          nothingEvents()
+        ],
+      ),
+    );
   }
 }
 
@@ -85,7 +85,7 @@ Widget cardEvent(Event event, Section section, BuildContext context){
               height: 200.0,
               alignment: Alignment.bottomLeft,
               decoration:  BoxDecoration(
-                  image: DecorationImage(image: NetworkImage(event.imageUrl!), fit: BoxFit.fill)),
+                  image: DecorationImage(image: renderBackgroundImage(event), fit: BoxFit.fill)),
               child: Container(
                 alignment: Alignment.bottomLeft,
                 padding: const EdgeInsets.all(4.0),
@@ -108,4 +108,11 @@ Widget cardEvent(Event event, Section section, BuildContext context){
               )
           ),
         ));
+}
+
+ImageProvider<Object> renderBackgroundImage(Event e) {
+  if (e.imageUrl == null)
+    return AssetImage('assets/events.jpg');
+  else
+    return NetworkImage(e.imageUrl!);
 }

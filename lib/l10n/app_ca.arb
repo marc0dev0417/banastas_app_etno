@@ -94,6 +94,34 @@
     "ad_photo":  "Afegir imatge",
     "no_quiz": "No hi ha enquestes disponibles",
 
+    "toast_send_mail": "S'està enviant el correu...",
+    "toast_send_mail_correct": "S'ha enviat el correu",
+    "toast_error": "Heu d'emplenar els camps",
+
+    "awaiting_resolution": "Esperant resolució",
+    "see": "Veure reserva",
+    "identification": "Identificació",
+    "invalid_dni": "DNI no vàlid",
+    "vote": "Votar",
+    "day_defunction": "Dia de defunció",
+    "type_service": "Tipus de servei",
+    "call": "Trucar",
+    "defunction": "Mort el ",
+
+    "see_more": "Veure més",
+    "restaurants": "Restaurants",
+    "hotels": "Hotels",
+    "others": "Altres",
+
+    "show_map": "Mostrar mapa",
+    "schedule": "Horari:",
+    "read_more": "Llegir més",
+    "show_less": "Mostrar menys",
+    "reserve_now": "Reservar ara",
+    "no_reserve": "Ja està reservat",
+    "intro_email_phone": "Introdueix email o telèfon",
+    "confirm_reserve": "Confirmarem la teva reserva per correu electrònic o per telèfon",
+    
     "identification": "Identificació",
     "vote": "Votar",
     "invalid_dni": "No és vàlid el DNI"

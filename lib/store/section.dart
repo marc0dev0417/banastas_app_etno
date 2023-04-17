@@ -105,6 +105,7 @@ abstract class SectionBase with Store {
   Future<List<CustomLink>> getCustomLinks(String locality) async {
     try{
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}custom_links?username=$locality'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) => CustomLink.fromJson(e)).toList();
       for (var element in data) {
@@ -120,13 +121,17 @@ abstract class SectionBase with Store {
   @action
   Future sendEnser(String address, String message, String subject, File fileName) async{
     try {
+      
       final responseImage = http.MultipartRequest('POST', Uri.parse('${Globals.url_microservice_etno}images?section=enseres&category=enseres&username=Bolea'));
+      
       responseImage.files.add( await http.MultipartFile.fromPath('image', fileName.path));
       responseImage.send().then((value) async {
         print(value.statusCode);
 
         if (value.statusCode == 200) {
+
           final response = await http.post(Uri.parse('${Globals.url_microservice_etno}sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=http://192.168.137.1:8080/images/enseres/${fileName.path.split("/").last}'));
+
           final decodeBody = utf8.decode(response.bodyBytes);
           final data = Message.fromJson(jsonDecode(decodeBody));
 
@@ -148,7 +153,10 @@ abstract class SectionBase with Store {
   @action
   Future<SectionDetails> getSectionDetails(String username) async{
     try{
+
+      
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}users/section_details?username=$username'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = SectionDetails.fromJson(jsonDecode(decodeBody));
       sectionDetails = data;
@@ -209,7 +217,9 @@ abstract class SectionBase with Store {
   Future<List<Event>> getAllEventsByLocality(String locality) async {
     try {
       final response = await http.get(
+          
           Uri.parse('${Globals.url_microservice_etno}events?username=$locality'));
+          
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
           .map((e) => Event.fromJson(e))
@@ -271,6 +281,7 @@ abstract class SectionBase with Store {
   Future<Event> getEventByUsernameAndTitle(String username, String title) async{
     try{
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}events?username=$username&title=$title'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = Event.fromJson(jsonDecode(decodeBody));
       print(data.long);
@@ -285,6 +296,7 @@ abstract class SectionBase with Store {
   Future<FCMToken> saveFcmToken(FCMToken fcmToken) async{
     try{
      final response = await http.post(Uri.parse('${Globals.url_microservice_etno}FCMTokens'), body: jsonEncode(fcmToken.toJson()), headers: <String, String> {
+     
        'Content-Type': 'application/json; charset=UTF-8'
      });
      final decodeBody = utf8.decode(response.bodyBytes);
@@ -300,6 +312,7 @@ abstract class SectionBase with Store {
   Future<bool> getSubscription(String fcmToken, String title) async{
     try{
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}subscription_users?fcmToken=$fcmToken&title=$title'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = UserSubscription.fromJson(jsonDecode(decodeBody));
 
@@ -318,7 +331,9 @@ abstract class SectionBase with Store {
 @action
 Future<bool> addSubscription(String locality, String title, UserSubscription userSubscription) async {
     try{
+
       final response = await http.post(Uri.parse('${Globals.url_microservice_etno}users/add/event/subscription?username=$locality&title=$title'), body:
+      
         jsonEncode(userSubscription.toJson()), headers: <String, String> {
         'Content-Type': 'application/json; charset=UTF-8'
       });
@@ -335,6 +350,7 @@ Future<bool> addSubscription(String locality, String title, UserSubscription use
 Future<bool> dropSubscription(String locality, String title, String fcmToken) async {
     try{
       final response = await http.put(Uri.parse('${Globals.url_microservice_etno}users/dropout/event/subscription?username=$locality&title=$title&fcmToken=$fcmToken'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = UserSubscription.fromJson(jsonDecode(decodeBody));
 
@@ -351,6 +367,7 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
     try {
       final response = await http.get(
           Uri.parse('${Globals.url_microservice_etno}pharmacies?username=$locality'));
+          
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
           .map((e) => Pharmacy.fromJson(e))
@@ -367,7 +384,9 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
   Future<List<Tourism>> getAllTourismByLocality(String locality) async {
     try {
       final response = await http.get(
+          
           Uri.parse('${Globals.url_microservice_etno}tourism?username=$locality'));
+          
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
           .map((e) => Tourism.fromJson(e))
@@ -386,6 +405,7 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
     try {
       final response = await http.get(Uri.parse(
           '${Globals.url_microservice_etno}services?username=$locality&category=$category'));
+          
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
           .map((e) => Service.fromJson(e))
@@ -402,6 +422,7 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
   Future<List<Ad>> getAllAdsByLocality(String locality) async {
     try{
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}ads?username=$locality'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) => Ad.fromJson(e)).toList();
       adsList = data;
@@ -416,6 +437,7 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
   Future<List<Bandos>> getAllBandosByLocality(String locality) async {
     try{
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}bandos/filtered?username=$locality'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) => Bandos.fromJson(e)).toList();
       bandoList = data;
@@ -429,6 +451,7 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
   Future<List<ImageMedia>> getAllImageMediaByLocality(String locality) async{
     try{
       final response = await http.get(Uri.parse('${Globals.url_microservice_etno}images?locality=$locality'));
+      
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) => ImageMedia.fromJson(e)).toList();
       imageList = data;
@@ -512,6 +535,7 @@ Future<bool> dropSubscription(String locality, String title, String fcmToken) as
   Future sendReserve(String username, String reserveName, ReserveUser reserveUser) async {
     try {
       final response = await http.put(Uri.parse('${Globals.url_microservice_etno}users/update/reserve?username=$username&reserveName=$reserveName'), body: jsonEncode(reserveUser.toJson()), headers: <String, String> {
+
         'Content-Type': 'application/json; charset=UTF-8'
       });
       if(response.statusCode == 200){
