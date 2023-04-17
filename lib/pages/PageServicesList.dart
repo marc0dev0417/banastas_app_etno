@@ -94,7 +94,7 @@ Widget servicesList(Section section, BuildContext context){
               child: Card(
                   child: Column(
                     children: [
-                      Row(
+                      Column(
                         children: [
                           renderImageServiceList(e),
                           SizedBox(width: 5.0),
@@ -140,7 +140,7 @@ Widget servicesList(Section section, BuildContext context){
 
 Widget renderImageServiceList(Service service){
   if (service.imageUrl == null){
-    return Image.asset('assets/Loading_icon.gif', height: 20, width: 20);
+    return Image.asset('assets/services.png', height: 200, width: 200);
   }else{
     return  ClipRRect(borderRadius: BorderRadius.circular(500.0),
       child: Image.network(
