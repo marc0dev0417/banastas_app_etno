@@ -1,4 +1,33 @@
 {
+
+  "events_empty": "Ez dago ekitaldirik erabilgarri",
+  "event": "gertaerak",
+  "no_news_heal": "Ez dago osasun-albisterik eskuragarri",
+  "no_news": "Ez dago berririk eskuragarri",
+  "no_news_tech": "Ez dago teknologia berririk eskuragarri",
+  "subscribe": "harpidetu",
+  "form_name": "Izena",
+  "form_mail": "Posta elektronikoa",
+  "form_phone": "Mugikorra",
+  "form_wallet": "Erreserbaren prezioa",
+  "no_fields_empty": "Eremu hutsak ez dira onartzen",
+  "cancel": "Utzi",
+  "news_general": "Orokorra",
+  "news_tecnology": "Teknologia",
+  "news_heal": "Osasuna",
+  "news_empty": "Berririk ez",
+  "card_pay_title": "Ordaindu kreditu txartelarekin",
+  "card_pay_form": "txartela formularioa",
+  "no_form_complete": "Formularioa ez dago osorik",
+  "pay": "Ordaindu",
+  "is_subscribe": "Ekitaldira harpidetu zara",
+  "pay_success": "Ordainketa behar bezala egin da",
+  "back_form": "Itzuli formulariora",
+  "fail_subscription": "Ezin izan da ekitaldira harpidetu",
+  "pay_fail": "Errore bat gertatu da ordainketan",
+  "try_again": "Saiatu berriro",
+  "sport": "Kirola",
+  
   "no_connection": "Ez dago Interneteko konexiorik",
 
   "events_empty": "No hay eventos disponibles",
@@ -93,7 +122,36 @@
   "ad_photo":  "Gehitu irudia",
   "no_quiz": "Ez dago inkestarik eskuragarri",
 
+  "toast_send_mail": "Posta bidaltzen ari da...",
+  "toast_send_mail_correct": "Posta bidali da",
+  "toast_error": "Eremuak bete behar dituzu",
+
+  "awaiting_resolution": "ebazpenaren zain",
+  "see": "Ikus erreserba",
+  "identification": "Identifikazioa",
+  "invalid_dni": "ID baliogabea",
+  "vote": "Bozkatu",
+  "day_defunction": "heriotza eguna",
+  "type_service": "Zerbitzu mota",
+  "call": "Deitu",
+  "defunction": "Egunean hildakoa ",
+
+  "see_more": "Gehiago ikusi",
+  "restaurants": "Jatetxeak",
+  "hotels": "Hotelak",
+  "others": "Beste batzuk",
+
+  "show_map": "Mapa erakutsi",
+  "schedule": "Ordutegia:",
+  "read_more": "Gehiago irakurri",
+  "show_less": "Gutxiago erakutsi",
+  "reserve_now": "Orain erreserbatu",
+  "no_reserve": "Jadanik erreserbatuta dago",
+  "intro_email_phone": "Sartu emaila edo telefonoa",
+  "confirm_reserve": "Zure erreserba email bidez edo telefono bidez baieztatuko dugu"
+  
   "identification": "Identifikazio",
   "vote": "Bozkatu",
   "invalid_dni": "NANa ez da baliozkoa"
+  
 }
