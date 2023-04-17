@@ -91,36 +91,7 @@
     "ad_photo":  "Ajouter une image",
     "no_quiz": "Aucune enquête disponible",
 
-    "toast_send_mail": "Le courrier est en cours d'envoi...",
-    "toast_send_mail_correct": "Le courrier a été envoyé",
-    "toast_error": "Vous devez remplir les champs",
-
-    "awaiting_resolution": "en attente de résolution",
-    "see": "Voir réservation",
-    "identification": "identifiant",
-    "invalid_dni": "ID invalide",
-    "vote": "Vote",
-    "day_defunction": "jour de la mort",
-    "type_service": "Type de service",
-    "call": "Appel",
-    "defunction": "Décédé le ",
-
-    "see_more": "Voir plus",
-    "restaurants": "Restaurants",
-    "hotels": "Hôtels",
-    "others": "Autres",
-
-    "show_map": "Afficher la carte",
-    "schedule": "Horaire :",
-    "read_more": "Lire la suite",
-    "show_less": "Afficher moins",
-    "reserve_now": "Réserver maintenant",
-    "no_reserve": "Déjà réservé",
-    "intro_email_phone": "Entrez votre e-mail ou votre téléphone",
-    "confirm_reserve": "Nous confirmerons votre réservation par courrier électronique ou par téléphone"
-    
     "identification": "Identifiant",
     "vote": "Vote",
     "invalid_dni": "L'identifiant n'est pas valide"
-    
 }
