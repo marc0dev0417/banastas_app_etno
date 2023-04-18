@@ -98,7 +98,7 @@ Widget cardEvent(Event event, Section section, BuildContext context){
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Text(event.hasSubscription! ? 'Subscripción' : 'Gratuito', style: const TextStyle(color: Colors.white,  fontWeight: FontWeight.bold, fontSize: 12.0, backgroundColor: Colors.blue)),
+                          Text(event.hasSubscription! ? AppLocalizations.of(context)!.subscription : AppLocalizations.of(context)!.free, style: const TextStyle(color: Colors.white,  fontWeight: FontWeight.bold, fontSize: 12.0, backgroundColor: Colors.blue)),
                           const SizedBox(width: 4.0),
                           Text(event.title!, style: const TextStyle(color: Colors.white, backgroundColor: Colors.red, fontWeight: FontWeight.bold, fontSize: 12.0))
                         ],

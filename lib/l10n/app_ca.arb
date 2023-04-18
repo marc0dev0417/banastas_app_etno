@@ -118,5 +118,11 @@
     "issued": "Emès",
     "monday_friday": "Dilluns-Divendres",
     "monday_saturday": "Dilluns-Dissabte",
-    "all_days": "Dilluns-Diumenge"
+    "all_days": "Dilluns-Diumenge",
+    "subscription": "Subscripció",
+    "free": "Gratuït",
+    "capacity": "Capacitat",
+    "places": "Places",
+    "unsubscribed_event": "S'ha desinscrit de l'esdeveniment",
+    "start_date": " - Data d'inici"
 }

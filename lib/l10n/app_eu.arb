@@ -120,5 +120,11 @@
   "issued": "Luzatutako",
   "monday_friday": "Astelehena-Ostirala",
   "monday_saturday": "Astelehena-Larunbata",
-  "all_days": "Astelehen-Igandea"
+  "all_days": "Astelehen-Igandea",
+  "subscription": "Harpidetza",
+  "free": "Doan",
+  "capacity": "Gaitasuna",
+  "places": "Lekuak",
+  "unsubscribed_event": "Gutxitu da ekitalditik",
+  "start_date": " - Hasierako data"
 }

@@ -186,12 +186,12 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                       Container(
                         padding: const EdgeInsets.only(left: 15.0, top: 4.0),
                         alignment: Alignment.topLeft,
-                        child: const Text('Capacidad', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
+                        child: Text(AppLocalizations.of(context)!.capacity, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
                       ),
                       Container(
                         padding: const EdgeInsets.only(left: 15.0),
                         alignment: Alignment.topLeft,
-                        child: Text('Plazas ${event.seats}/${event.capacity}', style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
+                        child: Text(AppLocalizations.of(context)!.places + ' ${event.seats}/${event.capacity}', style: const TextStyle(color: Colors.grey, fontSize: 10.0)),
                       ),
                       const Divider(),
                       Container(
@@ -210,7 +210,7 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                                 ),
                                 Container(
                                   alignment: Alignment.topLeft,
-                                  child:  const Text('- Fecha de Inicio', style: TextStyle(color: Colors.grey, fontSize: 10.0)),
+                                  child:  Text(AppLocalizations.of(context)!.start_date, style: TextStyle(color: Colors.grey, fontSize: 10.0)),
                                 ),
                                 SizedBox(
                                   width: MediaQuery.of(context).size.width * 0.1,
@@ -228,7 +228,7 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                                           }else{
                                             FirebaseMessaging.instance.getToken().then((value) => section.dropSubscription('Bolea', event.title!, value!));
                                             Fluttertoast.showToast(
-                                                msg: 'Se ha desuscrito del evento',
+                                                msg: AppLocalizations.of(context)!.unsubscribed_event,
                                                 toastLength: Toast.LENGTH_SHORT,
                                                 fontSize: 12,
                                                 textColor: Colors.white,
@@ -242,7 +242,7 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                                               });
                                             });
                                           }
-                                        }, child: !isSubscribe ? const Text('Subscribirse', style: TextStyle(color: Colors.white)) : const Text('Desuscribirse', style: TextStyle(color: Colors.white)))
+                                        }, child: !isSubscribe ? Text(AppLocalizations.of(context)!.subscribe, style: TextStyle(color: Colors.white)) : Text('No ' + AppLocalizations.of(context)!.subscribe, style: TextStyle(color: Colors.white)))
                                     ),
                                 )
                               ],
@@ -265,7 +265,7 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
                           alignment: Alignment.topLeft,
                           child: GestureDetector(
                               onTap: () => launchInBrowser(Uri.parse('https://maps.google.com/?daddr=${event.lat},${event.long}')),
-                              child: const Text('Mostrar Mapa', style: TextStyle(color: Colors.blue))
+                              child: Text(AppLocalizations.of(context)!.show_map, style: TextStyle(color: Colors.blue))
                           )
                       )
                     ],

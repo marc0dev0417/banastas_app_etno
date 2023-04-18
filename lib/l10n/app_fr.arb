@@ -117,5 +117,11 @@
     "issued": "Publié",
     "monday_friday": "Lundi-Vendredi",
     "monday_saturday": "Lundi-Samedi",
-    "all_days": "Lundi-Dimanche"
+    "all_days": "Lundi-Dimanche",
+    "subscription": "Abonnement",
+    "free": "Gratuit",
+    "capacity": "Capacité",
+    "places": "Places",
+    "unsubscribed_event": "Désabonné de l'événement",
+    "start_date": " - Date de début"
 }

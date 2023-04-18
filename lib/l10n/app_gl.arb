@@ -117,5 +117,11 @@
     "issued": "Emitido",
     "monday_friday": "Luns-Venres",
     "monday_saturday": "Luns-Sábado",
-    "all_days": "Luns-Domingo"
+    "all_days": "Luns-Domingo",
+    "subscription": "Subscrición",
+    "free": "De balde",
+    "capacity": "Capacidade",
+    "places": "Prazas",
+    "unsubscribed_event": "Darse de baixa do evento",
+    "start_date": " - Data de inicio"
 }

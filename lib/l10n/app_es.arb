@@ -119,5 +119,11 @@
     "issued": "Emitido",
     "monday_friday": "Lunes-Viernes",
     "monday_saturday": "Lunes-Sábado",
-    "all_days": "Lunes-Domingo"
+    "all_days": "Lunes-Domingo",
+    "subscription": "Suscripción",
+    "free": "Gratis",
+    "capacity": "Capacidad",
+    "places": "Plazas",
+    "unsubscribed_event": "Se ha desuscrito del evento",
+    "start_date": " - Fecha de inicio"
 }

@@ -202,5 +202,11 @@
     "issued": "Issued",
     "monday_friday": "Monday-Friday",
     "monday_saturday": "Monday-Saturday",
-    "all_days": "Monday-Sunday"
+    "all_days": "Monday-Sunday",
+    "subscription": "Subscription",
+    "free": "Free",
+    "capacity": "Capacity",
+    "places": "Places",
+    "unsubscribed_event": "Unsubscribed from event",
+    "start_date": " - Start date"
 }
