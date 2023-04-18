@@ -29,6 +29,7 @@ import '../models/menu/Ad.dart';
 import '../models/quiz/Quiz.dart';
 import '../models/section_details/SectionDetails.dart';
 import '../utils/Globals.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 part 'section.g.dart';
 
@@ -122,17 +123,14 @@ abstract class SectionBase with Store {
 
   @action
   Future sendEnser(String address, String message, String subject,
-      File fileName) async {
+      File fileName, BuildContext context) async {
     try {
       final responseImage = http.MultipartRequest('POST', Uri.parse(
           'http://tomcat.vpsecomputer.com:8080/images?section=enseres&category=enseres&username=Bolea'));
 
-
       responseImage.files.add(
           await http.MultipartFile.fromPath('image', fileName.path));
       responseImage.send().then((value) async {
-        print(value.statusCode);
-
         if (value.statusCode == 200) {
           final response = await http.post(Uri.parse(
               'http://tomcat.vpsecomputer.com:8080/sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=http://tomcat.vpsecomputer.com:8080/images/enseres/${fileName
@@ -140,17 +138,27 @@ abstract class SectionBase with Store {
                   .split("/")
                   .last}'));
 
-
           final decodeBody = utf8.decode(response.bodyBytes);
           final data = Message.fromJson(jsonDecode(decodeBody));
 
-          Fluttertoast.showToast(
-              msg: data.message!,
-              toastLength: Toast.LENGTH_SHORT,
-              fontSize: 12,
-              textColor: Colors.white,
-              backgroundColor: Colors.green
-          );
+          if (data.message == 'El correo se ha enviado exitosamente'){
+            Fluttertoast.showToast(
+                msg: AppLocalizations.of(context)!.toast_send_mail_correct,
+                toastLength: Toast.LENGTH_SHORT,
+                fontSize: 12,
+                textColor: Colors.white,
+                backgroundColor: Colors.green
+            );
+            Navigator.pop(context);
+          } else {
+            Fluttertoast.showToast(
+                msg: AppLocalizations.of(context)!.toast_send_mail_error,
+                toastLength: Toast.LENGTH_SHORT,
+                fontSize: 12,
+                textColor: Colors.white,
+                backgroundColor: Colors.red
+            );
+          }
         }
       });
     } catch (e) {
@@ -164,7 +172,6 @@ abstract class SectionBase with Store {
     try {
       final response = await http.get(Uri.parse(
           'http://tomcat.vpsecomputer.com:8080/users/section_details?username=$username'));
-
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = SectionDetails.fromJson(jsonDecode(decodeBody));

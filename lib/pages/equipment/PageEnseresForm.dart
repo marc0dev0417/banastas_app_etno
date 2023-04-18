@@ -105,7 +105,7 @@ class PageState extends State<PageEnseres> {
                           style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
                           onPressed: () {
                             if(name != '' && phone != '' && enser != '' && _image!=null){
-                              section.sendEnser('ecomputerapps@gmail.com', 'Hola mi nombre es $name con el teléfono $phone. \n $enser', 'Enser', _image!);
+                              section.sendEnser('ecomputerapps@gmail.com', 'Hola mi nombre es $name con el teléfono $phone. \n $enser', 'Enser', _image!, context);
                               //Navigator.pop(context);
                               Fluttertoast.showToast(
                                   msg: AppLocalizations.of(context)!.toast_send_mail,
