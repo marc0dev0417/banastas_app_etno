@@ -518,44 +518,7 @@ String getSectionText(String sectionText, BuildContext context) {
     case 'Yo decido':
       return AppLocalizations.of(context)!.section_quiz;
     default:
-      return '';
-
-      switch (sectionText) {
-        case 'Eventos':
-          return AppLocalizations.of(context)!.section_event;
-        case 'Turismo':
-          return AppLocalizations.of(context)!.section_tourism;
-        case 'Farmacias':
-          return AppLocalizations.of(context)!.section_pharmacy;
-        case 'Servicios':
-          return AppLocalizations.of(context)!.section_service;
-        case 'Noticias':
-          return AppLocalizations.of(context)!.section_news;
-        case 'Bandos':
-          return AppLocalizations.of(context)!.section_bando;
-        case 'Anuncios':
-          return AppLocalizations.of(context)!.section_ad;
-        case 'Galería':
-          return AppLocalizations.of(context)!.section_gallery;
-        case 'Defunciones':
-          return AppLocalizations.of(context)!.section_death;
-        case 'Enlaces':
-          return AppLocalizations.of(context)!.section_link;
-        case 'Patrocinadores':
-          return AppLocalizations.of(context)!.section_sponsor;
-        case 'Incidentes':
-          return AppLocalizations.of(context)!.section_incident;
-        case 'Reservas':
-          return AppLocalizations.of(context)!.section_booking;
-        case 'Incidentes':
-          return AppLocalizations.of(context)!.section_incident;
-        case 'Retirada de Enseres':
-          return AppLocalizations.of(context)!.section_trash;
-        case 'Yo decido':
-          return AppLocalizations.of(context)!.section_quiz;
-        default:
-          return sectionText;
-      }
+      return sectionText;
   }
 }
 
