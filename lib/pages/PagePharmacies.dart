@@ -91,12 +91,12 @@ class PharmaciesState extends State<PagePharmacies> {
                                                     ),
                                                     Container(
                                                       padding: EdgeInsets.only(right: 15.0),
-                                                      child: Text(element.type!,
+                                                      child: Text(renderTextTraslated(element.type!, context),
                                                           style: TextStyle(
                                                               fontSize: 15.0,
                                                               backgroundColor:
                                                               element.type ==
-                                                                  'Guardia'
+                                                                  AppLocalizations.of(context)!.guard
                                                                   ? Colors
                                                                   .blue
                                                                   : Colors
@@ -128,7 +128,7 @@ class PharmaciesState extends State<PagePharmacies> {
                                                       MainAxisAlignment
                                                           .spaceBetween,
                                                       children: [
-                                                        Text(element.schedule!,
+                                                        Text(element.schedule! ,
                                                             style: const TextStyle(
                                                                 fontSize:
                                                                 12.0)),
@@ -211,7 +211,7 @@ class PharmaciesState extends State<PagePharmacies> {
                               backgroundColor:
                               MaterialStatePropertyAll(Colors.white)),
                           onPressed: () {
-                            switch (tab.name) {
+                            switch (tab.name!) {
                               case 'Normal':
                                 setState(() {
                                   listMarker = listMarkerSaved;

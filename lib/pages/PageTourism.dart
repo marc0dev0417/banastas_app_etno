@@ -115,7 +115,7 @@ class TourismState extends State<PageTourism> {
                                                         top: 5.0,
                                                         left: 15.0),
                                                     child: Text(
-                                                      element.type!,
+                                                      renderTextTraslated(element.type!,context),
                                                       style: const TextStyle(
                                                           fontWeight:
                                                           FontWeight.bold,
