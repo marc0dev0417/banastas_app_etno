@@ -104,9 +104,16 @@ class PageState extends State<PageEnseres> {
                       ElevatedButton(
                           style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.white)),
                           onPressed: () {
-                            if(name != '' && phone != '' && enser != ''){
+                            if(name != '' && phone != '' && enser != '' && _image!=null){
                               section.sendEnser('ecomputerapps@gmail.com', 'Hola mi nombre es $name con el teléfono $phone. \n $enser', 'Enser', _image!);
-                              Navigator.pop(context);
+                              //Navigator.pop(context);
+                              Fluttertoast.showToast(
+                                  msg: AppLocalizations.of(context)!.toast_send_mail,
+                                  toastLength: Toast.LENGTH_SHORT,
+                                  fontSize: 12,
+                                  textColor: Colors.white,
+                                  backgroundColor: Colors.orange
+                              );
                             } else {
                               Fluttertoast.showToast(
                                   msg: AppLocalizations.of(context)!.toast_error,

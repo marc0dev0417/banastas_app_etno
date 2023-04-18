@@ -126,5 +126,6 @@
   "capacity": "Gaitasuna",
   "places": "Lekuak",
   "unsubscribed_event": "Gutxitu da ekitalditik",
-  "start_date": " - Hasierako data"
+  "start_date": " - Hasierako data",
+  "toast_send_mail_error": "Posta elektronikoa bidali ezin izan da."
 }

@@ -123,5 +123,6 @@
     "capacity": "Capacidade",
     "places": "Prazas",
     "unsubscribed_event": "Darse de baixa do evento",
-    "start_date": " - Data de inicio"
+    "start_date": " - Data de inicio",
+    "toast_send_mail_error": "Non se puido enviar o correo."
 }

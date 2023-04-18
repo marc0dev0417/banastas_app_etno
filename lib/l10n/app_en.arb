@@ -208,5 +208,6 @@
     "capacity": "Capacity",
     "places": "Places",
     "unsubscribed_event": "Unsubscribed from event",
-    "start_date": " - Start date"
+    "start_date": " - Start date",
+    "toast_send_mail_error": "Failed to send email."
 }

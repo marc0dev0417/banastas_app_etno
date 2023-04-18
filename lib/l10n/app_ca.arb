@@ -124,5 +124,6 @@
     "capacity": "Capacitat",
     "places": "Places",
     "unsubscribed_event": "S'ha desinscrit de l'esdeveniment",
-    "start_date": " - Data d'inici"
+    "start_date": " - Data d'inici",
+    "toast_send_mail_error": "No s'ha pogut enviar el correu."
 }
