@@ -198,5 +198,9 @@
     "reserve_now": "Book now",
     "no_reserve": "Already reserved",
     "intro_email_phone": "Enter email or phone",
-    "confirm_reserve": "We will confirm your reservation by email or phone"
+    "confirm_reserve": "We will confirm your reservation by email or phone",
+    "issued": "Issued",
+    "monday_friday": "Monday-Friday",
+    "monday_saturday": "Monday-Saturday",
+    "all_days": "Monday-Sunday"
 }

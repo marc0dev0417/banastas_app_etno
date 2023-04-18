@@ -33,15 +33,15 @@ class PageState extends State<PageServices> {
                           padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                           scrollDirection: Axis.vertical,
                           children: [
-                            cardServiceTest(AppLocalizations.of(context)!.restaurants, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: AppLocalizations.of(context)!.restaurants), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            cardServiceTest(AppLocalizations.of(context)!.restaurants, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Restaurantes'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.restaurant),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.hotels, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: AppLocalizations.of(context)!.hotels), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            cardServiceTest(AppLocalizations.of(context)!.hotels, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Hoteles'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.hotel),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.heal, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: AppLocalizations.of(context)!.heal), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            cardServiceTest(AppLocalizations.of(context)!.heal, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.healing),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.leisure, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: AppLocalizations.of(context)!.leisure), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            cardServiceTest(AppLocalizations.of(context)!.leisure, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.emoji_nature),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.others, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: AppLocalizations.of(context)!.others), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary),
+                            cardServiceTest(AppLocalizations.of(context)!.others, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Otros'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.dynamic_feed),
                           ],
                         ),
                       ),
@@ -58,7 +58,8 @@ Widget cardServiceTest(
     String title,
     String description,
     Function() function,
-    Color color
+    Color color,
+    IconData icon
     ) {
   return Container(
     child: GestureDetector(
@@ -71,7 +72,7 @@ Widget cardServiceTest(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(Icons.face, size: 40.0, color: Colors.white),
+                Icon(icon, size: 40.0, color: Colors.white),
                 SizedBox(width: 16.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

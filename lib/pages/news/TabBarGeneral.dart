@@ -64,7 +64,7 @@ Widget cardNew(New new_, BuildContext context) {
                             new_: New(
                                 new_.idNew,
                                 new_.username,
-                                new_.category,
+                                renderTextTraslated(new_.category!,context),
                                 new_.title,
                                 new_.publicationDate,
                                 new_.description,
@@ -81,7 +81,7 @@ Widget cardNew(New new_, BuildContext context) {
                                       new_: New(
                                           new_.idNew,
                                           new_.username,
-                                          new_.category,
+                                          renderTextTraslated(new_.category!,context),
                                           new_.title,
                                           new_.publicationDate,
                                           new_.description,
@@ -109,7 +109,7 @@ Widget cardNew(New new_, BuildContext context) {
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Text(new_.category!,
+                                    Text(renderTextTraslated(new_.category!,context),
                                         style: const TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.bold,
@@ -148,7 +148,7 @@ Widget cardNew(New new_, BuildContext context) {
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Text(new_.category!,
+                        Text(renderTextTraslated(new_.category!,context),
                             style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -178,4 +178,20 @@ ImageProvider<Object> renderBackgroundImage(New news) {
     return AssetImage('assets/news.png');
   else
     return NetworkImage(news.imageUrl!);
+}
+
+String renderTextTraslated(String name, BuildContext context) {
+  switch (name) {
+    case 'Tecnología':
+      return AppLocalizations.of(context)!.news_tecnology;
+      break;
+    case 'Salud':
+      return AppLocalizations.of(context)!.news_heal;
+      break;
+    case 'Deporte':
+      return AppLocalizations.of(context)!.sport;
+      break;
+    default:
+      return '';
+  }
 }

@@ -114,5 +114,9 @@
     "reserve_now": "Reservar ara",
     "no_reserve": "Ja està reservat",
     "intro_email_phone": "Introdueix email o telèfon",
-    "confirm_reserve": "Confirmarem la teva reserva per correu electrònic o per telèfon"
+    "confirm_reserve": "Confirmarem la teva reserva per correu electrònic o per telèfon",
+    "issued": "Emès",
+    "monday_friday": "Dilluns-Divendres",
+    "monday_saturday": "Dilluns-Dissabte",
+    "all_days": "Dilluns-Diumenge"
 }

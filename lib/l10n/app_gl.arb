@@ -113,5 +113,9 @@
     "reserve_now": "Reservar agora",
     "no_reserve": "Xa está reservado",
     "intro_email_phone": "Introduce o teu email ou teléfono",
-    "confirm_reserve": "Confirmaremos a túa reserva por correo electrónico ou por teléfono"
+    "confirm_reserve": "Confirmaremos a túa reserva por correo electrónico ou por teléfono",
+    "issued": "Emitido",
+    "monday_friday": "Luns-Venres",
+    "monday_saturday": "Luns-Sábado",
+    "all_days": "Luns-Domingo"
 }

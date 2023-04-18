@@ -115,5 +115,9 @@
     "reserve_now": "Reservar ahora",
     "no_reserve": "Ya está reservado",
     "intro_email_phone": "Introduce email o teléfono",
-    "confirm_reserve": "Confirmaremos tu reserva por correo electrónico o por teléfono"
+    "confirm_reserve": "Confirmaremos tu reserva por correo electrónico o por teléfono",
+    "issued": "Emitido",
+    "monday_friday": "Lunes-Viernes",
+    "monday_saturday": "Lunes-Sábado",
+    "all_days": "Lunes-Domingo"
 }

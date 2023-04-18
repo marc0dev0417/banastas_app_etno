@@ -113,5 +113,9 @@
     "reserve_now": "Réserver maintenant",
     "no_reserve": "Déjà réservé",
     "intro_email_phone": "Entrez votre e-mail ou votre téléphone",
-    "confirm_reserve": "Nous confirmerons votre réservation par courrier électronique ou par téléphone"
+    "confirm_reserve": "Nous confirmerons votre réservation par courrier électronique ou par téléphone",
+    "issued": "Publié",
+    "monday_friday": "Lundi-Vendredi",
+    "monday_saturday": "Lundi-Samedi",
+    "all_days": "Lundi-Dimanche"
 }

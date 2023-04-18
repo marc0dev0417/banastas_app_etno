@@ -136,7 +136,7 @@ showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(
                                 padding:
                                 const EdgeInsets.only(left: 15.0, top: 4.0),
                                 alignment: Alignment.topLeft,
-                                child: const Text('Emitido',
+                                child: Text(AppLocalizations.of(context)!.issued,
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 12.0)),
