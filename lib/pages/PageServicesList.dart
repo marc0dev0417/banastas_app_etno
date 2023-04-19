@@ -85,13 +85,15 @@ Widget servicesList(Section section, BuildContext context){
               alignment: Alignment.topLeft,
               child: Card(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         children: [
+                          SizedBox(width: 16.0),
                           renderImageServiceList(e),
                           SizedBox(width: 5.0),
                           Text(e.owner!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
-                          const SizedBox(width: 100.0),
+                          const SizedBox(width: 150.0),
                           const Icon(Icons.phone, size: 15.0),
                           const SizedBox(width: 5.0),
                           Text(e.number!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0)),
@@ -131,7 +133,7 @@ Widget servicesList(Section section, BuildContext context){
 }
 Widget renderImageServiceList(Service service){
   if (service.imageUrl == null){
-    return Image.asset('assets/Loading_icon.gif', height: 20, width: 20);
+    return Image.asset('assets/service_icon.png', height: 20, width: 20);
   }else{
     return  ClipRRect(borderRadius: BorderRadius.circular(500.0),
         child: Image.network(
