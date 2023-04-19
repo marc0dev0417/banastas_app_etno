@@ -45,10 +45,10 @@ class PharmaciesState extends State<PagePharmacies> {
           Uint8List? markerIcon;
           switch (element.type) {
             case 'Guardia':
-              markerIcon = await getBytesFromAsset('assets/pharmacy_blue.png', 80);
+              markerIcon = await getBytesFromAsset('assets/guardia1.png', 80);
               break;
             case 'Normal':
-              markerIcon = await getBytesFromAsset('assets/pharmacy_red.png', 80);
+              markerIcon = await getBytesFromAsset('assets/normal1.png', 80);
               break;
           }
           setState(() {
@@ -282,8 +282,8 @@ Widget renderImagePharmacy(Pharmacy pharmacy) {
 }
 Widget renderImageToTab(String tabName){
   switch(tabName){
-    case 'Normal': return Image.asset('assets/pharmacy_red.png', width: 30.0, height: 30.0);
-    case 'Guardia': return Image.asset('assets/pharmacy_blue.png', width: 30.0, height: 30.0);
+    case 'Normal': return Image.asset('assets/normal1.png', width: 30.0, height: 30.0);
+    case 'Guardia': return Image.asset('assets/guardia1.png', width: 30.0, height: 30.0);
     default: return Image.asset('assets/todo_pharmacy.png', width: 30.0, height: 30.0);
   }
 }

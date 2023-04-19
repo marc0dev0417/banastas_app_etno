@@ -55,23 +55,6 @@ class PageState extends State<TabBarGeneral> {
 
 Widget cardNew(New new_, BuildContext context) {
   return InkWell(
-      onTap: () => {
-            Navigator.push(
-                context,
-                PageRouteBuilder(
-                    pageBuilder: (context, animation1, animation2) =>
-                        PageNewDetail(
-                            new_: New(
-                                new_.idNew,
-                                new_.username,
-                                renderTextTraslated(new_.category!,context),
-                                new_.title,
-                                new_.publicationDate,
-                                new_.description,
-                                new_.imageUrl)),
-                    transitionDuration: Duration.zero,
-                    reverseTransitionDuration: Duration.zero)),
-            InkWell(
                 onTap: () => {
                       Navigator.push(
                           context,
@@ -89,53 +72,14 @@ Widget cardNew(New new_, BuildContext context) {
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero))
                     },
-                child: Card(
-                    child: Container(
-                        height: 200.0,
-                        alignment: Alignment.bottomLeft,
-                        decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: NetworkImage(new_.imageUrl!),
-                                fit: BoxFit.fill,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.grey, BlendMode.darken))),
-                        child: Container(
-                          alignment: Alignment.bottomLeft,
-                          padding: const EdgeInsets.all(4.0),
-                          child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Text(renderTextTraslated(new_.category!,context),
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12.0,
-                                            backgroundColor: Colors.black)),
-                                    const SizedBox(width: 4.0),
-                                    Text(new_.username!,
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            backgroundColor: Colors.red,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 12.0))
-                                  ],
-                                ),
-                                const SizedBox(height: 4.0),
-                                Text(new_.description!,
-                                    style: const TextStyle(color: Colors.white),
-                                    maxLines: 2)
-                              ]),
-                        ))))
-          },
-      child: Card(
+                child:  Card(
+                  margin: EdgeInsets.all(16.0),
         child: Container(
+          padding: EdgeInsets.all(10.0),
             height: 200.0,
             alignment: Alignment.bottomLeft,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
                 image: DecorationImage(
                     image: renderBackgroundImage(new_), fit: BoxFit.fill)),
             child: Container(
@@ -184,13 +128,10 @@ String renderTextTraslated(String name, BuildContext context) {
   switch (name) {
     case 'Tecnología':
       return AppLocalizations.of(context)!.news_tecnology;
-      break;
     case 'Salud':
       return AppLocalizations.of(context)!.news_heal;
-      break;
     case 'Deporte':
       return AppLocalizations.of(context)!.sport;
-      break;
     default:
       return '';
   }

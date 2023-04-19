@@ -86,42 +86,62 @@ class PageState extends State<PageListReserves> {
 }
 
 Widget cardReserve(BuildContext context, Reserve reserve) {
-  return SizedBox(
+  return Container(
+    padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
     height: 200.0,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
     child: InkWell(
-      child: Card(
-        color: Colors.white,
-        elevation: 5.0,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            reserve.place?.imageUrl == null
-                ? Container(
-              padding: const EdgeInsets.only(left: 60.0),
-              child: const CircularProgressIndicator(),
-            )
-                : SizedBox(
-                height: 200.0,
-                child: Image.network(reserve.place!.imageUrl!,
-                    width: 160.0, height: 200.0, fit: BoxFit.fill)),
-            const SizedBox(width: 45.0),
-            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Text(reserve.place!.name!,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              ElevatedButton(
-                  onPressed: () => Navigator.push(
-                      context,
-                      PageRouteBuilder(
-                          pageBuilder: (context, animation1, animation2) =>
-                              PageReserve(reserve: reserve))),
-                  style: const ButtonStyle(
-                      backgroundColor: MaterialStatePropertyAll(Colors.red)),
-                  child: Text(AppLocalizations.of(context)!.see,
-                      style: TextStyle(color: Colors.white)))
-            ])
-          ],
+        child: Card(
+          color: Colors.white,
+          elevation: 5.0,
+          child: Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: renderImage(reserve),
+                    fit: BoxFit.fill,
+                    opacity: 0.4,
+                ),
+                borderRadius: BorderRadius.circular(10.0)
+            ),
+            child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                Container(
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0)
+                  ),
+                  child: Text(reserve.place!.name!,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) =>
+                                PageReserve(reserve: reserve))),
+                    style: const ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(Colors.red)),
+                    child: Text(AppLocalizations.of(context)!.see,
+                        style: TextStyle(color: Colors.white)))
+              ])
+            ],
+          ),
         ),
       ),
-    ),
+    )
   );
+}
+
+ImageProvider<Object> renderImage(Reserve reserve) {
+  if (reserve.place!.imageUrl == null)
+    return AssetImage('assets/travel.jpg');
+  else
+    return NetworkImage(reserve.place!.imageUrl!);
 }

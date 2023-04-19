@@ -3,10 +3,7 @@ import 'package:etno_app/provider/locale_provider.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-
-import '../l10n/l10n.dart';
 import '../widgets/appbar_navigation.dart';
 import 'news/TabBarGeneral.dart';
 import 'news/TabBarSalud.dart';

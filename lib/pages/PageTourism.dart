@@ -23,9 +23,9 @@ class TourismState extends State<PageTourism> {
   Set<Marker> listMarkerSaved = {};
   List<TourismButton> tourismButton = [
     TourismButton('', Colors.black, 'Todo'),
-    TourismButton('assets/vajilla.png', Colors.green, 'Restaurante'),
-    TourismButton('assets/museo.png', Colors.yellow, 'Museo'),
-    TourismButton('assets/hotel.png', Colors.indigo, 'Hotel')
+    TourismButton('assets/restaurant1.png', Colors.green, 'Restaurante'),
+    TourismButton('assets/museum1.png', Colors.yellow, 'Museo'),
+    TourismButton('assets/hotel1.png', Colors.indigo, 'Hotel')
   ];
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
@@ -51,13 +51,13 @@ class TourismState extends State<PageTourism> {
       for (var element in value) {
         switch (element.type) {
           case 'Museo':
-            markerIcon = await getBytesFromAsset('assets/museo.png', 80);
+            markerIcon = await getBytesFromAsset('assets/museum1.png', 80);
             break;
           case 'Restaurante':
-            markerIcon = await getBytesFromAsset('assets/vajilla.png', 80);
+            markerIcon = await getBytesFromAsset('assets/restaurant1.png', 80);
             break;
           case 'Hotel':
-            markerIcon = await getBytesFromAsset('assets/hotel.png', 80);
+            markerIcon = await getBytesFromAsset('assets/hotel1.png', 80);
             break;
         }
         setState(() {
@@ -256,7 +256,7 @@ class TourismState extends State<PageTourism> {
                               }
                             },
                             child: renderImageTab(tab.assetUrl!,
-                                renderTextTraslated(tab.name!, context)) //aei
+                                renderTextTraslated(tab.name!, context))
                         )
                     ])
               ],
@@ -270,16 +270,12 @@ String renderTextTraslated(String name, BuildContext context) {
   switch (name) {
     case 'Restaurante':
       return AppLocalizations.of(context)!.restaurant;
-      break;
     case 'Todo':
       return AppLocalizations.of(context)!.all;
-      break;
     case 'Museo':
       return AppLocalizations.of(context)!.museum;
-      break;
     case 'Hotel':
       return AppLocalizations.of(context)!.hotel;
-      break;
     default:
       return '';
   }

@@ -9,6 +9,7 @@ import '../../store/section.dart';
 import '../../widgets/appbar_navigation.dart';
 import '../../widgets/home_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
 class PageEvents extends StatefulWidget {
   const PageEvents({super.key});
 
@@ -82,11 +83,13 @@ Widget cardEvent(Event event, Section section, BuildContext context){
           })
         },
         child: Card(
+          margin: EdgeInsets.all(16.0),
           child:
           Container(
               height: 200.0,
               alignment: Alignment.bottomLeft,
               decoration:  BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
                   image: DecorationImage(image: renderBackgroundImage(event), fit: BoxFit.fill)),
               child: Container(
                 alignment: Alignment.bottomLeft,
@@ -104,7 +107,7 @@ Widget cardEvent(Event event, Section section, BuildContext context){
                         ],
                       ),
                       const SizedBox(height: 4.0),
-                      Text(event.description!, style: const TextStyle(color: Colors.white), maxLines: 2)
+                      Text(event.description!, style: const TextStyle(color: Colors.black, backgroundColor: Colors.white), maxLines: 2,)
                     ]
                 ),
               )

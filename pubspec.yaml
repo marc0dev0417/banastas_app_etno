@@ -103,36 +103,13 @@ flutter:
       - assets/bolea_shield.png
       - assets/news.png
       - assets/france.png
-      - assets/event.jpg
       - assets/pass.png
-      - assets/pharmacy_red.png
-      - assets/pharmacy_blue.png
       - assets/todo_pharmacy.png
-      - assets/Loading_icon.gif
-      - assets/ocio_image.jpg
-      - assets/salud_image.jpg
-      - assets/tool_image.jpg
       - assets/Bolea.png
-      - assets/hotel.png
-      - assets/vajilla.png
-      - assets/museo.png
-      - assets/hotel.png
-      - assets/event.png
-      - assets/tour.png
-      - assets/phar.png
-      - assets/service.png
-      - assets/box_enser.png
-      - assets/custom_link.png
-      - assets/quiz_decide.png
-      - assets/band.png
-      - assets/ad.png
-      - assets/gallery.png
+      - assets/restaurant1.png
+      - assets/museum1.png
+      - assets/hotel1.png
       - assets/reserva.png
-      - assets/death.png
-      - assets/link.png
-      - assets/sponsor.png
-      - assets/incident.png
-      - assets/reserve.png
       - assets/cataluna.png
       - assets/uk.jpg
       - assets/tourism.jpg
@@ -147,13 +124,16 @@ flutter:
       - assets/galicia.png
       - assets/tourism.jpg
       - assets/sponsors.png
+      - assets/service_icon.png
       - assets/services.png
       - assets/pharmacies.png
       - assets/events.jpg
       - assets/defunctions.png
       - assets/bandos.jpg
       - assets/adverts.png
-
+      - assets/normal1.png
+      - assets/guardia1.png
+      - assets/travel.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
