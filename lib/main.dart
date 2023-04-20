@@ -184,7 +184,8 @@ class HomeState extends State<Home> {
         body: SafeArea(
             child: Container(
           color: context.watch<ColorBloc>().state.colorPrimary,
-          child: Column(
+          child: Expanded(
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               WarningWidgetValueNotifier(),
@@ -226,13 +227,13 @@ class HomeState extends State<Home> {
               slideEvents(context),
               specialButtons(context),
               Container(
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.all(16.0),
-                child: Text('Notificaciones',
-                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25.0))
-              )
+                  alignment: Alignment.centerLeft,
+                  padding: EdgeInsets.all(16.0),
+                  child: Text('Notificaciones',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 25.0)))
             ],
-          ),
+          )),
         )),
         bottomNavigationBar: bottomNavigation(context, 0));
   }
@@ -399,14 +400,12 @@ Widget specialButtons(BuildContext context) {
                 width: 171.0,
                 height: 120.0,
                 child: ElevatedButton(
-                    onPressed: (
-                        ) {
+                    onPressed: () {
                       Navigator.pushReplacement(
                           context,
                           PageRouteBuilder(
-                              pageBuilder:
-                                  (context, animation1, animation2) =>
-                              const PageEvents(),
+                              pageBuilder: (context, animation1, animation2) =>
+                                  const PageEvents(),
                               transitionDuration: Duration.zero,
                               reverseTransitionDuration: Duration.zero));
                     },
