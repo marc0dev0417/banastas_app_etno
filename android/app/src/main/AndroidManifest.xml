@@ -8,8 +8,6 @@
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDZcqlsS-nn_OIV9-ZsoC_HCGYSdgWld0U">
         </meta-data>
-        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/app"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -38,6 +38,7 @@ import 'bloc/color/color_bloc.dart';
 import 'firebase_options.dart';
 import 'l10n/l10n.dart';
 import 'models/Weather/Weather.dart';
+import 'package:etno_app/widgets/EventCard.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -166,6 +167,7 @@ class HomeState extends State<Home> {
         ));
   }
 
+  //HomePage build.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -181,306 +183,175 @@ class HomeState extends State<Home> {
         body: SafeArea(
             child: Container(
           color: context.watch<ColorBloc>().state.colorPrimary,
-          padding: const EdgeInsets.all(16.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const WarningWidgetValueNotifier(),
-              SizedBox(
-                height: 120.0,
-                width: double.maxFinite,
-                child: GestureDetector(
-                  child: Card.Card(
-                      color: context
-                          .watch<ColorBloc>()
-                          .state
-                          .colorPrimary
-                          .withOpacity(0.1),
-                      elevation: 2.0,
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset('assets/bolea_shield.png',
-                                width: 100.0, height: 100.0),
-                            const SizedBox(width: 16.0),
-                            Column(
-                              children: [
-                                weather.currentWeather?.temperature! == null
-                                    ? Container(
-                                        padding:
-                                            const EdgeInsets.only(top: 16.0),
-                                        child: const SizedBox(
-                                            width: 15.0,
-                                            height: 15.0,
-                                            child: CircularProgressIndicator(
-                                                color: Colors.white)),
-                                      )
-                                    : Container(
-                                        padding: EdgeInsets.only(top: 16.0),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                                '${weather.currentWeather?.temperature!}ºC',
-                                                style: const TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 30.0,
-                                                    color: Colors.white)),
-                                            const Text('Bolea',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w400,
-                                                    fontSize: 18.0,
-                                                    color: Colors.white)),
-                                          ],
-                                        ),
-                                      )
-                              ],
-                            )
-                          ],
+              WarningWidgetValueNotifier(),
+              Container(
+                padding: EdgeInsets.all(16.0),
+                child: widgetWeather(context, weather)
+              ),
+              Container(
+                padding: EdgeInsets.only(left: 16.0, right: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Calendario',
+                      style:
+                          TextStyle(fontWeight: FontWeight.w500, fontSize: 25.0),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation1, animation2) =>
+                                        const PageEvents(),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero));
+                      },
+                      child: Text(
+                        'Ver todos',
+                        style: TextStyle(
+                            fontSize: 15.5,
+                            color: Colors.orange,
+                          fontWeight: FontWeight.w500
                         ),
-                      )),
+                      ),
+                    )
+                  ],
                 ),
               ),
-              Expanded(
-                  child: Observer(
-                      builder: (context) => GridView.count(
-                          crossAxisCount: 2,
-                          children: section.getSections
-                              .map((e) => GestureDetector(
-                                    onTap: () {
-                                      switch (e.title) {
-                                        case 'Eventos':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageEvents(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Turismo':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      PageTourism(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Farmacias':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      PagePharmacies(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Retirada de Enseres':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageEnseres()));
-                                          break;
-                                        case 'Anuncios':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageAd(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Noticias':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      PageNews(
-                                                          pageContext: context),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Galería':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageGallery(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Enlaces':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageLinks(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Defunciones':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageDefunctions(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Servicios':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageServices(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Patrocinadores':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageSponsors(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Bandos':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageBandos(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Incidentes':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageIncidents(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Reservas':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageListReserves(),
-                                                  transitionDuration:
-                                                      Duration.zero,
-                                                  reverseTransitionDuration:
-                                                      Duration.zero));
-                                          break;
-                                        case 'Yo decido':
-                                          Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                  pageBuilder: (context,
-                                                          animation1,
-                                                          animation2) =>
-                                                      const PageQuiz()));
-                                          break;
-                                        default:
-                                          launchInBrowser(Uri.parse(e.webUrl!));
-                                      }
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      padding: const EdgeInsets.all(16.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Icon(e.iconData,
-                                              size: 40, color: Colors.white),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Text(
-                                                getSectionText(
-                                                    e.title!, context),
-                                                style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15.0),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              renderTextSection(e.title!,
-                                                  sectionDetails, context)
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ))
-                              .toList())))
+              slideEvents(context)
             ],
           ),
         )),
         bottomNavigationBar: bottomNavigation(context, 0));
   }
+}
+
+//Widget weather
+Widget widgetWeather(BuildContext context, Weather weather) {
+  return SizedBox(
+    height: 120.0,
+    width: double.maxFinite,
+    child: GestureDetector(
+      child: Card.Card(
+          color: Color.fromRGBO(210, 210, 210, 1),
+          elevation: 2.0,
+          child: Container(
+            padding: EdgeInsets.only(left: 40, right: 40),
+            alignment: Alignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image.asset('assets/bolea_shield.png',
+                    width: 100.0, height: 100.0),
+                const SizedBox(width: 16.0),
+                Column(
+                  children: [
+                    weather.currentWeather?.temperature! == null
+                        ? Container(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: const SizedBox(
+                                width: 15.0,
+                                height: 15.0,
+                                child: CircularProgressIndicator(
+                                    color: Colors.white)),
+                          )
+                        : Container(
+                            padding: EdgeInsets.only(top: 16.0),
+                            child: Column(
+                              children: [
+                                Text(
+                                    '${weather.currentWeather?.temperature!}ºC',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 30.0,
+                                        color: Colors.black)),
+                                const Text('Bolea',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 25.0,
+                                        color: Colors.black,)),
+                              ],
+                            ),
+                          )
+                  ],
+                )
+              ],
+            ),
+          )),
+    ),
+  );
+}
+
+//Slider of events
+Widget slideEvents(BuildContext context) {
+  return Container(
+    padding: EdgeInsets.only(top: 16.0, left: 16.0, bottom: 16.0),
+    height: 120,
+    child: ListView(
+      scrollDirection: Axis.horizontal,
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+          width: 220,
+          child: Card.Card(
+            color: Colors.orange,
+            child: Center(child: Text('Lunes')),
+          )
+        ),
+        Container(
+            width: 100,
+            child: Card.Card(
+              color: Colors.orange,
+              child: Center(child: Text('Lunes')),
+            )
+        ),
+        Container(
+            width: 100,
+            child: Card.Card(
+              color: Colors.orange,
+              child: Center(child: Text('Lunes')),
+            )
+        ),
+        Container(
+            width: 100,
+            child: Card.Card(
+              color: Colors.orange,
+              child: Center(child: Text('Lunes')),
+            )
+        ),
+        Container(
+            width: 100,
+            child: Card.Card(
+              color: Colors.orange,
+              elevation: 5.0,
+              child: Center(child: Text('Lunes')),
+            )
+        ),
+        Container(
+            width: 100,
+            child: Card.Card(
+              color: Colors.orange,
+              elevation: 5.0,
+              child: Center(child: Text('Lunes')),
+            )
+        ),
+        Container(
+            width: 100,
+            child: Card.Card(
+              color: Colors.orange,
+              elevation: 5.0,
+              child: Center(child: Text('Lunes')),
+            )
+        ),
+      ],
+    ),
+  );
 }
 
 String getSectionText(String sectionText, BuildContext context) {
@@ -519,113 +390,5 @@ String getSectionText(String sectionText, BuildContext context) {
       return AppLocalizations.of(context)!.section_quiz;
     default:
       return sectionText;
-  }
-}
-
-Widget renderTextSection(
-    String sectionName, SectionDetails sectionDetails, BuildContext context) {
-  switch (sectionName) {
-    case 'Eventos':
-      return sectionDetails.eventQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.eventQuantity} ${AppLocalizations.of(context)!.subsection_event}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Turismo':
-      return sectionDetails.tourismQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.tourismQuantity} ${AppLocalizations.of(context)!.subsection_tourism}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Farmacias':
-      return sectionDetails.pharmacyQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.pharmacyQuantity} ${AppLocalizations.of(context)!.subsection_pharmacy}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Anuncios':
-      return sectionDetails.adQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.adQuantity} ${AppLocalizations.of(context)!.subsection_ad}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Noticias':
-      return sectionDetails.newsQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.newsQuantity} ${AppLocalizations.of(context)!.subsection_news}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Galería':
-      return sectionDetails.galleryQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.galleryQuantity} ${AppLocalizations.of(context)!.subsection_gallery}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Enlaces':
-      return sectionDetails.linkQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.linkQuantity} ${AppLocalizations.of(context)!.subsection_link}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Defunciones':
-      return sectionDetails.deathQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.deathQuantity} ${AppLocalizations.of(context)!.subsection_death}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Servicios':
-      return sectionDetails.serviceQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.serviceQuantity} ${AppLocalizations.of(context)!.subsection_service}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Patrocinadores':
-      return sectionDetails.sponsorQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.sponsorQuantity} ${AppLocalizations.of(context)!.subsection_sponsor}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Bandos':
-      return sectionDetails.bandoQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.bandoQuantity} ${AppLocalizations.of(context)!.subsection_bando}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Incidentes':
-      return sectionDetails.incidentQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.incidentQuantity} ${AppLocalizations.of(context)!.subsection_incident}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Reservas':
-      return sectionDetails.reserveQuantity == null
-          ? const SizedBox(
-              width: 10.0, height: 10.0, child: CircularProgressIndicator())
-          : Text(
-              '${sectionDetails.reserveQuantity} ${AppLocalizations.of(context)!.subsection_booking}',
-              style: const TextStyle(color: Colors.white, fontSize: 10.0));
-    case 'Retirada de Enseres':
-      return Text(AppLocalizations.of(context)!.subsection_trash,
-          style: TextStyle(color: Colors.white, fontSize: 10.0),
-          textAlign: TextAlign.center);
-
-    case 'Yo decido':
-      return Text(AppLocalizations.of(context)!.subsection_quiz,
-          style: TextStyle(color: Colors.white, fontSize: 10.0));
-    default:
-      return const Text('',
-          style: TextStyle(color: Colors.blue, fontSize: 10.0));
   }
 }
