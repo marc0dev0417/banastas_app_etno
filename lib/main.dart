@@ -39,6 +39,7 @@ import 'firebase_options.dart';
 import 'l10n/l10n.dart';
 import 'models/Weather/Weather.dart';
 import 'package:etno_app/widgets/EventCard.dart';
+import 'package:flutter/widgets.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
@@ -188,9 +189,8 @@ class HomeState extends State<Home> {
             children: [
               WarningWidgetValueNotifier(),
               Container(
-                padding: EdgeInsets.all(16.0),
-                child: widgetWeather(context, weather)
-              ),
+                  padding: EdgeInsets.all(16.0),
+                  child: widgetWeather(context, weather)),
               Container(
                 padding: EdgeInsets.only(left: 16.0, right: 16.0),
                 child: Row(
@@ -198,8 +198,8 @@ class HomeState extends State<Home> {
                   children: [
                     Text(
                       'Calendario',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w500, fontSize: 25.0),
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500, fontSize: 25.0),
                     ),
                     GestureDetector(
                       onTap: () {
@@ -216,15 +216,21 @@ class HomeState extends State<Home> {
                         'Ver todos',
                         style: TextStyle(
                             fontSize: 15.5,
-                            color: Colors.orange,
-                          fontWeight: FontWeight.w500
-                        ),
+                            color: Color.fromRGBO(244, 144, 20, 1),
+                            fontWeight: FontWeight.w500),
                       ),
                     )
                   ],
                 ),
               ),
-              slideEvents(context)
+              slideEvents(context),
+              specialButtons(context),
+              Container(
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.all(16.0),
+                child: Text('Notificaciones',
+                    style: TextStyle(fontWeight: FontWeight.w500, fontSize: 25.0))
+              )
             ],
           ),
         )),
@@ -235,11 +241,11 @@ class HomeState extends State<Home> {
 //Widget weather
 Widget widgetWeather(BuildContext context, Weather weather) {
   return SizedBox(
-    height: 120.0,
+    height: 150.0,
     width: double.maxFinite,
     child: GestureDetector(
       child: Card.Card(
-          color: Color.fromRGBO(210, 210, 210, 1),
+          color: Color.fromRGBO(160, 140, 140, 0.17),
           elevation: 2.0,
           child: Container(
             padding: EdgeInsets.only(left: 40, right: 40),
@@ -248,7 +254,7 @@ Widget widgetWeather(BuildContext context, Weather weather) {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Image.asset('assets/bolea_shield.png',
-                    width: 100.0, height: 100.0),
+                    width: 120.0, height: 120.0),
                 const SizedBox(width: 16.0),
                 Column(
                   children: [
@@ -262,7 +268,7 @@ Widget widgetWeather(BuildContext context, Weather weather) {
                                     color: Colors.white)),
                           )
                         : Container(
-                            padding: EdgeInsets.only(top: 16.0),
+                            padding: EdgeInsets.only(top: 30.0),
                             child: Column(
                               children: [
                                 Text(
@@ -273,9 +279,10 @@ Widget widgetWeather(BuildContext context, Weather weather) {
                                         color: Colors.black)),
                                 const Text('Bolea',
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 25.0,
-                                        color: Colors.black,)),
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 25.0,
+                                      color: Colors.black,
+                                    )),
                               ],
                             ),
                           )
@@ -288,6 +295,149 @@ Widget widgetWeather(BuildContext context, Weather weather) {
   );
 }
 
+//Botones personalizados
+Widget specialButtons(BuildContext context) {
+  return Container(
+      padding:
+          EdgeInsets.only(left: 25.0, right: 25.0, top: 16.0, bottom: 16.0),
+      alignment: Alignment.center,
+      child: Column(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Container(
+                width: 171.0,
+                height: 120.0,
+                child: ElevatedButton(
+                    onPressed: () {},
+                    onLongPress: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
+                    child: Container(
+                      padding: EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Icon(Icons.newspaper,
+                              size: 80.0,
+                              color: Color.fromRGBO(154, 22, 22, 1)),
+                          Text(
+                            'NOTICIAS',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(154, 22, 22, 1)),
+                          )
+                        ],
+                      ),
+                    ))),
+            SizedBox(width: 16.0),
+            Container(
+                width: 171.0,
+                height: 120.0,
+                child: ElevatedButton(
+                    onPressed: () {},
+                    onLongPress: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
+                    child: Container(
+                      padding: EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Icon(Icons.medical_information,
+                              size: 80.0,
+                              color: Color.fromRGBO(154, 22, 22, 1)),
+                          Text(
+                            'SERVICIOS',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(154, 22, 22, 1)),
+                          )
+                        ],
+                      ),
+                    )))
+          ]),
+          SizedBox(
+            height: 16.0,
+          ),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Container(
+                width: 171.0,
+                height: 120.0,
+                child: ElevatedButton(
+                    onPressed: () {},
+                    onLongPress: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
+                    child: Container(
+                      padding: EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Icon(Icons.campaign,
+                              size: 80.0,
+                              color: Color.fromRGBO(154, 22, 22, 1)),
+                          Text(
+                            'BANDOS',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(154, 22, 22, 1)),
+                          )
+                        ],
+                      ),
+                    ))),
+            SizedBox(width: 16.0),
+            Container(
+                width: 171.0,
+                height: 120.0,
+                child: ElevatedButton(
+                    onPressed: (
+                        ) {
+                      Navigator.pushReplacement(
+                          context,
+                          PageRouteBuilder(
+                              pageBuilder:
+                                  (context, animation1, animation2) =>
+                              const PageEvents(),
+                              transitionDuration: Duration.zero,
+                              reverseTransitionDuration: Duration.zero));
+                    },
+                    onLongPress: () {},
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
+                    child: Container(
+                      padding: EdgeInsets.all(5.0),
+                      child: Column(
+                        children: [
+                          Icon(Icons.celebration,
+                              size: 80.0,
+                              color: Color.fromRGBO(154, 22, 22, 1)),
+                          Text(
+                            'EVENTOS',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color.fromRGBO(154, 22, 22, 1)),
+                          )
+                        ],
+                      ),
+                    )))
+          ]),
+        ],
+      ));
+}
+
 //Slider of events
 Widget slideEvents(BuildContext context) {
   return Container(
@@ -297,58 +447,180 @@ Widget slideEvents(BuildContext context) {
       scrollDirection: Axis.horizontal,
       children: <Widget>[
         Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-          width: 220,
-          child: Card.Card(
-            color: Colors.orange,
-            child: Center(child: Text('Lunes')),
-          )
-        ),
-        Container(
-            width: 100,
+            alignment: Alignment.center,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+            width: 260,
             child: Card.Card(
-              color: Colors.orange,
-              child: Center(child: Text('Lunes')),
-            )
-        ),
+              color: Color.fromRGBO(253, 178, 108, 1),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(left: 16.0, top: 10.0),
+                        width: 70.0,
+                        child: Column(children: [
+                          Text(
+                            '25',
+                            style: TextStyle(fontSize: 25.0),
+                          ),
+                          Text('ABR',
+                              style: TextStyle(
+                                  fontSize: 18.0, color: Colors.white))
+                        ])),
+                    VerticalDivider(
+                      color: Colors.deepOrange,
+                      thickness: 1.0,
+                      width: 1.0,
+                      indent: 16.0,
+                      endIndent: 16.0,
+                    ),
+                    Container(
+                        padding:
+                            EdgeInsets.only(right: 5.0, top: 5.0, bottom: 5.0),
+                        width: 170.0,
+                        child: Text(
+                          'Presentación App',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ))
+                  ]),
+            )),
+        SizedBox(width: 16.0),
         Container(
-            width: 100,
+            alignment: Alignment.center,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+            width: 260,
             child: Card.Card(
-              color: Colors.orange,
-              child: Center(child: Text('Lunes')),
-            )
-        ),
+              color: Color.fromRGBO(253, 178, 108, 1),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(left: 16.0, top: 10.0),
+                        width: 70.0,
+                        child: Column(children: [
+                          Text(
+                            '25',
+                            style: TextStyle(fontSize: 25.0),
+                          ),
+                          Text('ABR',
+                              style: TextStyle(
+                                  fontSize: 18.0, color: Colors.white))
+                        ])),
+                    VerticalDivider(
+                      color: Colors.deepOrange,
+                      thickness: 1.0,
+                      width: 1.0,
+                      indent: 16.0,
+                      endIndent: 16.0,
+                    ),
+                    Container(
+                        padding:
+                            EdgeInsets.only(right: 5.0, top: 5.0, bottom: 5.0),
+                        width: 170.0,
+                        child: Text(
+                          'Presentación App',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ))
+                  ]),
+            )),
+        SizedBox(width: 16.0),
         Container(
-            width: 100,
+            alignment: Alignment.center,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+            width: 260,
             child: Card.Card(
-              color: Colors.orange,
-              child: Center(child: Text('Lunes')),
-            )
-        ),
+              color: Color.fromRGBO(253, 178, 108, 1),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(left: 16.0, top: 10.0),
+                        width: 70.0,
+                        child: Column(children: [
+                          Text(
+                            '25',
+                            style: TextStyle(fontSize: 25.0),
+                          ),
+                          Text('ABR',
+                              style: TextStyle(
+                                  fontSize: 18.0, color: Colors.white))
+                        ])),
+                    VerticalDivider(
+                      color: Colors.deepOrange,
+                      thickness: 1.0,
+                      width: 1.0,
+                      indent: 16.0,
+                      endIndent: 16.0,
+                    ),
+                    Container(
+                        padding:
+                            EdgeInsets.only(right: 5.0, top: 5.0, bottom: 5.0),
+                        width: 170.0,
+                        child: Text(
+                          'Presentación App',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ))
+                  ]),
+            )),
+        SizedBox(width: 16.0),
         Container(
-            width: 100,
+            alignment: Alignment.center,
+            decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+            width: 260,
             child: Card.Card(
-              color: Colors.orange,
-              elevation: 5.0,
-              child: Center(child: Text('Lunes')),
-            )
-        ),
-        Container(
-            width: 100,
-            child: Card.Card(
-              color: Colors.orange,
-              elevation: 5.0,
-              child: Center(child: Text('Lunes')),
-            )
-        ),
-        Container(
-            width: 100,
-            child: Card.Card(
-              color: Colors.orange,
-              elevation: 5.0,
-              child: Center(child: Text('Lunes')),
-            )
-        ),
+              color: Color.fromRGBO(253, 178, 108, 1),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                        padding: EdgeInsets.only(left: 16.0, top: 10.0),
+                        width: 70.0,
+                        child: Column(children: [
+                          Text(
+                            '25',
+                            style: TextStyle(fontSize: 25.0),
+                          ),
+                          Text('ABR',
+                              style: TextStyle(
+                                  fontSize: 18.0, color: Colors.white))
+                        ])),
+                    VerticalDivider(
+                      color: Colors.deepOrange,
+                      thickness: 1.0,
+                      width: 1.0,
+                      indent: 16.0,
+                      endIndent: 16.0,
+                    ),
+                    Container(
+                        padding:
+                            EdgeInsets.only(right: 5.0, top: 5.0, bottom: 5.0),
+                        width: 170.0,
+                        child: Text(
+                          'Presentación App',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ))
+                  ]),
+            )),
       ],
     ),
   );

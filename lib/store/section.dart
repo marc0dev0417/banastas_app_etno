@@ -247,7 +247,7 @@ abstract class SectionBase with Store {
       final response = await http.get(
 
           Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/events?username=$locality'));
+              'https://tomcat.vpsecomputer.com:8080/events?username=$locality'));
 
       Uri.parse('${Globals.url_microservice_etno}events?username=$locality');
 
