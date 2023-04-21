@@ -446,10 +446,10 @@ Widget slideNotifications(BuildContext context) {
                   color: Color.fromRGBO(253, 178, 108, 1),
                   child: Row(children: [
                     Container(
-                        width: 70,
+                        width: 90.0,
                         height: 90.0,
                         padding:
-                        EdgeInsets.only(top: 16.0, bottom: 16.0, left: 20.0),
+                        EdgeInsets.only(right: 18.0, top: 16.0, bottom: 16.0, left: 18.0),
                         child: Container(
                             width: 50.0,
                             decoration: BoxDecoration(
@@ -457,11 +457,7 @@ Widget slideNotifications(BuildContext context) {
                                     image: AssetImage('assets/bandos.jpg'),
                                     fit: BoxFit.cover),
                                 borderRadius: BorderRadius.circular(10.0)))),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2,
-                      padding: EdgeInsets.only(left: 40.0),
-                      alignment: Alignment.center,
-                      child: Expanded(
+                    Expanded(
                         child: ReadMoreText(
                           'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
                           trimLines: 2,
@@ -470,8 +466,7 @@ Widget slideNotifications(BuildContext context) {
                           trimCollapsedText: 'Show more',
                           trimExpandedText: 'Show less',
                           moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                        ), // default is 1
-                      ),
+                        ),
                     ),
                   ]),
                 ));
