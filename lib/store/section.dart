@@ -249,7 +249,7 @@ abstract class SectionBase with Store {
           Uri.parse(
               'https://tomcat.vpsecomputer.com:8080/events?username=$locality'));
 
-      Uri.parse('${Globals.url_microservice_etno}events?username=$locality');
+
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
@@ -326,7 +326,7 @@ abstract class SectionBase with Store {
       String title) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/events?username=$username&title=$title'));
+          'https://tomcat.vpsecomputer.com:8080/events?username=$username&title=$title'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -361,7 +361,7 @@ abstract class SectionBase with Store {
   Future<bool> getSubscription(String fcmToken, String title) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/subscription_users?fcmToken=$fcmToken&title=$title'));
+          'https://tomcat.vpsecomputer.com:8080/subscription_users?fcmToken=$fcmToken&title=$title'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = UserSubscription.fromJson(jsonDecode(decodeBody));

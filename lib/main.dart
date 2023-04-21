@@ -81,7 +81,7 @@ class App extends StatelessWidget {
         return BlocProvider<ColorBloc>(
           create: (context) => ColorBloc(),
           child: MaterialApp(
-            theme: ThemeData(useMaterial3: true),
+            theme: ThemeData(useMaterial3: true, dividerColor: Colors.transparent),
             locale: provider.locale,
             supportedLocales: L10n.all,
             title: 'Etno App',
@@ -185,8 +185,7 @@ class HomeState extends State<Home> {
         body: SafeArea(
             child: Container(
           color: context.watch<ColorBloc>().state.colorPrimary,
-          child: Expanded(
-              child: ListView(
+          child:  ListView(
             scrollDirection: Axis.vertical,
             children: [
               WarningWidgetValueNotifier(),
@@ -237,7 +236,7 @@ class HomeState extends State<Home> {
               slideNotifications(context)
             ],
           )),
-        )),
+        ),
         bottomNavigationBar: bottomNavigation(context, 0));
   }
 }
@@ -249,7 +248,7 @@ Widget widgetWeather(BuildContext context, Weather weather) {
     width: double.maxFinite,
     child: GestureDetector(
       child: Card.Card(
-          color: Color.fromRGBO(160, 140, 140, 0.17),
+          color: Color.fromRGBO(240, 240, 240, 1),
           elevation: 2.0,
           child: Container(
             padding: EdgeInsets.only(left: 40, right: 40),
@@ -313,7 +312,7 @@ Widget specialButtons(BuildContext context) {
                     onPressed: () {},
                     onLongPress: () {},
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        primary: Color.fromRGBO(240, 240, 240, 1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
@@ -339,7 +338,7 @@ Widget specialButtons(BuildContext context) {
                     onPressed: () {},
                     onLongPress: () {},
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        primary: Color.fromRGBO(240, 240, 240, 1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
@@ -369,7 +368,7 @@ Widget specialButtons(BuildContext context) {
                     onPressed: () {},
                     onLongPress: () {},
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        primary: Color.fromRGBO(240, 240, 240, 1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
@@ -403,7 +402,7 @@ Widget specialButtons(BuildContext context) {
                     },
                     onLongPress: () {},
                     style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        primary: Color.fromRGBO(240, 240, 240, 1),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
@@ -428,49 +427,44 @@ Widget specialButtons(BuildContext context) {
       ));
 }
 
+
+
+
+
+//slide notifications
 Widget slideNotifications(BuildContext context) {
   return Container(
-      height: 335.0,
-      alignment: Alignment.center,
-      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0),
-      child: ListView.builder(
-          shrinkWrap: true,
-          itemCount: 7,
-          itemBuilder: (context, index) {
-            return Container(
-                height: 90.0,
+    height: 335.0,
+    alignment: Alignment.center,
+    margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0),
+    child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: 7,
+        itemBuilder: (context, index) {
+          return  Container(
                 alignment: Alignment.center,
                 decoration:
                 BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
                 child: Card.Card(
                   color: Color.fromRGBO(253, 178, 108, 1),
-                  child: Row(children: [
-                    Container(
-                        width: 90.0,
-                        height: 90.0,
-                        padding:
-                        EdgeInsets.only(right: 18.0, top: 16.0, bottom: 16.0, left: 18.0),
-                        child: Container(
-                            width: 50.0,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage('assets/bandos.jpg'),
-                                    fit: BoxFit.cover),
-                                borderRadius: BorderRadius.circular(10.0)))),
-                    Expanded(
-                        child: ReadMoreText(
-                          'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
-                          trimLines: 2,
-                          colorClickableText: Colors.pink,
-                          trimMode: TrimMode.Line,
-                          trimCollapsedText: 'Show more',
-                          trimExpandedText: 'Show less',
-                          moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
-                        ),
-                    ),
-                  ]),
-                ));
-          }),
+                  child: ExpansionTile(
+                    backgroundColor: Colors.transparent,
+                    iconColor: Colors.black,
+                    collapsedIconColor: Colors.black,
+                    childrenPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    expandedCrossAxisAlignment: CrossAxisAlignment.end,
+                    title: Text('Título', style: const TextStyle(
+                        color: Colors.black
+                    )),
+                    children: [
+                      Text('Contenido', style: const TextStyle(
+                          color: Colors.black
+                      ))
+                    ],
+                  ),
+                )
+          );
+        }),
   );
 }
 
