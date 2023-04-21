@@ -306,17 +306,18 @@ Widget specialButtons(BuildContext context) {
       alignment: Alignment.center,
       child: Column(
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
-                width: 171.0,
+                width: 145.0,
                 height: 120.0,
                 child: ElevatedButton(
                     onPressed: () {},
                     onLongPress: () {},
-                    style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromRGBO(160, 140, 140, 0.17)),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)))),
                     child: Container(
                       padding: EdgeInsets.all(5.0),
                       child: Column(
@@ -337,15 +338,16 @@ Widget specialButtons(BuildContext context) {
                     ))),
             SizedBox(width: 16.0),
             Container(
-                width: 171.0,
+                width: 145.0,
                 height: 120.0,
                 child: ElevatedButton(
                     onPressed: () {},
                     onLongPress: () {},
-                    style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromRGBO(160, 140, 140, 0.17)),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)))),
                     child: Container(
                       padding: EdgeInsets.all(5.0),
                       child: Column(
@@ -368,17 +370,18 @@ Widget specialButtons(BuildContext context) {
           SizedBox(
             height: 16.0,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
-                width: 171.0,
+                width: 145.0,
                 height: 120.0,
                 child: ElevatedButton(
                     onPressed: () {},
                     onLongPress: () {},
-                    style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromRGBO(160, 140, 140, 0.17)),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)))),
                     child: Container(
                       padding: EdgeInsets.all(5.0),
                       child: Column(
@@ -399,7 +402,7 @@ Widget specialButtons(BuildContext context) {
                     ))),
             SizedBox(width: 16.0),
             Container(
-                width: 171.0,
+                width: 145.0,
                 height: 120.0,
                 child: ElevatedButton(
                     onPressed: () {
@@ -412,10 +415,11 @@ Widget specialButtons(BuildContext context) {
                               reverseTransitionDuration: Duration.zero));
                     },
                     onLongPress: () {},
-                    style: ElevatedButton.styleFrom(
-                        primary: Color.fromRGBO(160, 140, 140, 0.17),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0))),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(
+                            Color.fromRGBO(160, 140, 140, 0.17)),
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0)))),
                     child: Container(
                       padding: EdgeInsets.all(5.0),
                       child: Column(
@@ -441,7 +445,7 @@ Widget specialButtons(BuildContext context) {
 
 Widget slideNotifications(BuildContext context) {
   return Container(
-    alignment: Alignment.center,
+      alignment: Alignment.center,
       margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0),
       child: Column(
         children: <Widget>[
@@ -452,32 +456,27 @@ Widget slideNotifications(BuildContext context) {
                   BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
               child: Card.Card(
                 color: Color.fromRGBO(253, 178, 108, 1),
-                child: Row(
-                    children: [
-                      Container(
-                        width: 70,
-                          height: 90.0,
-                          padding: EdgeInsets.only(
-                               top: 16.0, bottom: 16.0, left: 16.0),
-                          child: Container(
-                              width: 50.0,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: AssetImage('assets/bandos.jpg'),
-                                      fit: BoxFit.cover),
-                                  borderRadius: BorderRadius.circular(10.0)))),
-
-                      Container(
-                        width: 350.0,
-
-                          padding: EdgeInsets.all(16.0),
-                          alignment: Alignment.center,
-                          child: Text('Pedro Fernández ha sido detenido por robo.', textAlign: TextAlign.center, style: TextStyle(
-                                  fontSize: 20.0
-                              ))
-
-                          )
-                    ]),
+                child: Row(children: [
+                  Container(
+                      width: 70,
+                      height: 90.0,
+                      padding:
+                          EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
+                      child: Container(
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/bandos.jpg'),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(10.0)))),
+                  Container(
+                      width: 350.0,
+                      padding: EdgeInsets.all(16.0),
+                      alignment: Alignment.center,
+                      child: Text('Pedro Fernández ha sido detenido por robo.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 20.0)))
+                ]),
               ))
         ],
       ));
