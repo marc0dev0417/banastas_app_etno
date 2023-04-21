@@ -185,8 +185,8 @@ class HomeState extends State<Home> {
             child: Container(
           color: context.watch<ColorBloc>().state.colorPrimary,
           child: Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+              child: ListView(
+            scrollDirection: Axis.vertical,
             children: [
               WarningWidgetValueNotifier(),
               Container(
@@ -227,11 +227,13 @@ class HomeState extends State<Home> {
               slideEvents(context),
               specialButtons(context),
               Container(
-                  alignment: Alignment.centerLeft,
-                  padding: EdgeInsets.all(16.0),
-                  child: Text('Notificaciones',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 25.0)))
+                alignment: Alignment.centerLeft,
+                padding: EdgeInsets.all(16.0),
+                child: Text('Notificaciones',
+                    style:
+                        TextStyle(fontWeight: FontWeight.w500, fontSize: 25.0)),
+              ),
+              slideNotifications(context)
             ],
           )),
         )),
@@ -433,6 +435,50 @@ Widget specialButtons(BuildContext context) {
                       ),
                     )))
           ]),
+        ],
+      ));
+}
+
+Widget slideNotifications(BuildContext context) {
+  return Container(
+    alignment: Alignment.center,
+      margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0),
+      child: Column(
+        children: <Widget>[
+          Container(
+              height: 90.0,
+              alignment: Alignment.center,
+              decoration:
+                  BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+              child: Card.Card(
+                color: Color.fromRGBO(253, 178, 108, 1),
+                child: Row(
+                    children: [
+                      Container(
+                        width: 70,
+                          height: 90.0,
+                          padding: EdgeInsets.only(
+                               top: 16.0, bottom: 16.0, left: 16.0),
+                          child: Container(
+                              width: 50.0,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: AssetImage('assets/bandos.jpg'),
+                                      fit: BoxFit.cover),
+                                  borderRadius: BorderRadius.circular(10.0)))),
+
+                      Container(
+                        width: 350.0,
+
+                          padding: EdgeInsets.all(16.0),
+                          alignment: Alignment.center,
+                          child: Text('Pedro Fernández ha sido detenido por robo.', textAlign: TextAlign.center, style: TextStyle(
+                                  fontSize: 20.0
+                              ))
+
+                          )
+                    ]),
+              ))
         ],
       ));
 }
