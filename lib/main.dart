@@ -33,6 +33,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
+import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'bloc/color/color_bloc.dart';
 import 'firebase_options.dart';
@@ -302,24 +303,20 @@ Widget widgetWeather(BuildContext context, Weather weather) {
 Widget specialButtons(BuildContext context) {
   return Container(
       padding:
-          EdgeInsets.only(left: 25.0, right: 25.0, top: 16.0, bottom: 16.0),
+          EdgeInsets.only(left: 40.0, right: 40.0, top: 16.0, bottom: 16.0),
       alignment: Alignment.center,
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-                width: 145.0,
-                height: 120.0,
+            Expanded(
                 child: ElevatedButton(
                     onPressed: () {},
                     onLongPress: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromRGBO(160, 140, 140, 0.17)),
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
-                      padding: EdgeInsets.all(5.0),
                       child: Column(
                         children: [
                           Icon(Icons.newspaper,
@@ -337,19 +334,15 @@ Widget specialButtons(BuildContext context) {
                       ),
                     ))),
             SizedBox(width: 16.0),
-            Container(
-                width: 145.0,
-                height: 120.0,
+            Expanded(
                 child: ElevatedButton(
                     onPressed: () {},
                     onLongPress: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromRGBO(160, 140, 140, 0.17)),
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
-                      padding: EdgeInsets.all(5.0),
                       child: Column(
                         children: [
                           Icon(Icons.medical_information,
@@ -371,19 +364,15 @@ Widget specialButtons(BuildContext context) {
             height: 16.0,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Container(
-                width: 145.0,
-                height: 120.0,
+            Expanded(
                 child: ElevatedButton(
                     onPressed: () {},
                     onLongPress: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromRGBO(160, 140, 140, 0.17)),
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
-                      padding: EdgeInsets.all(5.0),
                       child: Column(
                         children: [
                           Icon(Icons.campaign,
@@ -401,9 +390,7 @@ Widget specialButtons(BuildContext context) {
                       ),
                     ))),
             SizedBox(width: 16.0),
-            Container(
-                width: 145.0,
-                height: 120.0,
+            Expanded(
                 child: ElevatedButton(
                     onPressed: () {
                       Navigator.pushReplacement(
@@ -415,13 +402,11 @@ Widget specialButtons(BuildContext context) {
                               reverseTransitionDuration: Duration.zero));
                     },
                     onLongPress: () {},
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(
-                            Color.fromRGBO(160, 140, 140, 0.17)),
-                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20.0)))),
+                    style: ElevatedButton.styleFrom(
+                        primary: Color.fromRGBO(160, 140, 140, 0.17),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0))),
                     child: Container(
-                      padding: EdgeInsets.all(5.0),
                       child: Column(
                         children: [
                           Icon(Icons.celebration,
@@ -445,41 +430,53 @@ Widget specialButtons(BuildContext context) {
 
 Widget slideNotifications(BuildContext context) {
   return Container(
+      height: 335.0,
       alignment: Alignment.center,
       margin: EdgeInsets.only(left: 20.0, right: 20.0, bottom: 16.0),
-      child: Column(
-        children: <Widget>[
-          Container(
-              height: 90.0,
-              alignment: Alignment.center,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
-              child: Card.Card(
-                color: Color.fromRGBO(253, 178, 108, 1),
-                child: Row(children: [
-                  Container(
-                      width: 70,
-                      height: 90.0,
-                      padding:
-                          EdgeInsets.only(top: 16.0, bottom: 16.0, left: 16.0),
-                      child: Container(
-                          width: 50.0,
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/bandos.jpg'),
-                                  fit: BoxFit.cover),
-                              borderRadius: BorderRadius.circular(10.0)))),
-                  Container(
-                      width: 350.0,
-                      padding: EdgeInsets.all(16.0),
+      child: ListView.builder(
+          shrinkWrap: true,
+          itemCount: 7,
+          itemBuilder: (context, index) {
+            return Container(
+                height: 90.0,
+                alignment: Alignment.center,
+                decoration:
+                BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+                child: Card.Card(
+                  color: Color.fromRGBO(253, 178, 108, 1),
+                  child: Row(children: [
+                    Container(
+                        width: 70,
+                        height: 90.0,
+                        padding:
+                        EdgeInsets.only(top: 16.0, bottom: 16.0, left: 20.0),
+                        child: Container(
+                            width: 50.0,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage('assets/bandos.jpg'),
+                                    fit: BoxFit.cover),
+                                borderRadius: BorderRadius.circular(10.0)))),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2,
+                      padding: EdgeInsets.only(left: 40.0),
                       alignment: Alignment.center,
-                      child: Text('Pedro Fernández ha sido detenido por robo.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20.0)))
-                ]),
-              ))
-        ],
-      ));
+                      child: Expanded(
+                        child: ReadMoreText(
+                          'Flutter is Google’s mobile UI open source framework to build high-quality native (super fast) interfaces for iOS and Android apps with the unified codebase.',
+                          trimLines: 2,
+                          colorClickableText: Colors.pink,
+                          trimMode: TrimMode.Line,
+                          trimCollapsedText: 'Show more',
+                          trimExpandedText: 'Show less',
+                          moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                        ), // default is 1
+                      ),
+                    ),
+                  ]),
+                ));
+          }),
+  );
 }
 
 //Slider of events

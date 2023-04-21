@@ -498,7 +498,7 @@ abstract class SectionBase with Store {
   Future<List<Bandos>> getAllBandosByLocality(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/bandos/filtered?username=$locality'));
+          'https://tomcat.vpsecomputer.com:8080/bandos/filtered?username=$locality'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -585,7 +585,7 @@ abstract class SectionBase with Store {
       Future<List<Reserve>> getReservesByLocality(String username) async {
         try {
           final response = await http.get(Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/reserves?username=$username'));
+              'https://tomcat.vpsecomputer.com:8080/reserves?username=$username'));
           final decodeBody = utf8.decode(response.bodyBytes);
           final data = (jsonDecode(decodeBody) as List).map((e) =>
               Reserve.fromJson(e)).toList();
