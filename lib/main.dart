@@ -437,13 +437,13 @@ class HomeState extends State<Home> {
             children: [
               Icon(returnIconSection(section.sectionName!),
               size: 80.0,
-              color: Color.fromRGBO(154, 22, 22, 1)),
+              color: context.watch<ColorBloc>().state.colorDark),
               Text(section.sectionName!,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(154, 22, 22, 1)
+                    color: context.watch<ColorBloc>().state.colorDark
                 )
               ),
             ],
@@ -481,10 +481,7 @@ class HomeState extends State<Home> {
             null),
         body: SafeArea(
           child: Container(
-              color: context
-                  .watch<ColorBloc>()
-                  .state
-                  .colorPrimary,
+              color: Colors.white,
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [

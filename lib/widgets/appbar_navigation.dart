@@ -1,6 +1,8 @@
+import 'package:etno_app/bloc/color/color_bloc.dart';
 import 'package:etno_app/pages/event/PageEvents.dart';
 import 'package:etno_app/widgets/DropDownLanguage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 PreferredSizeWidget appBarCustom(
@@ -13,7 +15,7 @@ PreferredSizeWidget appBarCustom(
     [tabs]
     ){
   return AppBar(
-    backgroundColor: Color.fromRGBO(255, 50, 50, 1.0),
+    backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
     automaticallyImplyLeading: false,
     leading: Visibility(
       visible: isVisibleBack,
@@ -25,10 +27,10 @@ PreferredSizeWidget appBarCustom(
             Navigator.pop(context);
           }
         },
-        child: Icon(Icons.chevron_left, color: Colors.white),
+        child: Icon(Icons.chevron_left, color: context.watch<ColorBloc>().state.colorSecondary),
       ),
     ),
-    title: Text(title, style: const TextStyle(color: Colors.white)),
+    title: Text(title, style: TextStyle(color: context.watch<ColorBloc>().state.colorSecondary)),
     actions:  [
       Visibility(
         visible: isVisibleLanguage,
@@ -47,9 +49,9 @@ PreferredSizeWidget appBarNews(
     ){
 
   return AppBar(
-      backgroundColor: Colors.red,
+      backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
       automaticallyImplyLeading: false,
-      title: Text(title, style: const TextStyle(color: Colors.white)),
+      title: Text(title, style: TextStyle(color: context.watch<ColorBloc>().state.colorSecondary)),
     bottom: TabBar(
       labelColor: Colors.white,
       indicatorColor: Colors.white,

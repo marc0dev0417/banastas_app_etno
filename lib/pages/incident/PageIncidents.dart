@@ -72,6 +72,7 @@ class PageState extends State<PageIncidents> {
     );
   }
 }
+
 Widget cardIncident(Incident incident){
   return InkWell(
       child: Card(
@@ -122,17 +123,27 @@ Widget cardIncidents(BuildContext context, Incident incident) {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(incident.title! , style: const TextStyle(fontWeight: FontWeight.bold))
+                SizedBox(
+                  width: 320.0,
+                  child: Text(
+                    incident.title!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    height: 30.0,
+                    width: 150.0,
+                    color: !incident.isSolved! ? Colors.red : Colors.green,
+                    child: !incident.isSolved! ?  Text(AppLocalizations.of(context)!.awaiting_resolution, style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
+                )
               ],
             ),
-            const SizedBox(width: 40.0),
-            Container(
-                alignment: Alignment.center,
-                height: 30.0,
-                width: 150.0,
-                color: !incident.isSolved! ? Colors.red : Colors.green,
-                child: !incident.isSolved! ?  Text(AppLocalizations.of(context)!.awaiting_resolution, style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
-            )
+
+
           ],
         ),
       ),
