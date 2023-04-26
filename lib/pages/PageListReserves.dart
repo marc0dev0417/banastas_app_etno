@@ -3,8 +3,10 @@ import 'package:etno_app/pages/PageSeeMyReserves.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../bloc/color/color_bloc.dart';
 import '../models/Reserve.dart';
 import '../widgets/appbar_navigation.dart';
 class PageListReserves extends StatefulWidget {
@@ -29,7 +31,7 @@ class PageState extends State<PageListReserves> {
       theme: ThemeData(
           useMaterial3: true,
           floatingActionButtonTheme:
-          const FloatingActionButtonThemeData(backgroundColor: Colors.red)),
+          FloatingActionButtonThemeData(backgroundColor: context.watch<ColorBloc>().state.colorPrimary)),
       home: Scaffold(
           backgroundColor: Colors.white,
           appBar: appBarCustom(
@@ -74,9 +76,9 @@ class PageState extends State<PageListReserves> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Icon(Icons.sell, color: Colors.white),
+                  Icon(Icons.sell, color: context.watch<ColorBloc>().state.colorSecondary),
                   Text(AppLocalizations.of(context)!.see_book,
-                      style: TextStyle(color: Colors.white))
+                      style: TextStyle(color: context.watch<ColorBloc>().state.colorSecondary))
                 ],
               ),
             ),
@@ -126,10 +128,10 @@ Widget cardReserve(BuildContext context, Reserve reserve) {
                         PageRouteBuilder(
                             pageBuilder: (context, animation1, animation2) =>
                                 PageReserve(reserve: reserve))),
-                    style: const ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(Colors.red)),
+                    style: ButtonStyle(
+                        backgroundColor: MaterialStatePropertyAll(context.watch<ColorBloc>().state.colorPrimary)),
                     child: Text(AppLocalizations.of(context)!.see,
-                        style: TextStyle(color: Colors.white)))
+                        style: TextStyle(color: context.watch<ColorBloc>().state.colorSecondary)))
               ])
             ],
           ),

@@ -1,6 +1,8 @@
+import 'package:etno_app/bloc/color/color_bloc.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -28,7 +30,7 @@ class PageState extends State<PageLinks> {
   @override
   Widget build(BuildContext pageContext) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: false, cardTheme: const CardTheme(color: Colors.white)),
+      theme: ThemeData(useMaterial3: false, cardTheme: CardTheme(color: context.watch<ColorBloc>().state.colorSecondary)),
       title: 'Page Enlaces',
       home: Scaffold(
           appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_link, Icons.language, false, () => null, null),
@@ -41,7 +43,7 @@ class PageState extends State<PageLinks> {
                     return Expanded(
                         child: ListView(
                             shrinkWrap: true,
-                            children: section.getLinks.map((e) => cardLink(e)).toList()
+                            children: section.getLinks.map((e) => cardLink(context, e)).toList()
                         )
                     );
                   }else{
@@ -67,7 +69,7 @@ class PageState extends State<PageLinks> {
   }
 }
 
-Widget cardLink(Link link){
+Widget cardLink(BuildContext context, Link link){
   Future<void> launchInBrowser(Uri url) async{
     if(!await launchUrl(
         url,
@@ -84,9 +86,9 @@ Widget cardLink(Link link){
               child:  Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Icon(Icons.link, size: 30.0, color: Colors.red),
+                     Icon(Icons.link, size: 30.0, color: context.watch<ColorBloc>().state.colorPrimary),
                     Flexible(child: Text(link.title!, style: const TextStyle(fontWeight: FontWeight.bold))),
-                    ElevatedButton(style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)), onPressed: () => launchInBrowser(Uri.parse(link.url!)), child: const Text('Visitar', style: TextStyle(color: Colors.white)))
+                    ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(context.watch<ColorBloc>().state.colorPrimary)), onPressed: () => launchInBrowser(Uri.parse(link.url!)), child: Text('Visitar', style: TextStyle(color: context.watch<ColorBloc>().state.colorSecondary)))
                   ]
               )
             )

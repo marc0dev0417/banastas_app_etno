@@ -5,7 +5,9 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../bloc/color/color_bloc.dart';
 import '../../models/Incident.dart';
 import '../../store/section.dart';
 class PageIncidents extends StatefulWidget {
@@ -65,7 +67,7 @@ class PageState extends State<PageIncidents> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const IncidentForm(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)),
-          backgroundColor: Colors.red,
+          backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
           child: const Icon(Icons.add),
         ),
       ),
@@ -142,8 +144,6 @@ Widget cardIncidents(BuildContext context, Incident incident) {
                 )
               ],
             ),
-
-
           ],
         ),
       ),

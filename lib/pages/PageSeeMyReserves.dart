@@ -33,7 +33,7 @@ class PageState extends State<PageSeeMyReserves> {
     return MaterialApp(
       title: 'See My reserves Page',
       home: Scaffold(
-        appBar: appBarCustom(context, true, AppLocalizations.of(context)!.section_booking, Icons.language, false, () => null),
+        appBar: appBarCustom(pageContext, true, AppLocalizations.of(pageContext)!.section_booking, Icons.language, false, () => null),
         body: SafeArea(
           child: Observer(builder: (context){
             if (section.getReserveUser.isNotEmpty){
@@ -41,7 +41,7 @@ class PageState extends State<PageSeeMyReserves> {
                   padding: const EdgeInsets.all(16.0),
                   child: Observer(builder: (context){
                     return ListView(
-                        children: section.getReserveUser.map((e) => cardMyReserve(context, e)).toList()
+                        children: section.getReserveUser.map((e) => cardMyReserve(pageContext, e)).toList()
                     );
                   })
               );
@@ -70,7 +70,7 @@ Widget cardMyReserve(BuildContext context, ReserveUser reserveUser) {
     height: 130.0,
     width: double.maxFinite,
     child: GestureDetector(
-      onTap: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageMyReserveDetails(reserve: Reserve.prop(reserveUser.place, reserveUser.isReserved, reserveUser.description, reserveUser.reservePhone, reserveUser.date, reserveUser.reserveSchedules)))) ,
+      onTap: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context1, animation1, animation2) => PageMyReserveDetails(reserve: Reserve.prop(reserveUser.place, reserveUser.isReserved, reserveUser.description, reserveUser.reservePhone, reserveUser.date, reserveUser.reserveSchedules), page_context: context))) ,
       child: Card(
         child: Row(
           children: [
