@@ -15,7 +15,7 @@ class ColorState extends Equatable {
 
   factory ColorState.initial(){
     return ColorState(
-        colorPrimary: Colors.blue,
+        colorPrimary: Colors.red,
         colorSecondary: Colors.white,
         colorDark: Color.fromRGBO(154, 22, 22, 1),
         inverseColor: Color.fromRGBO(31, 41, 43, 1.0)
