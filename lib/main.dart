@@ -255,7 +255,7 @@ class HomeState extends State<Home> {
                       children: <Widget>[
                         ListTile(
                           leading: Icon(Icons.celebration),
-                          title: Text('Eventos'),
+                          title: Text(getSectionText('Eventos', context)),
                           onTap: () {
                             setState(() {
                               section.sectionName = 'Eventos';
@@ -266,7 +266,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                           leading: Icon(Icons.map),
-                          title: Text('Turismo'),
+                          title: Text(getSectionText('Turismo', context)),
                           onTap: () {
                             setState(() {
                               section.sectionName = 'Turismo';
@@ -277,7 +277,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.medication),
-                            title: Text('Farmacias'),
+                            title: Text(getSectionText('Farmacias', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Farmacias';
@@ -288,7 +288,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.medical_information),
-                            title: Text('Servicios'),
+                            title: Text(getSectionText('Servicios', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Servicios';
@@ -299,7 +299,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.newspaper),
-                            title: Text('Noticias'),
+                            title:Text(getSectionText('Noticias', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Noticias';
@@ -310,7 +310,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.campaign),
-                            title: Text('Bandos'),
+                            title: Text(getSectionText('Bandos', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Bandos';
@@ -321,7 +321,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.tab),
-                            title: Text('Anuncios'),
+                            title: Text(getSectionText('Anuncios', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Anuncios';
@@ -332,7 +332,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.perm_media),
-                            title: Text('Galería'),
+                            title: Text(getSectionText('Gslería', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Galería';
@@ -343,7 +343,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.heart_broken_sharp),
-                            title: Text('Defunciones'),
+                            title: Text(getSectionText('Defunciones', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Defunciones';
@@ -354,7 +354,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.link),
-                            title: Text('Enlaces'),
+                            title: Text(getSectionText('Enlaces', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Enlaces';
@@ -365,7 +365,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.handshake),
-                            title: Text('Patrocinadores'),
+                            title: Text(getSectionText('Patrocinadores', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Patrocinadores';
@@ -376,7 +376,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.dangerous),
-                            title: Text('Incidentes'),
+                            title: Text(getSectionText('Incidentes', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Incidentes';
@@ -387,7 +387,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.beenhere),
-                            title: Text('Reservas'),
+                            title: Text(getSectionText('Reservas', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Reservas';
@@ -398,7 +398,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.recycling),
-                            title: Text('Enseres'),
+                            title: Text(getSectionText('Enseres', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Enseres';
@@ -409,7 +409,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.quiz),
-                            title: Text('Yo decido'),
+                            title: Text(getSectionText('Yo decido', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Yo decido';
@@ -438,9 +438,10 @@ class HomeState extends State<Home> {
               Icon(returnIconSection(section.sectionName!),
               size: 80.0,
               color: context.watch<ColorBloc>().state.colorDark),
-              Text(section.sectionName!,
-                textAlign: TextAlign.center,
-                style: TextStyle(
+              Text(
+                  getSectionText(section.sectionName!, context),//section.sectionName!,
+                  textAlign: TextAlign.center,
+                 style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: context.watch<ColorBloc>().state.colorDark
