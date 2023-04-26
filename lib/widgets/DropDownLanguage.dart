@@ -1,3 +1,4 @@
+import 'package:etno_app/bloc/language/language_bloc.dart';
 import 'package:etno_app/provider/locale_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class LanguagePickerWidget extends StatelessWidget {
     return DropdownButtonHideUnderline(
         child: DropdownButton(
           iconEnabledColor: Colors.white,
-          value: locale,
+          value: Locale(context.watch<LanguageBloc>().state.languageCode),
           items: L10n.all.map((locale){
             final flag = L10n.getFlag(locale.languageCode);
             return DropdownMenuItem(
@@ -25,14 +26,26 @@ class LanguagePickerWidget extends StatelessWidget {
               ),
               onTap: () {
                 final provider = Provider.of<LocaleProvider>(context, listen: false);
+                context.read<LanguageBloc>().add(SaveLanguageCode(languageCode: locale.languageCode));
                 provider.setLocale(locale);
               },
             );
           }).toList(), onChanged: (Locale? value) {
-
         },
           dropdownColor: Color.fromRGBO(255, 255, 255, 0.45),
         )
     );
+  }
+}
+
+Locale getLocaleLanguage(String languageCode){
+  switch(languageCode){
+    case 'es': return Locale('es');
+    case 'en': return Locale('en');
+    case 'ca': return Locale('ca');
+    case 'eu': return Locale('eu');
+    case 'fr': return Locale('fr');
+    case 'gl': return Locale('gl');
+    default: return Locale('es');
   }
 }

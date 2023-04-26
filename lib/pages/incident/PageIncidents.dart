@@ -5,7 +5,9 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../bloc/color/color_bloc.dart';
 import '../../models/Incident.dart';
 import '../../store/section.dart';
 class PageIncidents extends StatefulWidget {
@@ -65,13 +67,14 @@ class PageState extends State<PageIncidents> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) =>  const IncidentForm(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)),
-          backgroundColor: Colors.red,
+          backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
           child: const Icon(Icons.add),
         ),
       ),
     );
   }
 }
+
 Widget cardIncident(Incident incident){
   return InkWell(
       child: Card(
@@ -122,17 +125,25 @@ Widget cardIncidents(BuildContext context, Incident incident) {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(incident.title! , style: const TextStyle(fontWeight: FontWeight.bold))
+                SizedBox(
+                  width: 320.0,
+                  child: Text(
+                    incident.title!,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    softWrap: false,
+                    style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                ),
+                Container(
+                    alignment: Alignment.center,
+                    height: 30.0,
+                    width: 150.0,
+                    color: !incident.isSolved! ? Colors.red : Colors.green,
+                    child: !incident.isSolved! ?  Text(AppLocalizations.of(context)!.awaiting_resolution, style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
+                )
               ],
             ),
-            const SizedBox(width: 40.0),
-            Container(
-                alignment: Alignment.center,
-                height: 30.0,
-                width: 150.0,
-                color: !incident.isSolved! ? Colors.red : Colors.green,
-                child: !incident.isSolved! ?  Text(AppLocalizations.of(context)!.awaiting_resolution, style: TextStyle(fontSize: 12.0, color: Colors.white)) : const Text('Resuelta', style: TextStyle(fontSize: 12.0, color: Colors.white))
-            )
           ],
         ),
       ),

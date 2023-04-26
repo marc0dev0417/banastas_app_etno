@@ -127,5 +127,21 @@
   "places": "Lekuak",
   "unsubscribed_event": "Gutxitu da ekitalditik",
   "start_date": " - Hasierako data",
-  "toast_send_mail_error": "Posta elektronikoa bidali ezin izan da."
+  "toast_send_mail_error": "Posta elektronikoa bidali ezin izan da.",
+  "calendar": "Egutegia",
+  "notifications": "Jakinarazpenak",
+  "select_option": "Aukeratu aukera bat",
+  "see_all": "Guztiak ikusi",
+  "january": "URT",
+  "february": "OTS",
+  "march": "MAR",
+  "april": "API",
+  "may": "MAI",
+  "june": "EKI",
+  "july": "UZT",
+  "august": "ABU",
+  "september": "IRA",
+  "october": "URR",
+  "november": "AZA",
+  "december": "ABE"
 }

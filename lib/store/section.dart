@@ -103,7 +103,7 @@ abstract class SectionBase with Store {
   Future<List<CustomLink>> getCustomLinks(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/custom_links?username=$locality'));
+          '${Globals.url_microservice_etno}custom_links?username=$locality'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -126,14 +126,14 @@ abstract class SectionBase with Store {
       File fileName, BuildContext context) async {
     try {
       final responseImage = http.MultipartRequest('POST', Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/images?section=enseres&category=enseres&username=Bolea'));
+          '${Globals.url_microservice_etno}images?section=enseres&category=enseres&username=Bolea'));
 
       responseImage.files.add(
           await http.MultipartFile.fromPath('image', fileName.path));
       responseImage.send().then((value) async {
         if (value.statusCode == 200) {
           final response = await http.post(Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=http://tomcat.vpsecomputer.com:8080/images/enseres/${fileName
+              '${Globals.url_microservice_etno}sendMail/attachment?address=$address&message=$message&subject=$subject&attachment=${Globals.url_microservice_etno}images/enseres/${fileName
                   .path
                   .split("/")
                   .last}'));
@@ -171,7 +171,7 @@ abstract class SectionBase with Store {
   Future<SectionDetails> getSectionDetails(String username) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/users/section_details?username=$username'));
+          '${Globals.url_microservice_etno}users/section_details?username=$username'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = SectionDetails.fromJson(jsonDecode(decodeBody));
@@ -204,7 +204,7 @@ abstract class SectionBase with Store {
       final response = await http.get(
 
         Uri.parse(
-            'http://tomcat.vpsecomputer.com:8080/news?username=$locality'),
+            '${Globals.url_microservice_etno}news?username=$locality'),
 
 
       );
@@ -226,7 +226,7 @@ abstract class SectionBase with Store {
       final response = await http.get(
 
           Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/news?username=$locality&category=$category')
+              '${Globals.url_microservice_etno}news?username=$locality&category=$category')
 
       );
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -247,9 +247,9 @@ abstract class SectionBase with Store {
       final response = await http.get(
 
           Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/events?username=$locality'));
+              '${Globals.url_microservice_etno}events?username=$locality'));
 
-      Uri.parse('${Globals.url_microservice_etno}events?username=$locality');
+
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
@@ -267,7 +267,7 @@ abstract class SectionBase with Store {
   Future<List<Defunction>> getAllDefunctionsByLocality(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/deaths?username=$locality'));
+          '${Globals.url_microservice_etno}deaths?username=$locality'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -286,7 +286,7 @@ abstract class SectionBase with Store {
   Future<List<Sponsor>> getSponsorsByLocality(String locality) async {
     try {
       final response = await http.get(
-          Uri.parse('http://tomcat.vpsecomputer.com:8080/sponsors'));
+          Uri.parse('${Globals.url_microservice_etno}sponsors'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -305,8 +305,7 @@ abstract class SectionBase with Store {
   Future<List<Link>> getAllLinksByLocality(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/links?username=$locality'));
-
+          '${Globals.url_microservice_etno}links?username=$locality'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List)
@@ -326,8 +325,7 @@ abstract class SectionBase with Store {
       String title) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/events?username=$username&title=$title'));
-
+          '${Globals.url_microservice_etno}events?username=$username&title=$title'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = Event.fromJson(jsonDecode(decodeBody));
@@ -343,8 +341,10 @@ abstract class SectionBase with Store {
   Future<FCMToken> saveFcmToken(FCMToken fcmToken) async {
     try {
       final response = await http.post(
-          Uri.parse('http://tomcat.vpsecomputer.com:8080/FCMTokens'),
-          body: jsonEncode(fcmToken.toJson()), headers: <String, String>{});
+          Uri.parse('https://tomcat.vpsecomputer.com:8080/FCMTokens'),
+          body: jsonEncode(fcmToken.toJson()), headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8'
+      });
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = FCMToken.fromJson(jsonDecode(decodeBody));
@@ -356,12 +356,11 @@ abstract class SectionBase with Store {
     }
   }
 
-
   @action
   Future<bool> getSubscription(String fcmToken, String title) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/subscription_users?fcmToken=$fcmToken&title=$title'));
+          '${Globals.url_microservice_etno}subscription_users?fcmToken=$fcmToken&title=$title'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = UserSubscription.fromJson(jsonDecode(decodeBody));
@@ -383,7 +382,7 @@ abstract class SectionBase with Store {
       UserSubscription userSubscription) async {
     try {
       final response = await http.post(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/users/add/event/subscription?username=$locality&title=$title'),
+          '${Globals.url_microservice_etno}users/add/event/subscription?username=$locality&title=$title'),
           body:jsonEncode(userSubscription.toJson()), headers: <String, String> {
     'Content-Type': 'application/json; charset=UTF-8'
     });
@@ -401,7 +400,7 @@ abstract class SectionBase with Store {
       String fcmToken) async {
     try {
       final response = await http.put(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/users/dropout/event/subscription?username=$locality&title=$title&fcmToken=$fcmToken'));
+          '${Globals.url_microservice_etno}users/dropout/event/subscription?username=$locality&title=$title&fcmToken=$fcmToken'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = UserSubscription.fromJson(jsonDecode(decodeBody));
@@ -420,7 +419,7 @@ abstract class SectionBase with Store {
       final response = await http.get(
 
           Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/pharmacies?username=$locality'));
+              '${Globals.url_microservice_etno}pharmacies?username=$locality'));
 
     final decodeBody = utf8.decode(response.bodyBytes);
     final data = (jsonDecode(decodeBody) as List)
@@ -440,7 +439,7 @@ abstract class SectionBase with Store {
       final response = await http.get(
 
           Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/tourism?username=$locality'));
+              '${Globals.url_microservice_etno}tourism?username=$locality'));
 
     final decodeBody = utf8.decode(response.bodyBytes);
     final data = (jsonDecode(decodeBody) as List)
@@ -460,7 +459,7 @@ abstract class SectionBase with Store {
     try {
       final response = await http.get(Uri.parse(
 
-          'http://tomcat.vpsecomputer.com:8080/services?username=$locality&category=$category'));
+          '${Globals.url_microservice_etno}services?username=$locality&category=$category'));
 
 
     final decodeBody = utf8.decode(response.bodyBytes);
@@ -479,7 +478,7 @@ abstract class SectionBase with Store {
   Future<List<Ad>> getAllAdsByLocality(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/ads?username=$locality'));
+          '${Globals.url_microservice_etno}ads?username=$locality'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -498,14 +497,13 @@ abstract class SectionBase with Store {
   Future<List<Bandos>> getAllBandosByLocality(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/bandos/filtered?username=$locality'));
-
+          '${Globals.url_microservice_etno}bandos/filtered?username=$locality'));
 
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) =>
           Bandos.fromJson(e)).toList();
-      bandoList = data;
-      return data;
+      bandoList = data.toList();
+      return data.toList();
     } catch (e) {
       debugPrint(e.toString());
       rethrow;
@@ -516,7 +514,7 @@ abstract class SectionBase with Store {
   Future<List<ImageMedia>> getAllImageMediaByLocality(String locality) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/images?locality=$locality'));
+          '${Globals.url_microservice_etno}images?locality=$locality'));
 
 
       final decodeBody = utf8.decode(response.bodyBytes);
@@ -535,7 +533,7 @@ abstract class SectionBase with Store {
       String fcmToken) async {
     try {
       final response = await http.get(Uri.parse(
-          'http://tomcat.vpsecomputer.com:8080/incidents/villager?username=$locality&fcmToken=$fcmToken'));
+          '${Globals.url_microservice_etno}incidents/villager?username=$locality&fcmToken=$fcmToken'));
       final decodeBody = utf8.decode(response.bodyBytes);
       final data = (jsonDecode(decodeBody) as List).map((e) =>
           Incident.fromJson(e)).toList();
@@ -551,7 +549,7 @@ abstract class SectionBase with Store {
   Future<Message> sendMailMessage(MailDetails mailDetails) async {
     try {
       final response = await http.post(
-          Uri.parse('http://tomcat.vpsecomputer.com:8080/sendMail'),
+          Uri.parse('${Globals.url_microservice_etno}sendMail'),
           body: jsonEncode(mailDetails.toJson()), headers: <String, String> {
       'Content-Type': 'application/json; charset=UTF-8'
       });
@@ -568,7 +566,7 @@ abstract class SectionBase with Store {
     Future addIncident(Incident incident) async {
       try {
         final response = await http.post(Uri.parse(
-            'http://tomcat.vpsecomputer.com:8080/users/add/incident?username=${incident
+            '${Globals.url_microservice_etno}users/add/incident?username=${incident
                 .username}'), body: jsonEncode(incident.toJson()), headers: <
             String, String> {
             'Content-Type': 'application/json; charset=UTF-8'
@@ -585,7 +583,7 @@ abstract class SectionBase with Store {
       Future<List<Reserve>> getReservesByLocality(String username) async {
         try {
           final response = await http.get(Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/reserves?username=$username'));
+              '${Globals.url_microservice_etno}reserves?username=$username'));
           final decodeBody = utf8.decode(response.bodyBytes);
           final data = (jsonDecode(decodeBody) as List).map((e) =>
               Reserve.fromJson(e)).toList();
@@ -601,7 +599,7 @@ abstract class SectionBase with Store {
           String fcmToken) async {
         try {
           final response = await http.get(Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/reserveUsers?fcmToken=$fcmToken'));
+              '${Globals.url_microservice_etno}reserveUsers?fcmToken=$fcmToken'));
           final decodeBody = utf8.decode(response.bodyBytes);
           final data = (jsonDecode(decodeBody) as List).map((e) =>
               ReserveUser.fromJson(e)).toList();
@@ -617,7 +615,7 @@ abstract class SectionBase with Store {
           ReserveUser reserveUser) async {
         try {
           final response = await http.put(Uri.parse(
-              'http://tomcat.vpsecomputer.com:8080/users/update/reserve?username=$username&reserveName=$reserveName'),
+              '${Globals.url_microservice_etno}users/update/reserve?username=$username&reserveName=$reserveName'),
               body: jsonEncode(reserveUser.toJson()), headers: <String, String>{
 
               'Content-Type': 'application/json; charset=UTF-8'
@@ -643,7 +641,7 @@ abstract class SectionBase with Store {
         Future<List<Quiz>> getQuiz(String username) async {
           try {
             final response = await http.get(
-                Uri.parse('http://tomcat.vpsecomputer.com:8080/quizzes'));
+                Uri.parse('${Globals.url_microservice_etno}quizzes'));
             final decodeBody = utf8.decode(response.bodyBytes);
             final data = (jsonDecode(decodeBody) as List).map((e) =>
                 Quiz.fromJson(e)).toList();
@@ -659,7 +657,7 @@ abstract class SectionBase with Store {
             int option) async {
           try {
             final response = await http.put(Uri.parse(
-                'http://tomcat.vpsecomputer.com:8080/users/update/result/quiz?username=$username&idQuiz=$idQuiz&option=$option'));
+                '${Globals.url_microservice_etno}users/update/result/quiz?username=$username&idQuiz=$idQuiz&option=$option'));
             if (response.statusCode == 200) {
               Fluttertoast.showToast(
                   msg: 'Se ha enviado la encuesta',

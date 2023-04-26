@@ -3,10 +3,12 @@ import 'package:etno_app/models/MailDetails.dart';
 import 'package:etno_app/pages/incident/PageIncidents.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../bloc/color/color_bloc.dart';
 import '../../store/section.dart';
 class IncidentForm extends StatefulWidget {
   const IncidentForm({super.key});
@@ -124,8 +126,8 @@ class PageState extends State<IncidentForm> {
           const SizedBox(height: 20.0),
           ElevatedButton(
               onPressed: () => addIncidentAPI(),
-              style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.red)),
+              style: ButtonStyle(
+                  backgroundColor: MaterialStatePropertyAll(context.watch<ColorBloc>().state.colorPrimary)),
               child: Text(AppLocalizations.of(context)!.send,
                   style: TextStyle(color: Colors.white))),
         ]),

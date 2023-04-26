@@ -7,8 +7,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Reserve.dart';
 
 class PageMyReserveDetails extends StatefulWidget {
-  const PageMyReserveDetails({super.key, required this.reserve});
+  const PageMyReserveDetails({super.key, required this.reserve, required this.page_context});
   final Reserve reserve;
+  final BuildContext page_context;
   @override
   State<StatefulWidget> createState() {
     return PageState();
@@ -29,7 +30,7 @@ class PageState extends State<PageMyReserveDetails> {
     return MaterialApp(
       title: 'My reserve details',
       home: Scaffold(
-        appBar: appBarCustom(context, true, 'Reserva detalles', Icons.language, false, () => null),
+        appBar: appBarCustom(context, true, AppLocalizations.of(context)!.subsection_booking, Icons.language, false, () => null),
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.all(16.0),
@@ -52,7 +53,7 @@ class PageState extends State<PageMyReserveDetails> {
                     Text(props.place!.name!, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0)),
                     GestureDetector(
                         onTap: () => launchInBrowser(Uri.parse('https://maps.google.com/?daddr=${props.place?.latitude!},${props.place?.longitude!}')),
-                        child: Text(AppLocalizations.of(context)!.show_map, style: TextStyle(color: Colors.blue))
+                        child: Text(AppLocalizations.of(widget.page_context)!.show_map, style: TextStyle(color: Colors.blue))
                     )
                   ],
                 ),
@@ -62,16 +63,15 @@ class PageState extends State<PageMyReserveDetails> {
                   trimLines: 2,
                   colorClickableText: Colors.blue,
                   trimMode: TrimMode.Line,
-                  trimCollapsedText: AppLocalizations.of(context)!.read_more,
-                  trimExpandedText: AppLocalizations.of(context)!.show_less,
+                  trimCollapsedText: AppLocalizations.of(widget.page_context)!.read_more,
+                  trimExpandedText: AppLocalizations.of(widget.page_context)!.show_less,
                   moreStyle: const TextStyle(fontSize: 12.0, color: Colors.blue),
                   lessStyle: const TextStyle(fontSize: 12.0, color: Colors.blue),
                 ),
                 const SizedBox(height: 16.0),
-                Text(AppLocalizations.of(context)!.schedule, style: TextStyle(fontWeight: FontWeight.bold)),
+                Text(AppLocalizations.of(widget.page_context)!.schedule, style: TextStyle(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 8.0),
                 const Text('9:30 a 13:30 h'),
-
               ],
             ),
           ),

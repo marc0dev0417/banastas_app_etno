@@ -2,17 +2,19 @@ import 'package:etno_app/pages/PageMenuSections.dart';
 import 'package:etno_app/pages/PageNews.dart';
 import 'package:etno_app/pages/event/PageEvents.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../bloc/color/color_bloc.dart';
 import '../main.dart';
 
 Widget bottomNavigation(BuildContext context, int bottomIndex){
   return BottomNavigationBar(
     currentIndex: bottomIndex,
     type: BottomNavigationBarType.fixed,
-    backgroundColor: Color.fromRGBO(255, 50, 50, 1.0),
-    selectedItemColor: Color.fromRGBO(31, 41, 43, 1.0),
-    unselectedItemColor: Colors.white,
+    backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
+    selectedItemColor: context.watch<ColorBloc>().state.inverseColor,
+    unselectedItemColor: context.watch<ColorBloc>().state.colorSecondary,
     selectedFontSize: 10,
     unselectedFontSize: 12,
     onTap: (value) {

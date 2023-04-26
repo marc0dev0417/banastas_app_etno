@@ -3,8 +3,10 @@ import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../bloc/color/color_bloc.dart';
 import '../models/Bandos.dart';
 class PageBandos extends StatefulWidget {
   const PageBandos({super.key});
@@ -73,7 +75,7 @@ Widget carBando(Bandos bandos, BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Icon(Icons.campaign, color: Colors.red),
+               Icon(Icons.campaign, color: context.watch<ColorBloc>().state.colorDark),
               Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -84,7 +86,7 @@ Widget carBando(Bandos bandos, BuildContext context) {
                         style:
                         const TextStyle(color: Colors.grey, fontSize: 12.0))
                   ]),
-              const Icon(Icons.subdirectory_arrow_right, color: Colors.red)
+              Icon(Icons.subdirectory_arrow_right, color: context.watch<ColorBloc>().state.colorDark)
             ]),
       ),
     ),
@@ -105,8 +107,8 @@ showDialogBandos(BuildContext context, Bandos bandos) => showBottomSheet(
                       padding: const EdgeInsets.only(top: 15.0),
                       child: bandos.imageUrl != null
                           ? Image.network(bandos.imageUrl!, fit: BoxFit.fill)
-                          : const Icon(Icons.campaign,
-                          size: 80.0, color: Colors.red)),
+                          : Icon(Icons.campaign,
+                          size: 80.0, color: context.watch<ColorBloc>().state.colorDark)),
                   Container(
                     alignment: Alignment.topLeft,
                     child: Column(

@@ -282,8 +282,8 @@ showDialogEvent(BuildContext context, Event event, bool isSubscribe) => showBott
 
 Widget renderImageEventModal(Event event){
   if(event.imageUrl == null){
-    return const CircularProgressIndicator();
+    return Image.asset('assets/events.jpg', height: 200.0, width: 300.0);
   }else{
-    return Image.network(event.imageUrl!, fit: BoxFit.fill, height: 200, width: 300);
+    return Image.network(event.imageUrl!, fit: BoxFit.fill, height: 200.0, width: 300.0);
   }
 }

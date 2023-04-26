@@ -5,6 +5,7 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:path/path.dart';
 
 class PageServices extends StatefulWidget {
   const PageServices({super.key});
@@ -33,15 +34,15 @@ class PageState extends State<PageServices> {
                           padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                           scrollDirection: Axis.vertical,
                           children: [
-                            cardServiceTest(AppLocalizations.of(context)!.restaurants, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Restaurantes'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.restaurant),
+                            cardServiceTest(context, AppLocalizations.of(context)!.restaurants, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Restaurantes'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.restaurant),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.hotels, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Hoteles'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.hotel),
+                            cardServiceTest(context, AppLocalizations.of(context)!.hotels, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Hoteles'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.hotel),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.heal, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.healing),
+                            cardServiceTest(context, AppLocalizations.of(context)!.heal, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.healing),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.leisure, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.emoji_nature),
+                            cardServiceTest(context, AppLocalizations.of(context)!.leisure, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.emoji_nature),
                             SizedBox(height: 16.0),
-                            cardServiceTest(AppLocalizations.of(context)!.others, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Otros'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, context.watch<ColorBloc>().state.colorPrimary, Icons.dynamic_feed),
+                            cardServiceTest(context, AppLocalizations.of(context)!.others, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Otros'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.dynamic_feed),
                           ],
                         ),
                       ),
@@ -55,6 +56,7 @@ class PageState extends State<PageServices> {
 }
 
 Widget cardServiceTest(
+    BuildContext context,
     String title,
     String description,
     Function() function,
@@ -72,13 +74,13 @@ Widget cardServiceTest(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(icon, size: 40.0, color: Colors.white),
+                Icon(icon, size: 40.0, color: context.watch<ColorBloc>().state.colorDark),
                 SizedBox(width: 16.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0)),
-                    Text(description, style: TextStyle(color: Colors.yellow))
+                    Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20.0)),
+                    Text(description, style: TextStyle(color: Colors.orange))
                   ],
                 )
               ],

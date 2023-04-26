@@ -4,9 +4,11 @@ import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:readmore/readmore.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../bloc/color/color_bloc.dart';
 import '../models/Reserve.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 class PageReserve extends StatefulWidget {
@@ -40,7 +42,7 @@ class PageState extends State<PageReserve> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(useMaterial3: true, floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: Colors.red), dialogTheme: const DialogTheme(backgroundColor: Colors.white)),
+      theme: ThemeData(useMaterial3: true, floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: context.watch<ColorBloc>().state.colorPrimary), dialogTheme: const DialogTheme(backgroundColor: Colors.white)),
       home: Scaffold(
         floatingActionButton:
         Container(
@@ -50,7 +52,7 @@ class PageState extends State<PageReserve> {
             child: Container(
               width: 600.0,
               child: FloatingActionButton(
-                backgroundColor: isReserved! ? Colors.grey : Colors.red,
+                backgroundColor: isReserved! ? Colors.grey : context.watch<ColorBloc>().state.colorPrimary,
                 onPressed: () {
                   if (props.reserveUsers!.isEmpty){
                     showDialog<String>(
@@ -72,7 +74,7 @@ class PageState extends State<PageReserve> {
                             child: Text(AppLocalizations.of(context)!.cancel),
                           ),
                           TextButton(
-                            style: const ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.red)),
+                            style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(context.watch<ColorBloc>().state.colorPrimary)),
                             onPressed: () {
                               if (data != ''){
                                 FirebaseMessaging.instance.getToken().then((fcmToken) => section.sendReserve('Bolea', props.name!, ReserveUser(fcmToken,data, props.place, props.isReserved, props.description, props.phone, props.place?.latitude, props.place?.longitude, props.date, props.reserveSchedules)));
@@ -87,7 +89,7 @@ class PageState extends State<PageReserve> {
                                 );
                               }
                             },
-                            child: Text(AppLocalizations.of(context)!.subscribe, style: TextStyle(color: Colors.white)),
+                            child: Text(AppLocalizations.of(context)!.subscribe, style: TextStyle(color: context.watch<ColorBloc>().state.colorSecondary)),
                           ),
                         ],
                       ),

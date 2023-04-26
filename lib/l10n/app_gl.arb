@@ -124,5 +124,21 @@
     "places": "Prazas",
     "unsubscribed_event": "Darse de baixa do evento",
     "start_date": " - Data de inicio",
-    "toast_send_mail_error": "Non se puido enviar o correo."
+    "toast_send_mail_error": "Non se puido enviar o correo.",
+    "calendar": "Calendario",
+    "notifications": "Notificacións",
+    "select_option": "Selecciona unha opción",
+    "see_all": "Ver todos",
+    "january": "XAN",
+    "february": "FEB",
+    "march": "MAR",
+    "april": "ABR",
+    "may": "MAI",
+    "june": "XUÑ",
+    "july": "XUL",
+    "august": "AGO",
+    "september": "SET",
+    "october": "OUT",
+    "november": "NOV",
+    "december": "DEC"
 }

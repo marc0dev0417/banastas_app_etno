@@ -7,8 +7,11 @@ import 'package:etno_app/models/Pharmacy.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../bloc/color/color_bloc.dart';
 
 class PagePharmacies extends StatefulWidget {
   const PagePharmacies({super.key});
@@ -248,7 +251,7 @@ class PharmaciesState extends State<PagePharmacies> {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.red,
+            backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
             onPressed: () => Navigator.pop(context),
             child: Icon(Icons.chevron_left),
           ),
