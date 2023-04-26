@@ -72,13 +72,13 @@ Widget cardServiceTest(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(icon, size: 40.0, color: Colors.white),
+                Icon(icon, size: 40.0, color: Colors.red),
                 SizedBox(width: 16.0),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0)),
-                    Text(description, style: TextStyle(color: Colors.yellow))
+                    Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black, fontSize: 20.0)),
+                    Text(description, style: TextStyle(color: Colors.orange))
                   ],
                 )
               ],

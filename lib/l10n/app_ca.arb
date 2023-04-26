@@ -125,5 +125,21 @@
     "places": "Places",
     "unsubscribed_event": "S'ha desinscrit de l'esdeveniment",
     "start_date": " - Data d'inici",
-    "toast_send_mail_error": "No s'ha pogut enviar el correu."
+    "toast_send_mail_error": "No s'ha pogut enviar el correu.",
+    "calendar": "Calendari",
+    "notifications": "Notificacions",
+    "select_option": "Selecciona una opció",
+    "see_all": "Veure tots",
+    "january": "GEN",
+    "february": "FEB",
+    "march": "MAR",
+    "april": "ABR",
+    "may": "MAI",
+    "june": "JUN",
+    "july": "JUL",
+    "august": "AGO",
+    "september": "SET",
+    "october": "OCT",
+    "november": "NOV",
+    "december": "DES"
 }

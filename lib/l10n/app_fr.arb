@@ -124,5 +124,21 @@
     "places": "Places",
     "unsubscribed_event": "Désabonné de l'événement",
     "start_date": " - Date de début",
-    "toast_send_mail_error": "Impossible d'envoyer l'e-mail."
+    "toast_send_mail_error": "Impossible d'envoyer l'e-mail.",
+    "calendar": "Calendrier",
+    "notifications": "Notifications",
+    "select_option": "Sélectionner une option",
+    "see_all": "Voir tout",
+    "january": "JAN",
+    "february": "FÉV",
+    "march": "MAR",
+    "april": "AVR",
+    "may": "MAI",
+    "june": "JUI",
+    "july": "JUI",
+    "august": "AOÛ",
+    "september": "SEP",
+    "october": "OCT",
+    "november": "NOV",
+    "december": "DÉC"
 }

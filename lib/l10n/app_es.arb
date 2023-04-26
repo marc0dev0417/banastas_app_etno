@@ -126,5 +126,21 @@
     "places": "Plazas",
     "unsubscribed_event": "Se ha desuscrito del evento",
     "start_date": " - Fecha de inicio",
-    "toast_send_mail_error": "No se ha podido enviar el correo."
+    "toast_send_mail_error": "No se ha podido enviar el correo.",
+    "calendar": "Calendario",
+    "notifications": "Notificaciones",
+    "select_option": "Selecciona una opción",
+    "see_all": "Ver todos",
+    "january": "ENE",
+    "february": "FEB",
+    "march": "MAR",
+    "april": "ABR",
+    "may": "MAY",
+    "june": "JUN",
+    "july": "JUL",
+    "august": "AGO",
+    "september": "SEP",
+    "october": "OCT",
+    "november": "NOV",
+    "december": "DIC"
 }
