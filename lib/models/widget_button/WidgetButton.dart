@@ -2,16 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class WidgetButton {
   String? sectionName;
+  int? index;
 
-  WidgetButton({ this.sectionName });
-
-  WidgetButton.fromJson(Map<String, dynamic> json) {
-    sectionName = json['sectionName'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['sectionName'] = this.sectionName;
-    return data;
-  }
+  WidgetButton({ this.sectionName, this.index });
 }

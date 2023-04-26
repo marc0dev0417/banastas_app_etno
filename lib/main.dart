@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:etno_app/bloc/language/language_bloc.dart';
 import 'package:etno_app/bloc/widget_bloc/widget_section_bloc.dart';
 import 'package:etno_app/models/Bandos.dart';
 import 'package:etno_app/models/Event.dart';
@@ -12,6 +13,7 @@ import 'package:etno_app/pages/PageLinks.dart';
 import 'package:etno_app/pages/PageListReserves.dart';
 import 'package:etno_app/pages/PageNews.dart';
 import 'package:etno_app/pages/PagePharmacies.dart';
+import 'package:etno_app/pages/PageReserve.dart';
 import 'package:etno_app/pages/PageServices.dart';
 import 'package:etno_app/pages/PageSponsors.dart';
 import 'package:etno_app/pages/PageTourism.dart';
@@ -24,6 +26,7 @@ import 'package:etno_app/provider/locale_provider.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/utils/ConnectionChecker.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
+import 'package:etno_app/widgets/DropDownLanguage.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
 import 'package:etno_app/widgets/bottom_navigation.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -49,8 +52,6 @@ import 'package:flutter/widgets.dart';
 
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
   await Firebase.initializeApp();
   print("Handling a background message ${message.messageId}");
 }
@@ -85,11 +86,11 @@ class App extends StatelessWidget {
   const App({super.key});
 
   @override
-  Widget build(BuildContext context) =>
+  Widget build(BuildContext  context) =>
       ChangeNotifierProvider(
           create: (context) => LocaleProvider(),
           builder: (context, child) {
-            final provider = Provider.of<LocaleProvider>(context);
+           // final provider = Provider.of<LocaleProvider>(context);
             return MultiBlocProvider(
               providers: [
                 BlocProvider<ColorBloc>(
@@ -98,21 +99,28 @@ class App extends StatelessWidget {
                 BlocProvider<WidgetSectionBloc>(
                   create: (context) => WidgetSectionBloc(),
                 ),
+                BlocProvider<LanguageBloc>(
+                  create: (context) => LanguageBloc(),
+                ),
               ],
-              child: MaterialApp(
-                theme: ThemeData(
-                    useMaterial3: true, dividerColor: Colors.transparent),
-                locale: provider.locale,
-                supportedLocales: L10n.all,
-                title: 'Etno App',
-                home: const Home(),
-                localizationsDelegates: const [
-                  AppLocalizations.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate
-                ],
-              ),
+              child: Builder(
+                builder: (BuildContext context) {
+                 return MaterialApp(
+                    theme: ThemeData(
+                        useMaterial3: true, dividerColor: Colors.transparent),
+                    locale: getLocaleLanguage(context.watch<LanguageBloc>().state.languageCode),
+                    supportedLocales: L10n.all,
+                    title: 'Etno App',
+                    home: Home(),
+                    localizationsDelegates: const [
+                      AppLocalizations.delegate,
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate
+                    ],
+                  );
+                },
+              )
             );
           });
 }
@@ -134,6 +142,8 @@ class HomeState extends State<Home> {
   int bottomIndex = 0;
   final Section section = Section();
   WidgetButton sectionState = WidgetButton();
+  List<WidgetButton> section_list = [];
+  int indexSection = 0;
 
   Future<void> setupInteractedMessage() async {
     RemoteMessage? initialMessage =
@@ -189,6 +199,20 @@ class HomeState extends State<Home> {
   }
 
   @override
+  void didChangeDependencies() {
+    setState(() {
+      section_list.addAll([
+          WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameOne, index: 1),
+          WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameTwo, index: 2),
+          WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameThree, index: 3),
+          WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameFour, index: 4),
+
+      ].toSet());
+    });
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     timer.cancel();
     super.dispose();
@@ -208,10 +232,13 @@ class HomeState extends State<Home> {
 
   Widget returnElevatedButton(BuildContext context, WidgetButton section) {
     return ElevatedButton(
-        onPressed: () => print('navigate'),
+        onPressed: () {
+          returnFunctionNavigate(section.sectionName!, context).call();
+        },
         onLongPress: () {
           setState(() {
-            sectionState = section;
+            sectionState.sectionName = section.sectionName;
+            indexSection = section.index!;
           });
           showDialog(
             context: context,
@@ -232,7 +259,7 @@ class HomeState extends State<Home> {
                           onTap: () {
                             setState(() {
                               section.sectionName = 'Eventos';
-                              context.read<WidgetSectionBloc>().add(FilterWidgetSection(sectionOldName: sectionState.sectionName!, sectionName: section.sectionName!));
+                              context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Eventos'));
                             });
                               Navigator.pop(context);
                           },
@@ -243,6 +270,7 @@ class HomeState extends State<Home> {
                           onTap: () {
                             setState(() {
                               section.sectionName = 'Turismo';
+                              context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Turismo'));
                             });
                             Navigator.pop(context);
                           },
@@ -253,6 +281,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Farmacias';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Farmacias'));
                               });
                               Navigator.pop(context);
                             }
@@ -263,6 +292,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Servicios';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Servicios'));
                               });
                               Navigator.pop(context);
                             }
@@ -273,6 +303,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Noticias';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Noticias'));
                               });
                               Navigator.pop(context);
                             }
@@ -283,6 +314,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Bandos';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Bandos'));
                               });
                               Navigator.pop(context);
                             }
@@ -293,6 +325,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Anuncios';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Anuncios'));
                               });
                               Navigator.pop(context);
                             }
@@ -303,7 +336,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Galería';
-                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(sectionOldName: sectionState.sectionName!, sectionName: section.sectionName!));
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Galería'));
                               });
                               Navigator.pop(context);
                             }
@@ -314,6 +347,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Defunciones';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Defunciones'));
                               });
                               Navigator.pop(context);
                             }
@@ -324,6 +358,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Enlaces';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Enlaces'));
                               });
                               Navigator.pop(context);
                             }
@@ -334,6 +369,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Patrocinadores';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Patrocinadores'));
                               });
                               Navigator.pop(context);
                             }
@@ -344,6 +380,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Incidentes';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Incidentes'));
                               });
                               Navigator.pop(context);
                             }
@@ -354,6 +391,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Reservas';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Reservas'));
                               });
                               Navigator.pop(context);
                             }
@@ -364,6 +402,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Enseres';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Enseres'));
                               });
                               Navigator.pop(context);
                             }
@@ -374,6 +413,7 @@ class HomeState extends State<Home> {
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Yo decido';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Yo decido'));
                               });
                               Navigator.pop(context);
                             }
@@ -387,7 +427,7 @@ class HomeState extends State<Home> {
           );
         },
         style: ElevatedButton.styleFrom(
-            primary: Color.fromRGBO(240, 240, 240, 1),
+            backgroundColor: Color.fromRGBO(240, 240, 240, 1),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0))),
         child: Container(
@@ -395,7 +435,7 @@ class HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.label,
+              Icon(returnIconSection(section.sectionName!),
               size: 80.0,
               color: Color.fromRGBO(154, 22, 22, 1)),
               Text(section.sectionName!,
@@ -403,7 +443,9 @@ class HomeState extends State<Home> {
                 style: TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(154, 22, 22, 1))),
+                    color: Color.fromRGBO(154, 22, 22, 1)
+                )
+              ),
             ],
           ),
         )
@@ -416,11 +458,11 @@ class HomeState extends State<Home> {
         padding: EdgeInsets.only(left: 40.0, right: 40.0, top: 16.0, bottom: 16.0),
         alignment: Alignment.center,
         child: GridView.count(
-          mainAxisSpacing: 16.0,
-          crossAxisSpacing: 16.0,
-          physics: NeverScrollableScrollPhysics(),
-          crossAxisCount: 2,
-          children: context.watch<WidgetSectionBloc>().state.listWidgetButton.map((e) => returnElevatedButton(context, e)).toList()
+            mainAxisSpacing: 16.0,
+            crossAxisSpacing: 16.0,
+            physics: NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            children: section_list.map((e) => returnElevatedButton(context, e)).toList()
         ),
     );
   }
@@ -507,7 +549,7 @@ Widget widgetWeather(BuildContext context, Weather weather) {
     child: GestureDetector(
       child: Card.Card(
           color: Color.fromRGBO(240, 240, 240, 1),
-          elevation: 2.0,
+          elevation: 0.0,
           child: Container(
             padding: EdgeInsets.only(left: 40, right: 40),
             alignment: Alignment.center,
@@ -729,5 +771,63 @@ String returnDate(BuildContext context, Event e){
     case '11': return AppLocalizations.of(context)!.november;
     case '12': return AppLocalizations.of(context)!.december;
     default: return '';
+  }
+}
+
+IconData returnIconSection(String section) {
+  switch (section) {
+    case 'Eventos':
+      return Icons.celebration;
+    case 'Turismo':
+      return Icons.map;
+    case 'Farmacias':
+      return Icons.medication;
+    case 'Servicios':
+      return Icons.medical_information;
+    case 'Noticias':
+      return Icons.newspaper;
+    case 'Bandos':
+      return Icons.campaign;
+    case 'Anuncios':
+      return Icons.tab;
+    case 'Galería':
+      return Icons.perm_media;
+    case 'Defunciones':
+      return Icons.heart_broken_sharp;
+    case 'Enlaces':
+      return Icons.link;
+    case 'Patrocinadores':
+      return Icons.handshake;
+    case 'Incidentes':
+      return Icons.dangerous;
+    case 'Reservas':
+      return Icons.beenhere;
+    case 'Enseres':
+      return Icons.recycling;
+    case 'Yo decido':
+      return Icons.quiz;
+    default:
+      return Icons.disabled_by_default;
+  }
+}
+
+Function() returnFunctionNavigate(String sectionName, BuildContext context){
+  switch(sectionName) {
+    case 'Eventos': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageEvents()));
+    case 'Turismo': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageTourism()));
+    case 'Farmacias': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PagePharmacies()));
+    case 'Bandos': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageBandos()));
+    case 'Servicios': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServices()));
+    case 'Noticias': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageNews(pageContext: context)));
+    case 'Anuncios': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageAd()));
+    case 'Galería': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageGallery()));
+    case 'Defunciones': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageDefunctions()));
+    case 'Enlaces': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageLinks()));
+    case 'Patrocinadores': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageSponsors()));
+    case 'Incidentes': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageIncidents()));
+    case 'Reservas': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageListReserves()));
+    case 'Enseres': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageEnseres()));
+    case 'Yo decido': return () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageQuiz()));
+    default: return () => print('Is not working');
   }
 }
