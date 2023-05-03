@@ -8,6 +8,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../store/section.dart';
+import '../../utils/Globals.dart';
 
 class PageGallery extends StatefulWidget {
   const PageGallery({super.key});
@@ -23,7 +24,7 @@ class PageState extends State<PageGallery> {
 
   @override
   void initState() {
-    section.getAllImageMediaByLocality('Bolea');
+    section.getAllImageMediaByLocality('${Globals.locality}');
     super.initState();
   }
 

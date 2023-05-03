@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/menu/Ad.dart';
+import '../utils/Globals.dart';
 
 class PageAd extends StatefulWidget {
   const PageAd({super.key});
@@ -22,7 +23,7 @@ class PageState extends State<PageAd> {
 
   @override
   void initState() {
-    section.getAllAdsByLocality('Bolea');
+    section.getAllAdsByLocality('${Globals.locality}');
     super.initState();
   }
 

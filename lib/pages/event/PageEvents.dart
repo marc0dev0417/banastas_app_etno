@@ -6,6 +6,7 @@ import 'package:etno_app/models/Event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import '../../store/section.dart';
+import '../../utils/Globals.dart';
 import '../../widgets/appbar_navigation.dart';
 import '../../widgets/home_widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,7 +26,7 @@ class PageState extends State<PageEvents> {
   int tabIndex = 0;
   @override
   void initState() {
-    section.getAllEventsByLocality('Bolea').then((value) => eventList = value);
+    section.getAllEventsByLocality('${Globals.locality}').then((value) => eventList = value);
     super.initState();
   }
 

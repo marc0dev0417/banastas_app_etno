@@ -7,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Link.dart';
+import '../utils/Globals.dart';
 import '../widgets/appbar_navigation.dart';
 
 class PageLinks extends StatefulWidget {
@@ -23,7 +24,7 @@ class PageState extends State<PageLinks> {
 
   @override
   void initState() {
-    section.getAllLinksByLocality('Bolea');
+    section.getAllLinksByLocality('${Globals.locality}');
     super.initState();
   }
 

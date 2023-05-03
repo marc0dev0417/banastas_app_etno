@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../../utils/Globals.dart';
 import 'TabBarGeneral.dart';
 
 class TabBarTecnology extends StatefulWidget {
@@ -18,7 +19,7 @@ class PageState extends State<TabBarTecnology> {
   final Section section = Section();
   @override
   void initState() {
-    section.getNewsListByLocalityAndCategory('Bolea', 'Tecnología');
+    section.getNewsListByLocalityAndCategory('${Globals.locality}', 'Tecnología');
     super.initState();
   }
   @override

@@ -8,6 +8,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/color/color_bloc.dart';
 import '../models/Reserve.dart';
+import '../utils/Globals.dart';
 import '../widgets/appbar_navigation.dart';
 class PageListReserves extends StatefulWidget {
   const PageListReserves({super.key});
@@ -22,7 +23,7 @@ class PageState extends State<PageListReserves> {
 
   @override
   void initState() {
-    section.getReservesByLocality('Bolea');
+    section.getReservesByLocality('${Globals.locality}');
     super.initState();
   }
   @override

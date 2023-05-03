@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import '../utils/Globals.dart';
 import '../widgets/appbar_navigation.dart';
 class PageDefunctions extends StatefulWidget {
   const PageDefunctions({super.key});
@@ -17,7 +18,7 @@ class PageState extends State<PageDefunctions> {
   final Section section = Section();
   @override
   void initState() {
-    section.getAllDefunctionsByLocality('Bolea');
+    section.getAllDefunctionsByLocality('${Globals.locality}');
     super.initState();
   }
   @override

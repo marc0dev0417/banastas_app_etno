@@ -6,6 +6,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../../utils/Globals.dart';
+
 class PageQuiz extends StatefulWidget {
   const PageQuiz({super.key});
 
@@ -28,7 +30,7 @@ class PageState extends State<PageQuiz>{
 
  @override
   void initState() {
-    section.getQuiz('Bolea');
+    section.getQuiz('${Globals.locality}');
     super.initState();
   }
 
@@ -105,7 +107,7 @@ class PageState extends State<PageQuiz>{
                       ),
                       ElevatedButton(onPressed: () {
                         if (isDNIValid(dni)) {
-                          section.sendResultQuiz('Bolea', section.getQuizzes[0].idQuiz!, int.parse(answer!));
+                          section.sendResultQuiz('${Globals.locality}', section.getQuizzes[0].idQuiz!, int.parse(answer!));
                         } else {
                           Fluttertoast.showToast(
                               msg: AppLocalizations.of(pageContext)!.invalid_dni,

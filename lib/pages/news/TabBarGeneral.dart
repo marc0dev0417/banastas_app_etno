@@ -7,6 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../models/New.dart';
+import '../../utils/Globals.dart';
 import '../PageNewDetail.dart';
 
 class TabBarGeneral extends StatefulWidget {
@@ -23,7 +24,7 @@ class PageState extends State<TabBarGeneral> {
 
   @override
   void initState() {
-    section.getAllNewByLocality('Bolea');
+    section.getAllNewByLocality('${Globals.locality}');
     super.initState();
   }
 

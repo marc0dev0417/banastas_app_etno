@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:path/path.dart';
 
+import '../utils/Globals.dart';
+
 class PageServices extends StatefulWidget {
   const PageServices({super.key});
   @override
@@ -34,15 +36,15 @@ class PageState extends State<PageServices> {
                           padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                           scrollDirection: Axis.vertical,
                           children: [
-                            cardServiceTest(context, AppLocalizations.of(context)!.restaurants, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Restaurantes'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.restaurant),
+                            cardServiceTest(context, AppLocalizations.of(context)!.restaurants, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: '${Globals.locality}', category: 'Restaurantes'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.restaurant),
                             SizedBox(height: 16.0),
-                            cardServiceTest(context, AppLocalizations.of(context)!.hotels, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Hoteles'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.hotel),
+                            cardServiceTest(context, AppLocalizations.of(context)!.hotels, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: '${Globals.locality}', category: 'Hoteles'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.hotel),
                             SizedBox(height: 16.0),
-                            cardServiceTest(context, AppLocalizations.of(context)!.heal, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.healing),
+                            cardServiceTest(context, AppLocalizations.of(context)!.heal, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: '${Globals.locality}', category: 'Salud'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.healing),
                             SizedBox(height: 16.0),
-                            cardServiceTest(context, AppLocalizations.of(context)!.leisure, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.emoji_nature),
+                            cardServiceTest(context, AppLocalizations.of(context)!.leisure, AppLocalizations.of(context)!.see_more, (){ Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: '${Globals.locality}', category: 'Ocio'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.emoji_nature),
                             SizedBox(height: 16.0),
-                            cardServiceTest(context, AppLocalizations.of(context)!.others, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: 'Bolea', category: 'Otros'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.dynamic_feed),
+                            cardServiceTest(context, AppLocalizations.of(context)!.others, AppLocalizations.of(context)!.see_more, () { Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageServicesList(locality: '${Globals.locality}', category: 'Otros'), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); }, Color.fromRGBO(240, 240, 240, 1), Icons.dynamic_feed),
                           ],
                         ),
                       ),

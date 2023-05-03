@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/color/color_bloc.dart';
 import '../../models/Incident.dart';
 import '../../store/section.dart';
+import '../../utils/Globals.dart';
 class PageIncidents extends StatefulWidget {
   const PageIncidents({super.key});
   @override
@@ -23,7 +24,7 @@ class PageState extends State<PageIncidents> {
 
   @override
   void initState() {
-    FirebaseMessaging.instance.getToken().then((value) => section.getAllIncidentByLocalityAndFcmToken('Bolea', value!).then((value) =>
+    FirebaseMessaging.instance.getToken().then((value) => section.getAllIncidentByLocalityAndFcmToken('${Globals.locality}', value!).then((value) =>
         setState(() {
           incidents = value;
         })

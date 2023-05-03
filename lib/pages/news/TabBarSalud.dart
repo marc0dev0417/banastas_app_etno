@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
+import '../../utils/Globals.dart';
 import 'TabBarGeneral.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -20,7 +21,7 @@ class PageState extends State<TabBarSalud> {
 
   @override
   void initState() {
-    section.getNewsListByLocalityAndCategory('Bolea', 'Salud');
+    section.getNewsListByLocalityAndCategory('${Globals.locality}', 'Salud');
     super.initState();
   }
 

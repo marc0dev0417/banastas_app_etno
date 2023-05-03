@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/color/color_bloc.dart';
 import '../../store/section.dart';
+import '../../utils/Globals.dart';
 class IncidentForm extends StatefulWidget {
   const IncidentForm({super.key});
   @override
@@ -28,7 +29,7 @@ class PageState extends State<IncidentForm> {
   addIncidentAPI() {
     if (subject != '' || name != '' || description != '' || phone != '') {
       FirebaseMessaging.instance.getToken().then((value) => section.addIncident(
-          Incident(null, 'Bolea', value, subject, description, false, null)));
+          Incident(null, '${Globals.locality}', value, subject, description, false, null)));
       Fluttertoast.showToast(
           msg: AppLocalizations.of(context)!.toast_send_mail,
           toastLength: Toast.LENGTH_SHORT,

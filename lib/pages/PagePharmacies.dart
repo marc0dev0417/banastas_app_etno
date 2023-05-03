@@ -12,6 +12,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bloc/color/color_bloc.dart';
+import '../utils/Globals.dart';
 
 class PagePharmacies extends StatefulWidget {
   const PagePharmacies({super.key});
@@ -32,8 +33,8 @@ class PharmaciesState extends State<PagePharmacies> {
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(42.13639592850662, -0.41057481476933433),
-    zoom: 14.4746,
+    target: LatLng(42.181186, -0.452474),
+    zoom: 15.4746,
   );
   Future<Uint8List?> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
@@ -43,7 +44,7 @@ class PharmaciesState extends State<PagePharmacies> {
   }
   @override
   void initState() {
-    section.getAllPharmaciesByLocality('Bolea').then((value) =>
+    section.getAllPharmaciesByLocality('${Globals.locality}').then((value) =>
         value.forEach((element) async {
           Uint8List? markerIcon;
           switch (element.type) {
@@ -191,7 +192,6 @@ class PharmaciesState extends State<PagePharmacies> {
         initialIndex: 0,
         length: pharmaciesButton.length,
         child: Scaffold(
-          backgroundColor: Colors.red,
           floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
           body: Stack(
             children: [

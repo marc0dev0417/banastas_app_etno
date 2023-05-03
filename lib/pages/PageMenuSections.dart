@@ -23,6 +23,8 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 
 import '../bloc/color/color_bloc.dart';
 import '../models/section_details/SectionDetails.dart';
+import '../utils/Globals.dart';
+import '../widgets/home_widgets.dart';
 import 'equipment/PageEnseresForm.dart';
 
 class PageMenuSections extends StatefulWidget {
@@ -36,14 +38,14 @@ class PageMenuSections extends StatefulWidget {
 
 class PageState extends State<PageMenuSections> {
   SectionDetails sectionDetails = SectionDetails.empty();
-  final sectionStore = Section();
   final Section section = Section();
   int bottomIndex = 3;
 
   @override
   void initState() {
+    section.getCustomLinks(Globals.locality);
       section
-          .getSectionDetails('Bolea')
+          .getSectionDetails('${Globals.locality}')
           .then((value) => setState(() => sectionDetails = value)
       );
     super.initState();
@@ -56,13 +58,13 @@ class PageState extends State<PageMenuSections> {
         appBar: appBarCustom(context, false, 'Menú', Icons.language, false, () => print('Internalization in Menu'), null),
         body: SafeArea(
           child: Container(
-            // decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/Bolea.png'))),
+            // decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/${Globals.locality}.png'))),
               padding: const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
               child: Column(
                 children: [
                   Expanded(child: Observer(builder: (context) => GridView.count(
                       crossAxisCount: 2,
-                      children: sectionStore.getSections.map((e) =>
+                      children: section.getSections.map((e) =>
                           Center(
                               child: SizedBox(
                                 height: 170,
@@ -85,6 +87,7 @@ class PageState extends State<PageMenuSections> {
                                       case 'Reservas': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageListReserves(), transitionDuration: Duration.zero, reverseTransitionDuration: Duration.zero)); break;
                                       case 'Retirada de Enseres': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageEnseres(), reverseTransitionDuration: Duration.zero, transitionDuration: Duration.zero)); break;
                                       case 'Yo decido': Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => const PageQuiz(), reverseTransitionDuration: Duration.zero, transitionDuration: Duration.zero)); break;
+                                      default: launchInBrowser(Uri.parse(e.webUrl!));
                                     }
                                   },
                                   child: Card(

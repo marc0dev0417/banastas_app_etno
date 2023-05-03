@@ -10,6 +10,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Tourism.dart';
 import '../models/TourismButton.dart';
 import '../store/section.dart';
+import '../utils/Globals.dart';
 class PageTourism extends StatefulWidget {
   const PageTourism({super.key});
   @override
@@ -30,8 +31,8 @@ class TourismState extends State<PageTourism> {
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(42.13639592850662, -0.41057481476933433),
-    zoom: 14.4746,
+    target: LatLng(42.181186, -0.452474),
+    zoom: 15.4746,
   );
 
   Future<Uint8List?> getBytesFromAsset(String path, int width) async {
@@ -46,7 +47,7 @@ class TourismState extends State<PageTourism> {
 
   @override
   void initState() {
-    section.getAllTourismByLocality('Bolea').then((value) async {
+    section.getAllTourismByLocality('${Globals.locality}').then((value) async {
       Uint8List? markerIcon;
       for (var element in value) {
         switch (element.type) {

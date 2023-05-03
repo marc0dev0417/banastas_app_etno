@@ -11,6 +11,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../bloc/color/color_bloc.dart';
 import '../models/Reserve.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import '../utils/Globals.dart';
 class PageReserve extends StatefulWidget {
   const PageReserve({super.key, required this.reserve});
   final Reserve reserve;
@@ -77,7 +79,7 @@ class PageState extends State<PageReserve> {
                             style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(context.watch<ColorBloc>().state.colorPrimary)),
                             onPressed: () {
                               if (data != ''){
-                                FirebaseMessaging.instance.getToken().then((fcmToken) => section.sendReserve('Bolea', props.name!, ReserveUser(fcmToken,data, props.place, props.isReserved, props.description, props.phone, props.place?.latitude, props.place?.longitude, props.date, props.reserveSchedules)));
+                                FirebaseMessaging.instance.getToken().then((fcmToken) => section.sendReserve('${Globals.locality}', props.name!, ReserveUser(fcmToken,data, props.place, props.isReserved, props.description, props.phone, props.place?.latitude, props.place?.longitude, props.date, props.reserveSchedules)));
                                 Navigator.pop((context));
                               } else {
                                 Fluttertoast.showToast(

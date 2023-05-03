@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Sponsor.dart';
+import '../utils/Globals.dart';
 class PageSponsors extends StatefulWidget {
   const PageSponsors({super.key});
   @override
@@ -16,7 +17,7 @@ class PageState extends State<PageSponsors> {
   final Section section = Section();
   @override
   void initState() {
-    section.getSponsorsByLocality('Bolea');
+    section.getSponsorsByLocality('${Globals.locality}');
     super.initState();
   }
   @override

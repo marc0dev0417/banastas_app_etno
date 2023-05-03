@@ -126,7 +126,7 @@ abstract class SectionBase with Store {
       File fileName, BuildContext context) async {
     try {
       final responseImage = http.MultipartRequest('POST', Uri.parse(
-          '${Globals.url_microservice_etno}images?section=enseres&category=enseres&username=Bolea'));
+          '${Globals.url_microservice_etno}images?section=enseres&category=enseres&username=${Globals.locality}'));
 
       responseImage.files.add(
           await http.MultipartFile.fromPath('image', fileName.path));

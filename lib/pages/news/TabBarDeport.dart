@@ -1,6 +1,7 @@
 import 'package:etno_app/store/section.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import '../../utils/Globals.dart';
 import '../../utils/WarningWidgetValueNotifier.dart';
 import 'package:flutter/material.dart';
 import 'TabBarGeneral.dart';
@@ -15,7 +16,7 @@ class PageState extends State<TabBarDeport> {
 
   @override
   void initState() {
-    section.getNewsListByLocalityAndCategory('Bolea', 'Deporte');
+    section.getNewsListByLocalityAndCategory('${Globals.locality}', 'Deporte');
     super.initState();
   }
 

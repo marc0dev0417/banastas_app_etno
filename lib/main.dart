@@ -25,6 +25,7 @@ import 'package:etno_app/pages/quiz/PageQuiz.dart';
 import 'package:etno_app/provider/locale_provider.dart';
 import 'package:etno_app/store/section.dart';
 import 'package:etno_app/utils/ConnectionChecker.dart';
+import 'package:etno_app/utils/Globals.dart';
 import 'package:etno_app/utils/WarningWidgetValueNotifier.dart';
 import 'package:etno_app/widgets/DropDownLanguage.dart';
 import 'package:etno_app/widgets/appbar_navigation.dart';
@@ -159,7 +160,7 @@ class HomeState extends State<Home> {
   }
 
   void _handleMessage(RemoteMessage message) {
-    section.getAllBandosByLocality('Bolea');
+    section.getAllBandosByLocality('${Globals.locality}');
   }
 
   Future<void> launchInBrowser(Uri url) async {
@@ -173,25 +174,25 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     controller = TextEditingController();
-    section.getAllNewByLocality('Bolea');
-    section.getAllEventsByLocality('Bolea');
-    section.getAllBandosByLocality('Bolea');
+    section.getAllNewByLocality('${Globals.locality}');
+    section.getAllEventsByLocality('${Globals.locality}');
+    section.getAllBandosByLocality('${Globals.locality}');
     setupInteractedMessage();
     messaging
         .getToken()
-        .then((value) => section.saveFcmToken(FCMToken('Bolea', value)));
+        .then((value) => section.saveFcmToken(FCMToken('${Globals.locality}', value)));
 
     super.initState();
     section
-        .getSectionDetails('Bolea')
+        .getSectionDetails('${Globals.locality}')
         .then((value) => setState(() => sectionDetails = value));
-    section.getCustomLinks('Bolea');
+    section.getCustomLinks('${Globals.locality}');
 
     timer = Timer.periodic(
         const Duration(seconds: 1),
             (Timer t) =>
             setState(() {
-              section.getWeather(42.138642896056545, -0.40759873321216106).then(
+              section.getWeather(42.181186, -0.452474).then(
                       (value) =>
                   weather =
                       value); //42.138642896056545, -0.40759873321216106
@@ -206,7 +207,6 @@ class HomeState extends State<Home> {
           WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameTwo, index: 2),
           WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameThree, index: 3),
           WidgetButton(sectionName: context.watch<WidgetSectionBloc>().state.sectionNameFour, index: 4),
-
       ].toSet());
     });
     super.didChangeDependencies();
@@ -554,7 +554,7 @@ Widget widgetWeather(BuildContext context, Weather weather) {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.asset('assets/bolea_shield.png',
+                Image.asset('assets/shield.png',
                     width: 120.0, height: 120.0),
                 const SizedBox(width: 16.0),
                 Column(
@@ -578,7 +578,7 @@ Widget widgetWeather(BuildContext context, Weather weather) {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30.0,
                                   color: Colors.black)),
-                          const Text('Bolea',
+                          Text('${Globals.locality}',
                               style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 25.0,

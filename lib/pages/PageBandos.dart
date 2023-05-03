@@ -8,6 +8,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/color/color_bloc.dart';
 import '../models/Bandos.dart';
+import '../utils/Globals.dart';
 class PageBandos extends StatefulWidget {
   const PageBandos({super.key});
   @override
@@ -21,7 +22,7 @@ class PageState extends State<PageBandos> {
 
   @override
   void initState() {
-    section.getAllBandosByLocality('Bolea');
+    section.getAllBandosByLocality('${Globals.locality}');
     super.initState();
   }
 
