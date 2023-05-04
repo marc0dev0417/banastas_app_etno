@@ -24,6 +24,7 @@ class TourismState extends State<PageTourism> {
   Set<Marker> listMarkerSaved = {};
   List<TourismButton> tourismButton = [
     TourismButton('', Colors.black, 'Todo'),
+    TourismButton('assets/restaurant1.png', Colors.red, 'General'),
     TourismButton('assets/restaurant1.png', Colors.green, 'Restaurante'),
     TourismButton('assets/museum1.png', Colors.yellow, 'Museo'),
     TourismButton('assets/hotel1.png', Colors.indigo, 'Hotel')
@@ -59,6 +60,9 @@ class TourismState extends State<PageTourism> {
             break;
           case 'Hotel':
             markerIcon = await getBytesFromAsset('assets/hotel1.png', 80);
+            break;
+          case 'General':
+            markerIcon = await getBytesFromAsset('assets/restaurant1.png', 80);
             break;
         }
         setState(() {
@@ -212,6 +216,16 @@ class TourismState extends State<PageTourism> {
                                 MaterialStatePropertyAll(Colors.white)),
                             onPressed: () {
                               switch (tab.name) {
+                                case 'General':
+                                  setState(() {
+                                    listMarker = listMarkerSaved;
+                                    listMarker = listMarker
+                                        .where((element) =>
+                                    element.markerId.value ==
+                                        'General')
+                                        .toSet();
+                                  });
+                                  break;
                                 case 'Restaurante':
                                   setState(() {
                                     listMarker = listMarkerSaved;
@@ -269,6 +283,8 @@ class TourismState extends State<PageTourism> {
 
 String renderTextTraslated(String name, BuildContext context) {
   switch (name) {
+    case 'General':
+      return AppLocalizations.of(context)!.news_general;
     case 'Restaurante':
       return AppLocalizations.of(context)!.restaurant;
     case 'Todo':
