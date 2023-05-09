@@ -2,9 +2,11 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:etno_app/bloc/color/color_bloc.dart';
+import 'package:etno_app/pages/PageSpecificMarker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/Tourism.dart';
@@ -24,10 +26,13 @@ class TourismState extends State<PageTourism> {
   Set<Marker> listMarkerSaved = {};
   List<TourismButton> tourismButton = [
     TourismButton('', Colors.black, 'Todo'),
-    TourismButton('assets/restaurant1.png', Colors.red, 'General'),
+    TourismButton('assets/general.png', Colors.red, 'General'),
     TourismButton('assets/restaurant1.png', Colors.green, 'Restaurante'),
     TourismButton('assets/museum1.png', Colors.yellow, 'Museo'),
     TourismButton('assets/hotel1.png', Colors.indigo, 'Hotel')
+  ];
+  List<Widget> widgetList = [
+    DrawerHeader(decoration: BoxDecoration(color: Colors.white), child: Image.asset('assets/app.png'))
   ];
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
@@ -62,10 +67,17 @@ class TourismState extends State<PageTourism> {
             markerIcon = await getBytesFromAsset('assets/hotel1.png', 80);
             break;
           case 'General':
-            markerIcon = await getBytesFromAsset('assets/restaurant1.png', 80);
+            markerIcon = await getBytesFromAsset('assets/general.png', 80);
             break;
         }
         setState(() {
+          widgetList.add(
+              ListTile(
+                  tileColor: Colors.green,
+                  leading: Icon(Icons.location_on, color: Colors.white),
+                  title: Text(element.title!, style: TextStyle(color: Colors.white)),
+                  onTap: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageSpecificMarker(tourism: element))))
+          );
           listMarker.add(Marker(
               icon: BitmapDescriptor.fromBytes(markerIcon!),
               onTap: () {
@@ -185,6 +197,13 @@ class TourismState extends State<PageTourism> {
         initialIndex: 0,
         length: tourismButton.length,
         child: Scaffold(
+            drawer: Drawer(
+              elevation: 5.0,
+              child:  ListView(
+                padding: EdgeInsets.zero,
+                children: widgetList
+              )
+            ),
             floatingActionButtonLocation:
             FloatingActionButtonLocation.startFloat,
             floatingActionButton: FloatingActionButton(
