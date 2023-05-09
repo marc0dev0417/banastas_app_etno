@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:etno_app/bloc/color/color_bloc.dart';
-import 'package:etno_app/pages/PageSpecificMarker.dart';
+import 'package:etno_app/pages/PageTourismSpecificMarker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,7 +73,7 @@ class TourismState extends State<PageTourism> {
         setState(() {
           widgetList.add(
               ListTile(
-                  tileColor: Colors.green,
+                  tileColor: Colors.grey,
                   leading: Icon(Icons.location_on, color: Colors.white),
                   title: Text(element.title!, style: TextStyle(color: Colors.white)),
                   onTap: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PageSpecificMarker(tourism: element))))
@@ -207,7 +207,7 @@ class TourismState extends State<PageTourism> {
             floatingActionButtonLocation:
             FloatingActionButtonLocation.startFloat,
             floatingActionButton: FloatingActionButton(
-              backgroundColor: context.watch<ColorBloc>().state.colorPrimary,
+              backgroundColor: Colors.green,
               onPressed: () => Navigator.pop(context),
               child: Icon(Icons.chevron_left),
             ),

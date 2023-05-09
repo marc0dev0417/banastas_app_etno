@@ -13,6 +13,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../bloc/color/color_bloc.dart';
 import '../utils/Globals.dart';
+import 'PagePharmacySpecificMarker.dart';
 
 class PagePharmacies extends StatefulWidget {
   const PagePharmacies({super.key});
@@ -29,6 +30,9 @@ class PharmaciesState extends State<PagePharmacies> {
     PharmaciesButton(Icons.local_pharmacy, Colors.black, 'Todo'),
     PharmaciesButton(Icons.local_pharmacy, Colors.blue, 'Normal'),
     PharmaciesButton(Icons.local_pharmacy, Colors.red, 'Guardia')
+  ];
+  List<Widget> widgetList = [
+    DrawerHeader(decoration: BoxDecoration(color: Colors.white), child: Image.asset('assets/app.png'))
   ];
   final Completer<GoogleMapController> _controller =
   Completer<GoogleMapController>();
@@ -56,6 +60,13 @@ class PharmaciesState extends State<PagePharmacies> {
               break;
           }
           setState(() {
+            widgetList.add(
+                ListTile(
+                    tileColor: Colors.grey,
+                    leading: Icon(Icons.location_on, color: Colors.white),
+                    title: Text(element.name!, style: TextStyle(color: Colors.white)),
+                    onTap: () => Navigator.push(context, PageRouteBuilder(pageBuilder: (context, animation1, animation2) => PagePharmacySpecificMarker(pharmacy: element))))
+            );
             listMarker.add(Marker(
                 icon: BitmapDescriptor.fromBytes(markerIcon!),
                 onTap: () {
@@ -192,6 +203,13 @@ class PharmaciesState extends State<PagePharmacies> {
         initialIndex: 0,
         length: pharmaciesButton.length,
         child: Scaffold(
+         drawer: Drawer(
+              elevation: 5.0,
+              child:  ListView(
+                  padding: EdgeInsets.zero,
+                  children: widgetList
+              )
+          ),
           floatingActionButtonLocation: FloatingActionButtonLocation.startFloat,
           body: Stack(
             children: [
