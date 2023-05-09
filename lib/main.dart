@@ -398,11 +398,11 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.recycling),
-                            title: Text(getSectionText('Enseres', context)),
+                            title: Text(getSectionText('Retirada de Enseres', context)),
                             onTap: () {
                               setState(() {
-                                section.sectionName = 'Enseres';
-                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Enseres'));
+                                section.sectionName = 'Retirada de Enseres';
+                                context.read<WidgetSectionBloc>().add(FilterWidgetSection(buttonIndex: indexSection, sectionName: 'Retirada de Enseres'));
                               });
                               Navigator.pop(context);
                             }
