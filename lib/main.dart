@@ -332,7 +332,7 @@ class HomeState extends State<Home> {
                         ),
                         ListTile(
                             leading: Icon(Icons.perm_media),
-                            title: Text(getSectionText('Gslería', context)),
+                            title: Text(getSectionText('Galería', context)),
                             onTap: () {
                               setState(() {
                                 section.sectionName = 'Galería';
